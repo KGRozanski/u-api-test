@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 declare const google: any
 
@@ -7,22 +7,22 @@ declare const google: any
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'u-api-test';
+
+export class AppComponent implements OnInit {
+
+  title: string = 'u-api-test';
 
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
-
 
       google.accounts.id.initialize({
         client_id: "995696971353-a56rf0rf3q01sdf44ohefkq0fpf9qut1.apps.googleusercontent.com"
       });
 
-      google.accounts.id.prompt(); // also display the One Tap dialog
-    
+      // google.accounts.id.prompt(); // also display the One Tap dialog
+
   }
 
 
