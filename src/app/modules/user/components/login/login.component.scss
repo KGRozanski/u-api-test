@@ -1,3 +1,8 @@
+@use '@angular/material' as mat;
+@import '../../../../../assets/scss/typography/default-typography.scss';
+
+@include mat.core($default-typography);
+
 :host{
     display: block;
     min-width: 300px;
@@ -10,10 +15,8 @@
     box-shadow: 3px 3px 13px rgb(0, 0, 0, .2);
 }
 
-h1{
-    font-family: 'Berkshire Swash', cursive;
+h1 {
     text-align: center;
-    font-size: 2.75em;
 }
 
 .login{
@@ -21,3 +24,4 @@ h1{
     flex-direction: column;
 
 }
+

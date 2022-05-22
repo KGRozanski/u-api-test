@@ -1,8 +1,97 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@use '@angular/material' as mat;
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Hind:400,700&display=swap&subset=latin-ext');
+@import './assets/scss/palette.scss';
+@import './assets/scss/reset.scss';
+@import './assets/scss/shadows.scss';
+@import './assets/scss/typography/default-typography.scss';
+
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    background-color: #d6d6d6;
+}
+app-root{
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
 
 
-@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin-bottom: 5px;
+}
+
+.main-column {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.container {
+    display: grid;
+    grid:  auto / auto;
+    gap: 10px;
+    margin: 10px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100vw;
+        grid:  auto / 100vw;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+
+
+//default theme variables
+$my-primary: mat.define-palette($f-color1, 500);
+$my-accent: mat.define-palette($f-color4, 500);
+$my-warn: mat.define-palette($f-color5, 500);
+
+//default theme
+$default-theme: mat.define-light-theme((
+    color: (
+        primary: $my-primary,
+        accent: $my-accent,
+        warn: $my-warn,
+    ),
+    typography: $default-typography
+));
+
+@include mat.all-component-themes($default-theme);
+
+
 

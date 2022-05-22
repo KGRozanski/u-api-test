@@ -1,12 +1,22 @@
+@use '@angular/material' as mat;
+@import '../../../../../assets/scss/typography/default-typography.scss';
+
+@include mat.core($default-typography);
+
 :host{
     display: block;
-    max-width: 300px;
+    max-width: 342px;
+    min-width: 342px;
     padding: 20px;
     border-radius: 10px;
     border: 1px solid #efefef;
     background: #f2f2f2;
     background: linear-gradient(0deg, rgba(230,230,230,1) 0%, rgba(242,242,242,1) 100%);
     box-shadow: 3px 3px 13px rgb(0, 0, 0, .2);
+}
+
+h1 {
+    text-align: center;
 }
 
 :host ::ng-deep{
@@ -18,14 +28,18 @@
             line-height: 16px;
         }
     }
-    
+
+    // ERRORS CUSTOMIZATION
+    .mat-form-field-appearance-fill .mat-form-field-subscript-wrapper{
+        padding: 0;
+    }
+
+    mat-error{
+        font-size: 10.5px;
+        line-height: 11.81px;
+    }
 }
 
-h1{
-    font-family: 'Berkshire Swash', cursive;
-    text-align: center;
-    font-size: 2.75em;
-}
 
 a{
     cursor: pointer;
@@ -48,13 +62,13 @@ a{
     align-items: center;
     justify-content: center;
     margin: 10px 0 10px 0;
-
+    
     div{
         height: 1px;
         background-color: #afafaf;
         width: 100%;
     }
-
+    
     span{
         margin: 0 10px 0 10px;
     }
@@ -69,5 +83,10 @@ a{
         font-size: 12px;
         text-align: center;
         margin-bottom: 10px;
+
+        a{
+            font-size: 14px;
+        }
     }
 }
+
