@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+@import './variables.scss';
+@import './typography.scss';
+
+//default theme
+$default-theme: mat.define-light-theme((
+    color: (
+        primary: $my-primary,
+        accent: $my-accent,
+        warn: $my-warn,
+    ),
+    typography: $default-typography
+));

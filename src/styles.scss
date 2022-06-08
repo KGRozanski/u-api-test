@@ -4,9 +4,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
 @import url('https://fonts.googleapis.com/css?family=Hind:400,700&display=swap&subset=latin-ext');
 @import './assets/scss/palette.scss';
+@import './assets/scss/variables.scss';
+@import './assets/scss/theme.scss';
 @import './assets/scss/reset.scss';
 @import './assets/scss/shadows.scss';
-@import './assets/scss/typography/default-typography.scss';
+
+@include mat.all-component-themes($default-theme);
 
 * {
     box-sizing: border-box;
@@ -76,22 +79,9 @@ h3 {
 
 
 
-//default theme variables
-$my-primary: mat.define-palette($f-color1, 500);
-$my-accent: mat.define-palette($f-color4, 500);
-$my-warn: mat.define-palette($f-color5, 500);
 
-//default theme
-$default-theme: mat.define-light-theme((
-    color: (
-        primary: $my-primary,
-        accent: $my-accent,
-        warn: $my-warn,
-    ),
-    typography: $default-typography
-));
 
-@include mat.all-component-themes($default-theme);
+
 
 
 

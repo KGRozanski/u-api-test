@@ -1,0 +1,6 @@
+@use '@angular/material' as mat;
+
+//default theme variables
+$my-primary: mat.define-palette($f-color1, 500);
+$my-accent: mat.define-palette($f-color4, 500);
+$my-warn: mat.define-palette($f-color5, 500);

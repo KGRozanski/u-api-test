@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@import '../../../../../assets/scss/typography/default-typography.scss';
+@import '../../../../../assets/scss/typography.scss';
 
 @include mat.core($default-typography);
 
