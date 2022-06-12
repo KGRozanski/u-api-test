@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { Store } from '@ngrx/store';
+import { AccountActions } from 'src/app/core/actions/account.actions';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,7 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private FB: FormBuilder, private US: UserService) { }
+  constructor(private FB: FormBuilder, private US: UserService, private store: Store) { }
 
   public loginForm: FormGroup = this.FB.group({
     username: [null,
@@ -31,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    this.US.login(this.loginForm.value).subscribe((res) => console.log(res))
+    this.store.dispatch(AccountActions.login({ credentials: this.loginForm.value }));
   }
 
 }
