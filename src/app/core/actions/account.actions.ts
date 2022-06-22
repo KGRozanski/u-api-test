@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { UserCredentials } from "src/app/modules/user/interfaces/user-credentials.interface";
-import { Notification } from '../interfaces/notification.interface';
+import { UserInfo } from "../interfaces/user-info.interface";
 
 const login = createAction(
     '[Account] Login',
@@ -8,7 +8,8 @@ const login = createAction(
 );
 
 const loginSuccess = createAction(
-    '[Account] Login Success'
+    '[Account] Login Success',
+    props<{userInfo: UserInfo}>()
 );
 
 export const AccountActions = {

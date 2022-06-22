@@ -3,7 +3,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, exhaustMap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { AccountActions } from '../actions/account.actions';
-import { NotificationType } from '../enums/notification-type.enum';
 
 @Injectable()
 export class AccountEffect {
@@ -15,7 +14,8 @@ export class AccountEffect {
           .login(action.credentials)
           .pipe(
             map(() =>
-              AccountActions.loginSuccess()
+              
+              AccountActions.loginSuccess({userInfo: this.authService.userInfo})
             )
           )
       )
