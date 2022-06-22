@@ -1,0 +1,8 @@
+If you want to set the background colors, you likely want to customize the entire background and 
+foreground palette by emulating the mat-light-theme or mat-dark-theme functions with your own replacement. 
+Your replacement would include your own palettes instead of the mat-light-theme-foreground and background palettes.
+
+example: https://stackblitz.com/edit/angular-material-custom-background?file=theme.scss
+
+I don't know if this method is recommended or officially supported - therefore, 
+I'm not sure if it should be added to the documentation. It seems to me like it would be a better fit for a blog post.
