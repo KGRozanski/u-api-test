@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { SettingsSelectors } from './core/selectors/settings.selectors';
 
 declare const google: any
 
@@ -13,7 +16,11 @@ export class AppComponent implements OnInit {
   title: string = 'u-api-test';
 
 
-  constructor() {}
+  constructor(
+    private store: Store,
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit() {
 
@@ -22,6 +29,10 @@ export class AppComponent implements OnInit {
       });
 
       // google.accounts.id.prompt(); // also display the One Tap dialog
+
+      this.store.select(SettingsSelectors.selectSettingsCollection).subscribe((data) => {
+        this.renderer.setAttribute(this.document.body, 'class', data.isDarkModeEnabled ? 'darkMode' : '');
+      });
 
   }
 

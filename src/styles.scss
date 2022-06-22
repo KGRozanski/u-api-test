@@ -1,15 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
 @use '@angular/material' as mat;
+@use './assets/scss/palette';
+@use './assets/scss/variables';
+@use './assets/scss/theme';
+@use './assets/scss/reset';
+@use './assets/scss/shadows';
+@use './assets/scss/parcials/login-theme';
+@use './assets/scss/parcials/register-theme';
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
 @import url('https://fonts.googleapis.com/css?family=Hind:400,700&display=swap&subset=latin-ext');
-@import './assets/scss/palette.scss';
-@import './assets/scss/variables.scss';
-@import './assets/scss/theme.scss';
-@import './assets/scss/reset.scss';
-@import './assets/scss/shadows.scss';
 
-@include mat.all-component-themes($default-theme);
+@include mat.core();
+
+@include mat.all-component-themes(theme.$default-theme);
+@include login-theme.theme(theme.$default-theme);
+@include register-theme.theme(theme.$default-theme);
+
+.darkMode {
+    @include mat.all-component-colors(theme.$dark-theme);
+    @include login-theme.theme(theme.$dark-theme);
+    @include register-theme.theme(theme.$dark-theme);
+}
 
 * {
     box-sizing: border-box;

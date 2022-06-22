@@ -1,11 +1,18 @@
-
-
 <h1 class="mat-headline">FadeIn:</h1>
 
+<mat-slide-toggle
+    class="example-margin" 
+    color="accent"
+    [(ngModel)]="isChecked"
+    disabled="false"
+    (change)="darkModeChanged()"
+>
+</mat-slide-toggle>
+
 <div class="userInfo">
-    <div style="text-align: right;">
-        <span>kgrozanski</span><br>
+    <div style="text-align: right">
+        <span>kgrozanski</span><br />
         <a href="#">logout</a>
     </div>
-    <img class="avatar" src="https://lh3.googleusercontent.com/a-/AOh14Gik1bUO8V7GJ7r4W4i83_-TN5HNHTV3Jx3F4zH-lg=s96-c" alt="avatar">
+    <img class="avatar" src="#" alt="avatar" />
 </div>

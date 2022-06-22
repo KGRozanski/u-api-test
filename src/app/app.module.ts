@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './modules/shared/shared.module';
 import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
 import { StoreModule } from '@ngrx/store';
-import { accountReducer } from './core/reducers/account.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AuthService } from './core/auth/auth.service';
@@ -16,8 +15,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { AccountEffect } from './core/effects/account.effect';
 import { interceptorsProviders } from './core/interceptors/_interceptors';
 import { NotificationsEffect } from './core/effects/notifications.effect';
-import { notificationsReducer } from './core/reducers/notifications.reducer';
-
+import { FormsModule } from '@angular/forms';
+import { reducers } from './core/reducers/_app.reducer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,14 +24,12 @@ import { notificationsReducer } from './core/reducers/notifications.reducer';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     SharedModule,
     UserModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({
-      account: accountReducer,
-      notifications: notificationsReducer
-    }),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AccountEffect, NotificationsEffect])
   ],

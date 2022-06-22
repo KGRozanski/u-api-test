@@ -1,13 +1,25 @@
+@use './typography';
+@use './variables';
 @use '@angular/material' as mat;
-@import './variables.scss';
-@import './typography.scss';
 
 //default theme
 $default-theme: mat.define-light-theme((
     color: (
-        primary: $my-primary,
-        accent: $my-accent,
-        warn: $my-warn,
+        primary: variables.$my-primary-light,
+        accent: variables.$my-accent,
+        warn: variables.$my-warn,
     ),
-    typography: $default-typography
+    typography: typography.$default-typography
 ));
+
+//dark theme
+$dark-theme: mat.define-dark-theme((
+    color: (
+        primary: variables.$my-primary-dark,
+        accent: variables.$my-accent,
+        warn: variables.$my-warn,
+    ),
+    typography: typography.$default-typography
+));
+
+//https://www.youtube.com/watch?v=99T-zQLcluM

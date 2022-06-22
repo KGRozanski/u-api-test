@@ -3,16 +3,17 @@
 
 @include mat.core($default-typography);
 
+
+
 :host{
     display: block;
     min-width: 300px;
     max-width: 300px;
     padding: 20px;
     border-radius: 10px;
-    border: 1px solid #efefef;
-    background: #f2f2f2;
-    background: linear-gradient(0deg, rgba(230,230,230,1) 0%, rgba(242,242,242,1) 100%);
     box-shadow: 3px 3px 13px rgb(0, 0, 0, .2);
+    //check for performance issues
+    transition: all .5s;
 }
 
 h1 {

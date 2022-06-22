@@ -1,11 +1,5 @@
 /* Coolors Exported Palette - coolors.co/247ba0-70c1b3-b2dbbf-f3ffbd-ff1654 */
-
-/* HSL */
-$color1: hsla(198%, 63%, 38%, 1);
-$color2: hsla(170%, 40%, 60%, 1);
-$color3: hsla(139%, 36%, 78%, 1);
-$color4: hsla(71%, 100%, 87%, 1);
-$color5: hsla(344%, 100%, 54%, 1);
+@use '@angular/material' as mat;
 
 /* RGB */
 $color1: #2274A5;
@@ -35,7 +29,10 @@ $f-color1: (
         800: white,
         900: white,
         A700: white
-    )
+    ),
+    text-normal: rgb(0,0,0),
+    text-dark: rgb(255,255,255)
+    
 );
 $color2: rgba(112, 193, 179, 1);
 $f-color2: (
