@@ -10,12 +10,24 @@
         </div>
 
         <mat-slide-toggle
-        class="example-margin" 
-        color="accent"
-        [(ngModel)]="isChecked"
-        disabled="false"
-        (change)="darkModeChanged()"
-    >
-    </mat-slide-toggle>
+            class="example-margin" 
+            color="accent"
+            [(ngModel)]="isChecked"
+            disabled="false"
+            (change)="darkModeChanged()"
+        >
+        </mat-slide-toggle>
+    </li>
+    <li>
+        <div>
+            <i class="i-settings"></i>
+            <span>Settings</span>
+        </div>
+    </li>
+    <li>
+        <div>
+            <i class="i-logout"></i>
+            <span>Logout</span>
+        </div>
     </li>
 </ol>

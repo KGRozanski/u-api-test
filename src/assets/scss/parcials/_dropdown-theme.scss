@@ -20,6 +20,14 @@
         .header {
             border-bottom: 1px solid $divider;
         }
+
+        li{
+            &:hover{
+                cursor: pointer;
+                background-color: mat.get-color-from-palette($background, hover);
+            }
+        }
+
     }
     
 }

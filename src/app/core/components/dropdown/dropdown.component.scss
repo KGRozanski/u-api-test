@@ -3,8 +3,8 @@
 :host{
     position: fixed;
     z-index: 90000;
-    top: 48px;
-    right: 15px;
+    top: 42px;
+    right: 13px;
     width: 300px;
     border-radius: variables.$border-radius;
 }
@@ -32,6 +32,7 @@ ol {
         justify-content: space-between;
         align-items: center;
         padding: 15px 20px;
+
 
         i {
             display: inline-block;
