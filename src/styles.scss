@@ -1,39 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
-
+@use "sass:map";
 @use '@angular/material' as mat;
-@use './assets/scss/palette';
-@use './assets/scss/variables';
-@use './assets/scss/theme';
 @use './assets/scss/reset';
+@use './assets/scss/variables';
+@use './assets/scss/palette';
+@use './assets/scss/typography';
+@use './assets/scss/theme';
 @use './assets/scss/shadows';
+@use './assets/scss/parcials/icons-dark';
+@use './assets/scss/parcials/icons-light';
+
 @use './assets/scss/parcials/login-theme';
 @use './assets/scss/parcials/register-theme';
 @use './assets/scss/parcials/toolbar-theme';
-@use './assets/scss/typography';
+@use './assets/scss/parcials/dropdown-theme';
+
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
 @import url('https://fonts.googleapis.com/css?family=Hind:400,700&display=swap&subset=latin-ext');
 
 @include mat.core(typography.$default-typography);
 
 @include mat.all-component-themes(theme.$default-theme);
+@include icons-light.icons;
 @include login-theme.theme(theme.$default-theme);
 @include register-theme.theme(theme.$default-theme);
 @include toolbar-theme.theme(theme.$default-theme);
+@include dropdown-theme.theme(theme.$default-theme);
 
 .darkMode {
     @include mat.all-component-colors(theme.$dark-theme);
+    @include icons-dark.icons;
     @include login-theme.theme(theme.$dark-theme);
     @include register-theme.theme(theme.$dark-theme);
     @include toolbar-theme.theme(theme.$dark-theme);
+    @include dropdown-theme.theme(theme.$dark-theme);
 }
+
+$light-config: mat.get-color-config(theme.$default-theme);
+$dark-config: mat.get-color-config(theme.$dark-theme);
+$background-light: map.get($light-config, background);
+$background-dark: map.get($dark-config, background);
 
 * {
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
-body {
-    background-color: #d6d6d6;
+
+body{
+    //check for performance issues
+    transition: background-color .5s;
+    background-color: mat.get-color-from-palette($background-light, background);
 }
+
+body[class=darkMode]{
+    background-color: lighten(mat.get-color-from-palette($background-dark, background), 5%);
+}
+
+
 app-root{
     display: block;
     width: 100vw;

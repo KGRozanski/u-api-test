@@ -1,0 +1,21 @@
+<div class="header">
+    <img class="avatar" src="https://lh3.googleusercontent.com/a-/AOh14Gik1bUO8V7GJ7r4W4i83_-TN5HNHTV3Jx3F4zH-lg=s96-c" alt="avatar" />
+    <div class="username">kgrozanski</div>
+</div>
+<ol>
+    <li>
+        <div>
+            <i class="i-moon"></i>
+            <span>Dark mode</span>
+        </div>
+
+        <mat-slide-toggle
+        class="example-margin" 
+        color="accent"
+        [(ngModel)]="isChecked"
+        disabled="false"
+        (change)="darkModeChanged()"
+    >
+    </mat-slide-toggle>
+    </li>
+</ol>

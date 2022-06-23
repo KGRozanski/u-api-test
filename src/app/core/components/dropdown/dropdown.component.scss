@@ -1,0 +1,51 @@
+@use '../../../../assets/scss/variables.scss';
+
+:host{
+    position: fixed;
+    z-index: 90000;
+    top: 48px;
+    right: 15px;
+    width: 300px;
+    border-radius: variables.$border-radius;
+}
+
+.header{
+    display: flex;
+    padding: 15px;
+
+    .avatar{
+        width: 55px;
+        height: 55px;
+        border-radius: 100%;
+    }
+
+    .username{
+        margin: 10px 0 0 15px;
+        font-weight: 500;
+    }
+}
+
+ol {
+    li{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+
+        i {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+        }
+
+        span{
+            margin-left: 16px;
+        }
+
+        div{
+            display: flex;
+            align-items: center;
+        }
+    }
+}

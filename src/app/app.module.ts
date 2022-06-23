@@ -18,10 +18,12 @@ import { NotificationsEffect } from './core/effects/notifications.effect';
 import { FormsModule } from '@angular/forms';
 import { metaReducers, reducers } from './core/reducers/_app.reducer';
 import { HydrationEffects } from './core/effects/hydration.effect';
+import { DropdownComponent } from './core/components/dropdown/dropdown.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    DropdownComponent
   ],
   imports: [
     BrowserModule,

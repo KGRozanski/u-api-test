@@ -1,9 +1,11 @@
+@use '../../../../../assets/scss/variables.scss';
+
 :host{
     display: block;
     min-width: 300px;
     max-width: 300px;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: variables.$border-radius;
     box-shadow: 3px 3px 13px rgb(0, 0, 0, .2);
     //check for performance issues
     transition: all .5s;
