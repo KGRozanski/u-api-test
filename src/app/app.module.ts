@@ -16,7 +16,8 @@ import { AccountEffect } from './core/effects/account.effect';
 import { interceptorsProviders } from './core/interceptors/_interceptors';
 import { NotificationsEffect } from './core/effects/notifications.effect';
 import { FormsModule } from '@angular/forms';
-import { reducers } from './core/reducers/_app.reducer';
+import { metaReducers, reducers } from './core/reducers/_app.reducer';
+import { HydrationEffects } from './core/effects/hydration.effect';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,9 +30,9 @@ import { reducers } from './core/reducers/_app.reducer';
     SharedModule,
     UserModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(reducers, {metaReducers}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([AccountEffect, NotificationsEffect])
+    EffectsModule.forRoot([AccountEffect, NotificationsEffect, HydrationEffects])
   ],
   providers: [
     interceptorsProviders,
