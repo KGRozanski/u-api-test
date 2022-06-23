@@ -3,7 +3,7 @@
 
 
 //default theme variables
-$my-primary-light: mat.define-palette(palette.$f-color1, 500, 100, 700, text-normal);
-$my-primary-dark: mat.define-palette(palette.$f-color1, 500, 100, 700, text-dark);
+$my-primary-light: mat.define-palette(palette.$f-color1, 500, 100, 700);
+$my-primary-dark: mat.define-palette(palette.$f-color1, 500, 100, 700);
 $my-accent: mat.define-palette(palette.$f-color4, 500);
 $my-warn: mat.define-palette(palette.$f-color5, 500);

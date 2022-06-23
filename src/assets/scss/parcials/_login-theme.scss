@@ -21,14 +21,14 @@
     // Get the color config from the theme.
     $color-config: mat.get-color-config($theme);
 
-    // Get the primary color palette from the color-config.
-    $palette: map.get($color-config, primary);
+    // Get the foreground color palette from the color-config.
+    $palette: map.get($color-config, foreground);
 
     // Get the typography config from the theme.
     $typography-config: mat.get-typography-config($theme);
 
     .cmp-login {
-        color: mat.get-color-from-palette($palette, text);
+        color: mat.get-color-from-palette($palette, text, .9);
     }
 }
 

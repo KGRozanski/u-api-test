@@ -6,3 +6,6 @@ example: https://stackblitz.com/edit/angular-material-custom-background?file=the
 
 I don't know if this method is recommended or officially supported - therefore, 
 I'm not sure if it should be added to the documentation. It seems to me like it would be a better fit for a blog post.
+
+
+    // $is-dark-theme: map.get($color-config, is-dark);
