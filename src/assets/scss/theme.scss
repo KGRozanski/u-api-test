@@ -5,7 +5,7 @@
 //default theme
 $default-theme: mat.define-light-theme((
     color: (
-        primary: variables.$my-primary,
+        primary: variables.$my-primary-light,
         accent: variables.$my-accent,
         warn: variables.$my-warn,
     ),
@@ -15,7 +15,7 @@ $default-theme: mat.define-light-theme((
 //dark theme
 $dark-theme: mat.define-dark-theme((
     color: (
-        primary: variables.$my-primary,
+        primary: variables.$my-primary-dark,
         accent: variables.$my-accent,
         warn: variables.$my-warn,
     ),

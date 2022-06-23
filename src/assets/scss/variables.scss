@@ -2,7 +2,10 @@
 @use './palette' as palette;
 
 
+
+
 //default theme variables
-$my-primary: mat.define-palette(palette.$f-color1, 500, 100, 700);
-$my-accent: mat.define-palette(palette.$f-color4, 500);
-$my-warn: mat.define-palette(palette.$f-color5, 500);
+$my-primary-light: mat.define-palette(palette.$f-color1, 500, 100, 700, 500);
+$my-primary-dark: mat.define-palette(palette.$f-color1, 300, 100, 700, 300);
+$my-accent: mat.define-palette(palette.$f-color4, 500, 100, 700, 500);
+$my-warn: mat.define-palette(palette.$f-color5, 500, 100, 700, 500);
