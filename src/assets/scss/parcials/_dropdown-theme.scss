@@ -15,7 +15,7 @@
     .cmp-dropdown{
         // Read the 500 hue from the primary color palette.
         background-color: mat.get-color-from-palette($background, background);
-        border: 1px solid lighten(mat.get-color-from-palette($background, background), 50%);
+        border: 1px solid $divider;
 
         .header {
             border-bottom: 1px solid $divider;

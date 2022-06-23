@@ -8,11 +8,13 @@
 
     // Get the primary color palette from the color-config.
     $background: map.get($config, background);
+    $foreground: map.get($config, foreground);
+    $divider: map.get($foreground, divider);
 
     .cmp-login{
         // Read the 500 hue from the primary color palette.
         background-color: mat.get-color-from-palette($background, background);
-        border: 1px solid lighten(mat.get-color-from-palette($background, background), 50%);
+        border: 1px solid $divider;
     }
     
 }
