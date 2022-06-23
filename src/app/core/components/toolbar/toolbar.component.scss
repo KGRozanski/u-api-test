@@ -3,8 +3,6 @@
 
 @include mat.core($default-typography);
 
-
-
 :host{
     position: fixed;
     top: 0;
@@ -12,11 +10,11 @@
     z-index: 1000000;
     width: 100%;
     height: 53px;
-    background: #f2f2f2;
-    background: linear-gradient(0deg, rgba(230,230,230,1) 0%, rgba(242,242,242,1) 100%);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    //check for performance issues
+    transition: all .5s;
 }
 
 h1{

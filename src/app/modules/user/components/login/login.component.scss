@@ -1,10 +1,3 @@
-@use '@angular/material' as mat;
-@import '../../../../../assets/scss/typography.scss';
-
-@include mat.core($default-typography);
-
-
-
 :host{
     display: block;
     min-width: 300px;

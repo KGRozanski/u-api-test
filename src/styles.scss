@@ -8,19 +8,23 @@
 @use './assets/scss/shadows';
 @use './assets/scss/parcials/login-theme';
 @use './assets/scss/parcials/register-theme';
+@use './assets/scss/parcials/toolbar-theme';
+@use './assets/scss/typography';
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
 @import url('https://fonts.googleapis.com/css?family=Hind:400,700&display=swap&subset=latin-ext');
 
-@include mat.core();
+@include mat.core(typography.$default-typography);
 
 @include mat.all-component-themes(theme.$default-theme);
 @include login-theme.theme(theme.$default-theme);
 @include register-theme.theme(theme.$default-theme);
+@include toolbar-theme.theme(theme.$default-theme);
 
 .darkMode {
     @include mat.all-component-colors(theme.$dark-theme);
     @include login-theme.theme(theme.$dark-theme);
     @include register-theme.theme(theme.$dark-theme);
+    @include toolbar-theme.theme(theme.$dark-theme);
 }
 
 * {
