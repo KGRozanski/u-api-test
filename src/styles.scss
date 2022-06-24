@@ -15,6 +15,8 @@
 @use './assets/scss/parcials/toolbar-theme';
 @use './assets/scss/parcials/dropdown-theme';
 
+@use './assets/scss/mixins/dark-mode-transition.mixin' as transition;
+
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
 @import url('https://fonts.googleapis.com/css?family=Hind:400,700&display=swap&subset=latin-ext');
 
@@ -47,8 +49,7 @@ $background-dark: map.get($dark-config, background);
 }
 
 body{
-    //check for performance issues
-    transition: background-color .5s;
+    @include transition.transition-dark-mode();
     background-color: mat.get-color-from-palette($background-light, background);
 }
 

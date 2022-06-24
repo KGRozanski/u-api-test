@@ -1,4 +1,5 @@
 @use '../../../../../assets/scss/variables.scss';
+@use '../../../../../assets/scss/mixins/dark-mode-transition.mixin' as transition;
 
 :host{
     display: block;
@@ -7,8 +8,8 @@
     padding: 20px;
     border-radius: variables.$border-radius;
     box-shadow: 3px 3px 13px rgb(0, 0, 0, .2);
-    //check for performance issues
-    transition: all .5s;
+
+    @include transition.transition-dark-mode();
 }
 
 h1 {

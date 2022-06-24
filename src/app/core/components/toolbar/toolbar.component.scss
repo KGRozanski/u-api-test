@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @use '../../../../assets/scss/variables.scss';
+@use '../../../../assets/scss/mixins/dark-mode-transition.mixin' as transition;
 @import '../../../../assets/scss/typography.scss';
 
 @include mat.core($default-typography);
@@ -15,8 +16,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    //check for performance issues
-    transition: all .5s;
+
+    @include transition.transition-dark-mode();
 }
 
 h1{
@@ -24,10 +25,13 @@ h1{
     margin: 0 !important;
 }
 
-.avatar{
+#avatar{
     width: 42px;
     height: 42px;
     border-radius: 100%;
-    border: 1px solid #bdbdbd;
+
+    &:hover{
+        cursor: pointer;
+    }
 }
 
