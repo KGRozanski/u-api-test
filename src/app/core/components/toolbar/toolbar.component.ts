@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
+  public isDropdownVisible: boolean = false;
 
   constructor() { }
 
   public ngOnInit(): void {}
 
 
+  public toggleDropdown(): void {
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
 }
