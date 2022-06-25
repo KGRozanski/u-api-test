@@ -14,8 +14,12 @@ export class ToolbarComponent implements OnInit {
   public ngOnInit(): void {}
 
 
-  public toggleDropdown(): void {
-    this.isDropdownVisible = !this.isDropdownVisible;
+  public toggleDropdown(onlyDisable?: boolean): void {
+    if (onlyDisable) {
+      this.isDropdownVisible = false;
+    } else {
+      this.isDropdownVisible = !this.isDropdownVisible;
+    }
   }
 
 
