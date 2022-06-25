@@ -15,12 +15,8 @@ export class ToolbarComponent implements OnInit {
 
 
   public toggleDropdown(): void {
-    console.log('fire')
     this.isDropdownVisible = !this.isDropdownVisible;
   }
 
-  public hideDropdown(): void {
-    console.log('cole')
-    this.isDropdownVisible = false;
-  }
+
 }
