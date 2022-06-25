@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,6 +15,12 @@ export class ToolbarComponent implements OnInit {
 
 
   public toggleDropdown(): void {
+    console.log('fire')
     this.isDropdownVisible = !this.isDropdownVisible;
+  }
+
+  public hideDropdown(): void {
+    console.log('cole')
+    this.isDropdownVisible = false;
   }
 }

@@ -19,11 +19,13 @@ import { FormsModule } from '@angular/forms';
 import { metaReducers, reducers } from './core/reducers/_app.reducer';
 import { HydrationEffects } from './core/effects/hydration.effect';
 import { DropdownComponent } from './core/components/dropdown/dropdown.component';
+import directives from './core/directives/_directives';
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    DropdownComponent
+    DropdownComponent,
+    ...directives
   ],
   imports: [
     BrowserModule,

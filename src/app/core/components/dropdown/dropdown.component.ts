@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { SettingsActions } from '../../actions/settings.actions';
 import { SettingsSelectors } from '../../selectors/settings.selectors';
@@ -13,9 +13,9 @@ import { Settings } from '../../interfaces/settings.interface';
 })
 export class DropdownComponent implements OnInit {
   public isChecked: boolean = false;
-
   public settings$ = this.store.pipe(select(SettingsSelectors.selectSettingsCollection));
   private readonly unsubscribe$: Subject<void> = new Subject();
+
   constructor(private store: Store) { }
 
   public ngOnInit(): void {

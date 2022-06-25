@@ -1,7 +1,7 @@
 <h1 class="mat-headline">FadeIn:</h1>
 
 
-
-<img (click)="toggleDropdown()" id="avatar" src="https://lh3.googleusercontent.com/a-/AOh14Gik1bUO8V7GJ7r4W4i83_-TN5HNHTV3Jx3F4zH-lg=s96-c" alt="avatar" />
-
-<app-dropdown *ngIf="isDropdownVisible" class="cmp-dropdown shadow-md"></app-dropdown>
+<div clicked-outside (clickedOutside)="hideDropdown()">
+    <img (click)="toggleDropdown()" id="avatar" src="https://lh3.googleusercontent.com/a-/AOh14Gik1bUO8V7GJ7r4W4i83_-TN5HNHTV3Jx3F4zH-lg=s96-c" alt="avatar" />
+    <app-dropdown *ngIf="isDropdownVisible" class="cmp-dropdown shadow-md" ></app-dropdown>
+</div>
