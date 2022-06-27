@@ -49,7 +49,6 @@ $background-dark: map.get($dark-config, background);
 }
 
 body{
-    @include transition.transition-dark-mode();
     background-color: mat.get-color-from-palette($background-light, background);
 }
 
