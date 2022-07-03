@@ -1,6 +1,7 @@
+@use "sass:map";
+@use '@angular/material' as mat;
 @use './typography';
 @use './variables';
-@use '@angular/material' as mat;
 
 //default theme
 $default-theme: mat.define-light-theme((
@@ -23,3 +24,8 @@ $dark-theme: mat.define-dark-theme((
 ));
 
 //https://www.youtube.com/watch?v=99T-zQLcluM
+
+$light-config: mat.get-color-config($default-theme);
+$dark-config: mat.get-color-config($dark-theme);
+$background-light: map.get($light-config, background);
+$background-dark: map.get($dark-config, background);

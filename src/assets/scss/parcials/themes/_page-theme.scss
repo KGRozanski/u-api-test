@@ -3,18 +3,14 @@
 
 @mixin color($theme) {
     // Get the color config from the theme.
-
     $config: mat.get-color-config($theme);
 
     // Get the primary color palette from the color-config.
     $background: map.get($config, background);
-    $foreground: map.get($config, foreground);
-    $divider: map.get($foreground, divider);
 
-    .cmp-register{
+    .cmp-login{
         // Read the 500 hue from the primary color palette.
         background-color: mat.get-color-from-palette($background, background);
-        border: 1px solid $divider;
     }
     
 }
@@ -29,7 +25,7 @@
     // Get the typography config from the theme.
     $typography-config: mat.get-typography-config($theme);
 
-    .cmp-register {
+    .cmp-login {
         color: mat.get-color-from-palette($palette, text, .9);
     }
 }

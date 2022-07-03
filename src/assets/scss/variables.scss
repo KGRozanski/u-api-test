@@ -6,6 +6,6 @@ $border-radius: 10px;
 
 //default theme variables
 $my-primary-light: mat.define-palette(palette.$f-color1, 500, 100, 700, 500);
-$my-primary-dark: mat.define-palette(palette.$f-color1, 300, 100, 700, 300);
+$my-primary-dark: mat.define-palette(palette.$f-color1, 500, 100, 700, 500);
 $my-accent: mat.define-palette(palette.$f-color4, 500, 100, 700, 500);
 $my-warn: mat.define-palette(palette.$f-color5, 500, 100, 700, 500);

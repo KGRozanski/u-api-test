@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+@use '../../theme.scss';
+
+@use '../icons-dark';
+@use '../icons-light';
+
+
+@use './login-form-theme';
+@use './register-form-theme';
+@use './toolbar-theme';
+@use './dropdown-theme';
+
+@mixin themeSwitch($default-theme, $dark-theme) {
+
+    @include icons-light.icons;
+    @include mat.all-component-themes($default-theme);
+    @include login-form-theme.theme($default-theme);
+    @include register-form-theme.theme($default-theme);
+    @include toolbar-theme.theme($default-theme);
+    @include dropdown-theme.theme($default-theme);
+
+    .darkMode {
+        @include icons-dark.icons;
+        @include mat.all-component-colors($dark-theme);
+        @include login-form-theme.theme($dark-theme);
+        @include register-form-theme.theme($dark-theme);
+        @include toolbar-theme.theme($dark-theme);
+        @include dropdown-theme.theme($dark-theme);
+    }
+
+    body{
+        background-color: mat.get-color-from-palette(theme.$background-light, background);
+    }
+    
+    body[class=darkMode]{
+        background-color: lighten(mat.get-color-from-palette(theme.$background-dark, background), 5%);
+    }
+
+}
