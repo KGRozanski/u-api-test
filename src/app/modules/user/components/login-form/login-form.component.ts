@@ -5,11 +5,11 @@ import { Store } from '@ngrx/store';
 import { AccountActions } from 'src/app/core/actions/account.actions';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginFormComponent implements OnInit {
 
   constructor(private FB: FormBuilder, private US: UserService, private store: Store) { }
 

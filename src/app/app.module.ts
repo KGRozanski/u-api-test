@@ -20,11 +20,17 @@ import { metaReducers, reducers } from './core/reducers/_app.reducer';
 import { HydrationEffects } from './core/effects/hydration.effect';
 import { DropdownComponent } from './core/components/dropdown/dropdown.component';
 import directives from './core/directives/_directives';
+import { RegisterComponent } from './core/components/register/register.component';
+import { LoginComponent } from './core/components/login/login.component';
+import { HomePageComponent } from './core/components/home/home-page.component';
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     DropdownComponent,
+    RegisterComponent,
+    LoginComponent,
+    HomePageComponent,
     ...directives
   ],
   imports: [
@@ -43,7 +49,7 @@ import directives from './core/directives/_directives';
     AuthService,
     {
       provide: APP_INITIALIZER,
-      useFactory: (authService: AuthService) => () => authService.init(),
+      useFactory: (authService: AuthService) => () => authService.initAuth(),
       deps: [AuthService],
       multi: true
     }

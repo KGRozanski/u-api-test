@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CustomValidators } from '../../../../../app/core/validators/validators';
+import { CustomValidators } from '../../../../core/validators/validators';
 import { UserService } from '../../services/user.service';
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-register-form',
+  templateUrl: './register-form.component.html',
+  styleUrls: ['./register-form.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterFormComponent implements OnInit {
 
   constructor(private FB: FormBuilder, private US: UserService) { }
   

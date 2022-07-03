@@ -1,9 +1,6 @@
-@use '@angular/material' as mat;
 @use '../../../../assets/scss/variables.scss';
 @use '../../../../assets/scss/mixins/dark-mode-transition.mixin' as transition;
-@import '../../../../assets/scss/typography.scss';
 
-@include mat.core($default-typography);
 
 :host{
     position: fixed;
@@ -35,3 +32,10 @@ h1{
     }
 }
 
+.right-panel{
+    .auth-actions{
+        button:first-child{
+            margin-right: 10px;
+        }
+    }
+}
