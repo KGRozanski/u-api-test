@@ -1,5 +1,6 @@
 @use "sass:map";
 @use "@angular/material" as mat;
+@use "../../mixins/page.mixin";
 
 @mixin color($theme) {
     // Get the color config from the theme.
@@ -8,9 +9,9 @@
     // Get the primary color palette from the color-config.
     $background: map.get($config, background);
 
-    .cmp-login{
+    router-outlet + * {
         // Read the 500 hue from the primary color palette.
-        background-color: mat.get-color-from-palette($background, background);
+        // background-color: mat.get-color-from-palette($background, background);
     }
     
 }
@@ -25,7 +26,7 @@
     // Get the typography config from the theme.
     $typography-config: mat.get-typography-config($theme);
 
-    .cmp-login {
+    router-outlet + * {
         color: mat.get-color-from-palette($palette, text, .9);
     }
 }
@@ -34,6 +35,9 @@
 // and typography. This theme mixin should only emit the styles for
 // each color and typography, respectively, if they have a config specified.
 @mixin theme($theme) {
+
+    @include page.page();
+
     $color-config: mat.get-color-config($theme);
 
     @if $color-config != null {

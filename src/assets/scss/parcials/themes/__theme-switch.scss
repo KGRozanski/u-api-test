@@ -9,11 +9,13 @@
 @use './register-form-theme';
 @use './toolbar-theme';
 @use './dropdown-theme';
+@use './page-theme';
 
 @mixin themeSwitch($default-theme, $dark-theme) {
 
     @include icons-light.icons;
     @include mat.all-component-themes($default-theme);
+    @include page-theme.theme($default-theme);
     @include login-form-theme.theme($default-theme);
     @include register-form-theme.theme($default-theme);
     @include toolbar-theme.theme($default-theme);
@@ -22,6 +24,7 @@
     .darkMode {
         @include icons-dark.icons;
         @include mat.all-component-colors($dark-theme);
+        @include page-theme.theme($dark-theme);
         @include login-form-theme.theme($dark-theme);
         @include register-form-theme.theme($dark-theme);
         @include toolbar-theme.theme($dark-theme);

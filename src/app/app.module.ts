@@ -20,16 +20,16 @@ import { metaReducers, reducers } from './core/reducers/_app.reducer';
 import { HydrationEffects } from './core/effects/hydration.effect';
 import { DropdownComponent } from './core/components/dropdown/dropdown.component';
 import directives from './core/directives/_directives';
-import { RegisterComponent } from './core/components/register/register.component';
-import { LoginComponent } from './core/components/login/login.component';
+import { RegisterPageComponent } from './core/components/register/register-page.component';
+import { LoginPageComponent } from './core/components/login/login-page.component';
 import { HomePageComponent } from './core/components/home/home-page.component';
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     DropdownComponent,
-    RegisterComponent,
-    LoginComponent,
+    RegisterPageComponent,
+    LoginPageComponent,
     HomePageComponent,
     ...directives
   ],

@@ -2,8 +2,8 @@
 
 <div class="right-panel">
     <div class="auth-actions">
-        <button mat-flat-button color="basic">Login</button>
-        <button mat-flat-button color="primary">Sign up</button>
+        <button mat-flat-button color="basic" [routerLink]="['/login']" >Login</button>
+        <button mat-flat-button color="primary" [routerLink]="['/register']">Sign up</button>
     </div>
     
     <div *ngIf="true" clicked-outside (clickedOutside)="toggleDropdown(true)">

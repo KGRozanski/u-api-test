@@ -1,0 +1,6 @@
+@mixin page() {
+    router-outlet + * {
+        display: block;
+        padding: 20px;
+    }
+}
