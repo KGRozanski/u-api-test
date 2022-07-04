@@ -5,6 +5,7 @@
 
 .angular/**
 /.angular/cache
+/dist
 
 # User-specific files
 *.rsuser
