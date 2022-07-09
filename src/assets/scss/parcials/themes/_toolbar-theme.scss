@@ -20,14 +20,14 @@
         border-bottom: 1px solid $divider;
 
         #avatar{
-            border: 1px solid $divider;
+            img, .i-user{
+                border: 1px solid $divider;
 
-            &:active{
-                border: 1px solid mat.get-color-from-palette($primary, 500);
+                &:active{
+                    border: 1px solid mat.get-color-from-palette($primary, 500);
+                }
             }
         }
-
-
     }
     
 }

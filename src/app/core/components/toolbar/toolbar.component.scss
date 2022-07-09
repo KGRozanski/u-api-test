@@ -22,13 +22,24 @@ h1{
     margin: 0 !important;
 }
 
-#avatar{
+#avatar > img,i {
+    display: block;
     width: 42px;
     height: 42px;
     border-radius: 100%;
 
     &:hover{
         cursor: pointer;
+    }
+}
+
+[clicked-outside] {
+    border-radius: 100%;
+
+    .i-user{
+        background-position: center bottom;
+        background-size: 70%;
+        background-repeat: no-repeat;
     }
 }
 
