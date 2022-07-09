@@ -13,7 +13,7 @@ export class LogService {
     ];
 
     private queue: any = [];
-    private ECHO_TOKEN = {};
+    private TOKEN = {};
     private RESET_INPUT = "%c ";
     private RESET_CSS = "";
 
@@ -54,7 +54,7 @@ export class LogService {
                 css: "display: inline-block ; background-color: #2B52C2 ; color: #ffffff ; font-weight: bold ; padding: 3px 7px 3px 7px ; border-radius: 3px 3px 3px 3px ;"
             }
         );
-        args.unshift(this.ECHO_TOKEN);
+        args.unshift(this.TOKEN);
         //////////////////////////////
 
         (() => {
@@ -69,7 +69,7 @@ export class LogService {
                 // a special token. This indicates that we should pull the
                 // corresponding value out of the QUEUE instead of trying to
                 // output the given argument directly.
-                if ( args[ i ] === this.ECHO_TOKEN ) {
+                if ( args[ i ] === this.TOKEN ) {
 
                     var item = this.queue.shift();
 
@@ -115,7 +115,7 @@ export class LogService {
             css: "display: inline-block ; background-color: #2B52C2 ; color: #ffffff ; font-weight: bold ; padding: 3px 7px 3px 7px ; border-radius: 3px 3px 3px 3px ;"
         });
 
-        return( this.ECHO_TOKEN );
+        return( this.TOKEN );
 
     }
 
@@ -126,7 +126,7 @@ export class LogService {
             css: "display: inline-block ; background-color: #C2AE2B ; color: black ; font-weight: bold ; padding: 3px 7px 3px 7px ; border-radius: 3px 3px 3px 3px ;"
         });
 
-        return( this.ECHO_TOKEN );
+        return( this.TOKEN );
 
     }
 
