@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, exhaustMap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { AccountActions } from '../actions/account.actions';
+import { AccountService } from 'src/app/modules/shared/services/account.service';
 
 @Injectable()
 export class AccountEffect {
@@ -13,14 +14,18 @@ export class AccountEffect {
         this.authService
           .login(action.credentials)
           .pipe(
-            map(() =>
-              
-              AccountActions.loginSuccess({userInfo: this.authService.userInfo})
-            )
+            map(() =>{
+              this.authService.setupSuccessAuthFlag();
+              return AccountActions.loginSuccess({userInfo: this.accountService.userInfo});
+            })
           )
       )
     )
   );
 
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private accountService: AccountService
+  ) {}
 }
