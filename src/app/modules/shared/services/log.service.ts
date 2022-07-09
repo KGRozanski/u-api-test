@@ -5,13 +5,6 @@ import { environment } from '../../../../environments/environment';
     providedIn: 'root',
 })
 export class LogService {
-
-    private cssForModeLog = [
-        'background: #222; color: orange;  font-size: 20px;',
-        'background: #222; color: red;  font-size: 20px; font-weight: 900;',
-        'background: #222; color: green;  font-size: 20px; font-weight: 900;',
-    ];
-
     private queue: any = [];
     private TOKEN = {};
     private RESET_INPUT = "%c ";
@@ -19,35 +12,37 @@ export class LogService {
 
     constructor() {}
 
-    public log(...data: any[]): any {
+    public log(...data: any[]): void {
         this.using(data, console.log);
     }
 
-    public warn(...data: any[]): any {
+    public warn(...data: any[]): void {
         this.using(data, console.warn);
     }
 
-    public error(...data: any[]): any {
+    public error(...data: any[]): void {
         this.using(data, console.error);
     }
-    public trace(...data: any[]): any {
+
+    public trace(...data: any[]): void {
         this.using(data, console.trace);
     }
 
-    public group(...data: any[]): any {
+    public group(...data: any[]): void {
         this.using(data, console.group);
     }
     
-    public groupEnd(...data: any[]): any {
+    public groupEnd(...data: any[]): void {
         this.using(data, console.groupEnd);
     }
 
     // Proxy to the given Console Function. This uses an
-    // internal queue to aggregate values before calling the given Console
-    // Function with the desired formatting.
-    private using( args: any, consoleFunction: any ) {
+    // internal queue to aggregate values before calling the given console
+    // function with the desired formatting.
+    private using( args: any[], consoleFunction: Function ) {
         //////////////////////////////
-        // log on every request
+        // Insert time before every log msg
+        //
         this.queue.unshift(
             {
                 value: `${new Date().toLocaleString()}`,
@@ -57,54 +52,52 @@ export class LogService {
         args.unshift(this.TOKEN);
         //////////////////////////////
 
-        (() => {
-            let inputs: any = [];
-            let modifiers: any = [];
+
+        let msgs: any = [];
+        let modifiers: Array<string> = [];
 
 
 
-            for ( var i = 0 ; i < args.length ; i++ ) {
+        for ( let i = 0 ; i < args.length ; i++ ) {
 
-                // When the formatting utility methods are called, they return
-                // a special token. This indicates that we should pull the
-                // corresponding value out of the QUEUE instead of trying to
-                // output the given argument directly.
-                if ( args[ i ] === this.TOKEN ) {
+            // When the formatting utility methods are called, they return
+            // a special token. This indicates that we should pull the
+            // corresponding value out of the QUEUE instead of trying to
+            // output the given argument directly.
+            if ( args[ i ] === this.TOKEN ) {
 
-                    var item = this.queue.shift();
+                let item = this.queue.shift();
 
-                    inputs.push( ( "%c" + item.value ), this.RESET_INPUT );
-                    modifiers.push( item.css, this.RESET_CSS );
+                msgs.push( ( "%c" + item.value ), this.RESET_INPUT );
+                modifiers.push( item.css, this.RESET_CSS );
 
+            } else {
+                let arg = args[ i ];
+
+                if (
+                    ( typeof( arg ) === "object" ) ||
+                    ( typeof( arg ) === "function" )
+                    ) {
+
+                    msgs.push( "%o", this.RESET_INPUT );
+                    modifiers.push( arg, this.RESET_CSS );
 
                 } else {
 
-                    var arg = args[ i ];
-
-                    if (
-                        ( typeof( arg ) === "object" ) ||
-                        ( typeof( arg ) === "function" )
-                        ) {
-
-                        inputs.push( "%o", this.RESET_INPUT );
-                        modifiers.push( arg, this.RESET_CSS );
-
-                    } else {
-
-                        inputs.push( ( "%c" + arg ), this.RESET_INPUT );
-                        modifiers.push( this.RESET_CSS, this.RESET_CSS );
-
-                    }
+                    msgs.push( ( "%c" + arg ), this.RESET_INPUT );
+                    modifiers.push( this.RESET_CSS, this.RESET_CSS );
 
                 }
 
             }
 
-            consoleFunction( inputs.join( "" ), ...modifiers );
+        }
 
-            this.queue = [];
+        if (!environment.production) {
+            consoleFunction( msgs.join( "" ), ...modifiers );
+        }
 
-        })();
+        this.queue = [];
 
     }
 
