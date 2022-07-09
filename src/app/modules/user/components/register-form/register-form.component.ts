@@ -15,7 +15,7 @@ export class RegisterFormComponent {
 
   private googleScript: HTMLScriptElement = this.document.createElement("script");
 
-  constructor(private FB: FormBuilder, private US: UserService, @Inject(DOCUMENT) private document: Document,) {
+  constructor(private FB: FormBuilder, private US: UserService, @Inject(DOCUMENT) private document: Document) {
     this.googleScript.src = "https://accounts.google.com/gsi/client";
     this.document.body.appendChild(this.googleScript);
   }
