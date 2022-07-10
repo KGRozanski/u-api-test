@@ -1,103 +1,80 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 
+interface PrfixLog{
+    value: string;
+    css: string;
+}
 @Injectable({
     providedIn: 'root',
 })
 export class LogService {
+
     private queue: any = [];
     private TOKEN = {};
     private RESET_INPUT = "%c ";
     private RESET_CSS = "";
+    private PREFIX_OF_LOGS: PrfixLog | null = {
+        value: `${new Date().toLocaleString()}`,
+        css: "display: inline-block ; background-color: #2B52C2 ; color: #ffffff ; font-weight: bold ; padding: 3px 7px 3px 7px ; border-radius: 3px 3px 3px 3px ;"
+    };
 
     constructor() {}
 
-    public log(...data: any[]): void {
-        this.using(data, console.log);
-    }
 
-    public warn(...data: any[]): void {
-        this.using(data, console.warn);
-    }
+    public log: Function = this.using(console.log);
+    public warn: Function = this.using(console.warn);
+    public error: Function = this.using(console.error);
+    public trace: Function = this.using(console.trace);
+    public group: Function = this.using(console.group);
+    public groupEnd: Function = this.using(console.groupEnd)
 
-    public error(...data: any[]): void {
-        this.using(data, console.error);
-    }
-
-    public trace(...data: any[]): void {
-        this.using(data, console.trace);
-    }
-
-    public group(...data: any[]): void {
-        this.using(data, console.group);
-    }
-    
-    public groupEnd(...data: any[]): void {
-        this.using(data, console.groupEnd);
-    }
 
     // Proxy to the given Console Function. This uses an
     // internal queue to aggregate values before calling the given console
     // function with the desired formatting.
-    private using( args: any[], consoleFunction: Function ) {
-        //////////////////////////////
-        // Insert time before every log msg
-        //
-        this.queue.unshift(
-            {
-                value: `${new Date().toLocaleString()}`,
-                css: "display: inline-block ; background-color: #2B52C2 ; color: #ffffff ; font-weight: bold ; padding: 3px 7px 3px 7px ; border-radius: 3px 3px 3px 3px ;"
-            }
-        );
-        args.unshift(this.TOKEN);
-        //////////////////////////////
+    private using( consoleFunction: Function ) {
+        let that = this;
 
+        function consoleProxyFn() {
+            let msgs: any = [];
+            let modifiers: Array<string> = [];
 
-        let msgs: any = [];
-        let modifiers: Array<string> = [];
+            for ( let argument of arguments ) {
 
+                // When the formatting utility methods are called, they return
+                // a special token. This indicates that we should pull the
+                // corresponding value out of the QUEUE instead of trying to
+                // output the given argument directly.
+                if ( argument === that.TOKEN ) {
+                    let item = that.queue.shift();
 
-
-        for ( let i = 0 ; i < args.length ; i++ ) {
-
-            // When the formatting utility methods are called, they return
-            // a special token. This indicates that we should pull the
-            // corresponding value out of the QUEUE instead of trying to
-            // output the given argument directly.
-            if ( args[ i ] === this.TOKEN ) {
-
-                let item = this.queue.shift();
-
-                msgs.push( ( "%c" + item.value ), this.RESET_INPUT );
-                modifiers.push( item.css, this.RESET_CSS );
-
-            } else {
-                let arg = args[ i ];
-
-                if (
-                    ( typeof( arg ) === "object" ) ||
-                    ( typeof( arg ) === "function" )
-                    ) {
-
-                    msgs.push( "%o", this.RESET_INPUT );
-                    modifiers.push( arg, this.RESET_CSS );
-
+                    msgs.push("%c" + item.value , that.RESET_INPUT);
+                    modifiers.push(item.css, that.RESET_CSS);
                 } else {
+                    if (argument instanceof Object || argument instanceof Function ) {
+                        msgs.push("%o", that.RESET_INPUT);
+                        modifiers.push( argument, that.RESET_CSS);
+                    } else {
+                        msgs.push("%c" + argument, that.RESET_INPUT);
+                        modifiers.push( that.RESET_CSS, that.RESET_CSS);
+                    }
+                }
+            }
 
-                    msgs.push( ( "%c" + arg ), this.RESET_INPUT );
-                    modifiers.push( this.RESET_CSS, this.RESET_CSS );
-
+            if (!environment.production) {
+                if(that.PREFIX_OF_LOGS) {
+                    msgs.unshift( ( "%c" + that.PREFIX_OF_LOGS.value ), that.RESET_INPUT )
+                    modifiers.unshift( that.PREFIX_OF_LOGS.css, that.RESET_CSS );
                 }
 
+                consoleFunction( msgs.join( "" ), ...modifiers );
             }
 
+            that.queue = [];
         }
 
-        if (!environment.production) {
-            consoleFunction( msgs.join( "" ), ...modifiers );
-        }
-
-        this.queue = [];
+        return consoleProxyFn;
 
     }
 
