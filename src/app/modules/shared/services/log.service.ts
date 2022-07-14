@@ -14,10 +14,6 @@ export class LogService {
     private TOKEN = {};
     private RESET_INPUT = "%c ";
     private RESET_CSS = "";
-    private PREFIX_OF_LOGS: PrfixLog | null = {
-        value: `${new Date().toLocaleString()}`,
-        css: "display: inline-block ; background-color: #2B52C2 ; color: #ffffff ; font-weight: bold ; padding: 3px 7px 3px 7px ; border-radius: 3px 3px 3px 3px ;"
-    };
 
     constructor() {}
 
@@ -26,7 +22,7 @@ export class LogService {
     public warn: Function = this.using(console.warn);
     public error: Function = this.using(console.error);
     public trace: Function = this.using(console.trace);
-    public group: Function = this.using(console.group);
+    public group: Function = this.using(console.groupCollapsed);
     public groupEnd: Function = this.using(console.groupEnd)
 
 
@@ -63,10 +59,8 @@ export class LogService {
             }
 
             if (!environment.production) {
-                if(that.PREFIX_OF_LOGS) {
-                    msgs.unshift( ( "%c" + that.PREFIX_OF_LOGS.value ), that.RESET_INPUT )
-                    modifiers.unshift( that.PREFIX_OF_LOGS.css, that.RESET_CSS );
-                }
+                msgs.unshift( ( "%c" + that.prefix.value ), that.RESET_INPUT )
+                modifiers.unshift( that.prefix.css, that.RESET_CSS );
 
                 consoleFunction( msgs.join( "" ), ...modifiers );
             }
@@ -98,6 +92,13 @@ export class LogService {
 
         return( this.TOKEN );
 
+    }
+
+    public get prefix(): PrfixLog {
+        return {
+            value: `${new Date().toLocaleString()}`,
+            css: "display: inline-block ; background-color: #2B52C2 ; color: #ffffff ; font-weight: bold ; padding: 3px 7px 3px 7px ; border-radius: 3px 3px 3px 3px ;"
+        };
     }
 
 
