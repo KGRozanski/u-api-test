@@ -12,7 +12,7 @@ import { Settings } from '../../interfaces/settings.interface';
   styleUrls: ['./dropdown.component.scss']
 })
 export class DropdownComponent implements OnInit {
-  public isChecked: boolean = false;
+  public darkMode: boolean = false;
   public settings$ = this.store.pipe(select(SettingsSelectors.selectSettingsCollection));
   private readonly unsubscribe$: Subject<void> = new Subject();
 
@@ -20,7 +20,7 @@ export class DropdownComponent implements OnInit {
 
   public ngOnInit(): void {
     this.settings$.pipe(takeUntil(this.unsubscribe$)).subscribe((data: Settings) => {
-      this.isChecked = data.isDarkModeEnabled;
+      this.darkMode = data.darkMode;
     });
   }
 
@@ -29,7 +29,7 @@ export class DropdownComponent implements OnInit {
   }
 
   public darkModeChanged() {
-    this.store.dispatch(SettingsActions.darkModeToggle({isDarkModeEnabled: this.isChecked}));
+    this.store.dispatch(SettingsActions.darkModeToggle({darkMode: this.darkMode}));
   }
 
 }

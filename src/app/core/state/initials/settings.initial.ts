@@ -2,6 +2,6 @@ import { Settings } from "../../interfaces/settings.interface";
 
 export function getSettingsInitial(): Settings {
     return {
-        isDarkModeEnabled: false
+        darkMode: false
     }
 }

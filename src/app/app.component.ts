@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.select(SettingsSelectors.selectSettingsCollection).subscribe((data) => {
-      this.renderer.setAttribute(this.document.body, 'class', data.isDarkModeEnabled ? 'darkMode' : '');
+      this.renderer.setAttribute(this.document.body, 'class', data.darkMode ? 'darkMode' : '');
     });
   }
 

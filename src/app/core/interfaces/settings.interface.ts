@@ -1,3 +1,3 @@
 export interface Settings {
-    isDarkModeEnabled: boolean;
+    darkMode: boolean;
 }

@@ -5,7 +5,7 @@ import { getSettingsInitial } from '../state/initials/settings.initial';
 
 export const settingsReducer = createReducer(
     getSettingsInitial(),
-    on(SettingsActions.darkModeToggle, (state, {isDarkModeEnabled}) => ({...state, isDarkModeEnabled}))
+    on(SettingsActions.darkModeToggle, (state, {darkMode}) => ({...state, darkMode}))
 );
 
 
