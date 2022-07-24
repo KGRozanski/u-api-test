@@ -1,0 +1,15 @@
+.socials{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .policy{
+        font-size: 12.5px;
+        text-align: center;
+        margin-bottom: 10px;
+
+        a{
+            font-size: 14px;
+        }
+    }
+}

@@ -26,14 +26,23 @@ export class LoginFormComponent implements OnInit {
       [
         Validators.required
       ]
-    ]
+    ],
+    rememberMe: [false]
   });
 
   ngOnInit(): void {
   }
 
   submit() {
-    this.store.dispatch(AccountActions.login({ credentials: this.loginForm.value }));
+    if(this.loginForm.valid) {
+      this.store.dispatch(AccountActions.login({
+        credentials: {
+          username: this.loginForm.get('username')!.value,
+          password: this.loginForm.get('password')!.value,
+          remember_me: this.loginForm.get('rememberMe')!.value
+        }
+      }));
+    }
   }
 
 }

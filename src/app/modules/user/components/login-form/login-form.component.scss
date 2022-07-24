@@ -1,5 +1,6 @@
 @use '../../../../../assets/scss/variables.scss';
 @use '../../../../../assets/scss/mixins/dark-mode-transition.mixin' as transition;
+@use '../../../../../assets/scss/parcials/divider';
 
 :host{
     display: block;
@@ -19,6 +20,5 @@ h1 {
 .login{
     display: flex;
     flex-direction: column;
-
 }
 
