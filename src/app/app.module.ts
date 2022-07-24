@@ -23,6 +23,7 @@ import directives from './core/directives/_directives';
 import { RegisterPageComponent } from './core/components/register/register-page.component';
 import { LoginPageComponent } from './core/components/login/login-page.component';
 import { HomePageComponent } from './core/components/home/home-page.component';
+import { FooterComponent } from './core/components/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { HomePageComponent } from './core/components/home/home-page.component';
     RegisterPageComponent,
     LoginPageComponent,
     HomePageComponent,
-    ...directives
+    ...directives,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

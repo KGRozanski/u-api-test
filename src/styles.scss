@@ -7,7 +7,7 @@
 @use './assets/scss/typography';
 @use './assets/scss/theme';
 @use './assets/scss/shadows';
-@use './assets/scss/parcials/themes/_theme-switch' as themes;
+@use './assets/scss/parcials/themes/_theme-switch' as switch;
 @use './assets/scss/mixins/dark-mode-transition.mixin' as transition;
 
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
@@ -15,7 +15,7 @@
 
 
 @include mat.core(typography.$default-typography);
-@include themes.themeSwitch(theme.$default-theme, theme.$dark-theme);
+@include switch.themeSwitch(theme.$default-theme, theme.$dark-theme);
 
 
 
