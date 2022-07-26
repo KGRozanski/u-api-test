@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
-
+declare const cookieStore: any;
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +22,11 @@ export class CookieService {
 
   public doesCookieExist(name: string): boolean {
     return !!this.getCookie(name);
+  }
+
+
+  public async getCookieExpDate(cookieName: string): Promise<number | null> {
+    return await cookieStore.get(cookieName).then((cookie: any) => cookie.expires);
   }
 
 }
