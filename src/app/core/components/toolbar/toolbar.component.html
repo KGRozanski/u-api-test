@@ -1,18 +1,20 @@
 <h1 class="mat-headline">FadeIn:</h1>
 
 <div class="right-panel">
-    <div class="auth-actions">
-        <button mat-flat-button color="basic" [routerLink]="['/login']" >Login</button>
-        <button mat-flat-button color="primary" [routerLink]="['/register']">Sign up</button>
-    </div>
-
-</div>
-
+    <ng-container *ngIf="!authService.isAuthenticated" >
+        <div class="auth-actions">
+            <button mat-flat-button color="basic" [routerLink]="['/login']" >Login</button>
+            <button mat-flat-button color="primary" [routerLink]="['/register']">Sign up</button>
+        </div>
+    </ng-container>
     
-<div clicked-outside (clickedOutside)="toggleDropdown(true)">
-    <div id="avatar" (click)="toggleDropdown()">
-        <img src="https://lh3.googleusercontent.com/a-/AOh14Gik1bUO8V7GJ7r4W4i83_-TN5HNHTV3Jx3F4zH-lg=s96-c" alt="avatar" />
-        <i class="i-user"></i>
+    <div clicked-outside (clickedOutside)="toggleDropdown(true)">
+        <div id="avatar" [ngSwitch]="authService.isAuthenticated" (click)="toggleDropdown()">
+            <img *ngSwitchCase="true" [src]="account.photo" alt="avatar" />
+            <i *ngSwitchCase="false" class="i-user"></i>
+        </div>
+        <app-dropdown *ngIf="isDropdownVisible" class="cmp-dropdown shadow-md" ></app-dropdown>
     </div>
-    <app-dropdown *ngIf="isDropdownVisible" class="cmp-dropdown shadow-md" ></app-dropdown>
 </div>
+
+

@@ -5,6 +5,10 @@ import { SettingsSelectors } from '../../selectors/settings.selectors';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Settings } from '../../interfaces/settings.interface';
+import { AuthService } from '../../auth/auth.service';
+import { getAccountInitial } from '../../state/initials/account.initial';
+import { UserInfo } from '../../interfaces/user-info.interface';
+import { ACCOUNT_SELECTORS } from '../../selectors/account.selectors';
 
 @Component({
   selector: 'app-dropdown',
@@ -15,12 +19,16 @@ export class DropdownComponent implements OnInit {
   public darkMode: boolean = false;
   public settings$ = this.store.pipe(select(SettingsSelectors.selectSettingsCollection));
   private readonly unsubscribe$: Subject<void> = new Subject();
+  public account: UserInfo = getAccountInitial();
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, public authService: AuthService) { }
 
   public ngOnInit(): void {
     this.settings$.pipe(takeUntil(this.unsubscribe$)).subscribe((data: Settings) => {
       this.darkMode = data.darkMode;
+    });
+    this.store.select(ACCOUNT_SELECTORS.selectAccountCollection).subscribe((accountData) => {
+      this.account = accountData;
     });
   }
 

@@ -24,6 +24,7 @@ import { RegisterPageComponent } from './core/components/register/register-page.
 import { LoginPageComponent } from './core/components/login/login-page.component';
 import { HomePageComponent } from './core/components/home/home-page.component';
 import { FooterComponent } from './core/components/footer/footer.component';
+import { PagenotfoundComponent } from './core/components/pagenotfound/pagenotfound.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { FooterComponent } from './core/components/footer/footer.component';
     LoginPageComponent,
     HomePageComponent,
     ...directives,
-    FooterComponent
+    FooterComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,

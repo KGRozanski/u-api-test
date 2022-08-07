@@ -1,6 +1,6 @@
-<div class="header">
-    <img class="avatar" src="https://lh3.googleusercontent.com/a-/AOh14Gik1bUO8V7GJ7r4W4i83_-TN5HNHTV3Jx3F4zH-lg=s96-c" alt="avatar" />
-    <div class="username">kgrozanski</div>
+<div *ngIf="authService.isAuthenticated" class="header">
+    <img class="avatar" [src]="account.photo" alt="avatar" />
+    <div class="username">{{account.username}}</div>
 </div>
 <ol>
     <li>
@@ -18,13 +18,13 @@
         >
         </mat-slide-toggle>
     </li>
-    <li>
+    <li *ngIf="authService.isAuthenticated">
         <div>
             <i class="i-settings"></i>
             <span>Settings</span>
         </div>
     </li>
-    <li>
+    <li *ngIf="authService.isAuthenticated">
         <div>
             <i class="i-logout"></i>
             <span>Logout</span>

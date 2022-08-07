@@ -8,9 +8,11 @@ import { UserInfo } from "../interfaces/user-info.interface";
 import jwt_decode from "jwt-decode";
 import { TokenType } from "../enums/token-type.enum";
 import { JWT } from "../interfaces/jwt.interface";
-import { Router } from "@angular/router";
 import { LogService } from "src/app/modules/shared/services/log.service";
 import { elapsedTimeFormatter } from "../utils/elapsedTimeFormatter";
+import { AccountActions } from "../actions/account.actions";
+import { select, Store } from "@ngrx/store";
+import { ACCOUNT_SELECTORS } from "../selectors/account.selectors";
 
 
 @Injectable()
@@ -18,14 +20,27 @@ export class AuthService {
     private _oidcTokenTimeout = 35985000;
     private _accessTokenTimeout = 3585000;
     private _authenticatedCookieExp = 604790;
+    private account: UserInfo = {
+        username: '–',
+        email: '–',
+        givenName: '–',
+        familyName: '–',
+        photo: '–',
+        creationDate: '–'
+    }
+    private account$: Observable<UserInfo> = this.store.pipe(select(ACCOUNT_SELECTORS.selectAccountCollection));
     
     constructor(
         private readonly http: HttpClient,
         private apiLinks: ApiLinksService,
         private cookies: CookieService,
-        private router: Router,
-        private logger: LogService
-    ) {}
+        private logger: LogService,
+        private store: Store
+    ) {
+        this.account$.subscribe((accountData) => {
+            this.account = accountData;
+        });
+    }
 
     public initAuth(): Promise<boolean> {
 
@@ -33,6 +48,7 @@ export class AuthService {
             if(this.cookies.doesCookieExist(TokenType.LOGGED_IN_WITH)) {
                 this.setTokenTimeout(this._accessTokenTimeout, TokenType.ACCESS_TOKEN);
                 this.setTokenTimeout(this._oidcTokenTimeout, TokenType.ID_TOKEN);
+                this.store.dispatch(AccountActions.loginSuccess({userInfo: this.userInfo}));
                 this.setupSuccessAuthFlag();
                 resolve(true);
                 return;
@@ -51,6 +67,7 @@ export class AuthService {
                     complete: () => {
                         this.logInfo(TokenType.ACCESS_TOKEN);
                         this.setTokenTimeout(this._accessTokenTimeout, TokenType.ACCESS_TOKEN);
+                        this.store.dispatch(AccountActions.loginSuccess({userInfo: this.userInfo}));
                         this.setupSuccessAuthFlag();
 
                         try {
@@ -95,7 +112,6 @@ export class AuthService {
                         const NEW_DELAY = (type === TokenType.ACCESS_TOKEN) ? this._accessTokenTimeout : this._oidcTokenTimeout;
                         this.logInfo(type);
                         this.setTokenTimeout(NEW_DELAY, type);
-                        this.setupSuccessAuthFlag();
                     }
                 });
         }, timeout);
@@ -103,12 +119,47 @@ export class AuthService {
 
 
     /**
-     * Set the cookie to be a flag: `authenticated=true`
-     * of successful authentication. It's used to inform initAuth function
-     * to not send refresh request as client has no OAuth cookies
+     * Set the cookie: `authenticated=true`
+     * It's used as a flag of successful authentication, to inform initAuth function
+     * to not send refresh requests, because client has no OAuth cookies
      */
-    public setupSuccessAuthFlag(): void {
-        this.cookies.setCookie('authenticated', 'true', new Date(Date.now() + (this._authenticatedCookieExp * 1000)).toString());
+    public async setupSuccessAuthFlag(): Promise<void> {
+        const REMEMBER_ME = await this.cookies.getCookieExpDate('id_token');
+        const EXP_TIME = REMEMBER_ME ? new Date(Date.now() + (this._authenticatedCookieExp * 1000)).toString() : '0';
+        this.cookies.setCookie('authenticated', 'true', EXP_TIME);
+    }
+
+    public get userInfo(): UserInfo {
+        const ID_TOKEN = this.cookies.getCookie(TokenType.ID_TOKEN);
+        let decoded: UserInfo;
+
+        try {
+            decoded = jwt_decode(ID_TOKEN || '');
+        } catch(err) {
+            this.logger.log(`Error durning decoding an ${TokenType.ID_TOKEN}: ${err}`);
+            return this.account;
+        }
+
+        return {
+            username: decoded.username,
+            email: decoded.email,
+            givenName: decoded.givenName,
+            familyName: decoded.familyName,
+            photo: decoded.photo,
+            creationDate: decoded.creationDate
+        }
+    }
+
+    /**
+     * Void to be run after successful authentication. Sets up the session token refresh timeouts and flag cookies
+     */
+    public postSignIn(): void {
+        // SET TIMEOUTS HERE ⚠️⚠️⚠️
+        this.setTokenTimeout(this._accessTokenTimeout, TokenType.ACCESS_TOKEN);
+        this.setTokenTimeout(this._oidcTokenTimeout, TokenType.ID_TOKEN);
+        this.setupSuccessAuthFlag();
+        //fulfill store with user data
+        this.store.dispatch(AccountActions.loginSuccess({userInfo: this.userInfo}));
     }
 
     // public handleError(err: any): Observable<any> {
@@ -140,8 +191,12 @@ export class AuthService {
         return this.http.post<HttpResponse<Object> | HttpErrorResponse>(this.apiLinks.apiLink + 'auth/token?refresh=' + tokenType, {}, {withCredentials: true, observe: 'response'});
     }
 
-
-
-
+    public get isAuthenticated(): boolean {
+        if(this.account.email === '–' || this.account.email === '') {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 }
