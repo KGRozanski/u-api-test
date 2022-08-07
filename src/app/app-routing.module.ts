@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { HomePageComponent } from './core/components/home/home-page.component';
 import { LoginPageComponent } from './core/components/login/login-page.component';
+import { PagenotfoundComponent } from './core/components/pagenotfound/pagenotfound.component';
 import { RegisterPageComponent } from './core/components/register/register-page.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: HomePageComponent },
+  { path: 'home', redirectTo: '/home', pathMatch: 'full' },
   { path: 'register', component: RegisterPageComponent },
   { path: 'login', component: LoginPageComponent },
-  { path: 'home', component: HomePageComponent }
+  { path: '**', pathMatch: 'full', component: PagenotfoundComponent },
 ];
 
 @NgModule({

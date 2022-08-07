@@ -2,7 +2,7 @@
 @use './palette' as palette;
 
 $border-radius: 10px;
-
+$toolbar-height: 53px;
 
 //default theme variables
 $my-primary-light: mat.define-palette(palette.$f-color1, 500, 100, 700, 500);
