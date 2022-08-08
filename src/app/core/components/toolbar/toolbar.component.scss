@@ -1,6 +1,6 @@
 @use '../../../../assets/scss/variables.scss';
 @use '../../../../assets/scss/mixins/dark-mode-transition.mixin' as transition;
-
+@use '../../../../assets/scss/mixins/avatar.mixin' as avatar;
 
 :host{
     position: fixed;
@@ -22,26 +22,7 @@ h1{
     margin: 0 !important;
 }
 
-#avatar > img,i {
-    display: block;
-    width: 42px;
-    height: 42px;
-    border-radius: 100%;
-
-    &:hover{
-        cursor: pointer;
-    }
-}
-
-[clicked-outside] {
-    border-radius: 100%;
-
-    .i-user{
-        background-position: center bottom;
-        background-size: 70%;
-        background-repeat: no-repeat;
-    }
-}
+@include avatar.avatar(42px, 42px);
 
 .right-panel{
     display: flex;

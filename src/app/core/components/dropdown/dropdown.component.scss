@@ -1,4 +1,5 @@
 @use '../../../../assets/scss/variables.scss';
+@use '../../../../assets/scss/mixins/avatar.mixin' as avatar;
 
 :host{
     position: fixed;
@@ -13,11 +14,7 @@
     display: flex;
     padding: 15px;
 
-    .avatar{
-        width: 55px;
-        height: 55px;
-        border-radius: 100%;
-    }
+    @include avatar.avatar(55px, 55px);
 
     .username{
         margin: 10px 0 0 15px;
@@ -50,3 +47,6 @@ ol {
         }
     }
 }
+
+
+

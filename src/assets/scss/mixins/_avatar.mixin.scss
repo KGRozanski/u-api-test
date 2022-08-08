@@ -1,0 +1,19 @@
+@mixin avatar($width, $height) {
+    #avatar > img,i {
+        display: block;
+        width: $width;
+        height: $height;
+        border-radius: 100%;
+    
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
+        .i-user{
+            background-repeat: no-repeat;
+            background-size: 75%;
+            background-position: center bottom;
+        }
+    
+}

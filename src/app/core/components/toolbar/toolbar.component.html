@@ -9,7 +9,7 @@
     </ng-container>
     
     <div clicked-outside (clickedOutside)="toggleDropdown(true)">
-        <div id="avatar" [ngSwitch]="authService.isAuthenticated" (click)="toggleDropdown()">
+        <div id="avatar" [ngSwitch]="authService.isAuthenticated && account.photo !== ''" (click)="toggleDropdown()">
             <img *ngSwitchCase="true" [src]="account.photo" alt="avatar" />
             <i *ngSwitchCase="false" class="i-user"></i>
         </div>

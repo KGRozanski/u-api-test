@@ -1,5 +1,9 @@
 <div *ngIf="authService.isAuthenticated" class="header">
-    <img class="avatar" [src]="account.photo" alt="avatar" />
+    <div id="avatar" [ngSwitch]="authService.isAuthenticated && account.photo !== ''">
+        <img *ngSwitchCase="true" [src]="account.photo" alt="avatar" />
+        <i *ngSwitchCase="false" class="i-user"></i>
+    </div>
+
     <div class="username">{{account.username}}</div>
 </div>
 <ol>
