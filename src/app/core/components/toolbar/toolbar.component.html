@@ -1,4 +1,7 @@
-<h1 class="mat-headline">FadeIn:</h1>
+
+<div class="logo" [ngClass]="darkMode ? 'logo--dark' : 'logo--light'"></div>
+
+
 
 <div class="right-panel">
     <ng-container *ngIf="!authService.isAuthenticated" >

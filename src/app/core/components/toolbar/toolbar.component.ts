@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { AuthService } from '../../auth/auth.service';
 import { UserInfo } from '../../interfaces/user-info.interface';
 import { ACCOUNT_SELECTORS } from '../../selectors/account.selectors';
+import { SettingsSelectors } from '../../selectors/settings.selectors';
 import { getAccountInitial } from '../../state/initials/account.initial';
 
 @Component({
@@ -13,12 +14,16 @@ import { getAccountInitial } from '../../state/initials/account.initial';
 export class ToolbarComponent implements OnInit {
   public isDropdownVisible: boolean = false;
   public account: UserInfo = getAccountInitial();
+  public darkMode: boolean = true;
 
   constructor(private store: Store, public authService: AuthService) { }
 
   public ngOnInit(): void {
     this.store.select(ACCOUNT_SELECTORS.selectAccountCollection).subscribe((accountData) => {
       this.account = accountData;
+    });
+    this.store.select(SettingsSelectors.selectSettingsCollection).subscribe((settings) => {
+      this.darkMode = settings.darkMode;
     });
   }
 

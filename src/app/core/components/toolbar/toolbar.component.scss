@@ -36,3 +36,22 @@ h1{
         }
     }
 }
+
+.logo{
+    height: 100%;
+    width: 100px;
+    background-size: cover;
+    background-repeat: none;
+    background-position: center;
+
+    &--light{
+        background-image: url('../../../../assets/svg/fadein-logo-light.svg');
+    }
+
+    &--dark{
+        background-image: url('../../../../assets/svg/fadein-logo-dark.svg');
+    }
+}
+
+
+
