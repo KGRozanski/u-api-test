@@ -3,6 +3,6 @@
 @mixin page() {
     router-outlet + * {
         display: block;
-        border: 20px solid transparent;
+        margin: variables.$toolbar-height 10px 20px 10px;
     }
 }
