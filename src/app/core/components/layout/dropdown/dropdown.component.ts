@@ -1,14 +1,14 @@
 import { Component, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { SettingsActions } from '../../actions/settings.actions';
-import { SettingsSelectors } from '../../selectors/settings.selectors';
+import { SettingsActions } from '../../../actions/settings.actions';
+import { SettingsSelectors } from '../../../selectors/settings.selectors';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { Settings } from '../../interfaces/settings.interface';
-import { AuthService } from '../../auth/auth.service';
-import { getAccountInitial } from '../../state/initials/account.initial';
-import { UserInfo } from '../../interfaces/user-info.interface';
-import { ACCOUNT_SELECTORS } from '../../selectors/account.selectors';
+import { Settings } from '../../../interfaces/settings.interface';
+import { AuthService } from '../../../auth/auth.service';
+import { getAccountInitial } from '../../../state/initials/account.initial';
+import { UserInfo } from '../../../interfaces/user-info.interface';
+import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
 
 @Component({
   selector: 'app-dropdown',

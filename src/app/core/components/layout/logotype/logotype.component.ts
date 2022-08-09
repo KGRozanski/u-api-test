@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SettingsSelectors } from '../../selectors/settings.selectors';
+import { SettingsSelectors } from '../../../selectors/settings.selectors';
 
 @Component({
   selector: 'app-logotype',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthService } from '../../auth/auth.service';
-import { UserInfo } from '../../interfaces/user-info.interface';
-import { ACCOUNT_SELECTORS } from '../../selectors/account.selectors';
-import { getAccountInitial } from '../../state/initials/account.initial';
+import { AuthService } from '../../../auth/auth.service';
+import { UserInfo } from '../../../interfaces/user-info.interface';
+import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
+import { getAccountInitial } from '../../../state/initials/account.initial';
 
 @Component({
   selector: 'app-toolbar',

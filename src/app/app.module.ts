@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { UserModule } from './modules/user/user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './modules/shared/shared.module';
-import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
+import { ToolbarComponent } from './core/components/layout/toolbar/toolbar.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
@@ -18,14 +18,14 @@ import { NotificationsEffect } from './core/effects/notifications.effect';
 import { FormsModule } from '@angular/forms';
 import { metaReducers, reducers } from './core/reducers/_app.reducer';
 import { HydrationEffects } from './core/effects/hydration.effect';
-import { DropdownComponent } from './core/components/dropdown/dropdown.component';
+import { DropdownComponent } from './core/components/layout/dropdown/dropdown.component';
 import directives from './core/directives/_directives';
 import { RegisterComponent } from './core/components/pages/register/register.component';
 import { LoginComponent } from './core/components/pages/login/login.component';
 import { HomePageComponent } from './core/components/pages/home/home-page.component';
-import { FooterComponent } from './core/components/footer/footer.component';
+import { FooterComponent } from './core/components/layout/footer/footer.component';
 import { NotfoundComponent } from './core/components/pages/notfound/notfound.component';
-import { LogotypeComponent } from './core/components/logotype/logotype.component';
+import { LogotypeComponent } from './core/components/layout/logotype/logotype.component';
 @NgModule({
   declarations: [
     AppComponent,
