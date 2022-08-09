@@ -28,7 +28,7 @@
             <span>Settings</span>
         </div>
     </li>
-    <li *ngIf="authService.isAuthenticated">
+    <li *ngIf="authService.isAuthenticated" (click)="logout()">
         <div>
             <i class="i-logout"></i>
             <span>Logout</span>

@@ -20,6 +20,10 @@ export class CookieService {
     this.document.cookie = name + '=' + value + '; expires=' + exp+ '; path=/;';
   }
 
+  public removeCookie(name: string) {
+    document.cookie = name+'=; Max-Age=-99999999;'; 
+  }
+
   public doesCookieExist(name: string): boolean {
     return !!this.getCookie(name);
   }

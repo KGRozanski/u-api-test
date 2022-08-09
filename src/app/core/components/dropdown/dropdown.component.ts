@@ -40,4 +40,8 @@ export class DropdownComponent implements OnInit {
     this.store.dispatch(SettingsActions.darkModeToggle({darkMode: this.darkMode}));
   }
 
+  public logout(): void {
+    this.authService.logout();
+  }
+
 }

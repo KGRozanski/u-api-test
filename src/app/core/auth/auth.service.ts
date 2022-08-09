@@ -30,6 +30,7 @@ export class AuthService {
         creationDate: '–'
     }
     private account$: Observable<UserInfo> = this.store.pipe(select(ACCOUNT_SELECTORS.selectAccountCollection));
+    private timeoutsQueue: NodeJS.Timeout[] = [];
     
     constructor(
         private readonly http: HttpClient,
@@ -106,7 +107,7 @@ export class AuthService {
      */
     public setTokenTimeout(timeout: number, type: TokenType) {
         this.logger.log(`⌛ Timout to refresh ${type.toUpperCase()} has been set on: ${elapsedTimeFormatter(timeout)}`);
-        setTimeout(() => {
+        const timeoutID = setTimeout(() => {
             this.sendRefreshReq(type)
                 .pipe(retry(2))
                 .subscribe({
@@ -121,6 +122,19 @@ export class AuthService {
                     }
                 });
         }, timeout);
+
+        this.timeoutsQueue.push(timeoutID);
+
+    }
+
+    public clearAllTimeouts(): void {
+        const AMOUNT = this.timeoutsQueue.length;
+
+        for (const timeout of this.timeoutsQueue) {
+            clearTimeout(timeout);
+        }
+
+        this.logger.log(`🚽 ${AMOUNT} tokens timeouts has been cleared!`);
     }
 
 
@@ -193,6 +207,15 @@ export class AuthService {
         }
     
         return this.http.post(this.apiLinks.apiLink + 'auth/local', BODY, {withCredentials: true});
+    }
+
+    public logout(): void {
+        this.cookies.removeCookie('authenticated');
+        this.clearAllTimeouts();
+        this.http.post<HttpResponse<Object> | HttpErrorResponse>(this.apiLinks.apiLink + 'auth/logout', null, {withCredentials: true, observe: 'response'})
+            .subscribe(() => {
+                this.store.dispatch(AccountActions.clearAccountData());
+            });
     }
 
     public sendRefreshReq(tokenType: TokenType): Observable<HttpResponse<Object> | HttpErrorResponse> {
