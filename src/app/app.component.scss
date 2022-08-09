@@ -2,3 +2,25 @@ router-outlet{
     display: block;
     margin-top: 53px;
 }
+
+.fadein{
+    animation-name: fadein;
+    animation-duration: .327s;  
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(1, 0, 1, 1);
+}
+.fadeout{
+    animation-name: fadeout;
+    animation-duration: .427s;  
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.15, -0.05, 0.01, 0.84);
+}
+@keyframes fadein {
+    from {top: -1200px;}
+    to {top: 0;}
+}
+
+@keyframes fadeout {
+    from {top: 0;}
+    to {top: -1200;}
+}

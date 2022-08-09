@@ -12,11 +12,13 @@ export class NotificationsEffect {
     this.actions$.pipe(
       ofType(NotificationActions.push),
       tap((event) => {
-        this.snackBar.open(this.getMessage(event.notification), undefined, {duration: 3000});
+        this.snackBar.open(this.getMessage(event.notification), undefined, {duration: 4000});
       })
+
     ),
     { dispatch: false }
   );
+  store: any;
 
   constructor(private actions$: Actions, private snackBar: MatSnackBar) {}
 

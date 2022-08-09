@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, exhaustMap, of } from 'rxjs';
+import { exhaustMap, finalize } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { AccountActions } from '../actions/account.actions';
+import { Store } from '@ngrx/store';
+import { SettingsActions } from '../actions/settings.actions';
 
 @Injectable()
 export class AccountEffect {
@@ -11,6 +13,9 @@ export class AccountEffect {
       ofType(AccountActions.login),
       exhaustMap(async (action) => this.authService
         .login(action.credentials)
+        .pipe(finalize(() => {
+          this.store.dispatch(SettingsActions.loaderToggle({loaderVisibility: false}));
+        }))
         .subscribe({
           complete: () => {
             this.authService.postSignIn();
@@ -23,6 +28,7 @@ export class AccountEffect {
 
   constructor(
     private actions$: Actions,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store
   ) {}
 }

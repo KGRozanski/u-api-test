@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Store } from '@ngrx/store';
 import { AccountActions } from 'src/app/core/actions/account.actions';
+import { SettingsActions } from 'src/app/core/actions/settings.actions';
 
 @Component({
   selector: 'app-login-form',
@@ -35,6 +36,7 @@ export class LoginFormComponent implements OnInit {
 
   submit() {
     if(this.loginForm.valid) {
+      this.store.dispatch(SettingsActions.loaderToggle({loaderVisibility: true}));
       this.store.dispatch(AccountActions.login({
         credentials: {
           username: this.loginForm.get('username')!.value,

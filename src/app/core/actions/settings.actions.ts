@@ -6,7 +6,11 @@ const darkModeToggle = createAction(
     props<{darkMode: boolean}>()
 );
 
+const loaderToggle = createAction(
+    '[Settings] Loader Toggle',
+    props<{loaderVisibility: boolean}>()
+);
 
 export const SettingsActions = {
-    darkModeToggle
+    darkModeToggle, loaderToggle
 };

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, retry } from "rxjs";
+import { finalize, Observable, retry } from "rxjs";
 import { CookieService } from "src/app/modules/shared/services/cookie.service";
 import { UserCredentials } from "src/app/modules/user/interfaces/user-credentials.interface";
 import { ApiLinksService } from "src/app/modules/user/services/api-links.service";
@@ -14,6 +14,7 @@ import { AccountActions } from "../actions/account.actions";
 import { select, Store } from "@ngrx/store";
 import { ACCOUNT_SELECTORS } from "../selectors/account.selectors";
 import { Router } from "@angular/router";
+import { SettingsActions } from "../actions/settings.actions";
 
 
 @Injectable()
@@ -210,9 +211,14 @@ export class AuthService {
     }
 
     public logout(): void {
+        this.store.dispatch(SettingsActions.loaderToggle({loaderVisibility: true}));
         this.cookies.removeCookie('authenticated');
         this.clearAllTimeouts();
+        this.router.navigate(['']);
         this.http.post<HttpResponse<Object> | HttpErrorResponse>(this.apiLinks.apiLink + 'auth/logout', null, {withCredentials: true, observe: 'response'})
+            .pipe(finalize(() => {
+                this.store.dispatch(SettingsActions.loaderToggle({loaderVisibility: false}));
+            }))
             .subscribe(() => {
                 this.store.dispatch(AccountActions.clearAccountData());
             });
