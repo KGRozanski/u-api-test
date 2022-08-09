@@ -26,6 +26,7 @@ import { HomePageComponent } from './core/components/pages/home/home-page.compon
 import { FooterComponent } from './core/components/layout/footer/footer.component';
 import { NotfoundComponent } from './core/components/pages/notfound/notfound.component';
 import { LogotypeComponent } from './core/components/layout/logotype/logotype.component';
+import { SettingsComponent } from './core/components/pages/settings/settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { LogotypeComponent } from './core/components/layout/logotype/logotype.co
     ...directives,
     FooterComponent,
     NotfoundComponent,
-    LogotypeComponent
+    LogotypeComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

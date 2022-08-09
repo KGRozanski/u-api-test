@@ -22,7 +22,7 @@
         >
         </mat-slide-toggle>
     </li>
-    <li *ngIf="authService.isAuthenticated">
+    <li *ngIf="authService.isAuthenticated" [routerLink]="['/settings']">
         <div>
             <i class="i-settings"></i>
             <span>Settings</span>

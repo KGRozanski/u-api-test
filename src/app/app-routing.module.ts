@@ -4,12 +4,14 @@ import { HomePageComponent } from './core/components/pages/home/home-page.compon
 import { LoginComponent } from './core/components/pages/login/login.component';
 import { NotfoundComponent } from './core/components/pages/notfound/notfound.component';
 import { RegisterComponent } from './core/components/pages/register/register.component';
+import { SettingsComponent } from './core/components/pages/settings/settings.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: '**', pathMatch: 'full', component: NotfoundComponent },
 ];
 

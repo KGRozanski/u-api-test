@@ -19,4 +19,8 @@
     &--dark{
         background-image: url('../../../../../assets/svg/fadein-logo-dark.svg');
     }
+
+    &:hover{
+        cursor: pointer;
+    }
 }
