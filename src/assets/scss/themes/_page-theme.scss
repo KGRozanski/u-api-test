@@ -1,6 +1,6 @@
 @use "sass:map";
 @use "@angular/material" as mat;
-@use "../../mixins/page.mixin";
+@use "../mixins/page.mixin";
 
 @mixin color($theme) {
     // Get the color config from the theme.

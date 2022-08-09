@@ -13,6 +13,7 @@ import { elapsedTimeFormatter } from "../utils/elapsedTimeFormatter";
 import { AccountActions } from "../actions/account.actions";
 import { select, Store } from "@ngrx/store";
 import { ACCOUNT_SELECTORS } from "../selectors/account.selectors";
+import { Router } from "@angular/router";
 
 
 @Injectable()
@@ -35,7 +36,8 @@ export class AuthService {
         private apiLinks: ApiLinksService,
         private cookies: CookieService,
         private logger: LogService,
-        private store: Store
+        private store: Store, 
+        private router: Router
     ) {
         this.account$.subscribe((accountData) => {
             this.account = accountData;
@@ -50,11 +52,13 @@ export class AuthService {
                 this.setTokenTimeout(this._oidcTokenTimeout, TokenType.ID_TOKEN);
                 this.store.dispatch(AccountActions.loginSuccess({userInfo: this.userInfo}));
                 this.setupSuccessAuthFlag();
+                this.router.navigate(['']);
                 resolve(true);
                 return;
             }
 
             if(!this.cookies.doesCookieExist('authenticated')) {
+                this.store.dispatch(AccountActions.clearAccountData());
                 resolve(true);
                 return;
             }
@@ -62,6 +66,7 @@ export class AuthService {
             this.sendRefreshReq(TokenType.ACCESS_TOKEN)
                 .subscribe({
                     error: err => {
+                        this.store.dispatch(AccountActions.clearAccountData());
                         resolve(true);
                     },
                     complete: () => {
@@ -106,6 +111,7 @@ export class AuthService {
                 .pipe(retry(2))
                 .subscribe({
                     error: (err) => {
+                        this.store.dispatch(AccountActions.clearAccountData());
                         this.logger.log(`⛔ Token: ${type.toUpperCase()} couldn't been refreshed! – ${err.error.statusCode} ${err.error.message}`)
                     },
                     complete: () => {
@@ -160,6 +166,8 @@ export class AuthService {
         this.setupSuccessAuthFlag();
         //fulfill store with user data
         this.store.dispatch(AccountActions.loginSuccess({userInfo: this.userInfo}));
+        this.router.navigate(['']);
+        
     }
 
     // public handleError(err: any): Observable<any> {

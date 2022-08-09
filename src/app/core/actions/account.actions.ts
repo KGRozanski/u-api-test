@@ -12,6 +12,10 @@ const loginSuccess = createAction(
     props<{userInfo: UserInfo}>()
 );
 
+const clearAccountData = createAction(
+    '[Account] Clear Account Data'
+)
+
 export const AccountActions = {
-    login, loginSuccess
+    login, loginSuccess, clearAccountData
 };

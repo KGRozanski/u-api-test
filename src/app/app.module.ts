@@ -25,6 +25,7 @@ import { LoginPageComponent } from './core/components/login/login-page.component
 import { HomePageComponent } from './core/components/home/home-page.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { PagenotfoundComponent } from './core/components/pagenotfound/pagenotfound.component';
+import { LogotypeComponent } from './core/components/logotype/logotype.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { PagenotfoundComponent } from './core/components/pagenotfound/pagenotfou
     HomePageComponent,
     ...directives,
     FooterComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    LogotypeComponent
   ],
   imports: [
     BrowserModule,

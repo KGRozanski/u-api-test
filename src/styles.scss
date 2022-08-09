@@ -7,7 +7,8 @@
 @use './assets/scss/typography';
 @use './assets/scss/theme';
 @use './assets/scss/shadows';
-@use './assets/scss/parcials/themes/_theme-switch' as switch;
+@use './assets/scss/modifiers';
+@use './assets/scss/themes/_theme-switch' as switch;
 @use './assets/scss/mixins/dark-mode-transition.mixin' as transition;
 
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");

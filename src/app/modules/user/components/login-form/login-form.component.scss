@@ -1,6 +1,6 @@
 @use '../../../../../assets/scss/variables.scss';
 @use '../../../../../assets/scss/mixins/dark-mode-transition.mixin' as transition;
-@use '../../../../../assets/scss/parcials/abstracts/divider';
+@use '../../../../../assets/scss/abstracts/divider';
 
 :host{
     display: block;

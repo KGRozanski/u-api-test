@@ -7,7 +7,7 @@ import { RegisterPageComponent } from './core/components/register/register-page.
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'home', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: 'register', component: RegisterPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: '**', pathMatch: 'full', component: PagenotfoundComponent },
