@@ -1,14 +1,12 @@
-.logo--small > div.logo {
+app-logotype[class^="logo--small"] {
     width: 100px;
     height: 52px;
 }
-
-.logo--medium > div.logo {
+app-logotype[class^="logo--medium"] {
     width: 200px;
     height: 104px;
 }
-
-.logo--big > div.logo {
+app-logotype[class^="logo--big"] {
     width: 400px;
     height: 208px;
 }
