@@ -20,23 +20,23 @@ import { metaReducers, reducers } from './core/reducers/_app.reducer';
 import { HydrationEffects } from './core/effects/hydration.effect';
 import { DropdownComponent } from './core/components/dropdown/dropdown.component';
 import directives from './core/directives/_directives';
-import { RegisterPageComponent } from './core/components/register/register-page.component';
-import { LoginPageComponent } from './core/components/login/login-page.component';
-import { HomePageComponent } from './core/components/home/home-page.component';
+import { RegisterComponent } from './core/components/pages/register/register.component';
+import { LoginComponent } from './core/components/pages/login/login.component';
+import { HomePageComponent } from './core/components/pages/home/home-page.component';
 import { FooterComponent } from './core/components/footer/footer.component';
-import { PagenotfoundComponent } from './core/components/pagenotfound/pagenotfound.component';
+import { NotfoundComponent } from './core/components/pages/notfound/notfound.component';
 import { LogotypeComponent } from './core/components/logotype/logotype.component';
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     DropdownComponent,
-    RegisterPageComponent,
-    LoginPageComponent,
+    RegisterComponent,
+    LoginComponent,
     HomePageComponent,
     ...directives,
     FooterComponent,
-    PagenotfoundComponent,
+    NotfoundComponent,
     LogotypeComponent
   ],
   imports: [
