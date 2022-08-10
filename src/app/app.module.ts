@@ -27,7 +27,7 @@ import { FooterComponent } from './core/components/layout/footer/footer.componen
 import { NotfoundComponent } from './core/components/pages/notfound/notfound.component';
 import { LogotypeComponent } from './core/components/layout/logotype/logotype.component';
 import { SettingsComponent } from './core/components/pages/settings/settings.component';
-import { CurtainComponent } from './core/components/layout/curtain/curtain.component';
+import { LoadingIndicatorComponent } from './core/components/layout/loading-indicator/loading-indicator.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +41,7 @@ import { CurtainComponent } from './core/components/layout/curtain/curtain.compo
     NotfoundComponent,
     LogotypeComponent,
     SettingsComponent,
-    CurtainComponent
+    LoadingIndicatorComponent
   ],
   imports: [
     BrowserModule,

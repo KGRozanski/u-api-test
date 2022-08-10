@@ -29,10 +29,6 @@ export class AppComponent implements OnInit {
       this.setting = data;
       this.renderer.setAttribute(this.document.body, 'class', data.darkMode ? 'darkMode' : '');
     });
-
-
   }
-
-
 
 }
