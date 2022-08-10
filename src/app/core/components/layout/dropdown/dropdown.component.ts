@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { SettingsActions } from '../../../actions/settings.actions';
 import { SettingsSelectors } from '../../../selectors/settings.selectors';
@@ -32,6 +32,7 @@ export class DropdownComponent implements OnInit {
     });
   }
 
+
   public ngOnDestroy(): void {
     this.unsubscribe$.next();
   }
@@ -43,5 +44,6 @@ export class DropdownComponent implements OnInit {
   public logout(): void {
     this.authService.logout();
   }
+
 
 }

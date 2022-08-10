@@ -1,4 +1,4 @@
-<app-logotype></app-logotype>
+<app-logotype class="app-logotype"></app-logotype>
 
 
 
@@ -16,7 +16,7 @@
             <img *ngSwitchCase="true" [src]="account.photo" alt="avatar" />
             <i *ngSwitchCase="false" class="i-user"></i>
         </div>
-        <app-dropdown *ngIf="isDropdownVisible" class="cmp-dropdown shadow-md" ></app-dropdown>
+        <app-dropdown interacted-with-menu (interacted)="toggleDropdown(true)" *ngIf="isDropdownVisible" class="cmp-dropdown shadow-md" ></app-dropdown>
     </div>
 </div>
 
