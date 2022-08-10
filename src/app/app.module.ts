@@ -22,12 +22,14 @@ import { DropdownComponent } from './core/components/layout/dropdown/dropdown.co
 import directives from './core/directives/_directives';
 import { RegisterComponent } from './core/components/pages/register/register.component';
 import { LoginComponent } from './core/components/pages/login/login.component';
-import { HomePageComponent } from './core/components/pages/home/home-page.component';
+import { FrontComponent } from './core/components/pages/front/front.component';
 import { FooterComponent } from './core/components/layout/footer/footer.component';
 import { NotfoundComponent } from './core/components/pages/notfound/notfound.component';
 import { LogotypeComponent } from './core/components/layout/logotype/logotype.component';
 import { SettingsComponent } from './core/components/pages/settings/settings.component';
 import { LoadingIndicatorComponent } from './core/components/layout/loading-indicator/loading-indicator.component';
+import { HomeComponent } from './core/components/pages/home/home.component';
+import { GUARD_PROVIDERS } from './core/guards/_guards';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,13 +37,14 @@ import { LoadingIndicatorComponent } from './core/components/layout/loading-indi
     DropdownComponent,
     RegisterComponent,
     LoginComponent,
-    HomePageComponent,
+    FrontComponent,
     ...directives,
     FooterComponent,
     NotfoundComponent,
     LogotypeComponent,
     SettingsComponent,
-    LoadingIndicatorComponent
+    LoadingIndicatorComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import { LoadingIndicatorComponent } from './core/components/layout/loading-indi
   ],
   providers: [
     interceptorsProviders,
+    ...GUARD_PROVIDERS,
     AuthService,
     {
       provide: APP_INITIALIZER,

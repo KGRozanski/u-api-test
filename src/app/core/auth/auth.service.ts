@@ -214,10 +214,10 @@ export class AuthService {
         this.store.dispatch(SettingsActions.loaderToggle({loaderVisibility: true}));
         this.cookies.removeCookie('authenticated');
         this.clearAllTimeouts();
-        this.router.navigate(['']);
         this.http.post<HttpResponse<Object> | HttpErrorResponse>(this.apiLinks.apiLink + 'auth/logout', null, {withCredentials: true, observe: 'response'})
             .pipe(finalize(() => {
                 this.store.dispatch(SettingsActions.loaderToggle({loaderVisibility: false}));
+                this.router.navigate(['/front']);
             }))
             .subscribe(() => {
                 this.store.dispatch(AccountActions.clearAccountData());
