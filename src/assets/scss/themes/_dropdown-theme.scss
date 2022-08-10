@@ -22,7 +22,7 @@
         }
 
         li{
-            &:hover{
+            &:hover, &:active {
                 cursor: pointer;
                 background-color: mat.get-color-from-palette($background, hover);
             }
