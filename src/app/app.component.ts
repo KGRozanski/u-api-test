@@ -16,7 +16,7 @@ import { getSettingsInitial } from './core/state/initials/settings.initial';
 export class AppComponent implements OnInit {
 
   title: string = 'u-api-test';
-  public setting: Settings = getSettingsInitial()
+  public setting: Settings = getSettingsInitial();
 
   constructor(
     private store: Store,
