@@ -30,7 +30,13 @@ export class CookieService {
 
 
   public async getCookieExpDate(cookieName: string): Promise<number | null> {
-    return await cookieStore.get(cookieName).then((cookie: any) => cookie.expires);
+    return await cookieStore.get(cookieName).then((cookie: any) => {
+      if(cookie) {
+        return cookie.expires;
+      } else {
+        return null;
+      }
+    });
   }
 
 }

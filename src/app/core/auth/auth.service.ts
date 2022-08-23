@@ -47,7 +47,6 @@ export class AuthService {
     }
 
     public initAuth(): Promise<boolean> {
-
         return new Promise<boolean>((resolve, reject) => {
             if(this.cookies.doesCookieExist(TokenType.LOGGED_IN_WITH)) {
                 this.setTokenTimeout(this._accessTokenTimeout, TokenType.ACCESS_TOKEN);
