@@ -30,6 +30,7 @@ import { SettingsComponent } from './core/components/pages/settings/settings.com
 import { LoadingIndicatorComponent } from './core/components/layout/loading-indicator/loading-indicator.component';
 import { HomeComponent } from './core/components/pages/home/home.component';
 import { GUARD_PROVIDERS } from './core/guards/_guards';
+import { ActivationComponent } from './core/components/pages/activation/activation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { GUARD_PROVIDERS } from './core/guards/_guards';
     LogotypeComponent,
     SettingsComponent,
     LoadingIndicatorComponent,
-    HomeComponent
+    HomeComponent,
+    ActivationComponent
   ],
   imports: [
     BrowserModule,
