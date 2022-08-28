@@ -3,10 +3,10 @@
 <app-toolbar class="cmp-toolbar shadow-md"></app-toolbar>
 
 <mat-drawer-container class="manu-container" autosize hasBackdrop=false interacted-with-menu (interacted)="closeMenu()">
-    <mat-drawer #drawer mode="over" >
+    <mat-drawer #drawer mode="over" autoFocus=false>
         <ol class="sidenav">
             <li>
-                <button mat-stroked-button [routerLink]="['/admin-dashboard']"><i class="icon i-admin-dashboard"></i>Admin dashboard</button>
+                <button *ngIf="accountInfo.role === acceptableRole" mat-stroked-button [routerLink]="['/admin-dashboard']"><i class="icon i-admin-dashboard"></i>Admin dashboard</button>
             </li>
         </ol>
     </mat-drawer>

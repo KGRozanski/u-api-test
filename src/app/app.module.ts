@@ -19,7 +19,6 @@ import { FormsModule } from '@angular/forms';
 import { metaReducers, reducers } from './core/reducers/_app.reducer';
 import { HydrationEffects } from './core/effects/hydration.effect';
 import { DropdownComponent } from './core/components/layout/dropdown/dropdown.component';
-import directives from './core/directives/_directives';
 import { RegisterComponent } from './core/components/pages/register/register.component';
 import { LoginComponent } from './core/components/pages/login/login.component';
 import { FrontComponent } from './core/components/pages/front/front.component';
@@ -32,6 +31,7 @@ import { HomeComponent } from './core/components/pages/home/home.component';
 import { GUARD_PROVIDERS } from './core/guards/_guards';
 import { ActivationComponent } from './core/components/pages/activation/activation.component';
 import { AdminDashboardComponent } from './core/components/pages/admin-dashboard/admin-dashboard.component';
+import { RESOLVERS_PROVIDERS } from './core/resolvers/_resolvers';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +40,6 @@ import { AdminDashboardComponent } from './core/components/pages/admin-dashboard
     RegisterComponent,
     LoginComponent,
     FrontComponent,
-    ...directives,
     FooterComponent,
     NotfoundComponent,
     LogotypeComponent,
@@ -48,7 +47,7 @@ import { AdminDashboardComponent } from './core/components/pages/admin-dashboard
     LoadingIndicatorComponent,
     HomeComponent,
     ActivationComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +63,7 @@ import { AdminDashboardComponent } from './core/components/pages/admin-dashboard
   providers: [
     interceptorsProviders,
     ...GUARD_PROVIDERS,
+    ...RESOLVERS_PROVIDERS,
     AuthService,
     {
       provide: APP_INITIALIZER,

@@ -1,9 +1,9 @@
 import { createFeatureSelector } from "@ngrx/store";
-import { UserInfo } from "../interfaces/user-info.interface";
+import { AccountInfo } from "../interfaces/account-info.interface";
 
 
 export const selectAccountCollection = createFeatureSelector<
-    UserInfo
+    AccountInfo
 >('account');
 
 

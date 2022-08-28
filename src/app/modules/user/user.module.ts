@@ -6,13 +6,15 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleAuthComponent } from './components/google-auth/google-auth.component';
+import { TableOfUsersForAdminsComponent } from './components/table-of-users-for-admins/table-of-users-for-admins.component';
 
 
 @NgModule({
   declarations: [
     RegisterFormComponent,
     LoginFormComponent,
-    GoogleAuthComponent
+    GoogleAuthComponent,
+    TableOfUsersForAdminsComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { GoogleAuthComponent } from './components/google-auth/google-auth.compon
   ],
   exports: [
     RegisterFormComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    TableOfUsersForAdminsComponent
   ]
 })
 export class UserModule { }

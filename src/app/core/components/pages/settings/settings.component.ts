@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UserInfo } from 'src/app/core/interfaces/user-info.interface';
+import { AccountInfo } from 'src/app/core/interfaces/account-info.interface';
 import { ACCOUNT_SELECTORS } from 'src/app/core/selectors/account.selectors';
 import { getAccountInitial } from 'src/app/core/state/initials/account.initial';
 
@@ -10,7 +10,7 @@ import { getAccountInitial } from 'src/app/core/state/initials/account.initial';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  public account: UserInfo = getAccountInitial();
+  public account: AccountInfo = getAccountInitial();
 
   constructor(private store: Store) { }
 

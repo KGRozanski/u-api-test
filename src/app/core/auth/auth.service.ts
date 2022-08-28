@@ -4,7 +4,7 @@ import { finalize, Observable, retry } from "rxjs";
 import { CookieService } from "src/app/modules/shared/services/cookie.service";
 import { UserCredentials } from "src/app/modules/user/interfaces/user-credentials.interface";
 import { ApiLinksService } from "src/app/modules/user/services/api-links.service";
-import { UserInfo } from "../interfaces/user-info.interface";
+import { AccountInfo } from "../interfaces/account-info.interface";
 import jwt_decode from "jwt-decode";
 import { TokenType } from "../enums/token-type.enum";
 import { JWT } from "../interfaces/jwt.interface";
@@ -15,6 +15,7 @@ import { select, Store } from "@ngrx/store";
 import { ACCOUNT_SELECTORS } from "../selectors/account.selectors";
 import { Router } from "@angular/router";
 import { SettingsActions } from "../actions/settings.actions";
+import { getAccountInitial } from "../state/initials/account.initial";
 
 
 @Injectable()
@@ -22,15 +23,8 @@ export class AuthService {
     private _oidcTokenTimeout = 35985000;
     private _accessTokenTimeout = 3585000;
     private _authenticatedCookieExp = 604790;
-    private account: UserInfo = {
-        username: '–',
-        email: '–',
-        givenName: '–',
-        familyName: '–',
-        photo: '–',
-        creationDate: '–'
-    }
-    private account$: Observable<UserInfo> = this.store.pipe(select(ACCOUNT_SELECTORS.selectAccountCollection));
+    private account: AccountInfo = getAccountInitial();
+    private account$: Observable<AccountInfo> = this.store.pipe(select(ACCOUNT_SELECTORS.selectAccountCollection));
     private timeoutsQueue: NodeJS.Timeout[] = [];
     
     constructor(
@@ -51,7 +45,7 @@ export class AuthService {
             if(this.cookies.doesCookieExist(TokenType.LOGGED_IN_WITH)) {
                 this.setTokenTimeout(this._accessTokenTimeout, TokenType.ACCESS_TOKEN);
                 this.setTokenTimeout(this._oidcTokenTimeout, TokenType.ID_TOKEN);
-                this.store.dispatch(AccountActions.loginSuccess({userInfo: this.userInfo}));
+                this.store.dispatch(AccountActions.loginSuccess({AccountInfo: this.AccountInfo}));
                 this.setupSuccessAuthFlag();
                 this.router.navigate(['']);
                 resolve(true);
@@ -73,7 +67,7 @@ export class AuthService {
                     complete: () => {
                         this.logInfo(TokenType.ACCESS_TOKEN);
                         this.setTokenTimeout(this._accessTokenTimeout, TokenType.ACCESS_TOKEN);
-                        this.store.dispatch(AccountActions.loginSuccess({userInfo: this.userInfo}));
+                        this.store.dispatch(AccountActions.loginSuccess({AccountInfo: this.AccountInfo}));
                         this.setupSuccessAuthFlag();
 
                         try {
@@ -149,9 +143,9 @@ export class AuthService {
         this.cookies.setCookie('authenticated', 'true', EXP_TIME);
     }
 
-    public get userInfo(): UserInfo {
+    public get AccountInfo(): AccountInfo {
         const ID_TOKEN = this.cookies.getCookie(TokenType.ID_TOKEN);
-        let decoded: UserInfo;
+        let decoded: AccountInfo;
 
         try {
             decoded = jwt_decode(ID_TOKEN || '');
@@ -166,7 +160,8 @@ export class AuthService {
             givenName: decoded.givenName,
             familyName: decoded.familyName,
             photo: decoded.photo,
-            creationDate: decoded.creationDate
+            creationDate: decoded.creationDate,
+            role: decoded.role
         }
     }
 
@@ -179,7 +174,7 @@ export class AuthService {
         this.setTokenTimeout(this._oidcTokenTimeout, TokenType.ID_TOKEN);
         this.setupSuccessAuthFlag();
         //fulfill store with user data
-        this.store.dispatch(AccountActions.loginSuccess({userInfo: this.userInfo}));
+        this.store.dispatch(AccountActions.loginSuccess({AccountInfo: this.AccountInfo}));
         this.router.navigate(['']);
         
     }
@@ -228,7 +223,7 @@ export class AuthService {
     }
 
     public get isAuthenticated(): boolean {
-        if(this.account.email === '–' || this.account.email === '') {
+        if(this.account.email === '') {
             return false;
         } else {
             return true;

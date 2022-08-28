@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 import { Settings } from '../../../interfaces/settings.interface';
 import { AuthService } from '../../../auth/auth.service';
 import { getAccountInitial } from '../../../state/initials/account.initial';
-import { UserInfo } from '../../../interfaces/user-info.interface';
+import { AccountInfo } from '../../../interfaces/account-info.interface';
 import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
 
 @Component({
@@ -19,7 +19,7 @@ export class DropdownComponent implements OnInit {
   public darkMode: boolean = false;
   public settings$ = this.store.pipe(select(SETTINGS_SELECTORS.selectSettingsCollection));
   private readonly unsubscribe$: Subject<void> = new Subject();
-  public account: UserInfo = getAccountInitial();
+  public account: AccountInfo = getAccountInitial();
 
   constructor(private store: Store, public authService: AuthService) { }
 

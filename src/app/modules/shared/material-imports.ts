@@ -7,6 +7,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 const materialImports = [
     MatCardModule,
@@ -17,7 +20,10 @@ const materialImports = [
     MatSlideToggleModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
 ];
 
 export default materialImports;

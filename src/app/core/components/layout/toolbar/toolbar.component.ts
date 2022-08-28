@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SettingsActions } from 'src/app/core/actions/settings.actions';
 import { AuthService } from '../../../auth/auth.service';
-import { UserInfo } from '../../../interfaces/user-info.interface';
+import { AccountInfo } from '../../../interfaces/account-info.interface';
 import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
 import { getAccountInitial } from '../../../state/initials/account.initial';
 
@@ -13,7 +13,7 @@ import { getAccountInitial } from '../../../state/initials/account.initial';
 })
 export class ToolbarComponent implements OnInit {
   public isDropdownVisible: boolean = false;
-  public account: UserInfo = getAccountInitial();
+  public account: AccountInfo = getAccountInitial();
 
 
   constructor(private store: Store, public authService: AuthService) { }

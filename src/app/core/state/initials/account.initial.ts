@@ -1,12 +1,13 @@
-import { UserInfo } from "../../interfaces/user-info.interface"
+import { AccountInfo } from "../../interfaces/account-info.interface"
 
-export function getAccountInitial(): UserInfo {
+export function getAccountInitial(): AccountInfo {
     return {
         username: '',
         email: '',
         givenName: '',
         familyName: '',
         photo: '',
-        creationDate: ''
+        creationDate: '',
+        role: ''
     }
 }

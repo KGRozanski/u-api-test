@@ -10,6 +10,7 @@ import { RegisterComponent } from './core/components/pages/register/register.com
 import { SettingsComponent } from './core/components/pages/settings/settings.component';
 import { AuthGuard } from './core/guards/authGuard.guard';
 import { NoAuthGuard } from './core/guards/noAuthGuard.guard';
+import { GetListOfUsersResolver } from './core/resolvers/getListOfUsers.resolver';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -19,7 +20,14 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
   { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
-  { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
+  { 
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [AuthGuard],
+    resolve: { 
+      appTableOfUsersData: GetListOfUsersResolver
+    }
+  },
   { path: '**', pathMatch: 'full', component: NotfoundComponent },
 ];
 
