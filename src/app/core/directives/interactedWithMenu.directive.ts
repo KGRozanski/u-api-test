@@ -17,7 +17,7 @@ export class InteractedWithMenu implements AfterViewInit {
                     const CLICKED = e.target.nodeName;
                     const PARENT = e.target.parentElement.nodeName;
 
-                    if(CLICKED === "LI" || CLICKED === "option" || CLICKED === "I" || (CLICKED || PARENT === "BUTTON")) {
+                    if(CLICKED === "LI" || CLICKED === "option" || CLICKED === "I" || CLICKED === "BUTTON" || (CLICKED === "SPAN" && PARENT === "BUTTON")) {
                         this.interacted.emit();
                     }
                 });

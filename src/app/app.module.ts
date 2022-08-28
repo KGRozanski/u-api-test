@@ -31,6 +31,7 @@ import { LoadingIndicatorComponent } from './core/components/layout/loading-indi
 import { HomeComponent } from './core/components/pages/home/home.component';
 import { GUARD_PROVIDERS } from './core/guards/_guards';
 import { ActivationComponent } from './core/components/pages/activation/activation.component';
+import { AdminDashboardComponent } from './core/components/pages/admin-dashboard/admin-dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { ActivationComponent } from './core/components/pages/activation/activati
     SettingsComponent,
     LoadingIndicatorComponent,
     HomeComponent,
-    ActivationComponent
+    ActivationComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

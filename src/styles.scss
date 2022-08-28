@@ -10,6 +10,7 @@
 @use './assets/scss/modifiers';
 @use './assets/scss/themes/_theme-switch' as switch;
 @use './assets/scss/mixins/dark-mode-transition.mixin' as transition;
+@use './assets/scss/abstracts/index';
 
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
 @import url('https://fonts.googleapis.com/css?family=Hind:400,700&display=swap&subset=latin-ext');

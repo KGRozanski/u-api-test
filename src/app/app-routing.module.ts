@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ActivationComponent } from './core/components/pages/activation/activation.component';
+import { AdminDashboardComponent } from './core/components/pages/admin-dashboard/admin-dashboard.component';
 import { FrontComponent } from './core/components/pages/front/front.component';
 import { HomeComponent } from './core/components/pages/home/home.component';
 import { LoginComponent } from './core/components/pages/login/login.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
   { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
   { path: '**', pathMatch: 'full', component: NotfoundComponent },
 ];
 
