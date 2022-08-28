@@ -14,7 +14,10 @@ export class InteractedWithMenu implements AfterViewInit {
         if(this.INTERACTIVE_ELEMENTS.length > 0) {
             for (const el of this.INTERACTIVE_ELEMENTS) {
                 el.addEventListener('click', (e: any) => {
-                    if(e.target.nodeName === "LI") {
+                    const CLICKED = e.target.nodeName;
+                    const PARENT = e.target.parentElement.nodeName;
+
+                    if(CLICKED === "LI" || CLICKED === "option" || CLICKED === "I" || (CLICKED || PARENT === "BUTTON")) {
                         this.interacted.emit();
                     }
                 });

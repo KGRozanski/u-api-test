@@ -8,7 +8,7 @@
 </div>
 <ol>
     <li>
-        <div>
+        <div class="option">
             <i class="i-moon"></i>
             <span>Dark mode</span>
         </div>
@@ -23,13 +23,13 @@
         </mat-slide-toggle>
     </li>
     <li *ngIf="authService.isAuthenticated" [routerLink]="['/settings']">
-        <div>
+        <div class="option">
             <i class="i-settings"></i>
             <span>Settings</span>
         </div>
     </li>
     <li *ngIf="authService.isAuthenticated" (click)="logout()">
-        <div>
+        <div class="option">
             <i class="i-logout"></i>
             <span>Logout</span>
         </div>

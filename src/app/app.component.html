@@ -2,13 +2,13 @@
 
 <app-toolbar class="cmp-toolbar shadow-md"></app-toolbar>
 
-<mat-drawer-container class="manu-container" autosize hasBackdrop=false>
-    <mat-drawer #drawer mode="over">
-        <ul class="sidenav">
+<mat-drawer-container class="manu-container" autosize hasBackdrop=false interacted-with-menu (interacted)="closeMenu()">
+    <mat-drawer #drawer mode="over" >
+        <ol class="sidenav">
             <li>
                 <button mat-stroked-button><i class="icon i-admin-dashboard"></i>Admin dashboard</button>
             </li>
-        </ul>
+        </ol>
     </mat-drawer>
 
 </mat-drawer-container>
