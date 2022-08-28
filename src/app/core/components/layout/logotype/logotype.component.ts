@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SettingsSelectors } from '../../../selectors/settings.selectors';
+import { SETTINGS_SELECTORS } from '../../../selectors/settings.selectors';
 
 @Component({
   selector: 'app-logotype',
@@ -13,7 +13,7 @@ export class LogotypeComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.store.select(SettingsSelectors.selectSettingsCollection).subscribe((settings) => {
+    this.store.select(SETTINGS_SELECTORS.selectSettingsCollection).subscribe((settings) => {
       this.darkMode = settings.darkMode;
     });
   }

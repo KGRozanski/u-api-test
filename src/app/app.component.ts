@@ -1,8 +1,9 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, Inject, Renderer2, ViewChild } from '@angular/core';
+import { MatDrawer, } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
 import { Settings } from './core/interfaces/settings.interface';
-import { SettingsSelectors } from './core/selectors/settings.selectors';
+import { SETTINGS_SELECTORS } from './core/selectors/settings.selectors';
 import { getSettingsInitial } from './core/state/initials/settings.initial';
 
 
@@ -13,10 +14,11 @@ import { getSettingsInitial } from './core/state/initials/settings.initial';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
 
   title: string = 'u-api-test';
   public setting: Settings = getSettingsInitial();
+  @ViewChild('drawer') drawer: MatDrawer;
 
   constructor(
     private store: Store,
@@ -24,11 +26,18 @@ export class AppComponent implements OnInit {
     private renderer: Renderer2
   ) {}
 
-  ngOnInit() {
-    this.store.select(SettingsSelectors.selectSettingsCollection).subscribe((data) => {
-      this.setting = data;
-      this.renderer.setAttribute(this.document.body, 'class', data.darkMode ? 'darkMode' : '');
+  ngAfterViewInit(): void {
+    this.store.select(SETTINGS_SELECTORS.selectSettingsCollection).subscribe((settings) => {
+      this.setting = settings;
+      this.renderer.setAttribute(this.document.body, 'class', settings.darkMode ? 'darkMode' : '');
+      this.toggleMenu();
     });
+  }
+
+  public toggleMenu(): void {
+    if(this.drawer) {
+      this.drawer.toggle(this.setting.isMenuOpen);
+    }
   }
 
 }

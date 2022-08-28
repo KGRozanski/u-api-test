@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { SettingsActions } from '../../../actions/settings.actions';
-import { SettingsSelectors } from '../../../selectors/settings.selectors';
+import { SETTINGS_SELECTORS } from '../../../selectors/settings.selectors';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Settings } from '../../../interfaces/settings.interface';
@@ -17,7 +17,7 @@ import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
 })
 export class DropdownComponent implements OnInit {
   public darkMode: boolean = false;
-  public settings$ = this.store.pipe(select(SettingsSelectors.selectSettingsCollection));
+  public settings$ = this.store.pipe(select(SETTINGS_SELECTORS.selectSettingsCollection));
   private readonly unsubscribe$: Subject<void> = new Subject();
   public account: UserInfo = getAccountInitial();
 

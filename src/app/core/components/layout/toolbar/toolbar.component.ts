@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { SettingsActions } from 'src/app/core/actions/settings.actions';
 import { AuthService } from '../../../auth/auth.service';
 import { UserInfo } from '../../../interfaces/user-info.interface';
 import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
@@ -32,5 +33,8 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
+  public openMenu(): void {
+    this.store.dispatch(SettingsActions.mainMenuToggle());
+  }
 
 }

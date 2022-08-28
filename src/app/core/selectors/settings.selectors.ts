@@ -8,6 +8,6 @@ export const selectSettingsCollection = createFeatureSelector<
 
 
 
-export const SettingsSelectors = {
+export const SETTINGS_SELECTORS = {
     selectSettingsCollection
 }

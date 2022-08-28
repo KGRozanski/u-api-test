@@ -2,7 +2,17 @@
 
 <app-toolbar class="cmp-toolbar shadow-md"></app-toolbar>
 
-<router-outlet></router-outlet>
+<mat-drawer-container class="manu-container" autosize hasBackdrop=false>
+    <mat-drawer #drawer mode="over">
+        <ul class="sidenav">
+            <li>
+                <button mat-stroked-button><i class="icon i-admin-dashboard"></i>Admin dashboard</button>
+            </li>
+        </ul>
+    </mat-drawer>
 
+</mat-drawer-container>
+
+<router-outlet></router-outlet>
 
 <app-footer class="cmp-footer"></app-footer>

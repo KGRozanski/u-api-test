@@ -24,6 +24,15 @@ h1{
 
 @include avatar.avatar(42px, 42px);
 
+.left-panel{
+    display: flex;
+    align-items: center;
+
+    .main-menu-btn{
+        margin-right: 20px;
+    }
+}
+
 .right-panel{
     display: flex;
     align-items: center;

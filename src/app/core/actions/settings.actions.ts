@@ -11,6 +11,10 @@ const loaderToggle = createAction(
     props<{loaderVisibility: boolean}>()
 );
 
+const mainMenuToggle = createAction(
+    '[Settings] Main menu Toggle'
+);
+
 export const SettingsActions = {
-    darkModeToggle, loaderToggle
+    darkModeToggle, loaderToggle, mainMenuToggle
 };
