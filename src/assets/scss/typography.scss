@@ -19,6 +19,15 @@ h1,h2,h3,h4,h5,h6{
     margin-bottom: 1em;
 }
 
+.page-title{
+    display: flex;
+    align-items: center;
+
+    .icon{
+        margin-right: 15px;
+    }
+}
+
 p{
     @include mat.typography-level($default-typography, 'body-1');
     margin-bottom: 1em;

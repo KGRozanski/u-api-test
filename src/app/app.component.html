@@ -1,8 +1,8 @@
 <app-loading-indicator *ngIf="setting.loaderVisibility"></app-loading-indicator>
 
-<app-toolbar class="cmp-toolbar shadow-md"></app-toolbar>
+<app-toolbar class="cmp-toolbar shadow-md" (open)="menuToggle($event)"></app-toolbar>
 
-<mat-drawer-container class="manu-container" autosize hasBackdrop=false interacted-with-menu (interacted)="closeMenu()">
+<mat-drawer-container class="manu-container" autosize hasBackdrop=false interacted-with-menu (interacted)="menuToggle()">
     <mat-drawer #drawer mode="over" autoFocus=false>
         <ol class="sidenav">
             <li>

@@ -20,11 +20,4 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  public get dateOfRegistration(): string {
-    const DATE = new Date(Number(this.account.creationDate)).toISOString();
-    const SPLITTED = DATE.split('T')[0];
-
-    return SPLITTED
-  }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SettingsActions } from 'src/app/core/actions/settings.actions';
 import { AuthService } from '../../../auth/auth.service';
@@ -14,6 +14,8 @@ import { getAccountInitial } from '../../../state/initials/account.initial';
 export class ToolbarComponent implements OnInit {
   public isDropdownVisible: boolean = false;
   public account: AccountInfo = getAccountInitial();
+  
+  @Output() open = new EventEmitter();
 
 
   constructor(private store: Store, public authService: AuthService) { }
@@ -34,7 +36,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   public openMenu(): void {
-    this.store.dispatch(SettingsActions.mainMenuToggle());
+    this.open.emit();
   }
 
 }

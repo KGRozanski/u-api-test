@@ -1,10 +1,11 @@
-<h1>Settings</h1>
+<h2 class="page-title"><i class="icon icon-x2 i-settings"></i> Settings</h2>
 <br><br>
 <h2>Account info</h2>
+<app-avatar class="avatar avatar-big" [photo]="account.photo"></app-avatar>
 <p>
     name: {{account.givenName}} <br>
     surname: {{account.familyName}} <br>
     username: {{account.username}} <br>
     email: {{account.email}} <br>
-    date of signup: {{dateOfRegistration}}
+    date of signup: {{account.creationDate | date}}
 </p>

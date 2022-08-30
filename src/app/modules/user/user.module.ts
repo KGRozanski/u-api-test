@@ -7,6 +7,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleAuthComponent } from './components/google-auth/google-auth.component';
 import { TableOfUsersForAdminsComponent } from './components/table-of-users-for-admins/table-of-users-for-admins.component';
+import { AvatarComponent } from './components/avatar/avatar.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { TableOfUsersForAdminsComponent } from './components/table-of-users-for-
     RegisterFormComponent,
     LoginFormComponent,
     GoogleAuthComponent,
-    TableOfUsersForAdminsComponent
+    TableOfUsersForAdminsComponent,
+    AvatarComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { TableOfUsersForAdminsComponent } from './components/table-of-users-for-
   exports: [
     RegisterFormComponent,
     LoginFormComponent,
-    TableOfUsersForAdminsComponent
+    TableOfUsersForAdminsComponent,
+    AvatarComponent
   ]
 })
 export class UserModule { }

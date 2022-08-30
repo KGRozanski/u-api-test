@@ -1,5 +1,5 @@
 @mixin avatar($width, $height) {
-    #avatar > img,i {
+    .wrapper > img, i {
         display: block;
         width: $width;
         height: $height;
@@ -10,10 +10,10 @@
         }
     }
 
-        .i-user{
-            background-repeat: no-repeat;
-            background-size: 75%;
-            background-position: center bottom;
-        }
+    .i-user{
+        background-repeat: no-repeat;
+        background-size: 75%;
+        background-position: center bottom;
+    }
     
 }

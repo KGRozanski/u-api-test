@@ -20,7 +20,6 @@ import { getAccountInitial } from './core/state/initials/account.initial';
 
 export class AppComponent implements OnInit {
 
-  title: string = 'u-api-test';
   public setting: Settings = getSettingsInitial();
   public accountInfo: AccountInfo = getAccountInitial();
   public acceptableRole = Role.ADMIN;
@@ -38,7 +37,7 @@ export class AppComponent implements OnInit {
     this.store.select(SETTINGS_SELECTORS.selectSettingsCollection).subscribe((settings) => {
       this.setting = settings;
       this.renderer.setAttribute(this.document.body, 'class', settings.darkMode ? 'darkMode' : '');
-      this.toggleMenu();
+
     });
 
     this.store.select(ACCOUNT_SELECTORS.selectAccountCollection).subscribe((account) => {
@@ -46,14 +45,10 @@ export class AppComponent implements OnInit {
     });
   }
 
-  public toggleMenu(): void {
-    if(this.drawer) {
-      this.drawer.toggle();
-    }
+  public menuToggle(e?: any): void {
+    this.drawer.toggle();
   }
 
-  public closeMenu(): void {
-    this.store.dispatch(SettingsActions.mainMenuToggle());
-  }
+
 
 }

@@ -19,10 +19,8 @@
     </ng-container>
     
     <div clicked-outside (clickedOutside)="toggleDropdown(true)">
-        <div id="avatar" [ngSwitch]="authService.isAuthenticated && account.photo !== ''" (click)="toggleDropdown()">
-            <img *ngSwitchCase="true" [src]="account.photo" alt="avatar" />
-            <i *ngSwitchCase="false" class="i-user"></i>
-        </div>
+        <app-avatar class="avatar avatar-default" [photo]="account.photo" (click)="toggleDropdown()"></app-avatar>
+
         <app-dropdown interacted-with-menu (interacted)="toggleDropdown(true)" *ngIf="isDropdownVisible" class="cmp-dropdown shadow-md" ></app-dropdown>
     </div>
 </div>

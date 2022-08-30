@@ -1,0 +1,17 @@
+@use '../../../../../assets/scss/mixins/avatar.mixin';
+
+:host-context(.avatar-dropdown) {
+    @include avatar.avatar(55px, 55px);
+}
+
+:host-context(.avatar-default) {
+    @include avatar.avatar(42px, 42px);
+}
+
+:host-context(.avatar-small) {
+    @include avatar.avatar(32px, 32px);
+}
+
+:host-context(.avatar-big) {
+    @include avatar.avatar(100px, 100px);
+}

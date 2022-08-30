@@ -19,7 +19,7 @@
         background-color: mat.get-color-from-palette($background, background);
         border-bottom: 1px solid $divider;
 
-        #avatar{
+        .avatar{
             img, .i-user{
                 border: 1px solid $divider;
 

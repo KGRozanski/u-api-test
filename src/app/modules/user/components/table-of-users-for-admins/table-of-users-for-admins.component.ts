@@ -16,7 +16,7 @@ export class TableOfUsersForAdminsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   public dataSource: MatTableDataSource<[AccountExtended[], number]> = new MatTableDataSource();
-  public displayedColumns: string[] = ['id', 'photo', 'username', 'email', 'status', 'givenName', 'familyName', 'creationDate', 'lastLogin', 'removalDate', 'role'];
+  public displayedColumns: string[] = ['id', 'photo', 'username', 'email', 'role', 'status', 'givenName', 'familyName', 'creationDate', 'lastLogin', 'removalDate'];
   public totalAmountOfEntities: number = 0;
   
   constructor(private activatedRoute: ActivatedRoute, private US: UserService) {
@@ -34,7 +34,7 @@ export class TableOfUsersForAdminsComponent implements OnInit {
   }
 
   public handlePage(e: PageEvent): void {
-    this.fetchPage(e.pageIndex, e.pageSize, this.sort.start as any);
+    this.fetchPage(e.pageIndex, e.pageSize, this.sort.direction as any);
   }
 
   public sortData(e: Sort): void {
