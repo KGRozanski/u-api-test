@@ -53,13 +53,16 @@ router-outlet {
     .sidenav{
         padding: 5px;
         display: flex;
+        flex-direction: column;
         justify-content: stretch;
 
         li {
             width: 100%;
+            margin-bottom: 5px;
 
             button{
                 width: 100%;
+                text-align: left;
             }
 
             .icon{
