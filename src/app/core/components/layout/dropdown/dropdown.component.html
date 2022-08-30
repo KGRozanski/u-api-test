@@ -6,7 +6,7 @@
 <ol>
     <li>
         <div class="option">
-            <i class="i-moon"></i>
+            <mat-icon aria-hidden="false" aria-label="Settings dark mode">dark_mode</mat-icon>
             <span>Dark mode</span>
         </div>
 
@@ -21,13 +21,13 @@
     </li>
     <li *ngIf="authService.isAuthenticated" [routerLink]="['/settings']">
         <div class="option">
-            <i class="i-settings"></i>
+            <mat-icon aria-hidden="false" aria-label="Settings icon">settings</mat-icon>
             <span>Settings</span>
         </div>
     </li>
     <li *ngIf="authService.isAuthenticated" (click)="logout()">
         <div class="option">
-            <i class="i-logout"></i>
+            <mat-icon aria-hidden="false" aria-label="Settings logout">logout</mat-icon>
             <span>Logout</span>
         </div>
     </li>

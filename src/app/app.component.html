@@ -6,10 +6,16 @@
     <mat-drawer #drawer mode="over" autoFocus=false>
         <ol class="sidenav">
             <li>
-                <button mat-stroked-button [routerLink]="['/home']"><i class="icon i-home"></i>Home</button>
+                <button mat-stroked-button [routerLink]="['/home']">
+                    <mat-icon aria-hidden="false" aria-label="Home icon">home</mat-icon>
+                    Home
+                </button>
             </li>
             <li>
-                <button *ngIf="accountInfo.role === acceptableRole" mat-stroked-button [routerLink]="['/admin-dashboard']"><i class="icon i-admin-dashboard"></i>Admin dashboard</button>
+                <button *ngIf="accountInfo.role === acceptableRole" mat-stroked-button [routerLink]="['/admin-dashboard']">
+                    <mat-icon aria-hidden="false" aria-label="Home icon">admin_panel_settings</mat-icon>
+                    Admin dashboard
+                </button>
             </li>
         </ol>
     </mat-drawer>

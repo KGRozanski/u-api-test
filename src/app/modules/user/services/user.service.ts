@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RegisterUser } from '../interfaces/register-user.interface';
@@ -24,6 +24,10 @@ export class UserService {
       params = params.append("order", order);
 
     return this.http.get(this.apiLinks.apiLink + 'accounts', {params: params, withCredentials: true});
+  }
+
+  public banUser(id: number): Observable<Object> {
+    return this.http.post(this.apiLinks.apiLink + 'accounts/ban/'+id, null, {withCredentials: true});
   }
 
 }

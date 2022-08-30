@@ -32,6 +32,7 @@ import { GUARD_PROVIDERS } from './core/guards/_guards';
 import { ActivationComponent } from './core/components/pages/activation/activation.component';
 import { AdminDashboardComponent } from './core/components/pages/admin-dashboard/admin-dashboard.component';
 import { RESOLVERS_PROVIDERS } from './core/resolvers/_resolvers';
+import { DialogConfirmComponent } from './core/components/layout/dialog-confirm/dialog-confirm.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { RESOLVERS_PROVIDERS } from './core/resolvers/_resolvers';
     HomeComponent,
     ActivationComponent,
     AdminDashboardComponent,
+    DialogConfirmComponent,
   ],
   imports: [
     BrowserModule,

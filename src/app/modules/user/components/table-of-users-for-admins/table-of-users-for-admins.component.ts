@@ -1,8 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { NotificationActions } from 'src/app/core/actions/notifications.actions';
+import { DialogConfirmComponent } from 'src/app/core/components/layout/dialog-confirm/dialog-confirm.component';
+import { NotificationType } from 'src/app/core/enums/notification-type.enum';
 import AccountExtended from '../../interfaces/account-extended.interface';
 import { UserService } from '../../services/user.service';
 
@@ -16,10 +22,10 @@ export class TableOfUsersForAdminsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   public dataSource: MatTableDataSource<[AccountExtended[], number]> = new MatTableDataSource();
-  public displayedColumns: string[] = ['id', 'photo', 'username', 'email', 'role', 'status', 'givenName', 'familyName', 'creationDate', 'lastLogin', 'removalDate'];
+  public displayedColumns: string[] = ['id', 'photo', 'username', 'email', 'role', 'status', 'givenName', 'familyName', 'creationDate', 'lastLogin', 'removalDate', 'actions'];
   public totalAmountOfEntities: number = 0;
   
-  constructor(private activatedRoute: ActivatedRoute, private US: UserService) {
+  constructor(private activatedRoute: ActivatedRoute, private US: UserService, private store: Store, public dialog: MatDialog) {
     this.activatedRoute.data.subscribe((data) => {
       this.dataSource.data = data['appTableOfUsersData'][0]
       this.totalAmountOfEntities = data['appTableOfUsersData'][1] || 0;
@@ -44,6 +50,25 @@ export class TableOfUsersForAdminsComponent implements OnInit {
   private fetchPage(pageIndex: number, pageSize: number, order: 'ASC' | 'DESC') {
     this.US.getListOfUsers(pageIndex, pageSize, order.toUpperCase() as any).subscribe((accounts) => {
       this.dataSource.data = accounts[0];
+    });
+  }
+
+  public openBanUserDialog(id: number, username: string): void {
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      width: '450px',
+      data: {question: `Are you sure you want to ban ${username}?`}
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if(result) {
+        this.banUser(id);
+      }
+    });
+  }
+
+  private banUser(id: number) {
+    this.US.banUser(id).subscribe((data: any) => {
+      this.store.dispatch(NotificationActions.push({notification: {type: NotificationType.SUCCESS, message: data['message']}}))
     });
   }
 
