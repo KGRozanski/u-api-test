@@ -1,10 +1,6 @@
 @use '@angular/material' as mat;
 @use '../theme.scss';
 
-@use '../icons/icons';
-@use '../icons/icons-dark';
-@use '../icons/icons-light';
-
 
 @use './footer-theme';
 @use './login-form-theme';
@@ -15,9 +11,6 @@
 @use './table-theme';
 
 @mixin themeSwitch($default-theme, $dark-theme) {
-
-    @include icons-light.icons;
-
     @include mat.all-component-themes($default-theme);
     @include footer-theme.theme($default-theme);
     @include page-theme.theme($default-theme);
@@ -28,8 +21,6 @@
     @include table-theme.theme($default-theme);
 
     .darkMode {
-        @include icons-dark.icons;
-
         @include mat.all-component-colors($dark-theme);
         @include footer-theme.theme($dark-theme);
         @include page-theme.theme($dark-theme);
