@@ -4,11 +4,11 @@ import { Subscription } from 'rxjs';
 
 
 @Component({
-  selector: 'app-activation',
-  templateUrl: './activation.component.html',
-  styleUrls: ['./activation.component.scss']
+  selector: 'app-response',
+  templateUrl: './response.component.html',
+  styleUrls: ['./response.component.scss']
 })
-export class ActivationComponent implements OnInit {
+export class ResponseComponent implements OnInit {
   public activationMsg: string;
   
   private $routeSubscription: Subscription;

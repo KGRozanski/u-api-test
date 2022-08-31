@@ -3,6 +3,8 @@
 @mixin page() {
     router-outlet + * {
         display: block;
-        margin: calc(variables.$toolbar-height + 15px) 15px 20px 15px;
+        width: 100%;
+        // Adding paddings to the page layout isnt necessary since we are using 'mat-drawer-content'
+        // margin: calc(variables.$toolbar-height + 15px) 15px 20px 15px;
     }
 }

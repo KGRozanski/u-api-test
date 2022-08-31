@@ -29,7 +29,7 @@ import { SettingsComponent } from './core/components/pages/settings/settings.com
 import { LoadingIndicatorComponent } from './core/components/layout/loading-indicator/loading-indicator.component';
 import { HomeComponent } from './core/components/pages/home/home.component';
 import { GUARD_PROVIDERS } from './core/guards/_guards';
-import { ActivationComponent } from './core/components/pages/activation/activation.component';
+import { ResponseComponent } from './core/components/pages/response/response.component';
 import { AdminDashboardComponent } from './core/components/pages/admin-dashboard/admin-dashboard.component';
 import { RESOLVERS_PROVIDERS } from './core/resolvers/_resolvers';
 import { DialogConfirmComponent } from './core/components/layout/dialog-confirm/dialog-confirm.component';
@@ -47,7 +47,7 @@ import { DialogConfirmComponent } from './core/components/layout/dialog-confirm/
     SettingsComponent,
     LoadingIndicatorComponent,
     HomeComponent,
-    ActivationComponent,
+    ResponseComponent,
     AdminDashboardComponent,
     DialogConfirmComponent,
   ],

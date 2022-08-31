@@ -3,6 +3,7 @@
 :host {
     display: block;
     text-align: center;
+    margin: 30px auto;
 
     @include transition.transition-dark-mode();
 }

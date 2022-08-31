@@ -11,9 +11,11 @@
     $foreground: map.get($config, foreground);
     $divider: map.get($foreground, divider);
 
+
     .cmp-login-form{
         // Read the 500 hue from the primary color palette.
-        background-color: mat.get-color-from-palette($background, background);
+        
+        background-color: mat.get-color-from-palette($background, 'card');
         border: 1px solid $divider;
     }
     

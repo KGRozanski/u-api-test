@@ -16,7 +16,10 @@
         // Read the 500 hue from the primary color palette.
         background-color: mat.get-color-from-palette($background, background);
         border: 1px solid $divider;
-
+        
+        .wrapper{
+            border: 1px solid $divider;
+        }
 
         tr{
             &:hover, &:active {

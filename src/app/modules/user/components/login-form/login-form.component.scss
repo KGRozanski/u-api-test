@@ -22,3 +22,13 @@ h1 {
     flex-direction: column;
 }
 
+.forgot-pass{
+    display: block;
+    margin: 12px auto 0;
+    font-size: .84em;
+
+    &:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}

@@ -2,8 +2,8 @@
 
 <app-toolbar class="cmp-toolbar shadow-md" (open)="menuToggle($event)"></app-toolbar>
 
-<mat-drawer-container class="manu-container" autosize hasBackdrop=false interacted-with-menu (interacted)="menuToggle()">
-    <mat-drawer #drawer mode="over" autoFocus=false>
+<mat-drawer-container class="manu-container" autosize hasBackdrop="false" interacted-with-menu (interacted)="menuToggle()">
+    <mat-drawer #drawer mode="side" autoFocus=false>
         <ol class="sidenav">
             <li>
                 <button mat-stroked-button [routerLink]="['/home']">
@@ -19,9 +19,13 @@
             </li>
         </ol>
     </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+        <app-footer class="cmp-footer"></app-footer>
+    </mat-drawer-content>
 
 </mat-drawer-container>
 
-<router-outlet></router-outlet>
 
-<app-footer class="cmp-footer"></app-footer>
+
+

@@ -36,7 +36,7 @@
     }
     
     body[class=darkMode]{
-        background-color: lighten(mat.get-color-from-palette(theme.$background-dark, background), 5%);
+        background-color: mat.get-color-from-palette(theme.$background-dark, background);
     }
 
 }

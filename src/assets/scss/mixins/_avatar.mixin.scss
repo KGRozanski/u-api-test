@@ -1,19 +1,21 @@
 @mixin avatar($width, $height) {
-    .wrapper > img, i {
-        display: block;
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: $width;
         height: $height;
         border-radius: 100%;
+
+        img{
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+        }
     
         &:hover{
             cursor: pointer;
         }
     }
 
-    .i-user{
-        background-repeat: no-repeat;
-        background-size: 75%;
-        background-position: center bottom;
-    }
-    
 }
