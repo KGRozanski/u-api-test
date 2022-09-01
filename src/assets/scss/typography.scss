@@ -31,6 +31,11 @@ h1,h2,h3,h4,h5,h6{
     }
 }
 
+.frontpage-title{
+    margin: 10px 10px 10px 5px;
+    justify-content: center;
+}
+
 p{
     @include mat.typography-level($default-typography, 'body-1');
     margin-bottom: 1em;
