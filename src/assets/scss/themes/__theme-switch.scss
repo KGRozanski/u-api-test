@@ -9,6 +9,7 @@
 @use './dropdown-theme';
 @use './page-theme';
 @use './table-theme';
+@use './reset-password-form-theme';
 
 @mixin themeSwitch($default-theme, $dark-theme) {
     @include mat.all-component-themes($default-theme);
@@ -19,6 +20,7 @@
     @include toolbar-theme.theme($default-theme);
     @include dropdown-theme.theme($default-theme);
     @include table-theme.theme($default-theme);
+    @include reset-password-form-theme.theme($default-theme);
 
     .darkMode {
         @include mat.all-component-colors($dark-theme);
@@ -29,6 +31,7 @@
         @include toolbar-theme.theme($dark-theme);
         @include dropdown-theme.theme($dark-theme);
         @include table-theme.theme($dark-theme);
+        @include reset-password-form-theme.theme($dark-theme);
     }
 
     body{

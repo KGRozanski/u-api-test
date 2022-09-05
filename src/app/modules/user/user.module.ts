@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { GoogleAuthComponent } from './components/google-auth/google-auth.component';
 import { TableOfUsersForAdminsComponent } from './components/table-of-users-for-admins/table-of-users-for-admins.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
+import { ResetPasswordFormComponent } from './components/reset-password-form/reset-password-form.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -16,11 +18,13 @@ import { AvatarComponent } from './components/avatar/avatar.component';
     LoginFormComponent,
     GoogleAuthComponent,
     TableOfUsersForAdminsComponent,
-    AvatarComponent
+    AvatarComponent,
+    ResetPasswordFormComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
     SharedModule,
     HttpClientModule
   ],
@@ -28,7 +32,8 @@ import { AvatarComponent } from './components/avatar/avatar.component';
     RegisterFormComponent,
     LoginFormComponent,
     TableOfUsersForAdminsComponent,
-    AvatarComponent
+    AvatarComponent,
+    ResetPasswordFormComponent
   ]
 })
 export class UserModule { }

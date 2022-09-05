@@ -30,5 +30,16 @@ export class UserService {
     return this.http.post(this.apiLinks.apiLink + 'accounts/ban/'+id, null, {withCredentials: true});
   }
 
+  public sendPasswordResettingEmail(email: string): Observable<Object> {
+    return this.http.post(this.apiLinks.apiLink + 'accounts/password', {email}, {withCredentials: true});
+  }
+
+  public resetPassword(password: string, passwordConfirm: string, token: string): Observable<Object> {
+    let params = new HttpParams();
+      params = params.append("token", token);
+
+    return this.http.patch(this.apiLinks.apiLink + 'accounts/password', {password, passwordConfirm}, {params, withCredentials: true});
+  }
+
 }
 //Zaq1@wsx1234

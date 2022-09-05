@@ -11,6 +11,7 @@ import { SettingsComponent } from './core/components/pages/settings/settings.com
 import { AuthGuard } from './core/guards/authGuard.guard';
 import { NoAuthGuard } from './core/guards/noAuthGuard.guard';
 import { GetListOfUsersResolver } from './core/resolvers/getListOfUsers.resolver';
+import { ResetPasswordComponent } from './core/components/pages/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
   { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [NoAuthGuard] },
   { 
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
