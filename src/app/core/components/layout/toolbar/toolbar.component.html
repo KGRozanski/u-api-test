@@ -11,13 +11,6 @@
 
 
 <div class="right-panel">
-    <ng-container *ngIf="!authService.isAuthenticated" >
-        <div class="auth-actions">
-            <button mat-flat-button color="basic" [routerLink]="['/login']" >Login</button>
-            <button mat-flat-button color="primary" [routerLink]="['/register']">Sign up</button>
-        </div>
-    </ng-container>
-    
     <div clicked-outside (clickedOutside)="toggleDropdown(true)">
         <app-avatar class="avatar avatar-default" [photo]="account.photo" (click)="toggleDropdown()"></app-avatar>
 
