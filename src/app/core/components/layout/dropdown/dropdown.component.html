@@ -31,4 +31,16 @@
             <span>Logout</span>
         </div>
     </li>
+    <li *ngIf="!authService.isAuthenticated" [routerLink]="['/login']">
+        <div class="option">
+            <mat-icon aria-hidden="false" aria-label="Login button">login</mat-icon>
+            <span>Login</span>
+        </div>
+    </li>
+    <li *ngIf="!authService.isAuthenticated" [routerLink]="['/register']">
+        <div class="option">
+            <mat-icon aria-hidden="false" aria-label="Sing Up button">person_add</mat-icon>
+            <span>Sing Up</span>
+        </div>
+    </li>
 </ol>
