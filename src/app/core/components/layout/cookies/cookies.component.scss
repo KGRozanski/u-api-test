@@ -1,0 +1,33 @@
+:host{
+  position: fixed;
+  bottom: 0;
+  z-index: 90000;
+}
+.cookie-bar {
+  width: auto;
+  height: auto;
+  background-color: #fff;
+  display: flex;
+  padding: 25px;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.cookie-bar-content {
+  width: auto;
+  height: auto;
+  align-content: center;
+  text-align: center;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  padding: 25px;
+}
+.announcement {
+  text-align: center;
+  margin: 35px;
+}
+.decision {
+  text-align: center;
+  width: auto;
+  display: flex;
+  justify-content: space-evenly;
+}
