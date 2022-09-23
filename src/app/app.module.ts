@@ -34,6 +34,7 @@ import { AdminDashboardComponent } from './core/components/pages/admin-dashboard
 import { RESOLVERS_PROVIDERS } from './core/resolvers/_resolvers';
 import { DialogConfirmComponent } from './core/components/layout/dialog-confirm/dialog-confirm.component';
 import { ResetPasswordComponent } from './core/components/pages/reset-password/reset-password.component';
+import { CookiesComponent } from './core/components/layout/cookies/cookies.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +53,7 @@ import { ResetPasswordComponent } from './core/components/pages/reset-password/r
     AdminDashboardComponent,
     DialogConfirmComponent,
     ResetPasswordComponent,
+    CookiesComponent
   ],
   imports: [
     BrowserModule,
