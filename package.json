@@ -3,7 +3,7 @@
   "version": "3.8.0",
   "scripts": {
     "ng": "ng",
-    "prestart": "node ./src/scripts/register-cmp-themes.ts",
+    "prestart": "node ./src/scripts/register-cmp-themes.js",
     "start": "ng serve",
     "start:test": "ng serve --configuration=test",
     "build": "ng build",
