@@ -15,7 +15,7 @@
     $divider: map.get($foreground, divider);
 
 
-    .cmp-avatar{
+    app-avatar{
         // Read the 500 hue from the primary color palette.
         background-color: mat.get-color-from-palette($background, background);
 
@@ -41,7 +41,7 @@
     // Get the typography config from the theme.
     $typography-config: mat.get-typography-config($theme);
 
-    .cmp-avatar {
+    app-avatar {
         color: mat.get-color-from-palette($palette, text, .9);
     }
 }

@@ -12,7 +12,7 @@
     $divider: map.get($foreground, divider);
 
 
-    .cmp-dropdown{
+    app-dropdown{
         // Read the 500 hue from the primary color palette.
         background-color: mat.get-color-from-palette($background, background);
         border: 1px solid $divider;
@@ -42,7 +42,7 @@
     // Get the typography config from the theme.
     $typography-config: mat.get-typography-config($theme);
 
-    .cmp-dropdown {
+    app-dropdown {
         color: mat.get-color-from-palette($palette, text, .9);
     }
 }

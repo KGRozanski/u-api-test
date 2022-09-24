@@ -12,7 +12,7 @@
     $divider: map.get($foreground, divider);
 
 
-    .cmp-login-form{
+    app-login-form{
         // Read the 500 hue from the primary color palette.
         
         background-color: mat.get-color-from-palette($background, 'card');
@@ -31,7 +31,7 @@
     // Get the typography config from the theme.
     $typography-config: mat.get-typography-config($theme);
 
-    .cmp-login-form {
+    app-login-form {
         color: mat.get-color-from-palette($palette, text, .9);
     }
 }
