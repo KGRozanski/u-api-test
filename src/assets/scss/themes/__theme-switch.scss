@@ -3,6 +3,7 @@
 
 
 @use './avatar-theme';
+@use './cookies-theme';
 @use './dropdown-theme';
 @use './footer-theme';
 @use './login-form-theme';
@@ -16,6 +17,7 @@
 @mixin themeSwitch($default-theme, $dark-theme) {
     @include mat.all-component-themes($default-theme);
 	@include avatar-theme.theme($default-theme);
+	@include cookies-theme.theme($default-theme);
 	@include dropdown-theme.theme($default-theme);
 	@include footer-theme.theme($default-theme);
 	@include login-form-theme.theme($default-theme);
@@ -28,6 +30,7 @@
 	.darkMode {
         @include mat.all-component-colors($dark-theme);
 		@include avatar-theme.theme($dark-theme);
+		@include cookies-theme.theme($dark-theme);
 		@include dropdown-theme.theme($dark-theme);
 		@include footer-theme.theme($dark-theme);
 		@include login-form-theme.theme($dark-theme);
