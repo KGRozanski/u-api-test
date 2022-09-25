@@ -14,9 +14,9 @@ const path = require('path');
 
         if(switchFileIdx > -1) {
             files.splice(switchFileIdx, 1);
-            fs.rm(path.resolve(PATH + '/__theme-switch.scss'), (err) => { if (err) {throw err} });
+            //fs.rm(path.resolve(PATH + '/__theme-switch.scss'), (err) => { if (err) {throw err} });
         }
 
-        const parsed
+    
     });
 })();
