@@ -1,0 +1,49 @@
+@use '@angular/material' as mat;
+@use '../theme.scss';
+
+
+@use './avatar-theme';
+@use './dropdown-theme';
+@use './footer-theme';
+@use './login-form-theme';
+@use './page-theme';
+@use './register-form-theme';
+@use './reset-password-form-theme';
+@use './table-theme';
+@use './toolbar-theme';
+
+
+@mixin themeSwitch($default-theme, $dark-theme) {
+    @include mat.all-component-themes($default-theme);
+	@include avatar-theme.theme($default-theme);
+	@include dropdown-theme.theme($default-theme);
+	@include footer-theme.theme($default-theme);
+	@include login-form-theme.theme($default-theme);
+	@include page-theme.theme($default-theme);
+	@include register-form-theme.theme($default-theme);
+	@include reset-password-form-theme.theme($default-theme);
+	@include table-theme.theme($default-theme);
+	@include toolbar-theme.theme($default-theme);
+
+	.darkMode {
+        @include mat.all-component-colors($dark-theme);
+		@include avatar-theme.theme($dark-theme);
+		@include dropdown-theme.theme($dark-theme);
+		@include footer-theme.theme($dark-theme);
+		@include login-form-theme.theme($dark-theme);
+		@include page-theme.theme($dark-theme);
+		@include register-form-theme.theme($dark-theme);
+		@include reset-password-form-theme.theme($dark-theme);
+		@include table-theme.theme($dark-theme);
+		@include toolbar-theme.theme($dark-theme);
+    }
+
+    body{
+        background-color: mat.get-color-from-palette(theme.$background-light, background);
+    }
+    
+    body[class=darkMode]{
+        background-color: mat.get-color-from-palette(theme.$background-dark, background);
+    }
+
+}

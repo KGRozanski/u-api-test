@@ -1,31 +1,35 @@
+const fs = require('fs');
+const path = require('path');
+
+const id = process.argv[2];
+const filename = id.split('/')[id.split('/').length - 1];
+
+(function() {
+
+const content = `
 @use "sass:map";
 @use "@angular/material" as mat;
 
 @mixin color($theme) {
     // Get the color config from the theme.
-
     $config: mat.get-color-config($theme);
-
     // Get the primary color palette from the color-config.
     $primary: map.get($config, primary);
+
+
 
     $background: map.get($config, background);
     $foreground: map.get($config, foreground);
 
-    $divider: map.get($foreground, divider);
 
 
-    app-avatar{
-        // Read the 500 hue from the primary color palette.
-        background-color: mat.get-color-from-palette($background, background);
+    app-${filename}{
 
-        .wrapper{
-            border-color: $divider;
 
-            &:active{
-                border-color: mat.get-color-from-palette($primary, 500);
-            }
-        }
+
+
+
+
 
     }
     
@@ -41,7 +45,7 @@
     // Get the typography config from the theme.
     $typography-config: mat.get-typography-config($theme);
 
-    app-avatar {
+    app-${filename} {
         color: mat.get-color-from-palette($palette, text, .9);
     }
 }
@@ -61,3 +65,12 @@
         @include typography($theme);
     }
 }
+
+    `;
+
+
+    fs.appendFile(process.cwd() + "/src/assets/scss/themes/_" + filename + "-theme.scss", content, (err, data) => {
+        if (err) {throw err}
+    });
+
+})();

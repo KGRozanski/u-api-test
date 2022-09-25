@@ -1,6 +1,6 @@
 {
   "name": "u-api-test",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "scripts": {
     "ng": "ng",
     "prestart": "node ./src/scripts/register-cmp-themes.js",
@@ -8,7 +8,8 @@
     "start:test": "ng serve --configuration=test",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "gc": "bash ./src/scripts/generate-component.sh"
   },
   "private": true,
   "dependencies": {
