@@ -17,7 +17,24 @@ export class CookieService {
   }
 
   public setCookie(name: string, value: string, exp: string) {
-    this.document.cookie = name + '=' + value + '; expires=' + exp+ '; path=/;';
+    this.document.cookie = name + '=' + value + '; expires=' + exp + '; path=/;';
+  }
+
+  /**
+   * Sets the cookie with expiration date extended by {n} number of days
+   * @param name cookie name
+   * @param value cookie value
+   * @param exp cookie expiration in days (max and default is 400 due to rfc)
+   */
+  public setCookieWithExpInDays(name: string, value: string, exp: number = 400) {
+    let date = new Date();
+    if(!!exp && exp > 0) {
+      date.setDate(new Date().getDate() + exp);
+    } else {
+      throw new Error("Incorrent cookie expiration time: " + exp);
+    }
+
+    this.setCookie(name, value, date.toString())
   }
 
   public removeCookie(name: string) {

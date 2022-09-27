@@ -1,4 +1,4 @@
-<div class="cookie-bar shadow-md shadow-md--inverted" *ngIf="flaga">
+<div class="cookie-bar shadow-md shadow-md--inverted" *ngIf="visibility">
     <h3><i class="material-icons">cookie</i>&nbsp;Cookie Policy for FadeIn</h3>
     <div class="cookie-bar-content">
         
@@ -97,6 +97,6 @@
     </div>    
     <div class="decision">
         <button mat-flat-button>No</button>
-        <button mat-flat-button (click)="onClose()">Yes</button>
+        <button mat-flat-button (click)="accept()">Yes</button>
     </div>  
 </div>
