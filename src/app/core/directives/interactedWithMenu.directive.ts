@@ -14,14 +14,29 @@ export class InteractedWithMenu implements AfterViewInit {
         if(this.INTERACTIVE_ELEMENTS.length > 0) {
             for (const el of this.INTERACTIVE_ELEMENTS) {
                 el.addEventListener('click', (e: any) => {
-                    const CLICKED = e.target.nodeName;
-                    const PARENT = e.target.parentElement.nodeName;
-
-                    if(CLICKED === "LI" || CLICKED === "option" || CLICKED === "I" || CLICKED === "BUTTON" || (CLICKED === "SPAN" && PARENT === "BUTTON")) {
+                    if(!this.isOptionASwitch(e.target)) {
+                        return;
+                    } else {
                         this.interacted.emit();
                     }
                 });
             }
         }
+    }
+
+    private isOptionASwitch(element: HTMLElement | null): boolean {
+        if(!element) {return false;}
+
+        let clickedElement = element.localName + "." + element.className;
+
+        if(clickedElement.match(/no-link/) !== null) {
+            return false;
+        }
+        
+        if(element.localName === "li") {
+            return true;
+        }
+
+        return this.isOptionASwitch(element.parentElement);
     }
 }

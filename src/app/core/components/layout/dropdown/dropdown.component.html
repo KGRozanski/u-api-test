@@ -4,8 +4,8 @@
     <div class="username">{{account.username}}</div>
 </div>
 <ol>
-    <li>
-        <div class="option">
+    <li class="no-link">
+        <div>
             <mat-icon aria-hidden="false" aria-label="Settings dark mode">dark_mode</mat-icon>
             <span>Dark mode</span>
         </div>
@@ -20,25 +20,25 @@
         </mat-slide-toggle>
     </li>
     <li *ngIf="authService.isAuthenticated" [routerLink]="['/settings']">
-        <div class="option">
+        <div>
             <mat-icon aria-hidden="false" aria-label="Settings icon">settings</mat-icon>
             <span>Settings</span>
         </div>
     </li>
     <li *ngIf="authService.isAuthenticated" (click)="logout()">
-        <div class="option">
+        <div>
             <mat-icon aria-hidden="false" aria-label="Settings logout">logout</mat-icon>
             <span>Logout</span>
         </div>
     </li>
     <li *ngIf="!authService.isAuthenticated" [routerLink]="['/login']">
-        <div class="option">
+        <div>
             <mat-icon aria-hidden="false" aria-label="Login button">login</mat-icon>
             <span>Login</span>
         </div>
     </li>
     <li *ngIf="!authService.isAuthenticated" [routerLink]="['/register']">
-        <div class="option">
+        <div>
             <mat-icon aria-hidden="false" aria-label="Sing Up button">person_add</mat-icon>
             <span>Sing Up</span>
         </div>
