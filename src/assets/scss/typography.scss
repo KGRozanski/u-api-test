@@ -17,6 +17,7 @@ $default-typography: mat.define-typography-config(
 
 h1,h2,h3,h4,h5,h6{
     margin-bottom: 1em;
+    font-weight: normal;
 }
 
 .page-title{
@@ -31,10 +32,7 @@ h1,h2,h3,h4,h5,h6{
     }
 }
 
-.frontpage-title{
-    margin: 10px 10px 10px 5px;
-    justify-content: center;
-}
+
 
 p{
     @include mat.typography-level($default-typography, 'body-1');

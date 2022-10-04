@@ -3,22 +3,27 @@ import { CommonModule } from '@angular/common';
 import materialImports from './material-imports';
 import directives from 'src/app/core/directives/_directives';
 import Pipes from 'src/app/core/pipes/_pipes';
+import { EnableDisableMatFormFieldComponent } from './components/enable-disable-mat-form-field/enable-disable-mat-form-field.component';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     Pipes,
-    directives
+    directives,
+    EnableDisableMatFormFieldComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     materialImports
   ],
   exports: [
     Pipes,
     materialImports,
-    directives
+    directives,
+    EnableDisableMatFormFieldComponent
   ]
 })
 export class SharedModule { }

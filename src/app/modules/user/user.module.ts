@@ -10,6 +10,7 @@ import { TableOfUsersForAdminsComponent } from './components/table-of-users-for-
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ResetPasswordFormComponent } from './components/reset-password-form/reset-password-form.component';
 import { RouterModule } from '@angular/router';
+import { AccountInfoComponent } from './components/account-info/account-info.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { RouterModule } from '@angular/router';
     GoogleAuthComponent,
     TableOfUsersForAdminsComponent,
     AvatarComponent,
-    ResetPasswordFormComponent
+    ResetPasswordFormComponent,
+    AccountInfoComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { RouterModule } from '@angular/router';
     LoginFormComponent,
     TableOfUsersForAdminsComponent,
     AvatarComponent,
-    ResetPasswordFormComponent
+    ResetPasswordFormComponent,
+    AccountInfoComponent
   ]
 })
 export class UserModule { }

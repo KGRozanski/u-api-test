@@ -1,11 +1,3 @@
 <h1 class="page-title"><mat-icon aria-hidden="false" aria-label="Settings icon">settings</mat-icon>Settings</h1>
-<br><br>
-<h2>Account info</h2>
-<app-avatar class="cmp-avatar avatar-big" [photo]="account.photo"></app-avatar>
-<p>
-    name: {{account.givenName}} <br>
-    surname: {{account.familyName}} <br>
-    username: {{account.username}} <br>
-    email: {{account.email}} <br>
-    date of signup: {{account.creationDate | date}}
-</p>
+
+<app-account-info></app-account-info>

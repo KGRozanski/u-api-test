@@ -1,0 +1,7 @@
+<mat-form-field class="example-full-width" appearance="fill" disabler>
+    <mat-label>{{name}}</mat-label>
+    <input matInput type="text" [(ngModel)]="value" [disabled]="isDisabled" (change)="onChange(value)">
+    <button matSuffix mat-icon-button aria-label="Edit" (click)="setDisabledState!(!this.isDisabled)">
+        <mat-icon>edit</mat-icon>
+    </button>
+</mat-form-field>

@@ -1,0 +1,19 @@
+<mat-card>
+
+    <h2>Account info</h2>
+
+    <div class="general">
+        <app-avatar class="cmp-avatar avatar-big" [photo]="account.photo"></app-avatar>
+        <div class="simple-info">
+            <span class="username">{{account.username}}</span>
+            <span class="date-of-signup">Joined: {{account.creationDate | date}}</span>
+        </div>
+    </div>
+
+    <form class="personal-details" [formGroup]="personalDetailsForm">
+        <app-enable-disable-mat-form-field formControlName="givenName" name="Name"></app-enable-disable-mat-form-field>
+        <app-enable-disable-mat-form-field formControlName="familyName" name="Surname"></app-enable-disable-mat-form-field>
+        <app-enable-disable-mat-form-field formControlName="email" name="Email"></app-enable-disable-mat-form-field>
+    </form>
+
+</mat-card>

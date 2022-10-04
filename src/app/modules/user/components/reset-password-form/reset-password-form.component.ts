@@ -18,7 +18,7 @@ export class ResetPasswordFormComponent implements OnInit, OnDestroy {
   public sendingOrRevieving: boolean = true;
   private _token: string | null;
   private subscription: Subscription;
-  public resetPasswordForm: FormGroup = this.FB.group({
+  public resetPasswordForm: FormGroup = this.fb.group({
     email: [null,
       [
         Validators.required, 
@@ -29,7 +29,7 @@ export class ResetPasswordFormComponent implements OnInit, OnDestroy {
       ]
     ]
   });
-  public newPasswordForm: FormGroup = this.FB.group({
+  public newPasswordForm: FormGroup = this.fb.group({
     password: [null,
       [
         Validators.required, 
@@ -50,7 +50,7 @@ export class ResetPasswordFormComponent implements OnInit, OnDestroy {
     validators: CustomValidators.passwordEquality
   });
   
-  constructor(public FB: FormBuilder, public activatedRoute: ActivatedRoute, public US: UserService, public store: Store, public router: Router) {
+  constructor(public fb: FormBuilder, public activatedRoute: ActivatedRoute, public US: UserService, public store: Store, public router: Router) {
     this.subscription = this.activatedRoute.queryParams.subscribe((data) => {
       if(data['token']) {
         this._token = data['token'];

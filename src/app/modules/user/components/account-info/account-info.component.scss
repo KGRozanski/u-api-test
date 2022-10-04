@@ -1,0 +1,25 @@
+.general{
+    display: flex;
+
+    .simple-info{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin-left: 15px;
+
+        .username{
+            font-size: 1.4em;
+        }
+    
+        span{
+            font-size: .9em;
+        }
+    }
+
+}
+
+.personal-details{
+    display: flex;
+    margin: 25px 0 0 0;
+    gap: 15px;
+}

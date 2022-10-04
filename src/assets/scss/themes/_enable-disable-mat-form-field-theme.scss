@@ -1,29 +1,27 @@
+
 @use "sass:map";
 @use "@angular/material" as mat;
 
 @mixin color($theme) {
     // Get the color config from the theme.
-
     $config: mat.get-color-config($theme);
-
     // Get the primary color palette from the color-config.
     $primary: map.get($config, primary);
+
+
 
     $background: map.get($config, background);
     $foreground: map.get($config, foreground);
 
-    $divider: map.get($foreground, divider);
 
 
-    app-avatar{
+    app-enable-disable-mat-form-field{
 
-        .wrapper{
-            border-color: $divider;
 
-            &:active{
-                border-color: mat.get-color-from-palette($primary, 500);
-            }
-        }
+
+
+
+
 
     }
     
@@ -39,7 +37,7 @@
     // Get the typography config from the theme.
     $typography-config: mat.get-typography-config($theme);
 
-    app-avatar {
+    app-enable-disable-mat-form-field {
         color: mat.get-color-from-palette($palette, text, .9);
     }
 }
@@ -59,3 +57,5 @@
         @include typography($theme);
     }
 }
+
+    
