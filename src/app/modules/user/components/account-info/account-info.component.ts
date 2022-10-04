@@ -28,7 +28,7 @@ export class AccountInfoComponent implements OnInit {
 
     this.personalDetailsForm.valueChanges.subscribe((form) => {
       console.log(form)
-    })
+    });
   }
 
   private hydratePersonalDetailsForm(): void {

@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AccountInfoComponent } from 'src/app/modules/user/components/account-info/account-info.component';
 
 @Component({
   selector: 'app-enable-disable-mat-form-field',
@@ -23,11 +24,14 @@ export class EnableDisableMatFormFieldComponent implements ControlValueAccessor 
     this._value = value;
   }
 
+  constructor(private viewContainerRef: ViewContainerRef) {}
+
   @Input() name: string;
 
-  // @HostListener("document:keydown.enter", ["$event"]) onKeydownHandler() {
-  //   this.setDisabledState!(!this.isDisabled);
-  // }
+  @HostListener("document:keydown.enter", ["$event"]) onKeydownHandler($event: any) {
+    $event.target.blur();
+    this.setDisabledState!(true);
+  }
 
   onChange: (value: string) => void;
   onTouched: (value: string) => void;
@@ -35,14 +39,26 @@ export class EnableDisableMatFormFieldComponent implements ControlValueAccessor 
   writeValue(value: string): void {
     this.value = value;
   }
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
+
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
+  }
+
+  toggleButton(isDisabled: boolean): void {
+    this.disableAll();
+    this.setDisabledState!(isDisabled);
+  }
+  
+  disableAll() {
+    this.viewContainerRef.injector.get(AccountInfoComponent).personalDetailsForm.disable();
   }
 
 }
