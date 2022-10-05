@@ -81,7 +81,7 @@ export class AuthService {
                             }
 
                         } catch (err) {
-                            this.logger.log(`⚠️ Invalid ${TokenType.ID_TOKEN.toUpperCase()} – trying to refresh`);
+                            this.logger.log(`❌ Invalid ${TokenType.ID_TOKEN.toUpperCase()} – trying to refresh`);
                             this.setTokenTimeout(0, TokenType.ID_TOKEN);
                             resolve(true);
                             return;
@@ -188,8 +188,8 @@ export class AuthService {
 
     public logInfo(type: TokenType): void {
         this.logger.log((type === TokenType.ACCESS_TOKEN) ? 
-            `🔑 Access token refreshed! ` : 
-            `🆔 ID token refreshed`
+            `🔑 Access has been token refreshed ` : 
+            `👤 ID token has been refreshed `
         );
     }
 

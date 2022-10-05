@@ -44,6 +44,8 @@ export function elapsedTimeFormatter(n: number) {
         } else {
             output += '0' + minutes + ':';
         }
+    } else {
+        output += '00:';
     }
 
     if(seconds > 0) {
@@ -52,6 +54,8 @@ export function elapsedTimeFormatter(n: number) {
         } else {
             output += '0' + seconds;
         }
+    } else {
+        output += '00';
     }
 
     if(time > 0) {
