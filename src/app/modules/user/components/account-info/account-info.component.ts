@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { distinctUntilChanged } from 'rxjs';
 import { AccountInfo } from 'src/app/core/interfaces/account-info.interface';
 import { ACCOUNT_SELECTORS } from 'src/app/core/selectors/account.selectors';
 import { getAccountInitial } from 'src/app/core/state/initials/account.initial';
+import { isEqual } from 'lodash';
 
 @Component({
   selector: 'app-account-info',
@@ -26,9 +28,13 @@ export class AccountInfoComponent implements OnInit {
       this.hydratePersonalDetailsForm();
     });
 
-    this.personalDetailsForm.valueChanges.subscribe((form) => {
-      console.log(form)
-    });
+    this.personalDetailsForm.valueChanges
+      .pipe(
+        distinctUntilChanged((prev, curr) => isEqual(prev, curr))
+      )
+      .subscribe((form) => {
+        console.log(this.personalDetailsForm.value);
+      });
   }
 
   private hydratePersonalDetailsForm(): void {
