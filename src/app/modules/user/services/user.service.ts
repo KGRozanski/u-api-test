@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { RegisterUser } from '../interfaces/register-user.interface';
+import { UpdateAccountDto } from '../interfaces/update-account.dto.interface';
 import { ApiLinksService } from './api-links.service';
 
 @Injectable({
@@ -9,7 +11,7 @@ import { ApiLinksService } from './api-links.service';
 })
 export class UserService {
 
-  constructor(private readonly http: HttpClient, private apiLinks: ApiLinksService,) { }
+  constructor(private readonly http: HttpClient, private apiLinks: ApiLinksService, private authService: AuthService) { }
 
 
   public register(user: RegisterUser): Observable<Object> {
@@ -39,6 +41,10 @@ export class UserService {
       params = params.append("token", token);
 
     return this.http.patch(this.apiLinks.apiLink + 'accounts/password', {password, passwordConfirm}, {params, withCredentials: true});
+  }
+
+  public patchAccountInfo(formData: UpdateAccountDto): Observable<Object> {
+    return this.http.patch(this.apiLinks.apiLink + 'accounts/' + this.authService.AccountInfo.userID, formData, {withCredentials: true});
   }
 
 }

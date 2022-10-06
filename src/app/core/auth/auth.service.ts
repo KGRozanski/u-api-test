@@ -145,7 +145,7 @@ export class AuthService {
 
     public get AccountInfo(): AccountInfo {
         const ID_TOKEN = this.cookies.getCookie(TokenType.ID_TOKEN);
-        let decoded: AccountInfo;
+        let decoded: any;
 
         try {
             decoded = jwt_decode(ID_TOKEN || '');
@@ -155,6 +155,7 @@ export class AuthService {
         }
 
         return {
+            userID: decoded.sub,
             username: decoded.username,
             email: decoded.email,
             givenName: decoded.givenName,

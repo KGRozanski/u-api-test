@@ -1,6 +1,7 @@
 import { Role } from "src/app/modules/user/enums/roles.enum";
 
 export interface AccountInfo {
+    userID: string;
     username: string;
     email: string;
     givenName: string;
