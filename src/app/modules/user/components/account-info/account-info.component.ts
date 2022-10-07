@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, skipWhile, Subject, takeUntil } from 'rxjs';
 import { AccountInfo } from 'src/app/core/interfaces/account-info.interface';
@@ -18,20 +18,22 @@ import { NotificationType } from 'src/app/core/enums/notification-type.enum';
 export class AccountInfoComponent implements OnInit, OnDestroy {
   public account: AccountInfo = getAccountInitial();
   public personalDetailsForm: FormGroup = this.fb.group({
-    givenName: [null],
-    familyName: [null],
-    email: [null]
+    givenName: [null, [Validators.required]],
+    familyName: [null, [Validators.required]],
+    email: [null, [Validators.required]]
   });
-  private destroyed$: Subject<void> = new Subject<void>();
+  private destroyed$: Subject<void> = new Subject();
 
   constructor(private store: Store, private fb: FormBuilder, private US: UserService) {}
 
   ngOnInit(): void {
-    this.store.select(ACCOUNT_SELECTORS.selectAccountCollection).subscribe((accountData) => {
-      this.account = accountData;
-      this.hydratePersonalDetailsForm();
-      this.startFormValueListener();
-    });
+    this.store.select(ACCOUNT_SELECTORS.selectAccountCollection)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((accountData) => {
+        this.account = accountData;
+        this.hydratePersonalDetailsForm();
+        this.startFormValueListener();
+      });
   }
 
   ngOnDestroy(): void {
@@ -53,15 +55,20 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
     this.personalDetailsForm.valueChanges
       .pipe(
         takeUntil(this.destroyed$),
-        skipWhile((initValue) => {
-          return isEqual(initValue, CACHED_FORM_VAL);
+        skipWhile((value) => {
+          return isEqual(value, CACHED_FORM_VAL);
         }),
         distinctUntilChanged((prev, curr) => isEqual(prev, curr))
       )
       .subscribe((value) => {
+        if(!this.personalDetailsForm.valid) { return; };
+
         this.US.patchAccountInfo(value).subscribe((data: any) => {
-          this.store.dispatch(NotificationActions.push({notification: {type: NotificationType.SUCCESS, message: data['message']}}))
+          this.store.dispatch(NotificationActions.push({
+            notification: {type: NotificationType.SUCCESS, message: data['message']}
+          }));
         });
+
       });
   }
 
