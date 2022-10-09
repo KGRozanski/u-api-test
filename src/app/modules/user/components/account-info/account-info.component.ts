@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, skipWhile, Subject, takeUntil } from 'rxjs';
 import { AccountInfo } from 'src/app/core/interfaces/account-info.interface';
@@ -23,6 +23,8 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
     email: [null, [Validators.required]]
   });
   private destroyed$: Subject<void> = new Subject();
+  
+  @ViewChild('personalDetailsFormDir') public personalDetailsFormDir: NgForm;
 
   constructor(private store: Store, private fb: FormBuilder, private US: UserService) {}
 

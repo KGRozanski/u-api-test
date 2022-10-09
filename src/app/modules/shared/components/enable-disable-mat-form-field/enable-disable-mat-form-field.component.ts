@@ -1,6 +1,6 @@
-import { Component, HostListener, Input, ViewContainerRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { AccountInfoComponent } from 'src/app/modules/user/components/account-info/account-info.component';
+import { Component, Host, HostListener, Input, Optional, SkipSelf } from '@angular/core';
+import { AbstractControl, ControlContainer, ControlValueAccessor, FormControl, FormControlName, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+
 
 @Component({
   selector: 'app-enable-disable-mat-form-field',
@@ -15,6 +15,8 @@ import { AccountInfoComponent } from 'src/app/modules/user/components/account-in
 export class EnableDisableMatFormFieldComponent implements ControlValueAccessor {
   private _value: string;
   public isDisabled: boolean = true;
+  public formCtrl: FormControl & {active: boolean};
+  public parentForm: FormGroup & {controls: { [key: string]: AbstractControl & {active: boolean}}};
 
   public get value(): string {
     return this._value;
@@ -24,13 +26,24 @@ export class EnableDisableMatFormFieldComponent implements ControlValueAccessor 
     this._value = value;
   }
 
-  constructor(private viewContainerRef: ViewContainerRef) {}
+  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {}
+  
+  ngOnChanges(): void {
+    if(!this.controlContainer.formDirective) { throw new Error("No control container form directive specified");};
+    let container: ControlContainer & {form: FormGroup} = this.controlContainer as any;
+    this.parentForm = container.form as any;
+    this.formCtrl = this.parentForm.get(this.formControlName) as FormControl & {active: boolean};
+    this.formCtrl.active = false;
+  }
 
+  // Input name displayed to the user
   @Input() name: string;
+  // FormControlName used for matInput directive
+  @Input() formControlName: string;
 
   @HostListener("document:keydown.enter", ["$event"]) onKeydownHandler($event: any) {
     $event.target.blur();
-    this.setDisabledState!(true);
+    this.formCtrl.active = false;
   }
 
   onChange: (value: string) => void;
@@ -52,13 +65,15 @@ export class EnableDisableMatFormFieldComponent implements ControlValueAccessor 
     this.isDisabled = isDisabled;
   }
 
-  toggleButton(isDisabled: boolean): void {
-    this.disableAll();
-    this.setDisabledState!(isDisabled);
+  toggleControl(isActive: boolean): void {
+    this.disableSiblings();
+    this.formCtrl.active = isActive;
   }
   
-  disableAll() {
-    this.viewContainerRef.injector.get(AccountInfoComponent).personalDetailsForm.disable();
+  disableSiblings(): void {
+    for (const key in this.parentForm.controls) {
+      this.parentForm.controls[key].active = false;
+    }
   }
 
 }

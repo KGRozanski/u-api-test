@@ -1,12 +1,15 @@
-<mat-form-field class="example-full-width" appearance="fill" disabler>
+<mat-form-field class="example-full-width" appearance="fill">
     <mat-label>{{name}}</mat-label>
-    <input matInput type="text" [(ngModel)]="value" [disabled]="isDisabled" (change)="onChange(value)">
-    <button matSuffix mat-icon-button aria-label="Edit" (click)="toggleButton(!this.isDisabled)">
-        <ng-container *ngIf="isDisabled">
+    <input matInput type="text" [readonly]="!formCtrl.active" (change)="onChange(value)" [formControl]="formCtrl">
+    <button matSuffix mat-icon-button aria-label="Edit" (click)="toggleControl(!formCtrl.active)">
+        <ng-container *ngIf="!formCtrl.active">
             <mat-icon>edit</mat-icon>
         </ng-container>
-        <ng-container *ngIf="!isDisabled">
+        <ng-container *ngIf="formCtrl.active">
             <mat-icon>done</mat-icon>
         </ng-container>
     </button>
+    <mat-error>
+        An error has occurred
+    </mat-error>
 </mat-form-field>

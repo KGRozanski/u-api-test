@@ -9,7 +9,7 @@ import jwt_decode from "jwt-decode";
 import { TokenType } from "../enums/token-type.enum";
 import { JWT } from "../interfaces/jwt.interface";
 import { LogService } from "src/app/modules/shared/services/log.service";
-import { elapsedTimeFormatter } from "../utils/elapsedTimeFormatter";
+import { elapsedTimeFormatter } from "../utils/functions/elapsedTimeFormatter";
 import { AccountActions } from "../actions/account.actions";
 import { select, Store } from "@ngrx/store";
 import { ACCOUNT_SELECTORS } from "../selectors/account.selectors";

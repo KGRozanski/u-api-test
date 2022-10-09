@@ -15,7 +15,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AccountEffect } from './core/effects/account.effect';
 import { interceptorsProviders } from './core/interceptors/_interceptors';
 import { NotificationsEffect } from './core/effects/notifications.effect';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { metaReducers, reducers } from './core/reducers/_app.reducer';
 import { HydrationEffects } from './core/effects/hydration.effect';
 import { DropdownComponent } from './core/components/layout/dropdown/dropdown.component';

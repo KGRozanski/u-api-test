@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,6 +10,7 @@ import { AvatarComponent } from './components/avatar/avatar.component';
 import { ResetPasswordFormComponent } from './components/reset-password-form/reset-password-form.component';
 import { RouterModule } from '@angular/router';
 import { AccountInfoComponent } from './components/account-info/account-info.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({

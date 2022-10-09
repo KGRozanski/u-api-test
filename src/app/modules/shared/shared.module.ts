@@ -4,7 +4,7 @@ import materialImports from './material-imports';
 import directives from 'src/app/core/directives/_directives';
 import Pipes from 'src/app/core/pipes/_pipes';
 import { EnableDisableMatFormFieldComponent } from './components/enable-disable-mat-form-field/enable-disable-mat-form-field.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     materialImports
   ],
   exports: [
