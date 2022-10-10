@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AccountActions } from 'src/app/core/actions/account.actions';
 import { SettingsActions } from 'src/app/core/actions/settings.actions';
+import { RegexSupplier } from 'src/app/modules/shared/classes/RegexSupplier';
 
 @Component({
   selector: 'app-login-form',
@@ -19,7 +20,7 @@ export class LoginFormComponent implements OnInit {
         Validators.required, 
         Validators.min(3), 
         Validators.max(30), 
-        Validators.pattern(/^[A-Za-z0-9_@.]+$/)
+        Validators.pattern(RegexSupplier.email)
       ]
     ],
     password: [null,

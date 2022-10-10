@@ -8,6 +8,7 @@ import { getAccountInitial } from 'src/app/core/state/initials/account.initial';
 import { UserService } from '../../services/user.service';
 import { NotificationActions } from 'src/app/core/actions/notifications.actions';
 import { NotificationType } from 'src/app/core/enums/notification-type.enum';
+import { RegexSupplier } from 'src/app/modules/shared/classes/RegexSupplier';
 
 @Component({
   selector: 'app-account-info',
@@ -17,9 +18,9 @@ import { NotificationType } from 'src/app/core/enums/notification-type.enum';
 export class AccountInfoComponent implements OnInit, OnDestroy {
   public account: AccountInfo = getAccountInitial();
   public personalDetailsForm: FormGroup = this.fb.group({
-    givenName: [null, [Validators.required]],
-    familyName: [null, [Validators.required]],
-    email: [null, [Validators.required]]
+    givenName: [null, [Validators.required, Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
+    familyName: [null, [Validators.required, Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
+    email: [null, [Validators.required, Validators.pattern(RegexSupplier.email)]]
   });
   private destroyed$: Subject<void> = new Subject();
   

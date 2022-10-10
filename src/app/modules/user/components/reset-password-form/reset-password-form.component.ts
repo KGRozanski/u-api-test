@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { NotificationActions } from 'src/app/core/actions/notifications.actions';
 import { NotificationType } from 'src/app/core/enums/notification-type.enum';
 import { CustomValidators } from 'src/app/core/validators/validators';
+import { RegexSupplier } from 'src/app/modules/shared/classes/RegexSupplier';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class ResetPasswordFormComponent implements OnInit, OnDestroy {
         Validators.required, 
         Validators.min(3), 
         Validators.max(30), 
-        Validators.pattern(/^[A-Za-z0-9_@.]+$/),
+        Validators.pattern(RegexSupplier.email),
         Validators.email
       ]
     ]
@@ -33,17 +34,17 @@ export class ResetPasswordFormComponent implements OnInit, OnDestroy {
     password: [null,
       [
         Validators.required, 
-        Validators.min(3), 
-        Validators.max(30), 
-        Validators.pattern(/^[A-Za-z0-9_@.]+$/)
+        Validators.min(12), 
+        Validators.max(64), 
+        Validators.pattern(RegexSupplier.password)
       ]
     ],
     passwordConfirm: [null,
       [
         Validators.required, 
-        Validators.min(3), 
-        Validators.max(30), 
-        Validators.pattern(/^[A-Za-z0-9_@.]+$/)
+        Validators.min(12), 
+        Validators.max(64), 
+        Validators.pattern(RegexSupplier.password)
       ]
     ]
   }, {

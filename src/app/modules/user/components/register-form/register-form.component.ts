@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NotificationActions } from 'src/app/core/actions/notifications.actions';
 import { NotificationType } from 'src/app/core/enums/notification-type.enum';
+import { RegexSupplier } from 'src/app/modules/shared/classes/RegexSupplier';
 import { CustomValidators } from '../../../../core/validators/validators';
 import { UserService } from '../../services/user.service';
 
@@ -21,20 +22,20 @@ export class RegisterFormComponent {
         Validators.required, 
         Validators.min(3), 
         Validators.max(30), 
-        Validators.pattern(/^[A-Za-z0-9_]+$/)
+        Validators.pattern(RegexSupplier.username)
       ]
     ],
     email: [null, 
       [
         Validators.required,
         Validators.max(30),
-        Validators.email
+        Validators.pattern(RegexSupplier.email)
       ]
     ],
     password: [null, 
       [
         Validators.required, 
-        Validators.pattern(/(?=^.{12,64}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)
+        Validators.pattern(RegexSupplier.password)
       ]
     ],
     passwordConfirm: [null, 
