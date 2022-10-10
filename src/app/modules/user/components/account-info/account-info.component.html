@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <form class="personal-details" #personalDetailsFormDir="ngForm" [formGroup]="personalDetailsForm">
+    <form class="personal-details" #personalDetailsFormDir="ngForm" [formGroup]="personalDetailsForm" (ngSubmit)="onSubmit()">
         <app-enable-disable-mat-form-field formControlName="givenName" name="Name"></app-enable-disable-mat-form-field>
         <app-enable-disable-mat-form-field formControlName="familyName" name="Surname"></app-enable-disable-mat-form-field>
         <app-enable-disable-mat-form-field formControlName="email" name="Email"></app-enable-disable-mat-form-field>

@@ -1,6 +1,7 @@
-import { Component, Host, HostListener, Input, Optional, SkipSelf } from '@angular/core';
+import { Component, ElementRef, Host, HostListener, Input, Optional, SkipSelf } from '@angular/core';
 import { AbstractControl, ControlContainer, ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-
+import { CustomErrorStateMatcher } from '../../classes/CustomErrorStateMatcher';
+import { FormControlStatus } from '@angular/forms';
 
 @Component({
   selector: 'app-enable-disable-mat-form-field',
@@ -15,8 +16,10 @@ import { AbstractControl, ControlContainer, ControlValueAccessor, FormControl, F
 export class EnableDisableMatFormFieldComponent implements ControlValueAccessor {
   private _value: string;
   public isDisabled: boolean = true;
+  public container: any;
   public formCtrl: FormControl & {active: boolean};
   public parentForm: FormGroup & {controls: { [key: string]: AbstractControl & {active: boolean}}};
+  public errMatcher = new CustomErrorStateMatcher();
 
   public get value(): string {
     return this._value;
@@ -26,12 +29,12 @@ export class EnableDisableMatFormFieldComponent implements ControlValueAccessor 
     this._value = value;
   }
 
-  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer) {}
+  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, @SkipSelf() private el: ElementRef) {}
   
   ngOnChanges(): void {
     if(!this.controlContainer.formDirective) { throw new Error("No control container form directive specified");};
-    let container: ControlContainer & {form: FormGroup} = this.controlContainer as any;
-    this.parentForm = container.form as any;
+    this.container = this.controlContainer as any;
+    this.parentForm = this.container.form;
     this.formCtrl = this.parentForm.get(this.formControlName) as FormControl & {active: boolean};
     this.formCtrl.active = false;
   }
@@ -41,9 +44,10 @@ export class EnableDisableMatFormFieldComponent implements ControlValueAccessor 
   // FormControlName used for matInput directive
   @Input() formControlName: string;
 
-  @HostListener("document:keydown.enter", ["$event"]) onKeydownHandler($event: any) {
+  @HostListener("keydown.enter", ["$event"]) onKeydownHandler($event: any) {
     $event.target.blur();
-    this.formCtrl.active = false;
+    this.toggleControl(false);
+    this.submit();
   }
 
   onChange: (value: string) => void;
@@ -66,13 +70,23 @@ export class EnableDisableMatFormFieldComponent implements ControlValueAccessor 
   }
 
   toggleControl(isActive: boolean): void {
+    if(this.parentForm.status == "INVALID" as FormControlStatus) {return;};
     this.disableSiblings();
     this.formCtrl.active = isActive;
+    if(!isActive) {
+      this.submit();
+    }
   }
   
   disableSiblings(): void {
     for (const key in this.parentForm.controls) {
       this.parentForm.controls[key].active = false;
+    }
+  }
+
+  submit() {
+    if(this.formCtrl.dirty){
+      this.el.nativeElement.requestSubmit();
     }
   }
 

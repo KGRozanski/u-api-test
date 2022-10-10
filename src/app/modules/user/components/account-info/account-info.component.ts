@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { distinctUntilChanged, skipWhile, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { AccountInfo } from 'src/app/core/interfaces/account-info.interface';
 import { ACCOUNT_SELECTORS } from 'src/app/core/selectors/account.selectors';
 import { getAccountInitial } from 'src/app/core/state/initials/account.initial';
-import { cloneDeep, isEqual } from 'lodash';
 import { UserService } from '../../services/user.service';
 import { NotificationActions } from 'src/app/core/actions/notifications.actions';
 import { NotificationType } from 'src/app/core/enums/notification-type.enum';
@@ -34,7 +33,6 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
       .subscribe((accountData) => {
         this.account = accountData;
         this.hydratePersonalDetailsForm();
-        this.startFormValueListener();
       });
   }
 
@@ -52,27 +50,12 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
     }
   }
 
-  private startFormValueListener(): void {
-    const CACHED_FORM_VAL = cloneDeep(this.personalDetailsForm.value);
-    this.personalDetailsForm.valueChanges
-      .pipe(
-        takeUntil(this.destroyed$),
-        skipWhile((value) => {
-          return isEqual(value, CACHED_FORM_VAL);
-        }),
-        distinctUntilChanged((prev, curr) => isEqual(prev, curr))
-      )
-      .subscribe((value) => {
-        if(!this.personalDetailsForm.valid) { return; };
-
-        this.US.patchAccountInfo(value).subscribe((data: any) => {
-          this.store.dispatch(NotificationActions.push({
-            notification: {type: NotificationType.SUCCESS, message: data['message']}
-          }));
-        });
-
-      });
+  onSubmit(): void {
+    if(!this.personalDetailsForm.valid) {return;};
+    this.US.patchAccountInfo(this.personalDetailsForm.value).subscribe((data: any) => {
+      this.store.dispatch(NotificationActions.push({
+        notification: {type: NotificationType.SUCCESS, message: data['message']}
+      }));
+    });
   }
-
-
 }
