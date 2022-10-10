@@ -1,5 +1,5 @@
 import { Component, Host, HostListener, Input, Optional, SkipSelf } from '@angular/core';
-import { AbstractControl, ControlContainer, ControlValueAccessor, FormControl, FormControlName, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlContainer, ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 
 @Component({

@@ -1,4 +1,4 @@
-<mat-form-field class="example-full-width" appearance="fill">
+<mat-form-field appearance="fill" [class.mat-form-field-disabled]="!formCtrl.active">
     <mat-label>{{name}}</mat-label>
     <input matInput type="text" [readonly]="!formCtrl.active" (change)="onChange(value)" [formControl]="formCtrl">
     <button matSuffix mat-icon-button aria-label="Edit" (click)="toggleControl(!formCtrl.active)">
