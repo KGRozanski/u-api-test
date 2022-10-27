@@ -70,6 +70,7 @@ export class EnableDisableMatFormFieldComponent implements ControlValueAccessor 
   }
 
   toggleControl(isActive: boolean): void {
+    console.log(this.parentForm)
     if(this.parentForm.status == "INVALID" as FormControlStatus) {return;};
     this.disableSiblings();
     this.formCtrl.active = isActive;

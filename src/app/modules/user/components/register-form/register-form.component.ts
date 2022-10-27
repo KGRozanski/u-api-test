@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RegexSupplier } from '@fadein/commons';
 import { Store } from '@ngrx/store';
 import { NotificationActions } from 'src/app/core/actions/notifications.actions';
 import { NotificationType } from 'src/app/core/enums/notification-type.enum';
-import { RegexSupplier } from 'src/app/modules/shared/classes/RegexSupplier';
 import { CustomValidators } from '../../../../core/validators/validators';
 import { UserService } from '../../services/user.service';
 

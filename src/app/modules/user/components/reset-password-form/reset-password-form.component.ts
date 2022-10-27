@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RegexSupplier } from '@fadein/commons';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { NotificationActions } from 'src/app/core/actions/notifications.actions';
 import { NotificationType } from 'src/app/core/enums/notification-type.enum';
 import { CustomValidators } from 'src/app/core/validators/validators';
-import { RegexSupplier } from 'src/app/modules/shared/classes/RegexSupplier';
 import { UserService } from '../../services/user.service';
 
 @Component({

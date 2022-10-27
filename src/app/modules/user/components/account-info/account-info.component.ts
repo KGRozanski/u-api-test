@@ -8,7 +8,7 @@ import { getAccountInitial } from 'src/app/core/state/initials/account.initial';
 import { UserService } from '../../services/user.service';
 import { NotificationActions } from 'src/app/core/actions/notifications.actions';
 import { NotificationType } from 'src/app/core/enums/notification-type.enum';
-import { RegexSupplier } from 'src/app/modules/shared/classes/RegexSupplier';
+import { RegexSupplier } from '@fadein/commons';
 
 @Component({
   selector: 'app-account-info',
