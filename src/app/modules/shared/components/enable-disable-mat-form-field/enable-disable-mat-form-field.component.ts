@@ -1,42 +1,25 @@
-import { Component, ElementRef, Host, HostListener, Input, Optional, SkipSelf } from '@angular/core';
-import { AbstractControl, ControlContainer, ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, ElementRef, HostListener, Input, SkipSelf } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
 import { CustomErrorStateMatcher } from '../../classes/CustomErrorStateMatcher';
 import { FormControlStatus } from '@angular/forms';
+import { TogglableFormControl } from 'src/app/modules/user/components/account-info/interfaces/togglableFormControl.interface';
 
 @Component({
   selector: 'app-enable-disable-mat-form-field',
   templateUrl: './enable-disable-mat-form-field.component.html',
-  styleUrls: ['./enable-disable-mat-form-field.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: EnableDisableMatFormFieldComponent,
-    multi: true
-  }]
+  styleUrls: ['./enable-disable-mat-form-field.component.scss']
 })
-export class EnableDisableMatFormFieldComponent implements ControlValueAccessor {
-  private _value: string;
-  public isDisabled: boolean = true;
-  public container: any;
-  public formCtrl: FormControl & {active: boolean};
-  public parentForm: FormGroup & {controls: { [key: string]: AbstractControl & {active: boolean}}};
+export class EnableDisableMatFormFieldComponent {
+  public formCtrl: FormControl & TogglableFormControl;
+  public parentForm: FormGroup & {controls: { [key: string]: AbstractControl & TogglableFormControl}};
   public errMatcher = new CustomErrorStateMatcher();
 
-  public get value(): string {
-    return this._value;
-  }
-
-  public set value(value: string) {
-    this._value = value;
-  }
-
-  constructor(@Optional() @Host() @SkipSelf() private controlContainer: ControlContainer, @SkipSelf() private el: ElementRef) {}
+  constructor(@SkipSelf() private el: ElementRef, public formGroupDir: FormGroupDirective) {}
   
   ngOnChanges(): void {
-    if(!this.controlContainer.formDirective) { throw new Error("No control container form directive specified");};
-    this.container = this.controlContainer as any;
-    this.parentForm = this.container.form;
-    this.formCtrl = this.parentForm.get(this.formControlName) as FormControl & {active: boolean};
-    this.formCtrl.active = false;
+    this.parentForm = this.formGroupDir.form as any;
+    this.formCtrl = this.parentForm.get(this.name) as FormControl & TogglableFormControl;
+    this.formCtrl.disable();
   }
 
   // Input name displayed to the user
@@ -46,47 +29,35 @@ export class EnableDisableMatFormFieldComponent implements ControlValueAccessor 
 
   @HostListener("keydown.enter", ["$event"]) onKeydownHandler($event: any) {
     $event.target.blur();
-    this.toggleControl(false);
+    this.toggleControl();
     this.submit();
   }
 
-  onChange: (value: string) => void;
-  onTouched: (value: string) => void;
+  toggleControl(): void {
+    if(this.parentForm.status == "INVALID" as FormControlStatus) {return;}
 
-  writeValue(value: string): void {
-    this.value = value;
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
-  }
-
-  toggleControl(isActive: boolean): void {
-    console.log(this.parentForm)
-    if(this.parentForm.status == "INVALID" as FormControlStatus) {return;};
-    this.disableSiblings();
-    this.formCtrl.active = isActive;
-    if(!isActive) {
+    if(this.formCtrl.enabled) {
       this.submit();
+      this.formCtrl.disable();
+    } else {
+      this.formCtrl.oldValue = this.formCtrl.value;
+      this.disableSiblings();
+      this.formCtrl.enable();
     }
+
   }
   
   disableSiblings(): void {
     for (const key in this.parentForm.controls) {
-      this.parentForm.controls[key].active = false;
+      if(this.parentForm.controls[key].enabled && key !== this.name) {
+        this.parentForm.controls[key].reset(this.parentForm.controls[key].oldValue);
+      }
+      this.parentForm.controls[key].disable();
     }
   }
 
   submit() {
-    if(this.formCtrl.dirty){
+    if(this.formCtrl.value !== this.formCtrl.oldValue){
       this.el.nativeElement.requestSubmit();
     }
   }

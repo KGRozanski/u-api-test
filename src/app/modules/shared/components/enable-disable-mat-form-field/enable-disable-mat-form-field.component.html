@@ -1,11 +1,11 @@
-<mat-form-field appearance="fill" [class.mat-form-field-disabled]="!formCtrl.active">
+<mat-form-field appearance="fill" [formGroup]="formGroupDir.form">
     <mat-label>{{name}}</mat-label>
-    <input matInput type="text" [readonly]="!formCtrl.active" (change)="onChange(value)" [(ngModel)]="value" [formControl]="formCtrl" [errorStateMatcher]="errMatcher">
-    <button type="button" matSuffix mat-icon-button aria-label="Edit" (click)="toggleControl(!formCtrl.active)">
-        <ng-container *ngIf="!formCtrl.active">
+    <input matInput type="text" [formControlName]="name" [errorStateMatcher]="errMatcher">
+    <button type="button" matSuffix mat-icon-button aria-label="Edit" (click)="toggleControl()">
+        <ng-container *ngIf="formCtrl.disabled">
             <mat-icon>edit</mat-icon>
         </ng-container>
-        <ng-container *ngIf="formCtrl.active">
+        <ng-container *ngIf="!formCtrl.disabled">
             <mat-icon>done</mat-icon>
         </ng-container>
     </button>

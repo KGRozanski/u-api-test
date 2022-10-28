@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { AccountInfo } from 'src/app/core/interfaces/account-info.interface';
 import { ACCOUNT_SELECTORS } from 'src/app/core/selectors/account.selectors';
 import { getAccountInitial } from 'src/app/core/state/initials/account.initial';
@@ -17,38 +17,25 @@ import { RegexSupplier } from '@fadein/commons';
 })
 export class AccountInfoComponent implements OnInit, OnDestroy {
   public account: AccountInfo = getAccountInitial();
-  public personalDetailsForm: FormGroup = this.fb.group({
-    givenName: [null, [Validators.required, Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
-    familyName: [null, [Validators.required, Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
-    email: [null, [Validators.required, Validators.pattern(RegexSupplier.email)]]
-  });
+  public personalDetailsForm: FormGroup;
   private destroyed$: Subject<void> = new Subject();
   
-  @ViewChild('personalDetailsFormDir') public personalDetailsFormDir: NgForm;
-
   constructor(private store: Store, private fb: FormBuilder, private US: UserService) {}
 
   ngOnInit(): void {
     this.store.select(ACCOUNT_SELECTORS.selectAccountCollection)
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(
+        take(1),
+        takeUntil(this.destroyed$)
+      )
       .subscribe((accountData) => {
         this.account = accountData;
-        this.hydratePersonalDetailsForm();
+        this.buildForm();
       });
   }
 
   ngOnDestroy(): void {
     this.destroyed$.next();
-  }
-
-  private hydratePersonalDetailsForm(): void {
-    if (this.account) {
-      this.personalDetailsForm.setValue({
-        givenName: this.account.givenName,
-        familyName: this.account.familyName,
-        email: this.account.email
-      });
-    }
   }
 
   onSubmit(): void {
@@ -57,6 +44,14 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
       this.store.dispatch(NotificationActions.push({
         notification: {type: NotificationType.SUCCESS, message: data['message']}
       }));
+    });
+  }
+
+  private buildForm(): void {
+    this.personalDetailsForm = this.fb.group({
+      givenName: [this.account.givenName, [Validators.required, Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
+      familyName: [this.account.familyName, [Validators.required, Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
+      email: [this.account.email, [Validators.required, Validators.pattern(RegexSupplier.email)]]
     });
   }
 }

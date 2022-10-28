@@ -10,10 +10,10 @@
         </div>
     </div>
 
-    <form class="personal-details" #personalDetailsFormDir="ngForm" [formGroup]="personalDetailsForm" (ngSubmit)="onSubmit()">
-        <app-enable-disable-mat-form-field formControlName="givenName" name="Name"></app-enable-disable-mat-form-field>
-        <app-enable-disable-mat-form-field formControlName="familyName" name="Surname"></app-enable-disable-mat-form-field>
-        <app-enable-disable-mat-form-field formControlName="email" name="Email"></app-enable-disable-mat-form-field>
+    <form class="personal-details" [formGroup]="personalDetailsForm" (ngSubmit)="onSubmit()">
+        <app-enable-disable-mat-form-field name="givenName"></app-enable-disable-mat-form-field>
+        <app-enable-disable-mat-form-field name="familyName"></app-enable-disable-mat-form-field>
+        <app-enable-disable-mat-form-field name="email"></app-enable-disable-mat-form-field>
     </form>
 
 </mat-card>
