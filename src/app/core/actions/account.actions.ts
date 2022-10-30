@@ -7,8 +7,8 @@ const login = createAction(
     props<{credentials: UserCredentials}>()
 );
 
-const loginSuccess = createAction(
-    '[Account] Login Success',
+const update = createAction(
+    '[Account] Update',
     props<{AccountInfo: AccountInfo}>()
 );
 
@@ -16,6 +16,6 @@ const clearAccountData = createAction(
     '[Account] Clear Account Data'
 )
 
-export const AccountActions = {
-    login, loginSuccess, clearAccountData
+export const ACCOUNT_ACTIONS = {
+    login, update, clearAccountData
 };

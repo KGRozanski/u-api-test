@@ -10,7 +10,7 @@ import { TokenType } from "../enums/token-type.enum";
 import { JWT } from "../interfaces/jwt.interface";
 import { LogService } from "src/app/modules/shared/services/log.service";
 import { elapsedTimeFormatter } from "../utils/functions/elapsedTimeFormatter";
-import { AccountActions } from "../actions/account.actions";
+import { ACCOUNT_ACTIONS } from "../actions/account.actions";
 import { select, Store } from "@ngrx/store";
 import { ACCOUNT_SELECTORS } from "../selectors/account.selectors";
 import { Router } from "@angular/router";
@@ -45,7 +45,7 @@ export class AuthService {
             if(this.cookies.doesCookieExist(TokenType.LOGGED_IN_WITH)) {
                 this.setTokenTimeout(this._accessTokenTimeout, TokenType.ACCESS_TOKEN);
                 this.setTokenTimeout(this._oidcTokenTimeout, TokenType.ID_TOKEN);
-                this.store.dispatch(AccountActions.loginSuccess({AccountInfo: this.AccountInfo}));
+                this.store.dispatch(ACCOUNT_ACTIONS.update({AccountInfo: this.AccountInfo}));
                 this.setupSuccessAuthFlag();
                 this.router.navigate(['']);
                 resolve(true);
@@ -53,7 +53,7 @@ export class AuthService {
             }
 
             if(!this.cookies.doesCookieExist('authenticated')) {
-                this.store.dispatch(AccountActions.clearAccountData());
+                this.store.dispatch(ACCOUNT_ACTIONS.clearAccountData());
                 resolve(true);
                 return;
             }
@@ -61,13 +61,13 @@ export class AuthService {
             this.sendRefreshReq(TokenType.ACCESS_TOKEN)
                 .subscribe({
                     error: err => {
-                        this.store.dispatch(AccountActions.clearAccountData());
+                        this.store.dispatch(ACCOUNT_ACTIONS.clearAccountData());
                         resolve(true);
                     },
                     complete: () => {
                         this.logInfo(TokenType.ACCESS_TOKEN);
                         this.setTokenTimeout(this._accessTokenTimeout, TokenType.ACCESS_TOKEN);
-                        this.store.dispatch(AccountActions.loginSuccess({AccountInfo: this.AccountInfo}));
+                        this.store.dispatch(ACCOUNT_ACTIONS.update({AccountInfo: this.AccountInfo}));
                         this.setupSuccessAuthFlag();
 
                         try {
@@ -106,7 +106,7 @@ export class AuthService {
                 .pipe(retry(2))
                 .subscribe({
                     error: (err) => {
-                        this.store.dispatch(AccountActions.clearAccountData());
+                        this.store.dispatch(ACCOUNT_ACTIONS.clearAccountData());
                         this.logger.log(`⛔ Token: ${type.toUpperCase()} couldn't been refreshed! – ${err.error.statusCode} ${err.error.message}`)
                     },
                     complete: () => {
@@ -175,7 +175,7 @@ export class AuthService {
         this.setTokenTimeout(this._oidcTokenTimeout, TokenType.ID_TOKEN);
         this.setupSuccessAuthFlag();
         //fulfill store with user data
-        this.store.dispatch(AccountActions.loginSuccess({AccountInfo: this.AccountInfo}));
+        this.store.dispatch(ACCOUNT_ACTIONS.update({AccountInfo: this.AccountInfo}));
         this.router.navigate(['']);
         
     }
@@ -215,7 +215,7 @@ export class AuthService {
                 this.router.navigate(['/front']);
             }))
             .subscribe(() => {
-                this.store.dispatch(AccountActions.clearAccountData());
+                this.store.dispatch(ACCOUNT_ACTIONS.clearAccountData());
             });
     }
 
