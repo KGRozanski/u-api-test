@@ -12,6 +12,4 @@ export interface JWT {
     exp?: number;
     aud: string;
     typ: TokenType;
-    emailVerified?: boolean;
-    resetPassword?: boolean;
 }

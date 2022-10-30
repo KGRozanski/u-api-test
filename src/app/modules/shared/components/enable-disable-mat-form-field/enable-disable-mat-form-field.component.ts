@@ -28,7 +28,6 @@ export class EnableDisableMatFormFieldComponent {
   @Input() formControlName: string;
 
   @HostListener("keydown.enter", ["$event"]) onKeydownHandler($event: any) {
-    $event.target.blur();
     this.toggleControl();
     this.submit();
   }

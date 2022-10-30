@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { forkJoin, Subject, take, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { AccountInfo } from 'src/app/core/interfaces/account-info.interface';
 import { ACCOUNT_SELECTORS } from 'src/app/core/selectors/account.selectors';
 import { getAccountInitial } from 'src/app/core/state/initials/account.initial';
@@ -21,17 +21,27 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   public personalDetailsForm: FormGroup;
   private destroyed$: Subject<void> = new Subject();
   
-  constructor(private store: Store, private fb: FormBuilder, private US: UserService) {}
+  
+  constructor(private store: Store, private fb: FormBuilder, private US: UserService) {
+    this.personalDetailsForm = this.fb.group({
+      givenName: [null, [Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
+      familyName: [null, [Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
+      email: [null, [Validators.required, Validators.pattern(RegexSupplier.email)]]
+    });
+  }
 
   ngOnInit(): void {
     this.store.select(ACCOUNT_SELECTORS.selectAccountCollection)
       .pipe(
-        take(1),
         takeUntil(this.destroyed$)
       )
       .subscribe((accountData) => {
         this.account = accountData;
-        this.buildForm();
+        this.personalDetailsForm.setValue({
+          familyName: this.account.familyName,
+          givenName: this.account.givenName,
+          email: this.account.email
+        });
       });
   }
 
@@ -43,19 +53,13 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
     if(!this.personalDetailsForm.valid) {return;};
 
     
-    this.US.patchAccountInfo(this.personalDetailsForm.value).subscribe((data: any) => {
-      this.store.dispatch(ACCOUNT_ACTIONS.update({AccountInfo: this.personalDetailsForm.getRawValue()}));
-      this.store.dispatch(NotificationActions.push({
-        notification: {type: NotificationType.SUCCESS, message: data['message']}
-      }));
-    });
+    this.US.patchAccountInfo(this.personalDetailsForm.value)
+      .subscribe((data: any) => {
+        this.store.dispatch(ACCOUNT_ACTIONS.update({AccountInfo: this.personalDetailsForm.getRawValue()}));
+        this.store.dispatch(NotificationActions.push({
+          notification: {type: NotificationType.SUCCESS, message: data['message']}
+        }));
+      });
   }
 
-  private buildForm(): void {
-    this.personalDetailsForm = this.fb.group({
-      givenName: [this.account.givenName, [Validators.required, Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
-      familyName: [this.account.familyName, [Validators.required, Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
-      email: [this.account.email, [Validators.required, Validators.pattern(RegexSupplier.email)]]
-    });
-  }
 }

@@ -19,8 +19,7 @@ export class LoginFormComponent implements OnInit {
       [
         Validators.required, 
         Validators.min(3), 
-        Validators.max(30), 
-        Validators.pattern(RegexSupplier.username)
+        Validators.max(30)
       ]
     ],
     password: [null,

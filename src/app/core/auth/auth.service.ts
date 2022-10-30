@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { finalize, Observable, retry } from "rxjs";
+import { finalize, firstValueFrom, Observable, retry, take } from "rxjs";
 import { CookieService } from "src/app/modules/shared/services/cookie.service";
 import { UserCredentials } from "src/app/modules/user/interfaces/user-credentials.interface";
 import { ApiLinksService } from "src/app/modules/user/services/api-links.service";
@@ -16,6 +16,7 @@ import { ACCOUNT_SELECTORS } from "../selectors/account.selectors";
 import { Router } from "@angular/router";
 import { SettingsActions } from "../actions/settings.actions";
 import { getAccountInitial } from "../state/initials/account.initial";
+import * as _ from "lodash";
 
 
 @Injectable()
@@ -64,17 +65,16 @@ export class AuthService {
                         this.store.dispatch(ACCOUNT_ACTIONS.clearAccountData());
                         resolve(true);
                     },
-                    complete: () => {
+                    complete: async () => {
                         this.logInfo(TokenType.ACCESS_TOKEN);
                         this.setTokenTimeout(this._accessTokenTimeout, TokenType.ACCESS_TOKEN);
-                        this.store.dispatch(ACCOUNT_ACTIONS.update({AccountInfo: this.AccountInfo}));
                         this.setupSuccessAuthFlag();
 
                         try {
                             const DECODED: JWT = jwt_decode(this.cookies.getCookie(TokenType.ID_TOKEN)!);
                             const CURRENT_OIDC_TIMEOUT = (Number(DECODED.exp) * 1000) - Date.now();
 
-                            if(CURRENT_OIDC_TIMEOUT > 18000) {
+                            if(CURRENT_OIDC_TIMEOUT > 18000 && !(await this.doesUserUpdatedAccountInfo(this.AccountInfo))) {
                                 this.setTokenTimeout(CURRENT_OIDC_TIMEOUT - 15000, TokenType.ID_TOKEN);
                             } else {
                                 this.setTokenTimeout(0, TokenType.ID_TOKEN);
@@ -113,6 +113,10 @@ export class AuthService {
                         const NEW_DELAY = (type === TokenType.ACCESS_TOKEN) ? this._accessTokenTimeout : this._oidcTokenTimeout;
                         this.logInfo(type);
                         this.setTokenTimeout(NEW_DELAY, type);
+
+                        if (type === TokenType.ID_TOKEN) {
+                            this.store.dispatch(ACCOUNT_ACTIONS.update({AccountInfo: this.AccountInfo}));
+                        }
                     }
                 });
         }, timeout);
@@ -229,6 +233,11 @@ export class AuthService {
         } else {
             return true;
         }
+    }
+
+    public async doesUserUpdatedAccountInfo(accountInfo: AccountInfo): Promise<boolean> {
+        const ACCOUNT = await firstValueFrom(this.store.select(ACCOUNT_SELECTORS.selectAccountCollection));
+        return !_.isEqual(ACCOUNT, accountInfo);
     }
 
 }
