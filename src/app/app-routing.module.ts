@@ -16,7 +16,7 @@ import { ResetPasswordComponent } from './core/components/pages/reset-password/r
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'front', component: FrontComponent, canActivate: [NoAuthGuard] },
-  { path: 'response', component: ResponseComponent, canActivate: [NoAuthGuard] },
+  { path: 'response', component: ResponseComponent },
   { path: 'home', redirectTo: '', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
   { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },

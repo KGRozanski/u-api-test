@@ -1,0 +1,8 @@
+@use '../../../../../assets/scss/mixins/background.mixin' as background;
+@use '../../../../../assets/scss/mixins/prev-layout.mixin' as prev;
+
+:host{
+    @include background.background('../../../assets/img/background-studio2.jpg');
+
+    @include prev.prev-layout();
+}

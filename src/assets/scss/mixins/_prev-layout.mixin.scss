@@ -1,0 +1,11 @@
+@mixin prev-layout() {
+    display: flex !important;
+    justify-content: right;
+    padding-right: 20%;
+    padding-top: 70px;
+
+    @media screen and (max-width: 600px) {
+        justify-content: center;
+        padding-right: 0 !important;
+    }
+}
