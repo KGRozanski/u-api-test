@@ -1,4 +1,5 @@
 <div class="wrapper" [ngSwitch]="photo !== null && photo !== ''">
     <img *ngSwitchCase="true" [src]="photo" alt="avatar" />
     <mat-icon *ngSwitchCase="false">person</mat-icon>
+    <mat-icon class="edit">edit</mat-icon>
 </div>
