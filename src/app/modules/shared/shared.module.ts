@@ -5,6 +5,7 @@ import directives from 'src/app/core/directives/_directives';
 import Pipes from 'src/app/core/pipes/_pipes';
 import { EnableDisableMatFormFieldComponent } from './components/enable-disable-mat-form-field/enable-disable-mat-form-field.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UploadPhotoComponent } from './components/upload-photo/upload-photo.component';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     Pipes,
     directives,
-    EnableDisableMatFormFieldComponent
+    EnableDisableMatFormFieldComponent,
+    UploadPhotoComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     Pipes,
     materialImports,
     directives,
-    EnableDisableMatFormFieldComponent
+    EnableDisableMatFormFieldComponent,
+    UploadPhotoComponent
   ]
 })
 export class SharedModule { }

@@ -20,6 +20,7 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   public account: AccountInfo = getAccountInitial();
   public personalDetailsForm: FormGroup;
   private destroyed$: Subject<void> = new Subject();
+  public modalFlag: boolean = false;
   
   
   constructor(private store: Store, private fb: FormBuilder, private US: UserService) {
@@ -60,6 +61,10 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
           notification: {type: NotificationType.SUCCESS, message: data['message']}
         }));
       });
+  }
+
+  public toggleAvatarUploadModal(): void {
+    this.modalFlag = !this.modalFlag;
   }
 
 }
