@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/comm
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { b64toBlob } from 'src/app/core/utils/functions/b64toBlob';
 import { RegisterUser } from '../interfaces/register-user.interface';
 import { UpdateAccountDto } from '../interfaces/update-account.dto.interface';
 import { ApiLinksService } from './api-links.service';
@@ -45,6 +46,21 @@ export class UserService {
 
   public patchAccountInfo(formData: UpdateAccountDto): Observable<Object> {
     return this.http.patch(this.apiLinks.apiLink + 'accounts/' + this.authService.AccountInfo.userID, formData, {withCredentials: true});
+  }
+
+  public uploadAvatar(avatarData: string): Observable<Object> {
+
+    const formData = new FormData();
+
+
+    const file = new File([b64toBlob(avatarData.split(',')[1])], 'avatar.webp', {
+      type: 'image/webp',
+      lastModified: Date.now()
+    });
+
+    formData.append('avatar', file, 'avatar.webp');
+
+    return this.http.post(this.apiLinks.apiLink + 'accounts/avatarUpload', formData, {withCredentials: true});
   }
 
 }

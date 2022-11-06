@@ -1,6 +1,6 @@
 {
   "name": "u-api-test",
-  "version": "3.16.1",
+  "version": "3.17.0",
   "scripts": {
     "ng": "ng",
     "prestart": "node ./src/scripts/gc/register-cmp-themes.js",
@@ -30,6 +30,7 @@
     "@types/lodash": "^4.14.186",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
+    "ngx-image-cropper": "^6.2.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

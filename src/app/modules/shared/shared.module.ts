@@ -5,7 +5,8 @@ import directives from 'src/app/core/directives/_directives';
 import Pipes from 'src/app/core/pipes/_pipes';
 import { EnableDisableMatFormFieldComponent } from './components/enable-disable-mat-form-field/enable-disable-mat-form-field.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UploadPhotoComponent } from './components/upload-photo/upload-photo.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { CropImgComponent } from './components/dialogs/crop-img/crop-img.component';
 
 
 
@@ -14,20 +15,20 @@ import { UploadPhotoComponent } from './components/upload-photo/upload-photo.com
     Pipes,
     directives,
     EnableDisableMatFormFieldComponent,
-    UploadPhotoComponent
+    CropImgComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    materialImports
+    materialImports,
+    ImageCropperModule
   ],
   exports: [
     Pipes,
     materialImports,
     directives,
     EnableDisableMatFormFieldComponent,
-    UploadPhotoComponent
   ]
 })
 export class SharedModule { }

@@ -3,7 +3,7 @@
     <h2>Account info</h2>
 
     <div class="general">
-        <app-avatar class="cmp-avatar avatar-big hover-edit" [photo]="account.photo" (click)="toggleAvatarUploadModal()"></app-avatar>
+        <app-avatar class="cmp-avatar avatar-big hover-edit" [photo]="account.photo" (click)="openCropImg()"></app-avatar>
         <div class="simple-info">
             <span class="username">{{account.username}}</span>
             <span class="date-of-signup">Joined: {{account.creationDate | date}}</span>
@@ -15,7 +15,5 @@
         <app-enable-disable-mat-form-field name="familyName"></app-enable-disable-mat-form-field>
         <app-enable-disable-mat-form-field name="email"></app-enable-disable-mat-form-field>
     </form>
-
-    <app-upload-photo *ngIf="modalFlag"></app-upload-photo>
 
 </mat-card>

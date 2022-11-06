@@ -10,6 +10,8 @@ import { NotificationActions } from 'src/app/core/actions/notifications.actions'
 import { NotificationType } from 'src/app/core/enums/notification-type.enum';
 import { RegexSupplier } from '@fadein/commons';
 import { ACCOUNT_ACTIONS } from 'src/app/core/actions/account.actions';
+import { MatDialog } from '@angular/material/dialog';
+import { CropImgComponent } from 'src/app/modules/shared/components/dialogs/crop-img/crop-img.component';
 
 @Component({
   selector: 'app-account-info',
@@ -20,10 +22,8 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   public account: AccountInfo = getAccountInitial();
   public personalDetailsForm: FormGroup;
   private destroyed$: Subject<void> = new Subject();
-  public modalFlag: boolean = false;
   
-  
-  constructor(private store: Store, private fb: FormBuilder, private US: UserService) {
+  constructor(private store: Store, private fb: FormBuilder, private US: UserService, public dialog: MatDialog) {
     this.personalDetailsForm = this.fb.group({
       givenName: [null, [Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
       familyName: [null, [Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
@@ -63,8 +63,18 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
       });
   }
 
-  public toggleAvatarUploadModal(): void {
-    this.modalFlag = !this.modalFlag;
+  public openCropImg(): void {
+    const dialogRef = this.dialog.open(CropImgComponent, {
+      width: '450px'
+    });
+
+    dialogRef.afterClosed().subscribe((imgData) => {
+      if(imgData) {
+        this.US.uploadAvatar(imgData).subscribe((res) => {
+          console.log(res);
+        });
+      }
+    });
   }
 
 }
