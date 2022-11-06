@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, resolveForwardRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
@@ -70,8 +70,11 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((imgData) => {
       if(imgData) {
-        this.US.uploadAvatar(imgData).subscribe((res) => {
-          console.log(res);
+        this.US.uploadAvatar(imgData).subscribe((res: any) => {
+          this.store.dispatch(ACCOUNT_ACTIONS.update({AccountInfo: {photo: res['photoUrl']} as any}));
+          this.store.dispatch(NotificationActions.push({
+            notification: {type: NotificationType.SUCCESS, message: res['message']}
+          }));
         });
       }
     });
