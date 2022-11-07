@@ -1,6 +1,6 @@
 {
   "name": "u-api-test",
-  "version": "3.17.2",
+  "version": "3.17.3",
   "scripts": {
     "ng": "ng",
     "prestart": "node ./src/scripts/gc/register-cmp-themes.js",
