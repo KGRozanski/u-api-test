@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs';
 import { NotificationType } from '../enums/notification-type.enum';
-import { Notification } from '../interfaces/notification.interface';
+import { Notification } from '../interfaces/store/notification.interface';
 import { NotificationActions } from '../actions/notifications.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 

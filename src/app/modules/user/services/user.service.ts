@@ -45,7 +45,7 @@ export class UserService {
   }
 
   public patchAccountInfo(formData: UpdateAccountDto): Observable<Object> {
-    return this.http.patch(this.apiLinks.apiLink + 'accounts/' + this.authService.AccountInfo.userID, formData, {withCredentials: true});
+    return this.http.patch(this.apiLinks.apiLink + 'accounts/' + this.authService.AccountInfo.sub, formData, {withCredentials: true});
   }
 
   public uploadAvatar(avatarData: string): Observable<Object> {

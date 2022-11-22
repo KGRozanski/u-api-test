@@ -4,10 +4,8 @@ import { finalize, firstValueFrom, Observable, retry, take } from "rxjs";
 import { CookieService } from "src/app/modules/shared/services/cookie.service";
 import { UserCredentials } from "src/app/modules/user/interfaces/user-credentials.interface";
 import { ApiLinksService } from "src/app/modules/user/services/api-links.service";
-import { AccountInfo } from "../interfaces/account-info.interface";
+import { AccountInfo } from "../interfaces/store/account-info.interface";
 import jwt_decode from "jwt-decode";
-import { TokenType } from "../enums/token-type.enum";
-import { JWT } from "../interfaces/jwt.interface";
 import { LogService } from "src/app/modules/shared/services/log.service";
 import { elapsedTimeFormatter } from "../utils/functions/elapsedTimeFormatter";
 import { ACCOUNT_ACTIONS } from "../actions/account.actions";
@@ -17,6 +15,7 @@ import { Router } from "@angular/router";
 import { SettingsActions } from "../actions/settings.actions";
 import { getAccountInitial } from "../state/initials/account.initial";
 import * as _ from "lodash";
+import { JWT, TokenType } from "@fadein/commons";
 
 
 @Injectable()
@@ -159,7 +158,7 @@ export class AuthService {
         }
 
         return {
-            userID: decoded.sub,
+            sub: decoded.sub,
             username: decoded.username,
             email: decoded.email,
             givenName: decoded.givenName,

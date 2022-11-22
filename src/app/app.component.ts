@@ -3,8 +3,8 @@ import { ChangeDetectorRef, Component, Inject, OnInit, Renderer2, ViewChild } fr
 import { MatDrawer, } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
 import { SettingsActions } from './core/actions/settings.actions';
-import { Settings } from './core/interfaces/settings.interface';
-import { AccountInfo } from './core/interfaces/account-info.interface';
+import { Settings } from './core/interfaces/store/settings.interface';
+import { AccountInfo } from './core/interfaces/store/account-info.interface';
 import { SETTINGS_SELECTORS } from './core/selectors/settings.selectors';
 import { getSettingsInitial } from './core/state/initials/settings.initial';
 import { ACCOUNT_SELECTORS } from './core/selectors/account.selectors';

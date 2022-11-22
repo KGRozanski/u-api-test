@@ -1,8 +1,8 @@
-import { AccountInfo } from "../../interfaces/account-info.interface"
+import { AccountInfo } from "../../interfaces/store/account-info.interface"
 
 export function getAccountInitial(): AccountInfo {
     return {
-        userID: '',
+        sub: '',
         username: '',
         email: '',
         givenName: '',

@@ -1,4 +1,4 @@
-import { Settings } from "../../interfaces/settings.interface";
+import { Settings } from "../../interfaces/store/settings.interface";
 
 export function getSettingsInitial(): Settings {
     return {

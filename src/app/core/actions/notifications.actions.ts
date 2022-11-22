@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Notification } from '../interfaces/notification.interface';
+import { Notification } from '../interfaces/store/notification.interface';
 
 const push = createAction(
     '[Notificator] Push',

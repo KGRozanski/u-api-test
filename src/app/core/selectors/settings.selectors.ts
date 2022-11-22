@@ -1,5 +1,5 @@
 import { createFeatureSelector } from "@ngrx/store";
-import { Settings } from "../interfaces/settings.interface";
+import { Settings } from "../interfaces/store/settings.interface";
 
 
 export const selectSettingsCollection = createFeatureSelector<

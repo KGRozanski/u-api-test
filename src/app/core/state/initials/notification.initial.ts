@@ -1,5 +1,5 @@
 import { NotificationType } from '../../enums/notification-type.enum';
-import { Notification } from '../../interfaces/notification.interface';
+import { Notification } from '../../interfaces/store/notification.interface';
 
 export function getNotificationInitial(): Notification {
     return {

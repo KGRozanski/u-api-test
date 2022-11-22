@@ -4,10 +4,10 @@ import { SettingsActions } from '../../../actions/settings.actions';
 import { SETTINGS_SELECTORS } from '../../../selectors/settings.selectors';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { Settings } from '../../../interfaces/settings.interface';
+import { Settings } from '../../../interfaces/store/settings.interface';
 import { AuthService } from '../../../auth/auth.service';
 import { getAccountInitial } from '../../../state/initials/account.initial';
-import { AccountInfo } from '../../../interfaces/account-info.interface';
+import { AccountInfo } from '../../../interfaces/store/account-info.interface';
 import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
 
 @Component({

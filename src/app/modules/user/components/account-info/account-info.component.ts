@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, resolveForwardRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
-import { AccountInfo } from 'src/app/core/interfaces/account-info.interface';
+import { AccountInfo } from 'src/app/core/interfaces/store/account-info.interface';
 import { ACCOUNT_SELECTORS } from 'src/app/core/selectors/account.selectors';
 import { getAccountInitial } from 'src/app/core/state/initials/account.initial';
 import { UserService } from '../../services/user.service';
