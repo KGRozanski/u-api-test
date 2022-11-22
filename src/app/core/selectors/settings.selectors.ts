@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { createFeatureSelector } from "@ngrx/store";
 import { Settings } from "../interfaces/settings.interface";
 
 

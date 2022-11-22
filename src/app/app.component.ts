@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MatDrawer, } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
 import { SettingsActions } from './core/actions/settings.actions';
@@ -30,25 +30,39 @@ export class AppComponent implements OnInit {
   constructor(
     private store: Store,
     @Inject(DOCUMENT) private document: Document,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() :void {
     this.store.select(SETTINGS_SELECTORS.selectSettingsCollection).subscribe((settings) => {
       this.setting = settings;
       this.renderer.setAttribute(this.document.body, 'class', settings.darkMode ? 'darkMode' : '');
-
+      this._updateDrawer();
     });
-
+    
     this.store.select(ACCOUNT_SELECTORS.selectAccountCollection).subscribe((account) => {
       this.accountInfo = account;
     });
   }
 
-  public menuToggle(e?: any): void {
-    this.drawer.toggle();
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    this._updateDrawer();
   }
 
 
+  public menuToggle(e?: any): void {
+    this.store.dispatch(SettingsActions.drawerVisibility({drawerVisibility: !this.setting.drawerVisibility}));
+  }
+
+  private _updateDrawer(): void {
+    if(!this.drawer) { return };
+
+    this.drawer.opened = this.setting.drawerVisibility;
+    // to prevent 'ExpressionChangedAfterItHasBeenCheckedError'
+    this.cd.detectChanges();
+  }
 
 }

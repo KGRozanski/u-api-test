@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { SETTINGS_SELECTORS } from 'src/app/core/selectors/settings.selectors';
 
 @Component({
   selector: 'app-hamburger-btn',
@@ -8,13 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class HamburgerBtnComponent implements OnInit {
   public hamburgerFlag: boolean = false;
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
-  }
-  
-  public toggleBurger() {
-    this.hamburgerFlag = !this.hamburgerFlag;
+    this.store.select(SETTINGS_SELECTORS.selectSettingsCollection).subscribe((settings) => {
+      this.hamburgerFlag = settings.drawerVisibility;
+    });
   }
 
 }
