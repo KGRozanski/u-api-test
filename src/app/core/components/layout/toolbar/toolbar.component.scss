@@ -26,10 +26,8 @@ h1{
 .left-panel{
     display: flex;
     align-items: center;
+    gap: 10px;
 
-    .main-menu-btn{
-        margin-right: 20px;
-    }
 }
 
 .right-panel{

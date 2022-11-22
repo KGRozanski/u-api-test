@@ -38,48 +38,48 @@ import { CookiesComponent } from './core/components/layout/cookies/cookies.compo
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ToolbarComponent,
-    DropdownComponent,
-    RegisterComponent,
-    LoginComponent,
-    FrontComponent,
-    FooterComponent,
-    NotfoundComponent,
-    LogotypeComponent,
-    SettingsComponent,
-    LoadingIndicatorComponent,
-    HomeComponent,
-    ResponseComponent,
-    AdminDashboardComponent,
-    DialogConfirmComponent,
-    ResetPasswordComponent,
-    CookiesComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    SharedModule,
-    UserModule,
-    BrowserAnimationsModule,
-    StoreModule.forRoot(reducers, {metaReducers}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([AccountEffect, NotificationsEffect, HydrationEffects])
-  ],
-  providers: [
-    interceptorsProviders,
-    ...GUARD_PROVIDERS,
-    ...RESOLVERS_PROVIDERS,
-    AuthService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (authService: AuthService) => () => authService.initAuth(),
-      deps: [AuthService],
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ToolbarComponent,
+        DropdownComponent,
+        RegisterComponent,
+        LoginComponent,
+        FrontComponent,
+        FooterComponent,
+        NotfoundComponent,
+        LogotypeComponent,
+        SettingsComponent,
+        LoadingIndicatorComponent,
+        HomeComponent,
+        ResponseComponent,
+        AdminDashboardComponent,
+        DialogConfirmComponent,
+        ResetPasswordComponent,
+        CookiesComponent
+    ],
+    providers: [
+        interceptorsProviders,
+        ...GUARD_PROVIDERS,
+        ...RESOLVERS_PROVIDERS,
+        AuthService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: (authService: AuthService) => () => authService.initAuth(),
+            deps: [AuthService],
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        SharedModule,
+        UserModule,
+        BrowserAnimationsModule,
+        StoreModule.forRoot(reducers, { metaReducers }),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+        EffectsModule.forRoot([AccountEffect, NotificationsEffect, HydrationEffects])
+    ]
 })
 export class AppModule { }

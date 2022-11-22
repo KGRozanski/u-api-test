@@ -8,6 +8,7 @@
 @use './dropdown-theme';
 @use './enable-disable-mat-form-field-theme';
 @use './footer-theme';
+@use './hamburger-btn-theme';
 @use './login-form-theme';
 @use './page-theme';
 @use './register-form-theme';
@@ -24,6 +25,7 @@
 	@include dropdown-theme.theme($default-theme);
 	@include enable-disable-mat-form-field-theme.theme($default-theme);
 	@include footer-theme.theme($default-theme);
+	@include hamburger-btn-theme.theme($default-theme);
 	@include login-form-theme.theme($default-theme);
 	@include page-theme.theme($default-theme);
 	@include register-form-theme.theme($default-theme);
@@ -39,6 +41,7 @@
 		@include dropdown-theme.theme($dark-theme);
 		@include enable-disable-mat-form-field-theme.theme($dark-theme);
 		@include footer-theme.theme($dark-theme);
+		@include hamburger-btn-theme.theme($dark-theme);
 		@include login-form-theme.theme($dark-theme);
 		@include page-theme.theme($dark-theme);
 		@include register-form-theme.theme($dark-theme);
