@@ -27,7 +27,10 @@
     "types": [
       "node"
     ],
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@fadein": ["node_modules/@fadein"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
