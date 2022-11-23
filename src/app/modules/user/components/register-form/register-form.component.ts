@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { RegexSupplier } from '@fadein/commons';
 import { Store } from '@ngrx/store';
 import { NotificationActions } from 'src/app/core/actions/notifications.actions';
@@ -14,9 +14,9 @@ import { UserService } from '../../services/user.service';
 })
 export class RegisterFormComponent {
 
-  constructor(private fb: FormBuilder, private US: UserService, private store: Store) {}
+  constructor(private fb: UntypedFormBuilder, private US: UserService, private store: Store) {}
   
-  public registerForm: FormGroup = this.fb.group({
+  public registerForm: UntypedFormGroup = this.fb.group({
     username: [null, 
       [
         Validators.required, 

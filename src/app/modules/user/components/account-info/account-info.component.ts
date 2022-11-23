@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, resolveForwardRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 import { AccountInfo } from 'src/app/core/interfaces/store/account-info.interface';
@@ -20,10 +20,10 @@ import { CropImgComponent } from 'src/app/modules/shared/components/dialogs/crop
 })
 export class AccountInfoComponent implements OnInit, OnDestroy {
   public account: AccountInfo = getAccountInitial();
-  public personalDetailsForm: FormGroup;
+  public personalDetailsForm: UntypedFormGroup;
   private destroyed$: Subject<void> = new Subject();
   
-  constructor(private store: Store, private fb: FormBuilder, private US: UserService, public dialog: MatDialog) {
+  constructor(private store: Store, private fb: UntypedFormBuilder, private US: UserService, public dialog: MatDialog) {
     this.personalDetailsForm = this.fb.group({
       givenName: [null, [Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
       familyName: [null, [Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],

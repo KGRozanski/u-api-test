@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, Input, SkipSelf } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, FormGroupDirective } from '@angular/forms';
 import { CustomErrorStateMatcher } from '../../classes/CustomErrorStateMatcher';
 import { FormControlStatus } from '@angular/forms';
 import { TogglableFormControl } from 'src/app/modules/user/components/account-info/interfaces/togglableFormControl.interface';
@@ -10,15 +10,15 @@ import { TogglableFormControl } from 'src/app/modules/user/components/account-in
   styleUrls: ['./enable-disable-mat-form-field.component.scss']
 })
 export class EnableDisableMatFormFieldComponent {
-  public formCtrl: FormControl & TogglableFormControl;
-  public parentForm: FormGroup & {controls: { [key: string]: AbstractControl & TogglableFormControl}};
+  public formCtrl: UntypedFormControl & TogglableFormControl;
+  public parentForm: UntypedFormGroup & {controls: { [key: string]: AbstractControl & TogglableFormControl}};
   public errMatcher = new CustomErrorStateMatcher();
 
   constructor(@SkipSelf() private el: ElementRef, public formGroupDir: FormGroupDirective) {}
   
   ngOnChanges(): void {
     this.parentForm = this.formGroupDir.form as any;
-    this.formCtrl = this.parentForm.get(this.name) as FormControl & TogglableFormControl;
+    this.formCtrl = this.parentForm.get(this.name) as UntypedFormControl & TogglableFormControl;
     this.formCtrl.disable();
   }
 

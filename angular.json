@@ -129,5 +129,7 @@
       }
     }
   },
-  "defaultProject": "u-api-test"
+  "cli": {
+    "analytics": "5a9bb921-f997-4bd1-8b85-567204aade00"
+  }
 }

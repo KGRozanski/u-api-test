@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegexSupplier } from '@fadein/commons';
 import { Store } from '@ngrx/store';
@@ -19,7 +19,7 @@ export class ResetPasswordFormComponent implements OnInit, OnDestroy {
   public sendingOrRevieving: boolean = true;
   private _token: string | null;
   private subscription: Subscription;
-  public resetPasswordForm: FormGroup = this.fb.group({
+  public resetPasswordForm: UntypedFormGroup = this.fb.group({
     email: [null,
       [
         Validators.required, 
@@ -30,7 +30,7 @@ export class ResetPasswordFormComponent implements OnInit, OnDestroy {
       ]
     ]
   });
-  public newPasswordForm: FormGroup = this.fb.group({
+  public newPasswordForm: UntypedFormGroup = this.fb.group({
     password: [null,
       [
         Validators.required, 
@@ -51,7 +51,7 @@ export class ResetPasswordFormComponent implements OnInit, OnDestroy {
     validators: CustomValidators.passwordEquality
   });
   
-  constructor(public fb: FormBuilder, public activatedRoute: ActivatedRoute, public US: UserService, public store: Store, public router: Router) {
+  constructor(public fb: UntypedFormBuilder, public activatedRoute: ActivatedRoute, public US: UserService, public store: Store, public router: Router) {
     this.subscription = this.activatedRoute.queryParams.subscribe((data) => {
       if(data['token']) {
         this._token = data['token'];

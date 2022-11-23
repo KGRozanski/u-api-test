@@ -1,3 +1,4 @@
+import { JWT, TokenType } from "@fadein/commons";
 import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { finalize, firstValueFrom, Observable, retry, take } from "rxjs";
@@ -15,8 +16,6 @@ import { Router } from "@angular/router";
 import { SettingsActions } from "../actions/settings.actions";
 import { getAccountInitial } from "../state/initials/account.initial";
 import * as _ from "lodash";
-import { JWT, TokenType } from "@fadein/commons";
-
 
 @Injectable()
 export class AuthService {

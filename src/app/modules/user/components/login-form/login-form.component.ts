@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { RegexSupplier } from '@fadein/commons';
 import { Store } from '@ngrx/store';
 import { ACCOUNT_ACTIONS } from 'src/app/core/actions/account.actions';
@@ -12,9 +12,9 @@ import { SettingsActions } from 'src/app/core/actions/settings.actions';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private store: Store) { }
+  constructor(private fb: UntypedFormBuilder, private store: Store) { }
 
-  public loginForm: FormGroup = this.fb.group({
+  public loginForm: UntypedFormGroup = this.fb.group({
     username: [null,
       [
         Validators.required, 
