@@ -18,7 +18,7 @@
     "resolveJsonModule": true,
     "importHelpers": true,
     "allowJs": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2020",
     "lib": [
       "es2020",
@@ -29,8 +29,11 @@
     ],
     "strictPropertyInitialization": false,
     "paths": {
-      "@fadein": ["node_modules/@fadein"]
-    }
+      "@fadein": [
+        "node_modules/@fadein"
+      ]
+    },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
