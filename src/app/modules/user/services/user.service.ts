@@ -8,60 +8,69 @@ import { UpdateAccountDto } from '../interfaces/update-account.dto.interface';
 import { ApiLinksService } from './api-links.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UserService {
+    constructor(
+        private readonly http: HttpClient,
+        private apiLinks: ApiLinksService,
+        private authService: AuthService
+    ) {}
 
-  constructor(private readonly http: HttpClient, private apiLinks: ApiLinksService, private authService: AuthService) { }
+    public register(user: RegisterUser): Observable<Object> {
+        return this.http.post(this.apiLinks.apiLink + 'accounts', user);
+    }
 
+    public getListOfUsers(page: number, pageSize: number, order: 'ASC' | 'DESC'): Observable<any> {
+        let params = new HttpParams();
+        params = params.append('page', page);
+        params = params.append('pageSize', pageSize);
+        params = params.append('order', order);
 
-  public register(user: RegisterUser): Observable<Object> {
-    return this.http.post(this.apiLinks.apiLink + 'accounts', user);
-  }
+        return this.http.get(this.apiLinks.apiLink + 'accounts', {
+            params: params,
+            withCredentials: true
+        });
+    }
 
-  public getListOfUsers(page: number, pageSize: number, order: 'ASC' | 'DESC'): Observable<any> {
+    public banUser(id: number): Observable<Object> {
+        return this.http.post(this.apiLinks.apiLink + 'accounts/ban/' + id, null, {
+            withCredentials: true
+        });
+    }
 
-    let params = new HttpParams();
-      params = params.append("page", page);
-      params = params.append("pageSize", pageSize);
-      params = params.append("order", order);
+    public sendPasswordResettingEmail(email: string): Observable<Object> {
+        return this.http.post(this.apiLinks.apiLink + 'accounts/password', { email }, { withCredentials: true });
+    }
 
-    return this.http.get(this.apiLinks.apiLink + 'accounts', {params: params, withCredentials: true});
-  }
+    public resetPassword(password: string, passwordConfirm: string, token: string): Observable<Object> {
+        let params = new HttpParams();
+        params = params.append('token', token);
 
-  public banUser(id: number): Observable<Object> {
-    return this.http.post(this.apiLinks.apiLink + 'accounts/ban/'+id, null, {withCredentials: true});
-  }
+        return this.http.patch(
+            this.apiLinks.apiLink + 'accounts/password',
+            { password, passwordConfirm },
+            { params, withCredentials: true }
+        );
+    }
 
-  public sendPasswordResettingEmail(email: string): Observable<Object> {
-    return this.http.post(this.apiLinks.apiLink + 'accounts/password', {email}, {withCredentials: true});
-  }
+    public patchAccountInfo(formData: UpdateAccountDto): Observable<Object> {
+        return this.http.patch(this.apiLinks.apiLink + 'accounts/' + this.authService.AccountInfo.sub, formData, {
+            withCredentials: true
+        });
+    }
 
-  public resetPassword(password: string, passwordConfirm: string, token: string): Observable<Object> {
-    let params = new HttpParams();
-      params = params.append("token", token);
+    public uploadAvatar(avatarData: string): Observable<Object> {
+        const formData = new FormData();
 
-    return this.http.patch(this.apiLinks.apiLink + 'accounts/password', {password, passwordConfirm}, {params, withCredentials: true});
-  }
+        const file = new File([b64toBlob(avatarData.split(',')[1])], 'avatar.webp', {
+            type: 'image/webp',
+            lastModified: Date.now()
+        });
 
-  public patchAccountInfo(formData: UpdateAccountDto): Observable<Object> {
-    return this.http.patch(this.apiLinks.apiLink + 'accounts/' + this.authService.AccountInfo.sub, formData, {withCredentials: true});
-  }
+        formData.append('avatar', file, 'avatar.webp');
 
-  public uploadAvatar(avatarData: string): Observable<Object> {
-
-    const formData = new FormData();
-
-
-    const file = new File([b64toBlob(avatarData.split(',')[1])], 'avatar.webp', {
-      type: 'image/webp',
-      lastModified: Date.now()
-    });
-
-    formData.append('avatar', file, 'avatar.webp');
-
-    return this.http.post(this.apiLinks.apiLink + 'accounts/avatarUpload', formData, {withCredentials: true});
-  }
-
+        return this.http.post(this.apiLinks.apiLink + 'accounts/avatarUpload', formData, { withCredentials: true });
+    }
 }
 //Zaq1@wsx1234

@@ -1,0 +1,6 @@
+.angular/
+.vscode/
+dist/
+docs/
+performance/
+node_modules/

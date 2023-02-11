@@ -4,9 +4,8 @@ const path = require('path');
 const id = process.argv[2];
 const filename = id.split('/')[id.split('/').length - 1];
 
-(function() {
-
-const content = `
+(function () {
+    const content = `
 @use "sass:map";
 @use "@angular/material" as mat;
 
@@ -68,9 +67,9 @@ const content = `
 
     `;
 
-
-    fs.appendFile(process.cwd() + "/src/assets/scss/themes/_" + filename + "-theme.scss", content, (err, data) => {
-        if (err) {throw err}
+    fs.appendFile(process.cwd() + '/src/assets/scss/themes/_' + filename + '-theme.scss', content, (err, data) => {
+        if (err) {
+            throw err;
+        }
     });
-
 })();

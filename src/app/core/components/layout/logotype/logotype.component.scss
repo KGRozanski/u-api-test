@@ -1,9 +1,8 @@
-:host{
+:host {
     display: block;
     width: 100px;
     height: 52px;
 }
-
 
 .logo {
     height: 100%;
@@ -12,15 +11,15 @@
     background-repeat: no-repeat;
     background-position: center;
 
-    &--light{
+    &--light {
         background-image: url('../../../../../assets/svg/fadein-logo-light.svg');
     }
 
-    &--dark{
+    &--dark {
         background-image: url('../../../../../assets/svg/fadein-logo-dark.svg');
     }
 
-    &:hover{
+    &:hover {
         cursor: pointer;
     }
 }

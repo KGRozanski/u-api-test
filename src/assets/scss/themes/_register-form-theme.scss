@@ -1,5 +1,5 @@
-@use "sass:map";
-@use "@angular/material" as mat;
+@use 'sass:map';
+@use '@angular/material' as mat;
 
 @mixin color($theme) {
     // Get the color config from the theme.
@@ -11,12 +11,11 @@
     $foreground: map.get($config, foreground);
     $divider: map.get($foreground, divider);
 
-    app-register-form{
+    app-register-form {
         // Read the 500 hue from the primary color palette.
         background-color: mat.get-color-from-palette($background, 'card');
         border: 1px solid $divider;
     }
-    
 }
 
 @mixin typography($theme) {
@@ -30,7 +29,7 @@
     $typography-config: mat.get-typography-config($theme);
 
     app-register-form {
-        color: mat.get-color-from-palette($palette, text, .9);
+        color: mat.get-color-from-palette($palette, text, 0.9);
     }
 }
 

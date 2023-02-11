@@ -1,6 +1,5 @@
-
-@use "sass:map";
-@use "@angular/material" as mat;
+@use 'sass:map';
+@use '@angular/material' as mat;
 
 @mixin color($theme) {
     // Get the color config from the theme.
@@ -8,27 +7,20 @@
     // Get the primary color palette from the color-config.
     $primary: map.get($config, primary);
 
-
-
     $background: map.get($config, background);
     $foreground: map.get($config, foreground);
 
+    app-hamburger-btn {
+        // Get the color config from the theme.
+        $color-config: mat.get-color-config($theme);
 
-
-    app-hamburger-btn{
-    // Get the color config from the theme.
-    $color-config: mat.get-color-config($theme);
-
-    // Get the foreground color palette from the color-config.
-    $palette: map.get($color-config, foreground);
+        // Get the foreground color palette from the color-config.
+        $palette: map.get($color-config, foreground);
 
         .nav-icon span {
-            background-color: mat.get-color-from-palette($palette, text, .9);
+            background-color: mat.get-color-from-palette($palette, text, 0.9);
         }
-
     }
-    
-
 }
 
 @mixin typography($theme) {
@@ -42,7 +34,7 @@
     $typography-config: mat.get-typography-config($theme);
 
     app-hamburger-btn {
-        color: mat.get-color-from-palette($palette, text, .9);
+        color: mat.get-color-from-palette($palette, text, 0.9);
     }
 }
 
@@ -61,5 +53,3 @@
         @include typography($theme);
     }
 }
-
-    

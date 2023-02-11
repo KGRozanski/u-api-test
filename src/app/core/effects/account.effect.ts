@@ -8,27 +8,31 @@ import { SettingsActions } from '../actions/settings.actions';
 
 @Injectable()
 export class AccountEffect {
-  login$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ACCOUNT_ACTIONS.login),
-      exhaustMap(async (action) => this.authService
-        .login(action.credentials)
-        .pipe(finalize(() => {
-          this.store.dispatch(SettingsActions.loaderToggle({loaderVisibility: false}));
-        }))
-        .subscribe({
-          complete: () => {
-            this.authService.postSignIn();
-          }
-        })
-      )
-    ),
-    { dispatch: false}
-  );
+    login$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(ACCOUNT_ACTIONS.login),
+                exhaustMap(async (action) =>
+                    this.authService
+                        .login(action.credentials)
+                        .pipe(
+                            finalize(() => {
+                                this.store.dispatch(
+                                    SettingsActions.loaderToggle({
+                                        loaderVisibility: false
+                                    })
+                                );
+                            })
+                        )
+                        .subscribe({
+                            complete: () => {
+                                this.authService.postSignIn();
+                            }
+                        })
+                )
+            ),
+        { dispatch: false }
+    );
 
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private store: Store
-  ) {}
+    constructor(private actions$: Actions, private authService: AuthService, private store: Store) {}
 }

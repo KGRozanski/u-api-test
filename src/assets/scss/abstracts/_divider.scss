@@ -1,16 +1,16 @@
-.divider{
+.divider {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px 0 10px 0;
-    
-    div{
+
+    div {
         height: 1px;
         background-color: #afafaf;
         width: 100%;
     }
-    
-    span{
+
+    span {
         margin: 0 10px 0 10px;
     }
 }

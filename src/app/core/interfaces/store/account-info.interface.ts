@@ -1,4 +1,4 @@
-import { Role } from "src/app/modules/user/enums/roles.enum";
+import { Role } from 'src/app/modules/user/enums/roles.enum';
 
 export interface AccountInfo {
     sub: string;

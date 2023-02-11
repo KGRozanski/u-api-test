@@ -14,70 +14,91 @@ import { MatDialog } from '@angular/material/dialog';
 import { CropImgComponent } from 'src/app/modules/shared/components/dialogs/crop-img/crop-img.component';
 
 @Component({
-  selector: 'app-account-info',
-  templateUrl: './account-info.component.html',
-  styleUrls: ['./account-info.component.scss']
+    selector: 'app-account-info',
+    templateUrl: './account-info.component.html',
+    styleUrls: ['./account-info.component.scss']
 })
 export class AccountInfoComponent implements OnInit, OnDestroy {
-  public account: AccountInfo = getAccountInitial();
-  public personalDetailsForm: UntypedFormGroup;
-  private destroyed$: Subject<void> = new Subject();
-  
-  constructor(private store: Store, private fb: UntypedFormBuilder, private US: UserService, public dialog: MatDialog) {
-    this.personalDetailsForm = this.fb.group({
-      givenName: [null, [Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
-      familyName: [null, [Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
-      email: [null, [Validators.required, Validators.pattern(RegexSupplier.email)]]
-    });
-  }
+    public account: AccountInfo = getAccountInitial();
+    public personalDetailsForm: UntypedFormGroup;
+    private destroyed$: Subject<void> = new Subject();
 
-  ngOnInit(): void {
-    this.store.select(ACCOUNT_SELECTORS.selectAccountCollection)
-      .pipe(
-        takeUntil(this.destroyed$)
-      )
-      .subscribe((accountData) => {
-        this.account = accountData;
-        this.personalDetailsForm.setValue({
-          familyName: this.account.familyName,
-          givenName: this.account.givenName,
-          email: this.account.email
+    constructor(
+        private store: Store,
+        private fb: UntypedFormBuilder,
+        private US: UserService,
+        public dialog: MatDialog
+    ) {
+        this.personalDetailsForm = this.fb.group({
+            givenName: [null, [Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
+            familyName: [null, [Validators.pattern(RegexSupplier.onlyLettersWord_PL)]],
+            email: [null, [Validators.required, Validators.pattern(RegexSupplier.email)]]
         });
-      });
-  }
+    }
 
-  ngOnDestroy(): void {
-    this.destroyed$.next();
-  }
+    ngOnInit(): void {
+        this.store
+            .select(ACCOUNT_SELECTORS.selectAccountCollection)
+            .pipe(takeUntil(this.destroyed$))
+            .subscribe((accountData) => {
+                this.account = accountData;
+                this.personalDetailsForm.setValue({
+                    familyName: this.account.familyName,
+                    givenName: this.account.givenName,
+                    email: this.account.email
+                });
+            });
+    }
 
-  onSubmit(): void {
-    if(!this.personalDetailsForm.valid) {return;};
+    ngOnDestroy(): void {
+        this.destroyed$.next();
+    }
 
-    
-    this.US.patchAccountInfo(this.personalDetailsForm.value)
-      .subscribe((data: any) => {
-        this.store.dispatch(ACCOUNT_ACTIONS.update({AccountInfo: this.personalDetailsForm.getRawValue()}));
-        this.store.dispatch(NotificationActions.push({
-          notification: {type: NotificationType.SUCCESS, message: data['message']}
-        }));
-      });
-  }
+    onSubmit(): void {
+        if (!this.personalDetailsForm.valid) {
+            return;
+        }
 
-  public openCropImg(): void {
-    const dialogRef = this.dialog.open(CropImgComponent, {
-      width: '450px'
-    });
-
-    dialogRef.afterClosed().subscribe((imgData) => {
-      if(imgData) {
-        this.US.uploadAvatar(imgData).subscribe((res: any) => {
-          this.store.dispatch(ACCOUNT_ACTIONS.update({AccountInfo: {photo: res['photoUrl']} as any}));
-          this.store.dispatch(NotificationActions.push({
-            notification: {type: NotificationType.SUCCESS, message: res['message']}
-          }));
+        this.US.patchAccountInfo(this.personalDetailsForm.value).subscribe((data: any) => {
+            this.store.dispatch(
+                ACCOUNT_ACTIONS.update({
+                    AccountInfo: this.personalDetailsForm.getRawValue()
+                })
+            );
+            this.store.dispatch(
+                NotificationActions.push({
+                    notification: {
+                        type: NotificationType.SUCCESS,
+                        message: data['message']
+                    }
+                })
+            );
         });
-      }
-    });
-  }
+    }
 
+    public openCropImg(): void {
+        const dialogRef = this.dialog.open(CropImgComponent, {
+            width: '450px'
+        });
+
+        dialogRef.afterClosed().subscribe((imgData) => {
+            if (imgData) {
+                this.US.uploadAvatar(imgData).subscribe((res: any) => {
+                    this.store.dispatch(
+                        ACCOUNT_ACTIONS.update({
+                            AccountInfo: { photo: res['photoUrl'] } as any
+                        })
+                    );
+                    this.store.dispatch(
+                        NotificationActions.push({
+                            notification: {
+                                type: NotificationType.SUCCESS,
+                                message: res['message']
+                            }
+                        })
+                    );
+                });
+            }
+        });
+    }
 }

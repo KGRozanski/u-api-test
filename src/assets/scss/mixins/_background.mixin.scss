@@ -1,6 +1,6 @@
 @mixin background($url) {
-    &:after{
-        content: "";
+    &:after {
+        content: '';
         position: fixed;
         z-index: -2;
         left: 0;

@@ -36,7 +36,6 @@ import { DialogConfirmComponent } from './core/components/layout/dialog-confirm/
 import { ResetPasswordComponent } from './core/components/pages/reset-password/reset-password.component';
 import { CookiesComponent } from './core/components/layout/cookies/cookies.component';
 
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -78,8 +77,11 @@ import { CookiesComponent } from './core/components/layout/cookies/cookies.compo
         UserModule,
         BrowserAnimationsModule,
         StoreModule.forRoot(reducers, { metaReducers }),
-        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: environment.production
+        }),
         EffectsModule.forRoot([AccountEffect, NotificationsEffect, HydrationEffects])
     ]
 })
-export class AppModule { }
+export class AppModule {}

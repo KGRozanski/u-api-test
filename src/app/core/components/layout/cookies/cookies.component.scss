@@ -1,42 +1,42 @@
-:host{
-  position: fixed;
-  bottom: 0;
-  z-index: 950;
+:host {
+    position: fixed;
+    bottom: 0;
+    z-index: 950;
 }
 .cookie-bar {
-  width: auto;
-  height: auto;
-  display: flex;
-  padding: 25px;
-  justify-content: space-evenly;
-  flex-direction: column;
+    width: auto;
+    height: auto;
+    display: flex;
+    padding: 25px;
+    justify-content: space-evenly;
+    flex-direction: column;
 }
 .cookie-bar-content {
-  width: auto;
-  height: auto;
-  max-height: 300px;
-  overflow-y: scroll;
-  align-content: center;
-  text-align: center;
-  margin: 0 auto;
-  flex-wrap: wrap;
-  padding: 25px;
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    overflow-y: scroll;
+    align-content: center;
+    text-align: center;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    padding: 25px;
 }
 .announcement {
-  text-align: center;
-  margin: 35px;
+    text-align: center;
+    margin: 35px;
 }
 .decision {
-  margin: 20px auto 0 auto;
+    margin: 20px auto 0 auto;
 
-  button:nth-child(1) {
-    margin-right: 20px;;
-  }
+    button:nth-child(1) {
+        margin-right: 20px;
+    }
 }
 
-h3{
-  font-weight: 300;
-  display: flex;
-  align-items: center;
-  font-size: 1.35em;
+h3 {
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    font-size: 1.35em;
 }

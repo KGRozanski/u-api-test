@@ -1,4 +1,4 @@
-import { AccountInfo } from "../../interfaces/store/account-info.interface"
+import { AccountInfo } from '../../interfaces/store/account-info.interface';
 
 export function getAccountInitial(): AccountInfo {
     return {
@@ -10,5 +10,5 @@ export function getAccountInitial(): AccountInfo {
         photo: '',
         creationDate: '',
         role: ''
-    }
+    };
 }

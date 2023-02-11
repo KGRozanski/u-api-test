@@ -14,27 +14,44 @@ import { GetListOfUsersResolver } from './core/resolvers/getListOfUsers.resolver
 import { ResetPasswordComponent } from './core/components/pages/reset-password/reset-password.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'front', component: FrontComponent, canActivate: [NoAuthGuard] },
-  { path: 'response', component: ResponseComponent },
-  { path: 'home', redirectTo: '', pathMatch: 'full', canActivate: [AuthGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
-  { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
-  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
-  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [NoAuthGuard] },
-  { 
-    path: 'admin-dashboard',
-    component: AdminDashboardComponent,
-    canActivate: [AuthGuard],
-    resolve: { 
-      appTableOfUsersData: GetListOfUsersResolver
-    }
-  },
-  { path: '**', pathMatch: 'full', component: NotfoundComponent },
+    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'front', component: FrontComponent, canActivate: [NoAuthGuard] },
+    { path: 'response', component: ResponseComponent },
+    {
+        path: 'home',
+        redirectTo: '',
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'register',
+        component: RegisterComponent,
+        canActivate: [NoAuthGuard]
+    },
+    { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
+    {
+        path: 'settings',
+        component: SettingsComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'reset-password',
+        component: ResetPasswordComponent,
+        canActivate: [NoAuthGuard]
+    },
+    {
+        path: 'admin-dashboard',
+        component: AdminDashboardComponent,
+        canActivate: [AuthGuard],
+        resolve: {
+            appTableOfUsersData: GetListOfUsersResolver
+        }
+    },
+    { path: '**', pathMatch: 'full', component: NotfoundComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

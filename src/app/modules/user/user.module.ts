@@ -12,31 +12,24 @@ import { RouterModule } from '@angular/router';
 import { AccountInfoComponent } from './components/account-info/account-info.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
-  declarations: [
-    RegisterFormComponent,
-    LoginFormComponent,
-    GoogleAuthComponent,
-    TableOfUsersForAdminsComponent,
-    AvatarComponent,
-    ResetPasswordFormComponent,
-    AccountInfoComponent
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule,
-    SharedModule,
-    HttpClientModule
-  ],
-  exports: [
-    RegisterFormComponent,
-    LoginFormComponent,
-    TableOfUsersForAdminsComponent,
-    AvatarComponent,
-    ResetPasswordFormComponent,
-    AccountInfoComponent
-  ]
+    declarations: [
+        RegisterFormComponent,
+        LoginFormComponent,
+        GoogleAuthComponent,
+        TableOfUsersForAdminsComponent,
+        AvatarComponent,
+        ResetPasswordFormComponent,
+        AccountInfoComponent
+    ],
+    imports: [CommonModule, ReactiveFormsModule, RouterModule, SharedModule, HttpClientModule],
+    exports: [
+        RegisterFormComponent,
+        LoginFormComponent,
+        TableOfUsersForAdminsComponent,
+        AvatarComponent,
+        ResetPasswordFormComponent,
+        AccountInfoComponent
+    ]
 })
-export class UserModule { }
+export class UserModule {}

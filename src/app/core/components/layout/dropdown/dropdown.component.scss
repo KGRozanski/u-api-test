@@ -1,7 +1,7 @@
 @use '../../../../../assets/scss/variables.scss';
 @use '../../../../../assets/scss/mixins/avatar.mixin' as avatar;
 
-:host{
+:host {
     position: fixed;
     z-index: 90000;
     top: 42px;
@@ -11,18 +11,18 @@
     overflow: hidden;
 }
 
-.header{
+.header {
     display: flex;
     padding: 15px;
 
-    .username{
+    .username {
         margin: 10px 0 0 15px;
         font-weight: 500;
     }
 }
 
 ol {
-    li{
+    li {
         display: flex;
         width: 100%;
         justify-content: space-between;
@@ -30,23 +30,19 @@ ol {
         padding: 15px 20px;
         user-select: none;
 
-
         i {
             display: inline-block;
             width: 20px;
             height: 20px;
         }
 
-        span{
+        span {
             margin-left: 16px;
         }
 
-        div{
+        div {
             display: flex;
             align-items: center;
         }
     }
 }
-
-
-

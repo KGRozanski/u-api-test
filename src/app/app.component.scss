@@ -33,15 +33,12 @@ router-outlet {
     }
 }
 
-
-
 .manu-container {
     min-height: 100%;
     top: 0;
     left: 0;
 
-
-    .sidenav{
+    .sidenav {
         padding: 5px;
         display: flex;
         flex-direction: column;
@@ -51,18 +48,18 @@ router-outlet {
             width: 100%;
             margin-bottom: 5px;
 
-            button{
+            button {
                 width: 100%;
                 text-align: left;
             }
 
-            .icon{
+            .icon {
                 margin-right: 10px;
             }
         }
     }
 }
-.sidenav  {
+.sidenav {
     margin-top: 58px;
     min-width: 185px;
 }
@@ -74,6 +71,6 @@ mat-drawer-content {
     align-items: flex-start;
 }
 
-mat-drawer{
+mat-drawer {
     position: fixed;
 }

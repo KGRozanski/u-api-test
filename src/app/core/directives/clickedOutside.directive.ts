@@ -6,18 +6,19 @@ import { filter, fromEvent, Subscription } from 'rxjs';
 export class ClickedOutside implements AfterViewInit {
     @Output() clickedOutside = new EventEmitter<void>();
     private documentSubscription: Subscription | undefined;
-    
-    constructor(
-        private el: ElementRef,
-        @Inject(DOCUMENT) private document: Document
-    ) { }
+
+    constructor(private el: ElementRef, @Inject(DOCUMENT) private document: Document) {}
 
     public ngAfterViewInit() {
-        this.documentSubscription = fromEvent(this.document, 'click').pipe(filter((event) => {
-            return !this.isInside(event.target as HTMLElement);
-        })).subscribe(() => {
-            this.clickedOutside.emit();
-        });
+        this.documentSubscription = fromEvent(this.document, 'click')
+            .pipe(
+                filter((event) => {
+                    return !this.isInside(event.target as HTMLElement);
+                })
+            )
+            .subscribe(() => {
+                this.clickedOutside.emit();
+            });
     }
 
     public isInside(element: HTMLElement): boolean {
@@ -29,6 +30,4 @@ export class ClickedOutside implements AfterViewInit {
             this.documentSubscription.unsubscribe();
         }
     }
-
-
 }

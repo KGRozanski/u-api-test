@@ -1,6 +1,6 @@
 <mat-form-field appearance="fill" [formGroup]="formGroupDir.form">
-    <mat-label>{{name}}</mat-label>
-    <input matInput type="text" [formControlName]="name" [errorStateMatcher]="errMatcher">
+    <mat-label>{{ name }}</mat-label>
+    <input matInput type="text" [formControlName]="name" [errorStateMatcher]="errMatcher" />
     <button type="button" matSuffix mat-icon-button aria-label="Edit" (click)="toggleControl()">
         <ng-container *ngIf="formCtrl.disabled">
             <mat-icon>edit</mat-icon>
@@ -9,7 +9,5 @@
             <mat-icon>done</mat-icon>
         </ng-container>
     </button>
-    <mat-error>
-        An error has occurred
-    </mat-error>
+    <mat-error> An error has occurred </mat-error>
 </mat-form-field>

@@ -3,16 +3,15 @@
     <app-logotype class="app-logotype"></app-logotype>
 </div>
 
-
-
-
-
 <div class="right-panel">
     <div clicked-outside (clickedOutside)="toggleDropdown(true)">
         <app-avatar class="cmp-avatar avatar-default" [photo]="account.photo" (click)="toggleDropdown()"></app-avatar>
 
-        <app-dropdown interacted-with-menu (interacted)="toggleDropdown(true)" *ngIf="isDropdownVisible" class="cmp-dropdown shadow-md" ></app-dropdown>
+        <app-dropdown
+            interacted-with-menu
+            (interacted)="toggleDropdown(true)"
+            *ngIf="isDropdownVisible"
+            class="cmp-dropdown shadow-md"
+        ></app-dropdown>
     </div>
 </div>
-
-

@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * @param n Time left time in milliseconds
- * @returns 
+ * @returns
  */
 
 export function elapsedTimeFormatter(n: number) {
@@ -29,7 +29,7 @@ export function elapsedTimeFormatter(n: number) {
         }
     }
     if (hours > 0) {
-        if(hours >= 10) {
+        if (hours >= 10) {
             output += hours + ':';
         } else {
             output += '0' + hours + ':';
@@ -38,7 +38,7 @@ export function elapsedTimeFormatter(n: number) {
         output += '00:';
     }
 
-    if(minutes > 0) {
+    if (minutes > 0) {
         if (minutes >= 10) {
             output += minutes + ':';
         } else {
@@ -48,8 +48,8 @@ export function elapsedTimeFormatter(n: number) {
         output += '00:';
     }
 
-    if(seconds > 0) {
-        if(seconds >= 10) {
+    if (seconds > 0) {
+        if (seconds >= 10) {
             output += seconds;
         } else {
             output += '0' + seconds;
@@ -58,8 +58,8 @@ export function elapsedTimeFormatter(n: number) {
         output += '00';
     }
 
-    if(time > 0) {
-        output += '.'+time;
+    if (time > 0) {
+        output += '.' + time;
     }
 
     return output;

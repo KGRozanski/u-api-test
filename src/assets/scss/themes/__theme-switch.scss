@@ -1,7 +1,6 @@
 @use '@angular/material' as mat;
 @use '../theme.scss';
 
-
 @use './account-info-theme';
 @use './avatar-theme';
 @use './cookies-theme';
@@ -15,7 +14,6 @@
 @use './reset-password-form-theme';
 @use './table-theme';
 @use './toolbar-theme';
-
 
 @mixin themeSwitch($default-theme, $dark-theme) {
     @include mat.all-component-themes($default-theme);
@@ -50,12 +48,11 @@
 		@include toolbar-theme.theme($dark-theme);
     }
 
-    body{
+    body {
         background-color: mat.get-color-from-palette(theme.$background-light, background);
     }
-    
-    body[class=darkMode]{
+
+    body[class='darkMode'] {
         background-color: mat.get-color-from-palette(theme.$background-dark, background);
     }
-
 }

@@ -1,6 +1,5 @@
-
-@use "sass:map";
-@use "@angular/material" as mat;
+@use 'sass:map';
+@use '@angular/material' as mat;
 
 @mixin color($theme) {
     // Get the color config from the theme.
@@ -8,21 +7,13 @@
     // Get the primary color palette from the color-config.
     $primary: map.get($config, primary);
 
-
-
     $background: map.get($config, background);
     $foreground: map.get($config, foreground);
 
-
-
-    app-cookies{
+    app-cookies {
         // Read the 500 hue from the primary color palette.
         background-color: mat.get-color-from-palette($background, background);
-
-
-
     }
-    
 }
 
 @mixin typography($theme) {
@@ -36,7 +27,7 @@
     $typography-config: mat.get-typography-config($theme);
 
     app-cookies {
-        color: mat.get-color-from-palette($palette, text, .9);
+        color: mat.get-color-from-palette($palette, text, 0.9);
     }
 }
 
@@ -55,5 +46,3 @@
         @include typography($theme);
     }
 }
-
-    

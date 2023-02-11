@@ -6,41 +6,47 @@ import { NotificationActions } from 'src/app/core/actions/notifications.actions'
 import { NotificationType } from 'src/app/core/enums/notification-type.enum';
 
 @Component({
-  selector: 'app-crop-img',
-  templateUrl: './crop-img.component.html',
-  styleUrls: ['./crop-img.component.scss']
+    selector: 'app-crop-img',
+    templateUrl: './crop-img.component.html',
+    styleUrls: ['./crop-img.component.scss']
 })
 export class CropImgComponent implements OnInit {
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
+    imageChangedEvent: any = '';
+    croppedImage: any = '';
 
-  constructor(public dialogRef: MatDialogRef<CropImgComponent>, private store: Store) { }
+    constructor(public dialogRef: MatDialogRef<CropImgComponent>, private store: Store) {}
 
-  ngOnInit(): void {}
+    ngOnInit(): void {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
 
-  fileChangeEvent(event: any): void {
-      this.imageChangedEvent = event;
-  }
+    fileChangeEvent(event: any): void {
+        this.imageChangedEvent = event;
+    }
 
-  imageCropped(event: ImageCroppedEvent) {
-      this.croppedImage = event.base64;
-  }
+    imageCropped(event: ImageCroppedEvent) {
+        this.croppedImage = event.base64;
+    }
 
-  imageLoaded(image: LoadedImage) {
-      // show cropper
-  }
+    imageLoaded(image: LoadedImage) {
+        // show cropper
+    }
 
-  cropperReady() {
-    // cropper ready
-  }
+    cropperReady() {
+        // cropper ready
+    }
 
-  loadImageFailed() {
-    // show message
-    this.store.dispatch(NotificationActions.push({notification: {type: NotificationType.ERROR, message: "Failed to load image"}}));
-  }
-
+    loadImageFailed() {
+        // show message
+        this.store.dispatch(
+            NotificationActions.push({
+                notification: {
+                    type: NotificationType.ERROR,
+                    message: 'Failed to load image'
+                }
+            })
+        );
+    }
 }

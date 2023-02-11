@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@use "sass:map";
+@use 'sass:map';
 @use '@angular/material' as mat;
 @use './assets/scss/reset';
 @use './assets/scss/variables';
@@ -12,22 +12,18 @@
 @use './assets/scss/mixins/dark-mode-transition.mixin' as transition;
 @use './assets/scss/abstracts/index';
 
-@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Hind:400,700&display=swap&subset=latin-ext');
-
 
 @include mat.core(typography.$default-typography);
 @include switch.themeSwitch(theme.$default-theme, theme.$dark-theme);
-
-
 
 * {
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
 
-
-app-root{
+app-root {
     display: block;
     width: 100vw;
     height: 100vh;

@@ -1,8 +1,5 @@
 import { EmptyPipe } from './empty.pipe';
 
-
-const Pipes = [
-    EmptyPipe
-];
+const Pipes = [EmptyPipe];
 
 export default Pipes;

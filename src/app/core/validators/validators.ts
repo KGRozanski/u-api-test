@@ -6,7 +6,7 @@ export class CustomValidators {
         const confirmPassword = AC.get('passwordConfirm')?.value;
 
         if (password !== confirmPassword) {
-            AC.get('passwordConfirm')?.setErrors( { MatchPassword: true } );
+            AC.get('passwordConfirm')?.setErrors({ MatchPassword: true });
         }
     }
 }

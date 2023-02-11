@@ -1,5 +1,3 @@
-import { GetListOfUsersResolver } from "./getListOfUsers.resolver";
+import { GetListOfUsersResolver } from './getListOfUsers.resolver';
 
-export const RESOLVERS_PROVIDERS = [
-    GetListOfUsersResolver
-];
+export const RESOLVERS_PROVIDERS = [GetListOfUsersResolver];

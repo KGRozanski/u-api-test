@@ -1,10 +1,15 @@
 <app-loading-indicator *ngIf="setting.loaderVisibility"></app-loading-indicator>
 
-
 <app-toolbar class="cmp-toolbar shadow-md" (open)="menuToggle($event)"></app-toolbar>
 
-<mat-drawer-container class="manu-container" autosize hasBackdrop="false" interacted-with-menu (interacted)="menuToggle()">
-    <mat-drawer #drawer mode="side" autoFocus=false>
+<mat-drawer-container
+    class="manu-container"
+    autosize
+    hasBackdrop="false"
+    interacted-with-menu
+    (interacted)="menuToggle()"
+>
+    <mat-drawer #drawer mode="side" autoFocus="false">
         <ol class="sidenav">
             <li>
                 <button mat-stroked-button [routerLink]="['/home']">
@@ -13,7 +18,11 @@
                 </button>
             </li>
             <li>
-                <button *ngIf="accountInfo.role === acceptableRole" mat-stroked-button [routerLink]="['/admin-dashboard']">
+                <button
+                    *ngIf="accountInfo.role === acceptableRole"
+                    mat-stroked-button
+                    [routerLink]="['/admin-dashboard']"
+                >
                     <mat-icon aria-hidden="false" aria-label="Home icon">admin_panel_settings</mat-icon>
                     Admin dashboard
                 </button>
@@ -24,9 +33,5 @@
         <router-outlet></router-outlet>
         <app-footer class="cmp-footer"></app-footer>
     </mat-drawer-content>
-
 </mat-drawer-container>
 <app-cookies></app-cookies>
-
-
-

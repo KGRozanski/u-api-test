@@ -1,7 +1,7 @@
 <div *ngIf="authService.isAuthenticated" class="header">
     <app-avatar class="cmp-avatar avatar-dropdown" [photo]="account.photo"></app-avatar>
 
-    <div class="username">{{account.username}}</div>
+    <div class="username">{{ account.username }}</div>
 </div>
 <ol>
     <li class="no-link">
@@ -11,7 +11,7 @@
         </div>
 
         <mat-slide-toggle
-            class="example-margin" 
+            class="example-margin"
             color="accent"
             [(ngModel)]="darkMode"
             disabled="false"

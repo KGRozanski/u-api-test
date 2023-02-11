@@ -2,7 +2,7 @@
 @use '../../../../../assets/scss/mixins/dark-mode-transition.mixin' as transition;
 @use '../../../../../assets/scss/mixins/avatar.mixin' as avatar;
 
-:host{
+:host {
     position: fixed;
     top: 0;
     left: 0;
@@ -17,26 +17,22 @@
     @include transition.transition-dark-mode();
 }
 
-h1{
+h1 {
     padding-left: 15px;
     margin: 0 !important;
 }
 
-
-.left-panel{
+.left-panel {
     display: flex;
     align-items: center;
     gap: 10px;
-
 }
 
-.right-panel{
+.right-panel {
     display: flex;
     align-items: center;
 }
 
-.app-logotype{
+.app-logotype {
     margin-left: -11px;
 }
-
-

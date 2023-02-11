@@ -1,7 +1,4 @@
-import { AuthGuard } from "./authGuard.guard";
-import { NoAuthGuard } from "./noAuthGuard.guard";
+import { AuthGuard } from './authGuard.guard';
+import { NoAuthGuard } from './noAuthGuard.guard';
 
-export const GUARD_PROVIDERS = [
-    AuthGuard,
-    NoAuthGuard
-];
+export const GUARD_PROVIDERS = [AuthGuard, NoAuthGuard];
