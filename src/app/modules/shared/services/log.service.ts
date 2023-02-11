@@ -14,32 +14,33 @@ export class LogService {
     private RESET_INPUT = '%c ';
     private RESET_CSS = '';
 
-    constructor() {}
-
-    public log: Function = this.using(console.log);
-    public warn: Function = this.using(console.warn);
-    public error: Function = this.using(console.error);
-    public trace: Function = this.using(console.trace);
-    public group: Function = this.using(console.groupCollapsed);
-    public groupEnd: Function = this.using(console.groupEnd);
+    public log: (...args: string[]) => void = this.using(console.log);
+    public warn: (...args: string[]) => void = this.using(console.warn);
+    public error: (...args: string[]) => void = this.using(console.error);
+    public trace: (...args: string[]) => void = this.using(console.trace);
+    public group: (...args: string[]) => void = this.using(console.groupCollapsed);
+    public groupEnd: (...args: string[]) => void = this.using(console.groupEnd);
 
     // Proxy to the given Console Function. This uses an
     // internal queue to aggregate values before calling the given console
     // function with the desired formatting.
-    private using(consoleFunction: Function) {
-        let that = this;
+    private using(consoleFunction: (...args: string[]) => void): () => void {
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        const that = this;
 
         function consoleProxyFn() {
-            let msgs: any = [];
-            let modifiers: Array<string> = [];
+            const msgs: string[] = [];
+            const modifiers: Array<string> = [];
 
-            for (let argument of arguments) {
+
+            // eslint-disable-next-line prefer-rest-params
+            for (const argument of arguments) {
                 // When the formatting utility methods are called, they return
                 // a special token. This indicates that we should pull the
                 // corresponding value out of the QUEUE instead of trying to
                 // output the given argument directly.
                 if (argument === that.TOKEN) {
-                    let item = that.queue.shift();
+                    const item = that.queue.shift();
 
                     msgs.push('%c' + item.value, that.RESET_INPUT);
                     modifiers.push(item.css, that.RESET_CSS);
@@ -57,7 +58,8 @@ export class LogService {
             if (!environment.production) {
                 msgs.unshift('%c' + that.prefix.value, that.RESET_INPUT);
                 modifiers.unshift(that.prefix.css, that.RESET_CSS);
-
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 consoleFunction(msgs.join(''), ...modifiers);
             }
 

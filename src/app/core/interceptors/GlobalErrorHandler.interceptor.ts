@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Observable, of, throwError } from 'rxjs';
+import { HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HttpEvent } from '@angular/common/http';
+import { catchError, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NotificationActions } from '../actions/notifications.actions';
 import { NotificationType } from '../enums/notification-type.enum';
@@ -9,7 +9,7 @@ import { NotificationType } from '../enums/notification-type.enum';
 export class GlobalErrorHandlerInterceptor implements HttpInterceptor {
     constructor(private store: Store) {}
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<object>> {
         return next.handle(req).pipe(
             catchError((error) => {
                 if (error instanceof HttpErrorResponse) {

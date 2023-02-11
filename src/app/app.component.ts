@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectorRef, Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
 import { SettingsActions } from './core/actions/settings.actions';
@@ -16,7 +16,7 @@ import { getAccountInitial } from './core/state/initials/account.initial';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
     public setting: Settings = getSettingsInitial();
     public accountInfo: AccountInfo = getAccountInitial();
     public acceptableRole = Role.ADMIN;
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
         this._updateDrawer();
     }
 
-    public menuToggle(e?: any): void {
+    public menuToggle(): void {
         this.store.dispatch(
             SettingsActions.drawerVisibility({
                 drawerVisibility: !this.setting.drawerVisibility

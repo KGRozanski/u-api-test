@@ -10,7 +10,7 @@ export class CookiesComponent {
     public visibility = true;
 
     constructor(private cookieService: CookieService) {
-        if (cookieService.doesCookieExist('cookies_policy')) {
+        if (cookieService.getCookie('cookies_policy')) {
             this.visibility = false;
         }
     }

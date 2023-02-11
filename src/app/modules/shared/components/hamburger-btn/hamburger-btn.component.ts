@@ -8,7 +8,7 @@ import { SETTINGS_SELECTORS } from 'src/app/core/selectors/settings.selectors';
     styleUrls: ['./hamburger-btn.component.scss']
 })
 export class HamburgerBtnComponent implements OnInit {
-    public hamburgerFlag: boolean = false;
+    public hamburgerFlag = false;
 
     constructor(private store: Store) {}
 

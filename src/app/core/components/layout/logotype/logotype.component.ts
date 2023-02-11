@@ -8,7 +8,7 @@ import { SETTINGS_SELECTORS } from '../../../selectors/settings.selectors';
     styleUrls: ['./logotype.component.scss']
 })
 export class LogotypeComponent implements OnInit {
-    public darkMode: boolean = true;
+    public darkMode = true;
 
     constructor(private store: Store) {}
 

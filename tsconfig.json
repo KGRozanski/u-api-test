@@ -26,7 +26,8 @@
         "paths": {
             "@fadein": ["node_modules/@fadein"]
         },
-        "useDefineForClassFields": false
+        "useDefineForClassFields": false,
+        "allowSyntheticDefaultImports": true
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,

@@ -10,6 +10,4 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 export class LoadingIndicatorComponent {
     public color: ThemePalette = 'primary';
     public mode: ProgressSpinnerMode = 'indeterminate';
-
-    constructor() {}
 }

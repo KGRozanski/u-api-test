@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -17,7 +17,7 @@ export class UserService {
         private authService: AuthService
     ) {}
 
-    public register(user: RegisterUser): Observable<Object> {
+    public register(user: RegisterUser): Observable<object> {
         return this.http.post(this.apiLinks.apiLink + 'accounts', user);
     }
 
@@ -33,17 +33,17 @@ export class UserService {
         });
     }
 
-    public banUser(id: number): Observable<Object> {
+    public banUser(id: number): Observable<object> {
         return this.http.post(this.apiLinks.apiLink + 'accounts/ban/' + id, null, {
             withCredentials: true
         });
     }
 
-    public sendPasswordResettingEmail(email: string): Observable<Object> {
+    public sendPasswordResettingEmail(email: string): Observable<object> {
         return this.http.post(this.apiLinks.apiLink + 'accounts/password', { email }, { withCredentials: true });
     }
 
-    public resetPassword(password: string, passwordConfirm: string, token: string): Observable<Object> {
+    public resetPassword(password: string, passwordConfirm: string, token: string): Observable<object> {
         let params = new HttpParams();
         params = params.append('token', token);
 
@@ -54,13 +54,13 @@ export class UserService {
         );
     }
 
-    public patchAccountInfo(formData: UpdateAccountDto): Observable<Object> {
+    public patchAccountInfo(formData: UpdateAccountDto): Observable<object> {
         return this.http.patch(this.apiLinks.apiLink + 'accounts/' + this.authService.AccountInfo.sub, formData, {
             withCredentials: true
         });
     }
 
-    public uploadAvatar(avatarData: string): Observable<Object> {
+    public uploadAvatar(avatarData: string): Observable<object> {
         const formData = new FormData();
 
         const file = new File([b64toBlob(avatarData.split(',')[1])], 'avatar.webp', {

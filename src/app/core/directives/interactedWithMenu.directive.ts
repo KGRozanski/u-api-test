@@ -1,8 +1,8 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Output } from '@angular/core';
 
-@Directive({ selector: '[interacted-with-menu]' })
-export class InteractedWithMenu implements AfterViewInit {
-    @Output('interacted') interacted = new EventEmitter<void>();
+@Directive({ selector: '[appInteractedWithMenu]' })
+export class InteractedWithMenuDirective implements AfterViewInit {
+    @Output() interacted = new EventEmitter<void>();
 
     private INTERACTIVE_ELEMENTS: Array<HTMLElement> = [];
 
@@ -13,8 +13,8 @@ export class InteractedWithMenu implements AfterViewInit {
 
         if (this.INTERACTIVE_ELEMENTS.length > 0) {
             for (const el of this.INTERACTIVE_ELEMENTS) {
-                el.addEventListener('click', (e: any) => {
-                    if (!this.isOptionASwitch(e.target)) {
+                el.addEventListener('click', (e: Event) => {
+                    if (!this.isOptionASwitch(<HTMLElement>e.target)) {
                         return;
                     } else {
                         this.interacted.emit();
@@ -29,7 +29,7 @@ export class InteractedWithMenu implements AfterViewInit {
             return false;
         }
 
-        let clickedElement = element.localName + '.' + element.className;
+        const clickedElement = element.localName + '.' + element.className;
 
         if (clickedElement.match(/no-link/) !== null) {
             return false;

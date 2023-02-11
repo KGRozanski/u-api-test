@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, SkipSelf } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnChanges, SkipSelf } from '@angular/core';
 import { AbstractControl, UntypedFormControl, UntypedFormGroup, FormGroupDirective } from '@angular/forms';
 import { CustomErrorStateMatcher } from '../../classes/CustomErrorStateMatcher';
 import { FormControlStatus } from '@angular/forms';
@@ -9,7 +9,7 @@ import { TogglableFormControl } from 'src/app/modules/user/components/account-in
     templateUrl: './enable-disable-mat-form-field.component.html',
     styleUrls: ['./enable-disable-mat-form-field.component.scss']
 })
-export class EnableDisableMatFormFieldComponent {
+export class EnableDisableMatFormFieldComponent implements OnChanges {
     public formCtrl: UntypedFormControl & TogglableFormControl;
     public parentForm: UntypedFormGroup & {
         controls: { [key: string]: AbstractControl & TogglableFormControl };

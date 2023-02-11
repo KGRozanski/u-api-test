@@ -7,11 +7,11 @@ declare const cookieStore: any;
 export class CookieService {
     constructor(@Inject(DOCUMENT) private document: Document) {}
 
-    public getCookie(name: string) {
+    public getCookie(name: string): string {
         const value = `; ${this.document.cookie}`;
         const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop()?.split(';').shift();
-        else return undefined;
+        if (parts.length === 2) return parts.pop()?.split(';').shift() ?? '';
+        else return '';
     }
 
     public setCookie(name: string, value: string, exp: string) {
@@ -24,8 +24,8 @@ export class CookieService {
      * @param value cookie value
      * @param exp cookie expiration in days (max and default is 400 due to rfc)
      */
-    public setCookieWithExpInDays(name: string, value: string, exp: number = 400) {
-        let date = new Date();
+    public setCookieWithExpInDays(name: string, value: string, exp = 400) {
+        const date = new Date();
         if (!!exp && exp > 0) {
             date.setDate(new Date().getDate() + exp);
         } else {
@@ -37,10 +37,6 @@ export class CookieService {
 
     public removeCookie(name: string) {
         document.cookie = name + '=; Max-Age=-99999999;';
-    }
-
-    public doesCookieExist(name: string): boolean {
-        return !!this.getCookie(name);
     }
 
     public async getCookieExpDate(cookieName: string): Promise<number | null> {

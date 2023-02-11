@@ -1,7 +1,7 @@
-import { ClickedOutside } from './clickedOutside.directive';
-import { InteractedWithMenu } from './interactedWithMenu.directive';
+import { ClickedOutsideDirective } from './clickedOutside.directive';
+import { InteractedWithMenuDirective } from './interactedWithMenu.directive';
 import { RoleHighlightDirective } from './role-highlight.directive';
 
-const directives = [ClickedOutside, InteractedWithMenu, RoleHighlightDirective];
+const directives = [ClickedOutsideDirective, InteractedWithMenuDirective, RoleHighlightDirective];
 
 export default directives;

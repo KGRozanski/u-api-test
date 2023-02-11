@@ -4,11 +4,11 @@
 </div>
 
 <div class="right-panel">
-    <div clicked-outside (clickedOutside)="toggleDropdown(true)">
+    <div appClickedOutside (clickedOutside)="toggleDropdown(true)">
         <app-avatar class="cmp-avatar avatar-default" [photo]="account.photo" (click)="toggleDropdown()"></app-avatar>
 
         <app-dropdown
-            interacted-with-menu
+            appInteractedWithMenu
             (interacted)="toggleDropdown(true)"
             *ngIf="isDropdownVisible"
             class="cmp-dropdown shadow-md"

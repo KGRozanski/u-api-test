@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SettingsActions } from 'src/app/core/actions/settings.actions';
 import { AuthService } from '../../../auth/auth.service';
 import { AccountInfo } from '../../../interfaces/store/account-info.interface';
 import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
@@ -12,10 +11,10 @@ import { getAccountInitial } from '../../../state/initials/account.initial';
     styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-    public isDropdownVisible: boolean = false;
+    public isDropdownVisible = false;
     public account: AccountInfo = getAccountInitial();
 
-    @Output() open = new EventEmitter();
+    @Output() toggle = new EventEmitter();
 
     constructor(private store: Store, public authService: AuthService) {}
 
@@ -34,6 +33,6 @@ export class ToolbarComponent implements OnInit {
     }
 
     public openMenu(): void {
-        this.open.emit();
+        this.toggle.emit();
     }
 }

@@ -1,7 +1,7 @@
 import { JWT, TokenType } from '@fadein/commons';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { finalize, firstValueFrom, Observable, retry, take } from 'rxjs';
+import { finalize, firstValueFrom, Observable, retry } from 'rxjs';
 import { CookieService } from 'src/app/modules/shared/services/cookie.service';
 import { UserCredentials } from 'src/app/modules/user/interfaces/user-credentials.interface';
 import { ApiLinksService } from 'src/app/modules/user/services/api-links.service';
@@ -40,8 +40,8 @@ export class AuthService {
     }
 
     public initAuth(): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            if (this.cookies.doesCookieExist(TokenType.LOGGED_IN_WITH)) {
+        return new Promise<boolean>((resolve) => {
+            if (this.cookies.getCookie(TokenType.LOGGED_IN_WITH)) {
                 this.setTokenTimeout(this._accessTokenTimeout, TokenType.ACCESS_TOKEN);
                 this.setTokenTimeout(this._oidcTokenTimeout, TokenType.ID_TOKEN);
                 this.store.dispatch(ACCOUNT_ACTIONS.update({ AccountInfo: this.AccountInfo }));
@@ -51,14 +51,14 @@ export class AuthService {
                 return;
             }
 
-            if (!this.cookies.doesCookieExist('authenticated')) {
+            if (!this.cookies.getCookie('authenticated')) {
                 this.store.dispatch(ACCOUNT_ACTIONS.clearAccountData());
                 resolve(true);
                 return;
             }
 
             this.sendRefreshReq(TokenType.ACCESS_TOKEN).subscribe({
-                error: (err) => {
+                error: () => {
                     this.store.dispatch(ACCOUNT_ACTIONS.clearAccountData());
                     resolve(true);
                 },
@@ -68,7 +68,7 @@ export class AuthService {
                     this.setupSuccessAuthFlag();
 
                     try {
-                        const DECODED: JWT = jwt_decode(this.cookies.getCookie(TokenType.ID_TOKEN)!);
+                        const DECODED: JWT = jwt_decode(this.cookies.getCookie(TokenType.ID_TOKEN));
                         const CURRENT_OIDC_TIMEOUT = Number(DECODED.exp) * 1000 - Date.now();
 
                         if (
@@ -154,10 +154,10 @@ export class AuthService {
 
     public get AccountInfo(): AccountInfo {
         const ID_TOKEN = this.cookies.getCookie(TokenType.ID_TOKEN);
-        let decoded: any;
+        let decoded: AccountInfo;
 
         try {
-            decoded = jwt_decode(ID_TOKEN || '');
+            decoded = jwt_decode(ID_TOKEN);
         } catch (err) {
             this.logger.log(`Error durning decoding an ${TokenType.ID_TOKEN}: ${err}`);
             return this.account;
@@ -201,7 +201,7 @@ export class AuthService {
         );
     }
 
-    public login(credentials: UserCredentials): Observable<Object> {
+    public login(credentials: UserCredentials): Observable<object> {
         const BODY = {
             ...credentials,
             grant_type: 'password',
@@ -218,7 +218,7 @@ export class AuthService {
         this.cookies.removeCookie('authenticated');
         this.clearAllTimeouts();
         this.http
-            .post<HttpResponse<Object> | HttpErrorResponse>(this.apiLinks.apiLink + 'auth/logout', null, {
+            .post<HttpResponse<object> | HttpErrorResponse>(this.apiLinks.apiLink + 'auth/logout', null, {
                 withCredentials: true,
                 observe: 'response'
             })
@@ -237,8 +237,8 @@ export class AuthService {
             });
     }
 
-    public sendRefreshReq(tokenType: TokenType): Observable<HttpResponse<Object> | HttpErrorResponse> {
-        return this.http.post<HttpResponse<Object> | HttpErrorResponse>(
+    public sendRefreshReq(tokenType: TokenType): Observable<HttpResponse<object> | HttpErrorResponse> {
+        return this.http.post<HttpResponse<object> | HttpErrorResponse>(
             this.apiLinks.apiLink + 'auth/token?refresh=' + tokenType,
             {},
             { withCredentials: true, observe: 'response' }

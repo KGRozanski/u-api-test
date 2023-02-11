@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { SettingsActions } from '../../../actions/settings.actions';
 import { SETTINGS_SELECTORS } from '../../../selectors/settings.selectors';
@@ -15,8 +15,8 @@ import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
     templateUrl: './dropdown.component.html',
     styleUrls: ['./dropdown.component.scss']
 })
-export class DropdownComponent implements OnInit {
-    public darkMode: boolean = false;
+export class DropdownComponent implements OnInit, OnDestroy {
+    public darkMode = false;
     public settings$ = this.store.pipe(select(SETTINGS_SELECTORS.selectSettingsCollection));
     private readonly unsubscribe$: Subject<void> = new Subject();
     public account: AccountInfo = getAccountInitial();

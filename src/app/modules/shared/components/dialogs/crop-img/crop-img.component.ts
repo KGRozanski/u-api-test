@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 import { NotificationActions } from 'src/app/core/actions/notifications.actions';
@@ -10,19 +10,17 @@ import { NotificationType } from 'src/app/core/enums/notification-type.enum';
     templateUrl: './crop-img.component.html',
     styleUrls: ['./crop-img.component.scss']
 })
-export class CropImgComponent implements OnInit {
+export class CropImgComponent {
     imageChangedEvent: any = '';
     croppedImage: any = '';
 
     constructor(public dialogRef: MatDialogRef<CropImgComponent>, private store: Store) {}
 
-    ngOnInit(): void {}
-
     onNoClick(): void {
         this.dialogRef.close();
     }
 
-    fileChangeEvent(event: any): void {
+    fileChangeEvent(event: Event): void {
         this.imageChangedEvent = event;
     }
 

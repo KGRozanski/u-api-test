@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegexSupplier } from '@fadein/commons';
@@ -14,9 +14,9 @@ import { UserService } from '../../services/user.service';
     templateUrl: './reset-password-form.component.html',
     styleUrls: ['./reset-password-form.component.scss']
 })
-export class ResetPasswordFormComponent implements OnInit, OnDestroy {
+export class ResetPasswordFormComponent implements OnDestroy {
     // flag that indicates that the form is in 'sendEmail' mode or already has 'token' query in url
-    public sendingOrRevieving: boolean = true;
+    public sendingOrRevieving  = true;
     private _token: string | null;
     private subscription: Subscription;
     public resetPasswordForm: UntypedFormGroup = this.fb.group({
@@ -72,11 +72,9 @@ export class ResetPasswordFormComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnInit(): void {}
-
     public submitEmail(): void {
         if (this.resetPasswordForm.valid) {
-            this.US.sendPasswordResettingEmail(this.resetPasswordForm.get('email')!.value).subscribe((data: any) => {
+            this.US.sendPasswordResettingEmail(this.resetPasswordForm.get('email')?.value).subscribe((data: any) => {
                 this.store.dispatch(
                     NotificationActions.push({
                         notification: {
@@ -92,8 +90,8 @@ export class ResetPasswordFormComponent implements OnInit, OnDestroy {
     public submitNewPassword(): void {
         if (this.newPasswordForm.valid && this._token) {
             this.US.resetPassword(
-                this.newPasswordForm.get('password')!.value,
-                this.newPasswordForm.get('passwordConfirm')!.value,
+                this.newPasswordForm.get('password')?.value,
+                this.newPasswordForm.get('passwordConfirm')?.value,
                 this._token
             ).subscribe((data: any) => {
                 this.store.dispatch(

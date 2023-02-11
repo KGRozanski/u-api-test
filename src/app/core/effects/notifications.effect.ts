@@ -20,7 +20,6 @@ export class NotificationsEffect {
             ),
         { dispatch: false }
     );
-    store: any;
 
     constructor(private actions$: Actions, private snackBar: MatSnackBar) {}
 

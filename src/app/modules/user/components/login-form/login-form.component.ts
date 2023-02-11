@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { RegexSupplier } from '@fadein/commons';
 import { Store } from '@ngrx/store';
 import { ACCOUNT_ACTIONS } from 'src/app/core/actions/account.actions';
 import { SettingsActions } from 'src/app/core/actions/settings.actions';
@@ -10,7 +9,7 @@ import { SettingsActions } from 'src/app/core/actions/settings.actions';
     templateUrl: './login-form.component.html',
     styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
     constructor(private fb: UntypedFormBuilder, private store: Store) {}
 
     public loginForm: UntypedFormGroup = this.fb.group({
@@ -19,17 +18,15 @@ export class LoginFormComponent implements OnInit {
         rememberMe: [false]
     });
 
-    ngOnInit(): void {}
-
     submit() {
         if (this.loginForm.valid) {
             this.store.dispatch(SettingsActions.loaderToggle({ loaderVisibility: true }));
             this.store.dispatch(
                 ACCOUNT_ACTIONS.login({
                     credentials: {
-                        username: this.loginForm.get('username')!.value,
-                        password: this.loginForm.get('password')!.value,
-                        remember_me: this.loginForm.get('rememberMe')!.value
+                        username: this.loginForm.get('username')?.value,
+                        password: this.loginForm.get('password')?.value,
+                        remember_me: this.loginForm.get('rememberMe')?.value
                     }
                 })
             );

@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({ name: 'empty' })
 export class EmptyPipe implements PipeTransform {
-    transform(property: any): string {
+    transform(property: unknown): string {
         if (
             property === null ||
             property === undefined ||
@@ -12,7 +12,7 @@ export class EmptyPipe implements PipeTransform {
         ) {
             return 'N/A';
         } else {
-            return property;
+            return property as string;
         }
     }
 }

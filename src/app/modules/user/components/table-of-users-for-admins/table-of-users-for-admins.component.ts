@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
@@ -17,7 +16,7 @@ import { UserService } from '../../services/user.service';
     templateUrl: './table-of-users-for-admins.component.html',
     styleUrls: ['./table-of-users-for-admins.component.scss']
 })
-export class TableOfUsersForAdminsComponent implements OnInit {
+export class TableOfUsersForAdminsComponent {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
@@ -36,7 +35,7 @@ export class TableOfUsersForAdminsComponent implements OnInit {
         'removalDate',
         'actions'
     ];
-    public totalAmountOfEntities: number = 0;
+    public totalAmountOfEntities = 0;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -50,22 +49,20 @@ export class TableOfUsersForAdminsComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {}
-
     public handleSort(e: any): void {
         throw new Error('Not implemented');
     }
 
     public handlePage(e: PageEvent): void {
-        this.fetchPage(e.pageIndex, e.pageSize, this.sort.direction as any);
+        this.fetchPage(e.pageIndex, e.pageSize, this.sort.direction.toUpperCase() as 'ASC' | 'DESC');
     }
 
     public sortData(e: Sort): void {
-        this.fetchPage(this.paginator.pageIndex, this.paginator.pageSize, e.direction as any);
+        this.fetchPage(this.paginator.pageIndex, this.paginator.pageSize, e.direction.toUpperCase() as 'ASC' | 'DESC');
     }
 
     private fetchPage(pageIndex: number, pageSize: number, order: 'ASC' | 'DESC') {
-        this.US.getListOfUsers(pageIndex, pageSize, order.toUpperCase() as any).subscribe((accounts) => {
+        this.US.getListOfUsers(pageIndex, pageSize, order).subscribe((accounts) => {
             this.dataSource.data = accounts[0];
         });
     }
