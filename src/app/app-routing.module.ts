@@ -12,10 +12,11 @@ import { AuthGuard } from './core/guards/authGuard.guard';
 import { NoAuthGuard } from './core/guards/noAuthGuard.guard';
 import { GetListOfUsersResolver } from './core/resolvers/getListOfUsers.resolver';
 import { ResetPasswordComponent } from './core/components/pages/reset-password/reset-password.component';
-import { TestComponent } from './modules/websocket/components/test/test.component';
+import { GameComponent } from './modules/game/game.component';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: '', component: GameComponent, canActivate: [AuthGuard] },
     { path: 'front', component: FrontComponent, canActivate: [NoAuthGuard] },
     { path: 'response', component: ResponseComponent },
     {
@@ -47,10 +48,6 @@ const routes: Routes = [
         resolve: {
             appTableOfUsersData: GetListOfUsersResolver
         }
-    },
-    {
-        path: 'ws',
-        component: TestComponent
     },
     { path: '**', pathMatch: 'full', component: NotfoundComponent }
 ];

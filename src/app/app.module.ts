@@ -35,6 +35,7 @@ import { RESOLVERS_PROVIDERS } from './core/resolvers/_resolvers';
 import { DialogConfirmComponent } from './core/components/layout/dialog-confirm/dialog-confirm.component';
 import { ResetPasswordComponent } from './core/components/pages/reset-password/reset-password.component';
 import { CookiesComponent } from './core/components/layout/cookies/cookies.component';
+import { GameModule } from './modules/game/game.module';
 
 @NgModule({
     declarations: [
@@ -81,7 +82,8 @@ import { CookiesComponent } from './core/components/layout/cookies/cookies.compo
             maxAge: 25,
             logOnly: environment.production
         }),
-        EffectsModule.forRoot([AccountEffect, NotificationsEffect, HydrationEffects])
+        EffectsModule.forRoot([AccountEffect, NotificationsEffect, HydrationEffects]),
+        GameModule
     ]
 })
 export class AppModule {}

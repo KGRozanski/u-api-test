@@ -1,6 +1,6 @@
 {
-  "name": "u-api-test",
-  "version": "3.21.0",
+  "name": "fadein-test",
+  "version": "3.22.0",
   "scripts": {
     "ng": "ng",
     "prestart": "node ./src/scripts/gc/register-cmp-themes.js",
@@ -35,7 +35,11 @@
     "rxjs": "~7.5.0",
     "socket.io-client": "^4.6.1",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "pixi.js": "^7.2.0",
+    "@pixi/events": "^7.2.0",
+    "@pixi/math-extras": "^7.2.0",
+    "@types/offscreencanvas": "^2019.7.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.0.0",
