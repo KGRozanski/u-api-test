@@ -79,9 +79,8 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+<!-- [![Product Name Screen Shot][product-screenshot]](https://github.com/KGRozanski/u-api-test/blob/main/src/assets/img/screenshot-1.png?raw=true) -->
+<img src="https://github.com/KGRozanski/u-api-test/blob/main/src/assets/img/screenshot-1.png?raw=true" width="480px">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
