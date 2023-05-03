@@ -80,6 +80,7 @@
 ## About The Project
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://github.com/KGRozanski/u-api-test/blob/main/src/assets/img/screenshot-1.png?raw=true) -->
+<img src="https://github.com/KGRozanski/u-api-test/blob/main/src/assets/img/screenshot-2.png?raw=true" width="480px">
 <img src="https://github.com/KGRozanski/u-api-test/blob/main/src/assets/img/screenshot-1.png?raw=true" width="480px">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
