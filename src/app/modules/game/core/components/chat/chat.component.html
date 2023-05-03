@@ -1,4 +1,7 @@
-<div class="msgs">
-    <span #msgs *ngFor="let msg of chat$ | async">{{msg}}</span>
+<div class="msgs" [ngClass]="{opaque: !isHidden}">
+    <span class="animated" #msgs *ngFor="let msg of chat$ | async" innerHTML="{{msg}}"></span>
+</div>
+<div #permanent class="msgs msgs--permanent" [ngClass]="{opaque: isHidden}">
+    <span *ngFor="let msg of chat$ | async" innerHTML="{{msg}}"></span>
 </div>
 <input #userInput type="text" [ngClass]="{hidden: isHidden}">

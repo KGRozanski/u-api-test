@@ -9,7 +9,7 @@ export class WSService {
         transports: ['websocket'],
         auth: {
             token: 'test-auth-token', //currently not used; retrieved from cookie ;)
-        },
+        }
     });
 
     constructor(private readonly logger: LogService, private readonly dataService: DataService) {
@@ -33,7 +33,6 @@ export class WSService {
             this.dataService.pushMsg(msg);
         })
 
-        this.socket.emit('events', 'sieman');
     }
 
     public sendMsg(msg: string): void {
