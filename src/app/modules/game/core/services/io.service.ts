@@ -13,7 +13,7 @@ export class IOService {
     private _right!: Key;
 
     constructor() {
-        this.registerKeyMap();
+        this.registerKeyMap()
     }
 
 
@@ -36,7 +36,7 @@ export class IOService {
             x -= 5;
         }
 
-            this.displacementVector$.next(new Point(x,y));
+        this.displacementVector$.next(new Point(x,y));
     }
     
 
@@ -45,7 +45,13 @@ export class IOService {
         this._down = keyFactory('s');
         this._left = keyFactory('a');
         this._right = keyFactory('d');
+    }
 
+    detach() {
+        this._top.unsubscribe();
+        this._down.unsubscribe();
+        this._left.unsubscribe();
+        this._right.unsubscribe();
     }
     
 }

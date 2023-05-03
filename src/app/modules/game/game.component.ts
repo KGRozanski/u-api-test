@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, HostListener, Inject, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, Inject, OnDestroy, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 
 import * as PIXI from 'pixi.js';
 import { MapService } from './core/services/map.service';
@@ -18,15 +18,16 @@ declare let globalThis: any;
     selector: 'app-game',
     templateUrl: './game.component.html',
     styleUrls: ['./game.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
-export class GameComponent {
+export class GameComponent implements OnDestroy {
     // The application will create a renderer using WebGL, if possible,
     // with a fallback to a canvas render. It will also setup the ticker
     // and the root stage PIXI.Container
     private Application: Application;
     private _debugMode = false;
     public entitiesContainer: Container = new Container();
+    public ticker;
 
     @HostListener('document:keydown', ['$event'])
     onDebugToggle(event: KeyboardEvent) {
@@ -59,10 +60,12 @@ export class GameComponent {
         globalThis.__PIXI_STAGE__ = this.Application.stage;
         globalThis.__PIXI_RENDERER__ = this.Application.renderer;
 
-        this.Application.ticker.add((delta: number) => {
+        this.ticker = (delta: number) => {
             this.dataService.fpsCount$.next(Number(this.Application.ticker.FPS.toFixed(2)));
             this.IOService.listen();
-        });
+        };
+
+        this.Application.ticker.add(this.ticker);
 
         new Soldier(this.map, this.IOService, this.entitiesContainer);
 
@@ -71,7 +74,10 @@ export class GameComponent {
 
         // const fpsContainer = new Container();
 
-        // fpsContainer.addChild(description);
-        // this.Application.stage.addChild(fpsContainer)
+        // fpsContaineconsole.log(this.Application.ticker)
+    }
+
+    ngOnDestroy(): void {
+        this.Application.ticker.remove(this.ticker);
     }
 }

@@ -1,0 +1,4 @@
+<div class="msgs">
+    <span #msgs *ngFor="let msg of chat$ | async">{{msg}}</span>
+</div>
+<input #userInput type="text" [ngClass]="{hidden: isHidden}">

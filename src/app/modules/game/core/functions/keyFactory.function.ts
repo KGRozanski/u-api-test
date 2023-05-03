@@ -23,7 +23,7 @@ export function keyFactory(value: string): Key {
                 }
                 key.isDown = true;
                 key.isUp = false;
-                event.preventDefault();
+                // event.preventDefault();
             }
         },
         upHandler: (event: any) => {
@@ -33,7 +33,7 @@ export function keyFactory(value: string): Key {
                 }
                 key.isDown = false;
                 key.isUp = true;
-                event.preventDefault();
+                // event.preventDefault();
             }
         },
         // Detach event listeners

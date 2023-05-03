@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket, io } from 'socket.io-client';
 import { LogService } from 'src/app/modules/shared/services/log.service';
+import { DataService } from './data.service';
 
 @Injectable({ providedIn: 'root' })
 export class WSService {
@@ -11,7 +12,7 @@ export class WSService {
         },
     });
 
-    constructor(private readonly logger: LogService) {
+    constructor(private readonly logger: LogService, private readonly dataService: DataService) {
         this.socket.on('connect', () => {
             this.logger.log("[WebSocket] Connected");
         });
@@ -23,6 +24,19 @@ export class WSService {
             console.log(e);
         });
 
+
+        this.socket.on('players-list', (e: any) => {
+            console.log(e)
+        })
+
+        this.socket.on('chat', (msg: string) => {
+            this.dataService.pushMsg(msg);
+        })
+
         this.socket.emit('events', 'sieman');
+    }
+
+    public sendMsg(msg: string): void {
+        this.socket.emit('chat', msg);
     }
 }
