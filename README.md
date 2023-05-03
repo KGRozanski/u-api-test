@@ -30,10 +30,10 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="src/assets/img/fadein-logo-dark.png" alt="Logo" width="220" >
   </a>
 
-<h3 align="center">u-api-test</h3>
+<h3 align="center">fadein</h3>
 
   <p align="center">
         test repo for authentication and authorization
@@ -41,11 +41,11 @@
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="#">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/KGRozanski/u-api-test/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/KGRozanski/u-api-test/issues">Request Feature</a>
   </p>
 </div>
 
