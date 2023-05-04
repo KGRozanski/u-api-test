@@ -1,4 +1,3 @@
-import { Container, Point, Sprite } from "pixi.js";
 import { getScreenCenter } from "../utils/getScreenCenter.function";
 import { Chunk } from "../classes/Chunk";
 import world from "../data/map.json";
@@ -7,9 +6,9 @@ import { IChunk } from "../interfaces/Chunk.interface";
 import { DataService } from "./data.service";
 import { EntityFactory } from "../classes/Entity.factory";
 import { Constants } from "../constants/Constants.class";
-import { Injectable, Optional } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { IOService } from "./io.service";
-import { Soldier } from "../classes/Soldier";
+import { Container, Point, Sprite } from "pixi.js";
 
 @Injectable({ providedIn: "root" })
 export class MapService {
@@ -36,15 +35,16 @@ export class MapService {
       this._container.addChild(chunk.container);
     });
 
-    this.IOService.displacementVector$.subscribe((value) => {
-      this.container.position = this.container.position.add(value);
-    });
+    this.IOService.displacementVector$
+      .subscribe((value: Point) => {
+        this.updateMapPosition(value);
+      });
   
     this.setupListener();
+  }
 
-
-
-
+  public updateMapPosition(playerVector: Point): void {
+    this.container.position = this.container.position.add(playerVector);
   }
 
   public get container(): Container {

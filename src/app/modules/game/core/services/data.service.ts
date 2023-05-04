@@ -10,6 +10,7 @@ export class DataService {
     public buildEntity$ = new Subject<EntityClassName>();
     public toggleDebugInfo$ = new BehaviorSubject<boolean>(true);
     public chat$ = new BehaviorSubject<Array<string>>([]);
+    public initPlayerState$ = new Subject();
 
     constructor() { }
     

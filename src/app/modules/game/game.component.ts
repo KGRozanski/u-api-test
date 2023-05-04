@@ -11,6 +11,7 @@ import { DataService } from './core/services/data.service';
 import { IOService } from './core/services/io.service';
 import { Soldier } from './core/classes/Soldier';
 import { WSService } from './core/services/ws.service';
+import { throttleTime } from 'rxjs';
 
 declare let globalThis: any;
 
@@ -28,6 +29,7 @@ export class GameComponent implements OnDestroy {
     private _debugMode = false;
     public entitiesContainer: Container = new Container();
     public ticker;
+    public Soldier: Soldier;
 
     @HostListener('document:keydown', ['$event'])
     onDebugToggle(event: KeyboardEvent) {
@@ -67,7 +69,18 @@ export class GameComponent implements OnDestroy {
 
         this.Application.ticker.add(this.ticker);
 
-        new Soldier(this.map, this.IOService, this.entitiesContainer);
+        // Initial event with player data fired once at logon used only for hydration
+        this.dataService.initPlayerState$.subscribe((playerData: any) => {
+            this.Soldier = new Soldier(this.map, this.IOService, this.entitiesContainer, new Point(playerData.position.x, playerData.position.y));
+        });
+
+        this.IOService.displacementVector$
+            .pipe(throttleTime(100))
+            .subscribe(() => {
+                if (this.Soldier?.position) {
+                    this.WS.emit('playerVelocity', this.Soldier.position);
+                }
+            });
 
         // const description = new Text(`${this.Application.ticker.FPS}`, {fill: '#ff0000'});
         //   description.position = new Point(0,0)

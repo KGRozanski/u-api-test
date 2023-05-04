@@ -18,8 +18,9 @@ enum Direction {
 
 export class Soldier {
   private _sprite!: Spritesheet;
+  public position: Point;
 
-  constructor(private map: MapService, private IOService: IOService, public entitiesContainer: Container) {
+  constructor(private map: MapService, private IOService: IOService, public entitiesContainer: Container, position: Point) {
     this.loadSprite().then(() => {
       let anim = new AnimatedSprite(this._sprite.animations["walk_up"]);
       // anim.eventMode = 'static';
@@ -50,11 +51,18 @@ export class Soldier {
                 anim.stop();
             } else {
                 anim.textures = this._sprite.animations[Direction[dirKey]];
-                anim.play()
+                anim.play();
             }
         
         });
     });
+
+    this.IOService.displacementVector$.subscribe((position: Point) => {
+      this.position = this.position.add(position);
+    });
+
+    this.position = position;
+    this.map.updateMapPosition(position);
   }
 
   private async loadSprite(): Promise<void> {
