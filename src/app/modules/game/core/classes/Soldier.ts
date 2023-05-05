@@ -1,28 +1,20 @@
-import { Assets, Container, Point, Sprite, Spritesheet, Texture } from "pixi.js";
+import { Assets, Container, Point, Spritesheet } from "pixi.js";
 import { MapService } from "../services/map.service";
 import { AnimatedSprite, SCALE_MODES } from "pixi.js";
 import { IOService } from "../services/io.service";
-import { debounce, distinct, distinctUntilChanged, interval } from "rxjs";
+import { distinctUntilChanged, throttleTime } from "rxjs";
 import { getScreenCenter } from "../utils/getScreenCenter.function";
+import { WSService } from "../services/ws.service";
+import { Direction } from "../enums/directions.enum";
 
-enum Direction {
-    '0,-5' = 'walk_down',
-    '5,0' = 'walk_left',
-    '5,5' = 'walk_up_left',
-    '0,5' = 'walk_up',
-    '-5,0' = 'walk_right',
-    '-5,5' = 'walk_up_right',
-    '5,-5' = 'walk_down_left',
-    '-5,-5' = 'walk_down_right'
-}
 
 export class Soldier {
   private _sprite!: Spritesheet;
   public position: Point;
 
-  constructor(private map: MapService, private IOService: IOService, public entitiesContainer: Container, position: Point) {
+  constructor(private map: MapService, private IOService: IOService, public entitiesContainer: Container, public WS: WSService, position: Point) {
     this.loadSprite().then(() => {
-      let anim = new AnimatedSprite(this._sprite.animations["walk_up"]);
+      const anim = new AnimatedSprite(this._sprite.animations["walk_up"]);
       // anim.eventMode = 'static';
       anim.on("click", ($event) => {
         anim.currentFrame = 0;
@@ -60,6 +52,14 @@ export class Soldier {
     this.IOService.displacementVector$.subscribe((position: Point) => {
       this.position = this.position.add(position);
     });
+
+    this.IOService.displacementVector$
+        .pipe(throttleTime(100))
+        .subscribe(() => {
+            if (this.position) {
+                this.WS.emit('playerVelocity', this.position);
+            }
+        });
 
     this.position = position;
     this.map.updateMapPosition(position);

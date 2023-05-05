@@ -35,9 +35,6 @@ export class WSService {
             this.dataService.pushMsg(msg);
         })
 
-        this.IOService.displacementVector$.pipe(throttleTime(100)).subscribe((displacement: any) => {
-            // console.log(displacement)
-        })
 
         this.socket.on('initState', (e: any) => {
             this.dataService.initPlayerState$.next(e);

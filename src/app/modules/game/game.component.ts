@@ -6,12 +6,11 @@ import { MapService } from './core/services/map.service';
 
 import '@pixi/math-extras';
 import '@pixi/events';
-import { Application, Container, IApplicationOptions, Point, Text } from 'pixi.js';
+import { Application, Container, Point } from 'pixi.js';
 import { DataService } from './core/services/data.service';
 import { IOService } from './core/services/io.service';
 import { Soldier } from './core/classes/Soldier';
 import { WSService } from './core/services/ws.service';
-import { throttleTime } from 'rxjs';
 
 declare let globalThis: any;
 
@@ -71,16 +70,8 @@ export class GameComponent implements OnDestroy {
 
         // Initial event with player data fired once at logon used only for hydration
         this.dataService.initPlayerState$.subscribe((playerData: any) => {
-            this.Soldier = new Soldier(this.map, this.IOService, this.entitiesContainer, new Point(playerData.position.x, playerData.position.y));
+            this.Soldier = new Soldier(this.map, this.IOService, this.entitiesContainer, this.WS, new Point(playerData.position.x, playerData.position.y));
         });
-
-        this.IOService.displacementVector$
-            .pipe(throttleTime(100))
-            .subscribe(() => {
-                if (this.Soldier?.position) {
-                    this.WS.emit('playerVelocity', this.Soldier.position);
-                }
-            });
 
         // const description = new Text(`${this.Application.ticker.FPS}`, {fill: '#ff0000'});
         //   description.position = new Point(0,0)
