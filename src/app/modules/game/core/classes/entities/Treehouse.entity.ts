@@ -1,5 +1,5 @@
-import { AbstractEntity } from "../AbstractEntity";
+import { AbstractEntity } from '../AbstractEntity';
 
 export default class TreehouseEntity extends AbstractEntity {
-    public override title: string = 'Treehouse';
+	public override title: string = 'Treehouse';
 }

@@ -19,17 +19,16 @@
 @include switch.themeSwitch(theme.$default-theme, theme.$dark-theme);
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-body{
-    font-family: Roboto;
+body {
+	font-family: Roboto;
 }
 
 app-root {
-    display: block;
-    width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
+	display: block;
+	width: 100vw;
+	height: 100vh;
+	overflow-x: hidden;
 }
-

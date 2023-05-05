@@ -1,3 +1,3 @@
 export interface TogglableFormControl {
-    oldValue: string;
+	oldValue: string;
 }

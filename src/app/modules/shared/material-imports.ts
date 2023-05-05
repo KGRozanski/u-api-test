@@ -14,20 +14,20 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 
 const materialImports = [
-    MatCardModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatInputModule,
-    MatSnackBarModule,
-    MatSlideToggleModule,
-    MatProgressSpinnerModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatTooltipModule,
-    MatDialogModule
+	MatCardModule,
+	MatButtonModule,
+	MatCheckboxModule,
+	MatInputModule,
+	MatSnackBarModule,
+	MatSlideToggleModule,
+	MatProgressSpinnerModule,
+	MatSidenavModule,
+	MatIconModule,
+	MatTableModule,
+	MatPaginatorModule,
+	MatSortModule,
+	MatTooltipModule,
+	MatDialogModule,
 ];
 
 export default materialImports;

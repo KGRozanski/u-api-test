@@ -1,19 +1,19 @@
-import { EntityClassName } from "../types/Entity.type";
-import { AbstractEntity } from "./AbstractEntity";
+import { EntityClassName } from '../types/Entity.type';
+import { AbstractEntity } from './AbstractEntity';
 import Entites from './entities/_index';
 
 export class EntityFactory {
-    public static id = 0;
-    private static _entity: AbstractEntity;
-    private static readonly entites = Entites;
+	public static id = 0;
+	private static _entity: AbstractEntity;
+	private static readonly entites = Entites;
 
-    constructor() {}
+	constructor() {}
 
-    public static setStrategy(entityTitle: EntityClassName) {
-        this._entity = new EntityFactory.entites[entityTitle];
-    }
+	public static setStrategy(entityTitle: EntityClassName) {
+		this._entity = new EntityFactory.entites[entityTitle]();
+	}
 
-    public static get entity () {
-        return EntityFactory._entity;
-    }
+	public static get entity() {
+		return EntityFactory._entity;
+	}
 }

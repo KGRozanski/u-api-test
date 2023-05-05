@@ -3,36 +3,36 @@
 @use '../../../../../assets/scss/mixins/avatar.mixin' as avatar;
 
 :host {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    width: 100%;
-    height: variables.$toolbar-height;
-    padding: 0 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	width: 100%;
+	height: variables.$toolbar-height;
+	padding: 0 15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 
-    @include transition.transition-dark-mode();
+	@include transition.transition-dark-mode();
 }
 
 h1 {
-    padding-left: 15px;
-    margin: 0 !important;
+	padding-left: 15px;
+	margin: 0 !important;
 }
 
 .left-panel {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
 .right-panel {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .app-logotype {
-    margin-left: -11px;
+	margin-left: -11px;
 }

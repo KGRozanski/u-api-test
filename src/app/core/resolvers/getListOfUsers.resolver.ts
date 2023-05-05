@@ -7,9 +7,9 @@ import AccountExtended from 'src/app/modules/user/interfaces/account-extended.in
 
 @Injectable()
 export class GetListOfUsersResolver implements Resolve<Observable<HttpResponse<[AccountExtended[], number]>>> {
-    constructor(private US: UserService) {}
+	constructor(private US: UserService) {}
 
-    resolve(): Observable<HttpResponse<[AccountExtended[], number]>> {
-        return this.US.getListOfUsers(0, 10, 'DESC');
-    }
+	resolve(): Observable<HttpResponse<[AccountExtended[], number]>> {
+		return this.US.getListOfUsers(0, 10, 'DESC');
+	}
 }

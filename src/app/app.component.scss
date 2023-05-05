@@ -1,76 +1,76 @@
 router-outlet {
-    display: block;
-    margin-top: 53px;
+	display: block;
+	margin-top: 53px;
 }
 
 .fadein {
-    animation-name: fadein;
-    animation-duration: 0.327s;
-    animation-fill-mode: forwards;
-    animation-timing-function: cubic-bezier(1, 0, 1, 1);
+	animation-name: fadein;
+	animation-duration: 0.327s;
+	animation-fill-mode: forwards;
+	animation-timing-function: cubic-bezier(1, 0, 1, 1);
 }
 .fadeout {
-    animation-name: fadeout;
-    animation-duration: 0.427s;
-    animation-fill-mode: forwards;
-    animation-timing-function: cubic-bezier(0.15, -0.05, 0.01, 0.84);
+	animation-name: fadeout;
+	animation-duration: 0.427s;
+	animation-fill-mode: forwards;
+	animation-timing-function: cubic-bezier(0.15, -0.05, 0.01, 0.84);
 }
 @keyframes fadein {
-    from {
-        top: -1200px;
-    }
-    to {
-        top: 0;
-    }
+	from {
+		top: -1200px;
+	}
+	to {
+		top: 0;
+	}
 }
 
 @keyframes fadeout {
-    from {
-        top: 0;
-    }
-    to {
-        top: -1200;
-    }
+	from {
+		top: 0;
+	}
+	to {
+		top: -1200;
+	}
 }
 
 .manu-container {
-    min-height: 100%;
-    top: 0;
-    left: 0;
+	min-height: 100%;
+	top: 0;
+	left: 0;
 
-    .sidenav {
-        padding: 5px;
-        display: flex;
-        flex-direction: column;
-        justify-content: stretch;
+	.sidenav {
+		padding: 5px;
+		display: flex;
+		flex-direction: column;
+		justify-content: stretch;
 
-        li {
-            width: 100%;
-            margin-bottom: 5px;
+		li {
+			width: 100%;
+			margin-bottom: 5px;
 
-            button {
-                width: 100%;
-                text-align: left;
-            }
+			button {
+				width: 100%;
+				text-align: left;
+			}
 
-            .icon {
-                margin-right: 10px;
-            }
-        }
-    }
+			.icon {
+				margin-right: 10px;
+			}
+		}
+	}
 }
 .sidenav {
-    margin-top: 58px;
-    min-width: 185px;
+	margin-top: 58px;
+	min-width: 185px;
 }
 
 mat-drawer-content {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+	padding: 12px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
 mat-drawer {
-    position: fixed;
+	position: fixed;
 }

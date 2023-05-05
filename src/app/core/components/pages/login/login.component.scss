@@ -2,7 +2,7 @@
 @use '../../../../../assets/scss/mixins/prev-layout.mixin' as prev;
 
 :host {
-    @include background.background('../../../assets/img/background-studio2.jpg');
+	@include background.background('../../../assets/img/background-studio2.jpg');
 
-    @include prev.prev-layout();
+	@include prev.prev-layout();
 }

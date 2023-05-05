@@ -1,51 +1,51 @@
-:host{
-    display: block;
-    position: fixed;
-    bottom: 104px;
-    left: 5px;
-    min-width: 1000px;
-    background: rgba(0, 0, 0, 0.3);
+:host {
+	display: block;
+	position: fixed;
+	bottom: 104px;
+	left: 5px;
+	min-width: 1000px;
+	background: rgba(0, 0, 0, 0.3);
 }
 
-input{
-    height: 40px;
-    min-width: 100%;
-    line-height: 40px;
-    font-size: 28px;
-    background: none;
-    color: #fff;
-    border: none;
+input {
+	height: 40px;
+	min-width: 100%;
+	line-height: 40px;
+	font-size: 28px;
+	background: none;
+	color: #fff;
+	border: none;
 }
-input:focus{
-    outline: none;
+input:focus {
+	outline: none;
 }
 
-.msgs{
-    display: flex;
-    flex-direction: column;
-    font-size: 28px;
-    gap: 5px;
+.msgs {
+	display: flex;
+	flex-direction: column;
+	font-size: 28px;
+	gap: 5px;
 
-    .animated {
-        animation: fadeOut 1s ease-in 9s;
-    }
+	.animated {
+		animation: fadeOut 1s ease-in 9s;
+	}
 
-    &--permanent{
-        max-height: 523px;
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }
+	&--permanent {
+		max-height: 523px;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
 }
 
 @keyframes fadeOut {
-    to {
-      opacity: 0;
-    }
+	to {
+		opacity: 0;
+	}
 }
-.opaque{
-    visibility: hidden;
-    height: 0;
+.opaque {
+	visibility: hidden;
+	height: 0;
 }
-.hidden{
-    display: none !important;
+.hidden {
+	display: none !important;
 }

@@ -12,57 +12,57 @@ import { Role } from './modules/user/enums/roles.enum';
 import { getAccountInitial } from './core/state/initials/account.initial';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewInit {
-    public setting: Settings = getSettingsInitial();
-    public accountInfo: AccountInfo = getAccountInitial();
-    public acceptableRole = Role.ADMIN;
+	public setting: Settings = getSettingsInitial();
+	public accountInfo: AccountInfo = getAccountInitial();
+	public acceptableRole = Role.ADMIN;
 
-    @ViewChild('drawer') drawer: MatDrawer;
+	@ViewChild('drawer') drawer: MatDrawer;
 
-    constructor(
-        private store: Store,
-        @Inject(DOCUMENT) private document: Document,
-        private renderer: Renderer2,
-        private cd: ChangeDetectorRef
-    ) {}
+	constructor(
+		private store: Store,
+		@Inject(DOCUMENT) private document: Document,
+		private renderer: Renderer2,
+		private cd: ChangeDetectorRef,
+	) {}
 
-    ngOnInit(): void {
-        this.store.select(SETTINGS_SELECTORS.selectSettingsCollection).subscribe((settings) => {
-            this.setting = settings;
-            this.renderer.setAttribute(this.document.body, 'class', settings.darkMode ? 'darkMode' : '');
-            this._updateDrawer();
-        });
+	ngOnInit(): void {
+		this.store.select(SETTINGS_SELECTORS.selectSettingsCollection).subscribe((settings) => {
+			this.setting = settings;
+			this.renderer.setAttribute(this.document.body, 'class', settings.darkMode ? 'darkMode' : '');
+			this._updateDrawer();
+		});
 
-        this.store.select(ACCOUNT_SELECTORS.selectAccountCollection).subscribe((account) => {
-            this.accountInfo = account;
-        });
-    }
+		this.store.select(ACCOUNT_SELECTORS.selectAccountCollection).subscribe((account) => {
+			this.accountInfo = account;
+		});
+	}
 
-    ngAfterViewInit(): void {
-        //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-        //Add 'implements AfterViewInit' to the class.
-        this._updateDrawer();
-    }
+	ngAfterViewInit(): void {
+		//Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+		//Add 'implements AfterViewInit' to the class.
+		this._updateDrawer();
+	}
 
-    public menuToggle(): void {
-        this.store.dispatch(
-            SettingsActions.drawerVisibility({
-                drawerVisibility: !this.setting.drawerVisibility
-            })
-        );
-    }
+	public menuToggle(): void {
+		this.store.dispatch(
+			SettingsActions.drawerVisibility({
+				drawerVisibility: !this.setting.drawerVisibility,
+			}),
+		);
+	}
 
-    private _updateDrawer(): void {
-        if (!this.drawer) {
-            return;
-        }
+	private _updateDrawer(): void {
+		if (!this.drawer) {
+			return;
+		}
 
-        this.drawer.opened = this.setting.drawerVisibility;
-        // to prevent 'ExpressionChangedAfterItHasBeenCheckedError'
-        this.cd.detectChanges();
-    }
+		this.drawer.opened = this.setting.drawerVisibility;
+		// to prevent 'ExpressionChangedAfterItHasBeenCheckedError'
+		this.cd.detectChanges();
+	}
 }

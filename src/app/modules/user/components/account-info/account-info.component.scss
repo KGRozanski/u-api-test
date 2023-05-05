@@ -1,25 +1,25 @@
 .general {
-    display: flex;
+	display: flex;
 
-    .simple-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        margin-left: 15px;
+	.simple-info {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		margin-left: 15px;
 
-        .username {
-            font-size: 1.4em;
-        }
+		.username {
+			font-size: 1.4em;
+		}
 
-        span {
-            font-size: 0.9em;
-        }
-    }
+		span {
+			font-size: 0.9em;
+		}
+	}
 }
 
 .personal-details {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 25px 0 0 0;
-    gap: 15px;
+	display: flex;
+	flex-wrap: wrap;
+	margin: 25px 0 0 0;
+	gap: 15px;
 }

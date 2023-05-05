@@ -5,62 +5,62 @@ import { FormControlStatus } from '@angular/forms';
 import { TogglableFormControl } from 'src/app/modules/user/components/account-info/interfaces/togglableFormControl.interface';
 
 @Component({
-    selector: 'app-enable-disable-mat-form-field',
-    templateUrl: './enable-disable-mat-form-field.component.html',
-    styleUrls: ['./enable-disable-mat-form-field.component.scss']
+	selector: 'app-enable-disable-mat-form-field',
+	templateUrl: './enable-disable-mat-form-field.component.html',
+	styleUrls: ['./enable-disable-mat-form-field.component.scss'],
 })
 export class EnableDisableMatFormFieldComponent implements OnChanges {
-    public formCtrl: UntypedFormControl & TogglableFormControl;
-    public parentForm: UntypedFormGroup & {
-        controls: { [key: string]: AbstractControl & TogglableFormControl };
-    };
-    public errMatcher = new CustomErrorStateMatcher();
+	public formCtrl: UntypedFormControl & TogglableFormControl;
+	public parentForm: UntypedFormGroup & {
+		controls: { [key: string]: AbstractControl & TogglableFormControl };
+	};
+	public errMatcher = new CustomErrorStateMatcher();
 
-    constructor(@SkipSelf() private el: ElementRef, public formGroupDir: FormGroupDirective) {}
+	constructor(@SkipSelf() private el: ElementRef, public formGroupDir: FormGroupDirective) {}
 
-    ngOnChanges(): void {
-        this.parentForm = this.formGroupDir.form as any;
-        this.formCtrl = this.parentForm.get(this.name) as UntypedFormControl & TogglableFormControl;
-        this.formCtrl.disable();
-    }
+	ngOnChanges(): void {
+		this.parentForm = this.formGroupDir.form as any;
+		this.formCtrl = this.parentForm.get(this.name) as UntypedFormControl & TogglableFormControl;
+		this.formCtrl.disable();
+	}
 
-    // Input name displayed to the user
-    @Input() name: string;
-    // FormControlName used for matInput directive
-    @Input() formControlName: string;
+	// Input name displayed to the user
+	@Input() name: string;
+	// FormControlName used for matInput directive
+	@Input() formControlName: string;
 
-    @HostListener('keydown.enter', ['$event']) onKeydownHandler($event: any) {
-        this.toggleControl();
-        this.submit();
-    }
+	@HostListener('keydown.enter', ['$event']) onKeydownHandler($event: any) {
+		this.toggleControl();
+		this.submit();
+	}
 
-    toggleControl(): void {
-        if (this.parentForm.status == ('INVALID' as FormControlStatus)) {
-            return;
-        }
+	toggleControl(): void {
+		if (this.parentForm.status == ('INVALID' as FormControlStatus)) {
+			return;
+		}
 
-        if (this.formCtrl.enabled) {
-            this.submit();
-            this.formCtrl.disable();
-        } else {
-            this.formCtrl.oldValue = this.formCtrl.value;
-            this.disableSiblings();
-            this.formCtrl.enable();
-        }
-    }
+		if (this.formCtrl.enabled) {
+			this.submit();
+			this.formCtrl.disable();
+		} else {
+			this.formCtrl.oldValue = this.formCtrl.value;
+			this.disableSiblings();
+			this.formCtrl.enable();
+		}
+	}
 
-    disableSiblings(): void {
-        for (const key in this.parentForm.controls) {
-            if (this.parentForm.controls[key].enabled && key !== this.name) {
-                this.parentForm.controls[key].reset(this.parentForm.controls[key].oldValue);
-            }
-            this.parentForm.controls[key].disable();
-        }
-    }
+	disableSiblings(): void {
+		for (const key in this.parentForm.controls) {
+			if (this.parentForm.controls[key].enabled && key !== this.name) {
+				this.parentForm.controls[key].reset(this.parentForm.controls[key].oldValue);
+			}
+			this.parentForm.controls[key].disable();
+		}
+	}
 
-    submit() {
-        if (this.formCtrl.value !== this.formCtrl.oldValue) {
-            this.el.nativeElement.requestSubmit();
-        }
-    }
+	submit() {
+		if (this.formCtrl.value !== this.formCtrl.oldValue) {
+			this.el.nativeElement.requestSubmit();
+		}
+	}
 }

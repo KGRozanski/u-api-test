@@ -1,24 +1,24 @@
 <input type="file" (change)="fileChangeEvent($event)" />
 
 <image-cropper
-    [imageChangedEvent]="imageChangedEvent"
-    [maintainAspectRatio]="true"
-    [aspectRatio]="1 / 1"
-    format="webp"
-    [resizeToWidth]="256"
-    (imageCropped)="imageCropped($event)"
-    (imageLoaded)="imageLoaded($event)"
-    (cropperReady)="cropperReady()"
-    (loadImageFailed)="loadImageFailed()"
-    [roundCropper]="true"
+	[imageChangedEvent]="imageChangedEvent"
+	[maintainAspectRatio]="true"
+	[aspectRatio]="1 / 1"
+	format="webp"
+	[resizeToWidth]="256"
+	(imageCropped)="imageCropped($event)"
+	(imageLoaded)="imageLoaded($event)"
+	(cropperReady)="cropperReady()"
+	(loadImageFailed)="loadImageFailed()"
+	[roundCropper]="true"
 ></image-cropper>
 
 <!-- <img [src]="croppedImage" /> -->
 <div class="actions">
-    <button type="submit" mat-flat-button color="primary" [mat-dialog-close]="croppedImage" [disabled]="!croppedImage">
-        <mat-icon>save</mat-icon>
-        Save
-    </button>
-    &nbsp;
-    <button mat-flat-button color="warn" (click)="onNoClick()">Cancel</button>
+	<button type="submit" mat-flat-button color="primary" [mat-dialog-close]="croppedImage" [disabled]="!croppedImage">
+		<mat-icon>save</mat-icon>
+		Save
+	</button>
+	&nbsp;
+	<button mat-flat-button color="warn" (click)="onNoClick()">Cancel</button>
 </div>

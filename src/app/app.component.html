@@ -3,35 +3,35 @@
 <app-toolbar class="cmp-toolbar shadow-md" (toggle)="menuToggle()"></app-toolbar>
 
 <mat-drawer-container
-    class="manu-container"
-    autosize
-    hasBackdrop="false"
-    appInteractedWithMenu
-    (interacted)="menuToggle()"
+	class="manu-container"
+	autosize
+	hasBackdrop="false"
+	appInteractedWithMenu
+	(interacted)="menuToggle()"
 >
-    <mat-drawer #drawer mode="side" autoFocus="false">
-        <ol class="sidenav">
-            <li>
-                <button mat-stroked-button [routerLink]="['/home']">
-                    <mat-icon aria-hidden="false" aria-label="Home icon">home</mat-icon>
-                    Home
-                </button>
-            </li>
-            <li>
-                <button
-                    *ngIf="accountInfo.role === acceptableRole"
-                    mat-stroked-button
-                    [routerLink]="['/admin-dashboard']"
-                >
-                    <mat-icon aria-hidden="false" aria-label="Home icon">admin_panel_settings</mat-icon>
-                    Admin dashboard
-                </button>
-            </li>
-        </ol>
-    </mat-drawer>
-    <mat-drawer-content>
-        <router-outlet></router-outlet>
-        <app-footer class="cmp-footer"></app-footer>
-    </mat-drawer-content>
+	<mat-drawer #drawer mode="side" autoFocus="false">
+		<ol class="sidenav">
+			<li>
+				<button mat-stroked-button [routerLink]="['/home']">
+					<mat-icon aria-hidden="false" aria-label="Home icon">home</mat-icon>
+					Home
+				</button>
+			</li>
+			<li>
+				<button
+					*ngIf="accountInfo.role === acceptableRole"
+					mat-stroked-button
+					[routerLink]="['/admin-dashboard']"
+				>
+					<mat-icon aria-hidden="false" aria-label="Home icon">admin_panel_settings</mat-icon>
+					Admin dashboard
+				</button>
+			</li>
+		</ol>
+	</mat-drawer>
+	<mat-drawer-content>
+		<router-outlet></router-outlet>
+		<app-footer class="cmp-footer"></app-footer>
+	</mat-drawer-content>
 </mat-drawer-container>
 <app-cookies></app-cookies>

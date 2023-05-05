@@ -6,18 +6,18 @@ import { finalize } from 'rxjs/operators';
 import { SettingsActions } from '../actions/settings.actions';
 
 @Injectable({
-    providedIn: 'root'
+	providedIn: 'root',
 })
 export class LoaderInterceptor implements HttpInterceptor {
-    constructor(private Store: Store) {}
+	constructor(private Store: Store) {}
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.Store.dispatch(SettingsActions.loaderToggle({ loaderVisibility: true }));
+	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+		this.Store.dispatch(SettingsActions.loaderToggle({ loaderVisibility: true }));
 
-        return next.handle(req).pipe(
-            finalize(() => {
-                this.Store.dispatch(SettingsActions.loaderToggle({ loaderVisibility: false }));
-            })
-        );
-    }
+		return next.handle(req).pipe(
+			finalize(() => {
+				this.Store.dispatch(SettingsActions.loaderToggle({ loaderVisibility: false }));
+			}),
+		);
+	}
 }

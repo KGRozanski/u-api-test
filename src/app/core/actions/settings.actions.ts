@@ -7,7 +7,7 @@ const loaderToggle = createAction('[Settings] Loader Toggle', props<{ loaderVisi
 const drawerVisibility = createAction('[Settings] Drawer Visibility Toggle', props<{ drawerVisibility: boolean }>());
 
 export const SettingsActions = {
-    darkModeToggle,
-    loaderToggle,
-    drawerVisibility
+	darkModeToggle,
+	loaderToggle,
+	drawerVisibility,
 };

@@ -38,52 +38,52 @@ import { CookiesComponent } from './core/components/layout/cookies/cookies.compo
 import { GameModule } from './modules/game/game.module';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        ToolbarComponent,
-        DropdownComponent,
-        RegisterComponent,
-        LoginComponent,
-        FrontComponent,
-        FooterComponent,
-        NotfoundComponent,
-        LogotypeComponent,
-        SettingsComponent,
-        LoadingIndicatorComponent,
-        HomeComponent,
-        ResponseComponent,
-        AdminDashboardComponent,
-        DialogConfirmComponent,
-        ResetPasswordComponent,
-        CookiesComponent
-    ],
-    providers: [
-        interceptorsProviders,
-        ...GUARD_PROVIDERS,
-        ...RESOLVERS_PROVIDERS,
-        AuthService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: (authService: AuthService) => () => authService.initAuth(),
-            deps: [AuthService],
-            multi: true
-        }
-    ],
-    bootstrap: [AppComponent],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        AppRoutingModule,
-        SharedModule,
-        UserModule,
-        BrowserAnimationsModule,
-        StoreModule.forRoot(reducers, { metaReducers }),
-        StoreDevtoolsModule.instrument({
-            maxAge: 25,
-            logOnly: environment.production
-        }),
-        EffectsModule.forRoot([AccountEffect, NotificationsEffect, HydrationEffects]),
-        GameModule
-    ]
+	declarations: [
+		AppComponent,
+		ToolbarComponent,
+		DropdownComponent,
+		RegisterComponent,
+		LoginComponent,
+		FrontComponent,
+		FooterComponent,
+		NotfoundComponent,
+		LogotypeComponent,
+		SettingsComponent,
+		LoadingIndicatorComponent,
+		HomeComponent,
+		ResponseComponent,
+		AdminDashboardComponent,
+		DialogConfirmComponent,
+		ResetPasswordComponent,
+		CookiesComponent,
+	],
+	providers: [
+		interceptorsProviders,
+		...GUARD_PROVIDERS,
+		...RESOLVERS_PROVIDERS,
+		AuthService,
+		{
+			provide: APP_INITIALIZER,
+			useFactory: (authService: AuthService) => () => authService.initAuth(),
+			deps: [AuthService],
+			multi: true,
+		},
+	],
+	bootstrap: [AppComponent],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		AppRoutingModule,
+		SharedModule,
+		UserModule,
+		BrowserAnimationsModule,
+		StoreModule.forRoot(reducers, { metaReducers }),
+		StoreDevtoolsModule.instrument({
+			maxAge: 25,
+			logOnly: environment.production,
+		}),
+		EffectsModule.forRoot([AccountEffect, NotificationsEffect, HydrationEffects]),
+		GameModule,
+	],
 })
 export class AppModule {}

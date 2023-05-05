@@ -4,25 +4,25 @@ import { DataService } from '../../services/data.service';
 import { EntityClassName } from '../../types/Entity.type';
 
 @Component({
-  selector: 'app-toolbar',
-  templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss']
+	selector: 'app-toolbar',
+	templateUrl: './toolbar.component.html',
+	styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent {
-  public entites = Entites;
+	public entites = Entites;
 
-  @HostListener('click', ['$event'])
-  onClick(event: Event) {
-      let target: EventTarget & {title: string} = event.target as any;
+	@HostListener('click', ['$event'])
+	onClick(event: Event) {
+		let target: EventTarget & { title: string } = event.target as any;
 
-      if(target.title) {
-        this.dataService.buildEntity$.next(target.title + "Entity" as EntityClassName);
-      }
-  }
+		if (target.title) {
+			this.dataService.buildEntity$.next((target.title + 'Entity') as EntityClassName);
+		}
+	}
 
-  constructor(private dataService: DataService) {}
+	constructor(private dataService: DataService) {}
 
-  public getEntityBtnSrc(name: string): string {
-    return name.toLocaleLowerCase();
-  }
+	public getEntityBtnSrc(name: string): string {
+		return name.toLocaleLowerCase();
+	}
 }

@@ -1,4 +1,9 @@
 {
     "files.autoSave": "afterDelay",
-    "material-icon-theme.activeIconPack": "angular_ngrx"
+    "material-icon-theme.activeIconPack": "angular_ngrx",
+    "editor.indentSize": "tabSize",
+    "editor.tabSize": 4,
+    "[typescript]": {
+        "editor.tabSize": 4
+    }
 }

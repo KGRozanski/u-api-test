@@ -3,7 +3,7 @@ import { AccountInfo } from '../interfaces/store/account-info.interface';
 import { Settings } from '../interfaces/store/settings.interface';
 
 export interface AppState {
-    notifications: Notification;
-    account: AccountInfo;
-    settings: Settings;
+	notifications: Notification;
+	account: AccountInfo;
+	settings: Settings;
 }

@@ -6,9 +6,9 @@ import { notificationsReducer } from './notifications.reducer';
 import { settingsReducer } from './settings.reducer';
 
 export const reducers: ActionReducerMap<AppState> = {
-    notifications: notificationsReducer,
-    account: accountReducer,
-    settings: settingsReducer
+	notifications: notificationsReducer,
+	account: accountReducer,
+	settings: settingsReducer,
 };
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];

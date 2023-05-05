@@ -2,43 +2,43 @@ import { AfterViewInit, Directive, ElementRef, EventEmitter, Output } from '@ang
 
 @Directive({ selector: '[appInteractedWithMenu]' })
 export class InteractedWithMenuDirective implements AfterViewInit {
-    @Output() interacted = new EventEmitter<void>();
+	@Output() interacted = new EventEmitter<void>();
 
-    private INTERACTIVE_ELEMENTS: Array<HTMLElement> = [];
+	private INTERACTIVE_ELEMENTS: Array<HTMLElement> = [];
 
-    constructor(private el: ElementRef) {}
+	constructor(private el: ElementRef) {}
 
-    public ngAfterViewInit() {
-        this.INTERACTIVE_ELEMENTS = this.el.nativeElement.querySelector('ol').children;
+	public ngAfterViewInit() {
+		this.INTERACTIVE_ELEMENTS = this.el.nativeElement.querySelector('ol').children;
 
-        if (this.INTERACTIVE_ELEMENTS.length > 0) {
-            for (const el of this.INTERACTIVE_ELEMENTS) {
-                el.addEventListener('click', (e: Event) => {
-                    if (!this.isOptionASwitch(<HTMLElement>e.target)) {
-                        return;
-                    } else {
-                        this.interacted.emit();
-                    }
-                });
-            }
-        }
-    }
+		if (this.INTERACTIVE_ELEMENTS.length > 0) {
+			for (const el of this.INTERACTIVE_ELEMENTS) {
+				el.addEventListener('click', (e: Event) => {
+					if (!this.isOptionASwitch(<HTMLElement>e.target)) {
+						return;
+					} else {
+						this.interacted.emit();
+					}
+				});
+			}
+		}
+	}
 
-    private isOptionASwitch(element: HTMLElement | null): boolean {
-        if (!element) {
-            return false;
-        }
+	private isOptionASwitch(element: HTMLElement | null): boolean {
+		if (!element) {
+			return false;
+		}
 
-        const clickedElement = element.localName + '.' + element.className;
+		const clickedElement = element.localName + '.' + element.className;
 
-        if (clickedElement.match(/no-link/) !== null) {
-            return false;
-        }
+		if (clickedElement.match(/no-link/) !== null) {
+			return false;
+		}
 
-        if (element.localName === 'li') {
-            return true;
-        }
+		if (element.localName === 'li') {
+			return true;
+		}
 
-        return this.isOptionASwitch(element.parentElement);
-    }
+		return this.isOptionASwitch(element.parentElement);
+	}
 }

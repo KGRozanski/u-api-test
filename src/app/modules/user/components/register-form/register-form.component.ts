@@ -8,39 +8,44 @@ import { CustomValidators } from '../../../../core/validators/validators';
 import { UserService } from '../../services/user.service';
 
 @Component({
-    selector: 'app-register-form',
-    templateUrl: './register-form.component.html',
-    styleUrls: ['./register-form.component.scss']
+	selector: 'app-register-form',
+	templateUrl: './register-form.component.html',
+	styleUrls: ['./register-form.component.scss'],
 })
 export class RegisterFormComponent {
-    constructor(private fb: UntypedFormBuilder, private US: UserService, private store: Store) {}
+	constructor(private fb: UntypedFormBuilder, private US: UserService, private store: Store) {}
 
-    public registerForm: UntypedFormGroup = this.fb.group(
-        {
-            username: [
-                null,
-                [Validators.required, Validators.min(3), Validators.max(30), Validators.pattern(RegexSupplier.username)]
-            ],
-            email: [null, [Validators.required, Validators.max(30), Validators.pattern(RegexSupplier.email)]],
-            password: [null, [Validators.required, Validators.pattern(RegexSupplier.password)]],
-            passwordConfirm: [null, [Validators.required]],
-            statute: [null, [Validators.requiredTrue]]
-        },
-        {
-            validators: CustomValidators.passwordEquality
-        }
-    );
+	public registerForm: UntypedFormGroup = this.fb.group(
+		{
+			username: [
+				null,
+				[
+					Validators.required,
+					Validators.min(3),
+					Validators.max(30),
+					Validators.pattern(RegexSupplier.username),
+				],
+			],
+			email: [null, [Validators.required, Validators.max(30), Validators.pattern(RegexSupplier.email)]],
+			password: [null, [Validators.required, Validators.pattern(RegexSupplier.password)]],
+			passwordConfirm: [null, [Validators.required]],
+			statute: [null, [Validators.requiredTrue]],
+		},
+		{
+			validators: CustomValidators.passwordEquality,
+		},
+	);
 
-    submit() {
-        this.US.register(this.registerForm.value).subscribe((res: any) => {
-            this.store.dispatch(
-                NotificationActions.push({
-                    notification: {
-                        type: NotificationType.SUCCESS,
-                        message: res['message']
-                    }
-                })
-            );
-        });
-    }
+	submit() {
+		this.US.register(this.registerForm.value).subscribe((res: any) => {
+			this.store.dispatch(
+				NotificationActions.push({
+					notification: {
+						type: NotificationType.SUCCESS,
+						message: res['message'],
+					},
+				}),
+			);
+		});
+	}
 }

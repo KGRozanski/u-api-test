@@ -7,15 +7,8 @@ import { CommonModule } from '@angular/common';
 import { ChatComponent } from './core/components/chat/chat.component';
 
 @NgModule({
-  declarations: [
-    GameComponent,
-    ToolbarComponent,
-    DebugComponent,
-    ChatComponent
-  ],
-  imports: [
-    CommonModule
-  ],
-  providers: [],
+	declarations: [GameComponent, ToolbarComponent, DebugComponent, ChatComponent],
+	imports: [CommonModule],
+	providers: [],
 })
-export class GameModule { }
+export class GameModule {}

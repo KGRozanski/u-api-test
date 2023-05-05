@@ -10,8 +10,8 @@ import { CropImgComponent } from './components/dialogs/crop-img/crop-img.compone
 import { HamburgerBtnComponent } from './components/hamburger-btn/hamburger-btn.component';
 
 @NgModule({
-    declarations: [Pipes, directives, EnableDisableMatFormFieldComponent, CropImgComponent, HamburgerBtnComponent],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, materialImports, ImageCropperModule],
-    exports: [Pipes, materialImports, directives, EnableDisableMatFormFieldComponent, HamburgerBtnComponent]
+	declarations: [Pipes, directives, EnableDisableMatFormFieldComponent, CropImgComponent, HamburgerBtnComponent],
+	imports: [CommonModule, FormsModule, ReactiveFormsModule, materialImports, ImageCropperModule],
+	exports: [Pipes, materialImports, directives, EnableDisableMatFormFieldComponent, HamburgerBtnComponent],
 })
 export class SharedModule {}

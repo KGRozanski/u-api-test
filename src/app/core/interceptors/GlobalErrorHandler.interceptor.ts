@@ -7,25 +7,25 @@ import { NotificationType } from '../enums/notification-type.enum';
 
 @Injectable()
 export class GlobalErrorHandlerInterceptor implements HttpInterceptor {
-    constructor(private store: Store) {}
+	constructor(private store: Store) {}
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<object>> {
-        return next.handle(req).pipe(
-            catchError((error) => {
-                if (error instanceof HttpErrorResponse) {
-                    console.log('[GLOBAL INTERCEPTOR] http error occured', error);
-                    this.store.dispatch(
-                        NotificationActions.push({
-                            notification: {
-                                type: NotificationType.ERROR,
-                                message: error.error.message
-                            }
-                        })
-                    );
-                }
+	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<object>> {
+		return next.handle(req).pipe(
+			catchError((error) => {
+				if (error instanceof HttpErrorResponse) {
+					console.log('[GLOBAL INTERCEPTOR] http error occured', error);
+					this.store.dispatch(
+						NotificationActions.push({
+							notification: {
+								type: NotificationType.ERROR,
+								message: error.error.message,
+							},
+						}),
+					);
+				}
 
-                throw error;
-            })
-        );
-    }
+				throw error;
+			}),
+		);
+	}
 }

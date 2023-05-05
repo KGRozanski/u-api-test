@@ -3,54 +3,54 @@
 @use '../../../../../assets/scss/abstracts/divider';
 
 :host {
-    display: block;
-    max-width: 342px;
-    min-width: 342px;
-    height: 655px;
-    padding: 20px;
-    border-radius: variables.$border-radius;
-    box-shadow: 3px 3px 13px rgb(0, 0, 0, 0.2);
+	display: block;
+	max-width: 342px;
+	min-width: 342px;
+	height: 655px;
+	padding: 20px;
+	border-radius: variables.$border-radius;
+	box-shadow: 3px 3px 13px rgb(0, 0, 0, 0.2);
 
-    @include transition.transition-dark-mode();
+	@include transition.transition-dark-mode();
 }
 
 h1 {
-    text-align: center;
+	text-align: center;
 }
 
 :host ::ng-deep {
-    .mat-checkbox {
-        .mat-checkbox-layout {
-            white-space: break-spaces;
-        }
-        .mat-checkbox-layout > .mat-checkbox-label {
-            line-height: 16px;
-        }
-    }
+	.mat-checkbox {
+		.mat-checkbox-layout {
+			white-space: break-spaces;
+		}
+		.mat-checkbox-layout > .mat-checkbox-label {
+			line-height: 16px;
+		}
+	}
 
-    // ERRORS CUSTOMIZATION
-    .mat-form-field-appearance-fill .mat-form-field-subscript-wrapper {
-        padding: 0;
-    }
+	// ERRORS CUSTOMIZATION
+	.mat-form-field-appearance-fill .mat-form-field-subscript-wrapper {
+		padding: 0;
+	}
 
-    mat-error {
-        font-size: 10.5px;
-        line-height: 11.81px;
-    }
+	mat-error {
+		font-size: 10.5px;
+		line-height: 11.81px;
+	}
 }
 
 a {
-    cursor: pointer;
-    text-decoration: underline;
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 .register {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    .statute {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
+	.statute {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+	}
 }

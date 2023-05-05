@@ -11,36 +11,36 @@ import { AccountInfo } from '../../../interfaces/store/account-info.interface';
 import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
 
 @Component({
-    selector: 'app-dropdown',
-    templateUrl: './dropdown.component.html',
-    styleUrls: ['./dropdown.component.scss']
+	selector: 'app-dropdown',
+	templateUrl: './dropdown.component.html',
+	styleUrls: ['./dropdown.component.scss'],
 })
 export class DropdownComponent implements OnInit, OnDestroy {
-    public darkMode = false;
-    public settings$ = this.store.pipe(select(SETTINGS_SELECTORS.selectSettingsCollection));
-    private readonly unsubscribe$: Subject<void> = new Subject();
-    public account: AccountInfo = getAccountInitial();
+	public darkMode = false;
+	public settings$ = this.store.pipe(select(SETTINGS_SELECTORS.selectSettingsCollection));
+	private readonly unsubscribe$: Subject<void> = new Subject();
+	public account: AccountInfo = getAccountInitial();
 
-    constructor(private store: Store, public authService: AuthService) {}
+	constructor(private store: Store, public authService: AuthService) {}
 
-    public ngOnInit(): void {
-        this.settings$.pipe(takeUntil(this.unsubscribe$)).subscribe((data: Settings) => {
-            this.darkMode = data.darkMode;
-        });
-        this.store.select(ACCOUNT_SELECTORS.selectAccountCollection).subscribe((accountData) => {
-            this.account = accountData;
-        });
-    }
+	public ngOnInit(): void {
+		this.settings$.pipe(takeUntil(this.unsubscribe$)).subscribe((data: Settings) => {
+			this.darkMode = data.darkMode;
+		});
+		this.store.select(ACCOUNT_SELECTORS.selectAccountCollection).subscribe((accountData) => {
+			this.account = accountData;
+		});
+	}
 
-    public ngOnDestroy(): void {
-        this.unsubscribe$.next();
-    }
+	public ngOnDestroy(): void {
+		this.unsubscribe$.next();
+	}
 
-    public darkModeChanged() {
-        this.store.dispatch(SettingsActions.darkModeToggle({ darkMode: this.darkMode }));
-    }
+	public darkModeChanged() {
+		this.store.dispatch(SettingsActions.darkModeToggle({ darkMode: this.darkMode }));
+	}
 
-    public logout(): void {
-        this.authService.logout();
-    }
+	public logout(): void {
+		this.authService.logout();
+	}
 }

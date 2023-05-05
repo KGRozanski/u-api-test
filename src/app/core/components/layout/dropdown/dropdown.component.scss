@@ -2,47 +2,47 @@
 @use '../../../../../assets/scss/mixins/avatar.mixin' as avatar;
 
 :host {
-    position: fixed;
-    z-index: 90000;
-    top: 42px;
-    right: 13px;
-    width: 300px;
-    border-radius: variables.$border-radius;
-    overflow: hidden;
+	position: fixed;
+	z-index: 90000;
+	top: 42px;
+	right: 13px;
+	width: 300px;
+	border-radius: variables.$border-radius;
+	overflow: hidden;
 }
 
 .header {
-    display: flex;
-    padding: 15px;
+	display: flex;
+	padding: 15px;
 
-    .username {
-        margin: 10px 0 0 15px;
-        font-weight: 500;
-    }
+	.username {
+		margin: 10px 0 0 15px;
+		font-weight: 500;
+	}
 }
 
 ol {
-    li {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 20px;
-        user-select: none;
+	li {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		align-items: center;
+		padding: 15px 20px;
+		user-select: none;
 
-        i {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-        }
+		i {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+		}
 
-        span {
-            margin-left: 16px;
-        }
+		span {
+			margin-left: 16px;
+		}
 
-        div {
-            display: flex;
-            align-items: center;
-        }
-    }
+		div {
+			display: flex;
+			align-items: center;
+		}
+	}
 }

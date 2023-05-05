@@ -1,11 +1,11 @@
 @use '../variables.scss';
 
 @mixin page() {
-    router-outlet + * {
-        display: block;
-        width: 100%;
-        min-height: 80vh;
-        // Adding paddings to the page layout isnt necessary since we are using 'mat-drawer-content'
-        // margin: calc(variables.$toolbar-height + 15px) 15px 20px 15px;
-    }
+	router-outlet + * {
+		display: block;
+		width: 100%;
+		min-height: 80vh;
+		// Adding paddings to the page layout isnt necessary since we are using 'mat-drawer-content'
+		// margin: calc(variables.$toolbar-height + 15px) 15px 20px 15px;
+	}
 }

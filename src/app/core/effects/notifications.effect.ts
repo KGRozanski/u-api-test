@@ -8,32 +8,32 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class NotificationsEffect {
-    notifications$ = createEffect(
-        () =>
-            this.actions$.pipe(
-                ofType(NotificationActions.push),
-                tap((event) => {
-                    this.snackBar.open(this.getMessage(event.notification), undefined, {
-                        duration: 4000
-                    });
-                })
-            ),
-        { dispatch: false }
-    );
+	notifications$ = createEffect(
+		() =>
+			this.actions$.pipe(
+				ofType(NotificationActions.push),
+				tap((event) => {
+					this.snackBar.open(this.getMessage(event.notification), undefined, {
+						duration: 4000,
+					});
+				}),
+			),
+		{ dispatch: false },
+	);
 
-    constructor(private actions$: Actions, private snackBar: MatSnackBar) {}
+	constructor(private actions$: Actions, private snackBar: MatSnackBar) {}
 
-    private getMessage(notification: Notification): string {
-        if (notification.type === NotificationType.ERROR) {
-            return `⛔ ${notification.message}`;
-        } else if (notification.type === NotificationType.WARNING) {
-            return `⚠️ ${notification.message}`;
-        } else if (notification.type === NotificationType.INFO) {
-            return `💡 ${notification.message}`;
-        } else if (notification.type === NotificationType.SUCCESS) {
-            return `✅ ${notification.message}`;
-        } else {
-            return notification.message || '';
-        }
-    }
+	private getMessage(notification: Notification): string {
+		if (notification.type === NotificationType.ERROR) {
+			return `⛔ ${notification.message}`;
+		} else if (notification.type === NotificationType.WARNING) {
+			return `⚠️ ${notification.message}`;
+		} else if (notification.type === NotificationType.INFO) {
+			return `💡 ${notification.message}`;
+		} else if (notification.type === NotificationType.SUCCESS) {
+			return `✅ ${notification.message}`;
+		} else {
+			return notification.message || '';
+		}
+	}
 }

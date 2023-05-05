@@ -1,41 +1,41 @@
 @use '../../../../../assets/scss/mixins/avatar.mixin';
 
 :host-context(.avatar-dropdown) {
-    @include avatar.avatar(55px, 55px);
+	@include avatar.avatar(55px, 55px);
 }
 
 :host-context(.avatar-default) {
-    @include avatar.avatar(42px, 42px);
+	@include avatar.avatar(42px, 42px);
 }
 
 :host-context(.avatar-small) {
-    @include avatar.avatar(34px, 34px);
+	@include avatar.avatar(34px, 34px);
 }
 
 :host-context(.avatar-big) {
-    @include avatar.avatar(100px, 100px);
+	@include avatar.avatar(100px, 100px);
 }
 
 .wrapper {
-    border: 1px solid;
-    position: relative;
+	border: 1px solid;
+	position: relative;
 }
 
 .edit {
-    display: none;
+	display: none;
 }
 
 :host.hover-edit > .wrapper:hover > .edit {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3em;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 3em;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 50%;
+	cursor: pointer;
 }

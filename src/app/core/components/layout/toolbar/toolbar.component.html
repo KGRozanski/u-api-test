@@ -1,17 +1,17 @@
 <div class="left-panel">
-    <app-hamburger-btn (click)="openMenu()"></app-hamburger-btn>
-    <app-logotype class="app-logotype"></app-logotype>
+	<app-hamburger-btn (click)="openMenu()"></app-hamburger-btn>
+	<app-logotype class="app-logotype"></app-logotype>
 </div>
 
 <div class="right-panel">
-    <div appClickedOutside (clickedOutside)="toggleDropdown(true)">
-        <app-avatar class="cmp-avatar avatar-default" [photo]="account.photo" (click)="toggleDropdown()"></app-avatar>
+	<div appClickedOutside (clickedOutside)="toggleDropdown(true)">
+		<app-avatar class="cmp-avatar avatar-default" [photo]="account.photo" (click)="toggleDropdown()"></app-avatar>
 
-        <app-dropdown
-            appInteractedWithMenu
-            (interacted)="toggleDropdown(true)"
-            *ngIf="isDropdownVisible"
-            class="cmp-dropdown shadow-md"
-        ></app-dropdown>
-    </div>
+		<app-dropdown
+			appInteractedWithMenu
+			(interacted)="toggleDropdown(true)"
+			*ngIf="isDropdownVisible"
+			class="cmp-dropdown shadow-md"
+		></app-dropdown>
+	</div>
 </div>

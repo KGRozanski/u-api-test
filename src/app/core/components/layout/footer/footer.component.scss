@@ -1,9 +1,9 @@
 @use '../../../../../assets/scss/mixins/dark-mode-transition.mixin' as transition;
 
 :host {
-    display: block;
-    text-align: center;
-    margin: 30px auto;
+	display: block;
+	text-align: center;
+	margin: 30px auto;
 
-    @include transition.transition-dark-mode();
+	@include transition.transition-dark-mode();
 }

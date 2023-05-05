@@ -16,7 +16,7 @@
 @use './toolbar-theme';
 
 @mixin themeSwitch($default-theme, $dark-theme) {
-    @include mat.all-component-themes($default-theme);
+	@include mat.all-component-themes($default-theme);
 	@include account-info-theme.theme($default-theme);
 	@include avatar-theme.theme($default-theme);
 	@include cookies-theme.theme($default-theme);
@@ -32,7 +32,7 @@
 	@include toolbar-theme.theme($default-theme);
 
 	.darkMode {
-        @include mat.all-component-colors($dark-theme);
+		@include mat.all-component-colors($dark-theme);
 		@include account-info-theme.theme($dark-theme);
 		@include avatar-theme.theme($dark-theme);
 		@include cookies-theme.theme($dark-theme);
@@ -46,13 +46,13 @@
 		@include reset-password-form-theme.theme($dark-theme);
 		@include table-theme.theme($dark-theme);
 		@include toolbar-theme.theme($dark-theme);
-    }
+	}
 
-    body {
-        background-color: mat.get-color-from-palette(theme.$background-light, background);
-    }
+	body {
+		background-color: mat.get-color-from-palette(theme.$background-light, background);
+	}
 
-    body[class='darkMode'] {
-        background-color: mat.get-color-from-palette(theme.$background-dark, background);
-    }
+	body[class='darkMode'] {
+		background-color: mat.get-color-from-palette(theme.$background-dark, background);
+	}
 }

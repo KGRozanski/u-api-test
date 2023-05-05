@@ -3,10 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    production: false,
-    api_protocol: 'http',
-    api_origin: 'localhost',
-    api_port: '3000'
+	production: false,
+	api_protocol: 'http',
+	api_origin: 'localhost',
+	api_port: '3000',
 };
 
 /*

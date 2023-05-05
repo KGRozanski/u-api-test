@@ -1,12 +1,12 @@
 @mixin prev-layout() {
-    display: flex !important;
-    justify-content: right;
-    padding-right: 20%;
-    padding-top: 70px;
+	display: flex !important;
+	justify-content: right;
+	padding-right: 20%;
+	padding-top: 70px;
 
-    @media screen and (max-width: 600px) {
-        justify-content: center;
-        padding-right: 0 !important;
-        padding-top: 0 !important;
-    }
+	@media screen and (max-width: 600px) {
+		justify-content: center;
+		padding-right: 0 !important;
+		padding-top: 0 !important;
+	}
 }

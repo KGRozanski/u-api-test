@@ -1,93 +1,92 @@
-import { getScreenCenter } from "../utils/getScreenCenter.function";
-import { Chunk } from "../classes/Chunk";
-import world from "../data/map.json";
-import { Map as MapType } from "../types/Map.type";
-import { IChunk } from "../interfaces/Chunk.interface";
-import { DataService } from "./data.service";
-import { EntityFactory } from "../classes/Entity.factory";
-import { Constants } from "../constants/Constants.class";
-import { Injectable } from "@angular/core";
-import { IOService } from "./io.service";
-import { Container, Point, Sprite } from "pixi.js";
+import { getScreenCenter } from '../utils/getScreenCenter.function';
+import { Chunk } from '../classes/Chunk';
+import world from '../data/map.json';
+import { Map as MapType } from '../types/Map.type';
+import { IChunk } from '../interfaces/Chunk.interface';
+import { DataService } from './data.service';
+import { EntityFactory } from '../classes/Entity.factory';
+import { Constants } from '../constants/Constants.class';
+import { Injectable } from '@angular/core';
+import { IOService } from './io.service';
+import { Container, Point, Sprite } from 'pixi.js';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class MapService {
-  private _container: Container = new Container();
-  public origin: Point = getScreenCenter();
-  public map: MapType = world as MapType;
+	private _container: Container = new Container();
+	public origin: Point = getScreenCenter();
+	public map: MapType = world as MapType;
 
-  // array of chunks in current render distance to be drawn
-  private _chunksBuffer: Array<Chunk> = [];
-  private _renderDistance: number = 1;
-  public targetedTile: Sprite = null as unknown as Sprite;
-  public targetedChunk: Chunk = null as unknown as Chunk;
+	// array of chunks in current render distance to be drawn
+	private _chunksBuffer: Array<Chunk> = [];
+	private _renderDistance: number = 1;
+	public targetedTile: Sprite = null as unknown as Sprite;
+	public targetedChunk: Chunk = null as unknown as Chunk;
 
-  constructor(private dataService: DataService, private IOService: IOService) {
-    this.container.position = this.origin;
+	constructor(private dataService: DataService, private IOService: IOService) {
+		this.container.position = this.origin;
 
-    this.map.forEach((chunkData: IChunk) => {
-      const CHUNK = new Chunk(this, chunkData, this.dataService);
-      this._chunksBuffer.push(CHUNK);
-    });
+		this.map.forEach((chunkData: IChunk) => {
+			const CHUNK = new Chunk(this, chunkData, this.dataService);
+			this._chunksBuffer.push(CHUNK);
+		});
 
-    this._chunksBuffer.forEach((chunk: Chunk) => {
-      chunk.render();
-      this._container.addChild(chunk.container);
-    });
+		this._chunksBuffer.forEach((chunk: Chunk) => {
+			chunk.render();
+			this._container.addChild(chunk.container);
+		});
 
-    this.IOService.displacementVector$
-      .subscribe((value: Point) => {
-        this.updateMapPosition(value);
-      });
-  
-    this.setupListener();
-  }
+		this.IOService.displacementVector$.subscribe((value: Point) => {
+			this.updateMapPosition(value);
+		});
 
-  public updateMapPosition(playerVector: Point): void {
-    this.container.position = this.container.position.add(playerVector);
-  }
+		this.setupListener();
+	}
 
-  public get container(): Container {
-    return this._container;
-  }
+	public updateMapPosition(playerVector: Point): void {
+		this.container.position = this.container.position.add(playerVector);
+	}
 
-  public getChunk(coords: Point): Chunk | undefined {
-    return this._chunksBuffer.find((chunk: any) => chunk.coords.equals(coords));
-  }
+	public get container(): Container {
+		return this._container;
+	}
 
-  public clearGraphics(): void {
-    this._chunksBuffer.forEach((chunk: any) => chunk.clearGraphics());
-  }
+	public getChunk(coords: Point): Chunk | undefined {
+		return this._chunksBuffer.find((chunk: any) => chunk.coords.equals(coords));
+	}
 
-  public setupListener(): void {
-    this.dataService.buildEntity$.subscribe((entityName) => {
-      EntityFactory.setStrategy(entityName);
-      const choosenEntity = EntityFactory.entity.getSprite();
+	public clearGraphics(): void {
+		this._chunksBuffer.forEach((chunk: any) => chunk.clearGraphics());
+	}
 
-      this._container.onmousemove = (event) => {
-        if (this.targetedTile) {
-          choosenEntity.position.set(
-            this.targetedTile.position.x + (Constants.tileSize - choosenEntity.width) / 2,
-            this.targetedTile.position.y - (choosenEntity.height - 100)
-          );
+	public setupListener(): void {
+		this.dataService.buildEntity$.subscribe((entityName) => {
+			EntityFactory.setStrategy(entityName);
+			const choosenEntity = EntityFactory.entity.getSprite();
 
-          this.targetedChunk.entitiesContainer.addChild(choosenEntity);
+			this._container.onmousemove = (event) => {
+				if (this.targetedTile) {
+					choosenEntity.position.set(
+						this.targetedTile.position.x + (Constants.tileSize - choosenEntity.width) / 2,
+						this.targetedTile.position.y - (choosenEntity.height - 100),
+					);
 
-          if (this.targetedChunk.tracks) {
-            const tempContainer: Container = this.targetedChunk.entitiesContainer.children[
-              this.targetedChunk.tracks!.x + this.targetedChunk.tracks!.y
-            ] as Container;
+					this.targetedChunk.entitiesContainer.addChild(choosenEntity);
 
-            if (tempContainer) {
-              tempContainer.addChild(choosenEntity);
-            }
-          }
+					if (this.targetedChunk.tracks) {
+						const tempContainer: Container = this.targetedChunk.entitiesContainer.children[
+							this.targetedChunk.tracks!.x + this.targetedChunk.tracks!.y
+						] as Container;
 
-          this._container.onclick = (event) => {
-            this._container.onmousemove = null;
-          };
-        }
-      };
-    });
-  }
+						if (tempContainer) {
+							tempContainer.addChild(choosenEntity);
+						}
+					}
+
+					this._container.onclick = (event) => {
+						this._container.onmousemove = null;
+					};
+				}
+			};
+		});
+	}
 }

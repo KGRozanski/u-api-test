@@ -1,6 +1,6 @@
-import { ITile } from "./Tile.interface";
+import { ITile } from './Tile.interface';
 
 export interface IChunk {
-    coords: [number, number];
-    tiles: Array<[ITile]>;
+	coords: [number, number];
+	tiles: Array<[ITile]>;
 }

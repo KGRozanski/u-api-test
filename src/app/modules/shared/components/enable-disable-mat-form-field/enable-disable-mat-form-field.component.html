@@ -1,13 +1,13 @@
 <mat-form-field appearance="fill" [formGroup]="formGroupDir.form">
-    <mat-label>{{ name }}</mat-label>
-    <input matInput type="text" [formControlName]="name" [errorStateMatcher]="errMatcher" />
-    <button type="button" matSuffix mat-icon-button aria-label="Edit" (click)="toggleControl()">
-        <ng-container *ngIf="formCtrl.disabled">
-            <mat-icon>edit</mat-icon>
-        </ng-container>
-        <ng-container *ngIf="!formCtrl.disabled">
-            <mat-icon>done</mat-icon>
-        </ng-container>
-    </button>
-    <mat-error> An error has occurred </mat-error>
+	<mat-label>{{ name }}</mat-label>
+	<input matInput type="text" [formControlName]="name" [errorStateMatcher]="errMatcher" />
+	<button type="button" matSuffix mat-icon-button aria-label="Edit" (click)="toggleControl()">
+		<ng-container *ngIf="formCtrl.disabled">
+			<mat-icon>edit</mat-icon>
+		</ng-container>
+		<ng-container *ngIf="!formCtrl.disabled">
+			<mat-icon>done</mat-icon>
+		</ng-container>
+	</button>
+	<mat-error> An error has occurred </mat-error>
 </mat-form-field>
