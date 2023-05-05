@@ -41,6 +41,10 @@ export class WSService {
 		this.socket.on('initState', (e: any) => {
 			this.dataService.initPlayerState$.next(e);
 		});
+
+		this.socket.on('entitiesPositions', (e: any) => {
+			console.log(e[0].position)
+		})
 	}
 
 	public sendMsg(msg: string): void {

@@ -20,16 +20,10 @@ export class Soldier {
 	) {
 		this.loadSprite().then(() => {
 			const anim = new AnimatedSprite(this._sprite.animations['walk_up']);
-			// anim.eventMode = 'static';
-			anim.on('click', ($event) => {
-				anim.currentFrame = 0;
-				anim.stop();
-			});
 			anim.position = getScreenCenter();
 			anim.texture.baseTexture.scaleMode = SCALE_MODES.NEAREST;
 			anim.scale.set(3);
 			anim.animationSpeed = 0.16;
-			// this._sprite.parse();
 			anim.play();
 
 			this.entitiesContainer.addChild(anim);
@@ -40,7 +34,8 @@ export class Soldier {
 						return JSON.stringify(prev) == JSON.stringify(cur);
 					}),
 				)
-				.subscribe((val) => {
+				.subscribe((val: Point) => {
+					this.position = this.position.add(position);
 					const dirKey: keyof typeof Direction = (val.x + ',' + val.y) as any;
 
 					if ((dirKey as any) == '0,0') {
@@ -51,10 +46,6 @@ export class Soldier {
 						anim.play();
 					}
 				});
-		});
-
-		this.IOService.displacementVector$.subscribe((position: Point) => {
-			this.position = this.position.add(position);
 		});
 
 		this.IOService.displacementVector$.pipe(throttleTime(100)).subscribe(() => {

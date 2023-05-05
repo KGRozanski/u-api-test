@@ -46,7 +46,7 @@
 		@include reset-password-form-theme.theme($dark-theme);
 		@include table-theme.theme($dark-theme);
 		@include toolbar-theme.theme($dark-theme);
-	}
+    }
 
 	body {
 		background-color: mat.get-color-from-palette(theme.$background-light, background);
