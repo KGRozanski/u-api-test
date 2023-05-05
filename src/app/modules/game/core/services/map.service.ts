@@ -6,12 +6,14 @@ import { IChunk } from '../interfaces/Chunk.interface';
 import { DataService } from './data.service';
 import { EntityFactory } from '../classes/Entity.factory';
 import { Constants } from '../constants/Constants.class';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { IOService } from './io.service';
-import { Container, Point, Sprite } from 'pixi.js';
+import { Application, Container, Point, Sprite } from 'pixi.js';
+import { PIXI_APPLICATION } from '../tokens/application.di-token';
 
 @Injectable({ providedIn: 'root' })
 export class MapService {
+	private _application: Application;
 	private _container: Container = new Container();
 	public origin: Point = getScreenCenter();
 	public map: MapType = world as MapType;
@@ -22,7 +24,8 @@ export class MapService {
 	public targetedTile: Sprite = null as unknown as Sprite;
 	public targetedChunk: Chunk = null as unknown as Chunk;
 
-	constructor(private dataService: DataService, private IOService: IOService) {
+	constructor(@Inject(PIXI_APPLICATION) application: Application[], private dataService: DataService, private IOService: IOService) {
+		this._application = application[0];
 		this.container.position = this.origin;
 
 		this.map.forEach((chunkData: IChunk) => {
@@ -40,6 +43,7 @@ export class MapService {
 		});
 
 		this.setupListener();
+		this._application.stage.addChild(this.container);
 	}
 
 	public updateMapPosition(playerVector: Point): void {

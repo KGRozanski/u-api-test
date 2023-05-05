@@ -84,6 +84,7 @@ import { GameModule } from './modules/game/game.module';
 		}),
 		EffectsModule.forRoot([AccountEffect, NotificationsEffect, HydrationEffects]),
 		GameModule,
+
 	],
 })
 export class AppModule {}

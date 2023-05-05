@@ -1,7 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, HostListener, Inject, OnDestroy, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 
-import * as PIXI from 'pixi.js';
 import { MapService } from './core/services/map.service';
 
 import '@pixi/math-extras';
@@ -11,6 +10,7 @@ import { DataService } from './core/services/data.service';
 import { IOService } from './core/services/io.service';
 import { Soldier } from './core/classes/Soldier';
 import { WSService } from './core/services/ws.service';
+import { PIXI_APPLICATION } from './core/tokens/application.di-token';
 
 declare let globalThis: any;
 
@@ -21,9 +21,6 @@ declare let globalThis: any;
 	encapsulation: ViewEncapsulation.None,
 })
 export class GameComponent implements OnDestroy {
-	// The application will create a renderer using WebGL, if possible,
-	// with a fallback to a canvas render. It will also setup the ticker
-	// and the root stage PIXI.Container
 	private Application: Application;
 	private _debugMode = false;
 	public entitiesContainer: Container = new Container();
@@ -40,20 +37,14 @@ export class GameComponent implements OnDestroy {
 
 	constructor(
 		@Inject(DOCUMENT) private document: Document,
+		@Inject(PIXI_APPLICATION) application: Application[],
 		private dataService: DataService,
 		private map: MapService,
 		private IOService: IOService,
 		private readonly viewRef: ViewContainerRef,
 		private readonly WS: WSService,
 	) {
-		this.Application = new PIXI.Application({
-			resizeTo: window,
-			resolution: window.devicePixelRatio,
-			autoDensity: true,
-			antialias: true,
-		});
-		dataService.application = this.Application
-		this.Application.stage.addChild(this.map.container);
+		this.Application = application[0];
 		this.Application.stage.addChild(this.entitiesContainer);
 		this.viewRef.element.nativeElement.appendChild(this.Application.view as any);
 
