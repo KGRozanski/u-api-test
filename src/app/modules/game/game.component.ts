@@ -52,7 +52,7 @@ export class GameComponent implements OnDestroy {
 			autoDensity: true,
 			antialias: true,
 		});
-		dataService.application$.next(this.Application);
+		dataService.application = this.Application
 		this.Application.stage.addChild(this.map.container);
 		this.Application.stage.addChild(this.entitiesContainer);
 		this.viewRef.element.nativeElement.appendChild(this.Application.view as any);

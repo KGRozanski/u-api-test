@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Socket, io } from 'socket.io-client';
 import { LogService } from 'src/app/modules/shared/services/log.service';
 import { DataService } from './data.service';
-import { throttleTime } from 'rxjs';
 import { IOService } from './io.service';
+import { ServerToClientEvents, ClientToServerEvents, PublicState } from '@fadein/commons';
 
 @Injectable({ providedIn: 'root' })
 export class WSService {
-	private socket: Socket<any, any> = io('http://localhost:3000', {
+	private socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:3000', {
 		transports: ['websocket'],
 		auth: {
 			token: 'test-auth-token', //currently not used; retrieved from cookie ;)
@@ -22,17 +22,8 @@ export class WSService {
 		this.socket.on('connect', () => {
 			this.logger.log('[WebSocket] Connected');
 		});
-		// this.socket.emit('events', (response: any) => {
-		//     console.log('event', response);
-		// });
 
-		this.socket.on('events', (e: any) => {
-			console.log(e);
-		});
 
-		this.socket.on('playersList', (e: any) => {
-			console.log(e);
-		});
 
 		this.socket.on('chat', (msg: string) => {
 			this.dataService.pushMsg(msg);
@@ -42,9 +33,9 @@ export class WSService {
 			this.dataService.initPlayerState$.next(e);
 		});
 
-		this.socket.on('entitiesPositions', (e: any) => {
-			console.log(e[0].position)
-		})
+		this.socket.on('stateSnapshot', (e: PublicState) => {
+			console.log(e.positions[0].position)
+		});
 	}
 
 	public sendMsg(msg: string): void {
@@ -52,7 +43,7 @@ export class WSService {
 	}
 
 	// type should be from library common with serv
-	public emit(type: any, msg: any): void {
+	public emit(type: keyof ClientToServerEvents, msg: any): void {
 		this.socket.emit(type, msg);
 	}
 }

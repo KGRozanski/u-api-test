@@ -35,7 +35,6 @@ export class Soldier {
 					}),
 				)
 				.subscribe((val: Point) => {
-					this.position = this.position.add(position);
 					const dirKey: keyof typeof Direction = (val.x + ',' + val.y) as any;
 
 					if ((dirKey as any) == '0,0') {
@@ -46,6 +45,12 @@ export class Soldier {
 						anim.play();
 					}
 				});
+		});
+
+		this.IOService.displacementVector$.subscribe((position: Point) => {
+			if (this.position) {
+				this.position = this.position.add(position);
+			}
 		});
 
 		this.IOService.displacementVector$.pipe(throttleTime(100)).subscribe(() => {

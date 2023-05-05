@@ -67,7 +67,7 @@ export class MapService {
 				if (this.targetedTile) {
 					choosenEntity.position.set(
 						this.targetedTile.position.x + (Constants.tileSize - choosenEntity.width) / 2,
-						this.targetedTile.position.y - (choosenEntity.height - 100),
+						this.targetedTile.position.y - (choosenEntity.height - 100)
 					);
 
 					this.targetedChunk.entitiesContainer.addChild(choosenEntity);
