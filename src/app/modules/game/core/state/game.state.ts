@@ -1,5 +1,8 @@
-import { State } from "../interfaces/State.interface";
+import { GameState } from "../interfaces/GameState.interface";
 
-export const initialState: State = {
-    initPlayerData: null
+export const initialState: GameState = {
+    initPlayerData: null,
+    chat: {
+        messages: []
+    }
 };

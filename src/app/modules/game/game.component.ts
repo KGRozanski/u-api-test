@@ -57,14 +57,6 @@ export class GameComponent implements OnDestroy {
 
 		this.Application.ticker.add(this.ticker);
 
-
-
-		// const description = new Text(`${this.Application.ticker.FPS}`, {fill: '#ff0000'});
-		//   description.position = new Point(0,0)
-
-		// const fpsContainer = new Container();
-
-		// fpsContaineconsole.log(this.Application.ticker)
 	}
 
 	ngOnDestroy(): void {

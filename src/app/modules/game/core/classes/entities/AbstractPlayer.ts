@@ -1,4 +1,4 @@
-import { AnimatedSprite, Assets, Point, SCALE_MODES, Spritesheet } from "pixi.js";
+import { AnimatedSprite, Point, SCALE_MODES, Spritesheet } from "pixi.js";
 import { getScreenCenter } from "../../utils/getScreenCenter.function";
 
 export abstract class PlayerAbstract {

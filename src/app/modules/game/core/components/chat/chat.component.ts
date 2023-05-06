@@ -3,6 +3,7 @@ import {
 	Component,
 	ElementRef,
 	HostListener,
+	OnDestroy,
 	QueryList,
 	ViewChild,
 	ViewChildren,
@@ -11,13 +12,17 @@ import {
 import { IOService } from '../../services/io.service';
 import { WSService } from '../../services/ws.service';
 import { DataService } from '../../services/data.service';
-
+import { BehaviorSubject, Subject, Subscription, concatMap, of, switchMap, takeUntil } from 'rxjs';
+import { Actions, ofType } from '@ngrx/effects';
+import * as GameActions from '../../actions/game.actions';
+import { Store } from '@ngrx/store';
+import * as GameSelectors from '../../selectors/game.selectors';
 @Component({
 	selector: 'app-chat',
 	templateUrl: './chat.component.html',
 	styleUrls: ['./chat.component.scss'],
 })
-export class ChatComponent implements AfterViewInit {
+export class ChatComponent implements AfterViewInit, OnDestroy {
 	@HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
 		if (event.key === 't' || event.key === '/') {
 			this.isHidden = false;
@@ -46,17 +51,40 @@ export class ChatComponent implements AfterViewInit {
 	@ViewChildren('msgs')
 	public msgsContainer: QueryList<any>;
 	public isHidden = true;
-	public chat$ = this.dataService.chat$;
+	public receivedToRender: Array<string> = [];
+	public allMessages$ = this.store.select(GameSelectors.selectChatMessages);
+	private readonly destroy$ = new Subject();
 
-	constructor(private io: IOService, private readonly WS: WSService, private readonly dataService: DataService) {}
+	constructor(
+		private io: IOService,
+		private readonly WS: WSService,
+		private actions$: Actions,
+		private store: Store,
+	) {
+		this.actions$
+		.pipe(
+			ofType(GameActions.gameChatNewMsg),
+			takeUntil(this.destroy$)
+		)
+		.subscribe((data) => {
+			this.receivedToRender.push(data.msg);
+		});
+	}
 
 	ngAfterViewInit(): void {
-		this.msgsContainer.changes.subscribe((e) => {
-			const CURRENT_EL = e.last.nativeElement;
-			setTimeout(() => {
-				CURRENT_EL.remove();
-			}, 10000);
-		});
+		this.msgsContainer.changes
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((e) => {
+				const CURRENT_EL = e.last.nativeElement;
+				setTimeout(() => {
+					CURRENT_EL.remove();
+				}, 10000);
+			});
+	}
+
+	ngOnDestroy(): void {
+		this.destroy$.next('');
+		this.destroy$.complete();
 	}
 
 	// Scroll all messages to the top to see last received ones

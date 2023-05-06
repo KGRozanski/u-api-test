@@ -26,18 +26,16 @@ export class WSService {
 		});
 
 
-
 		this.socket.on('chat', (msg: string) => {
-			this.dataService.pushMsg(msg);
+			this.store.dispatch(GameActions.gameChatNewMsg({msg}));
 		});
 
 		this.socket.on('initState', (e: any) => {
-			this.dataService.initPlayerState$.next(e);
 			this.store.dispatch(GameActions.gameInit({data: e}));
 		});
 
 		this.socket.on('stateSnapshot', (e: PublicState) => {
-			console.log(e.positions[0].position)
+			// console.log(e.positions[0].position)
 		});
 	}
 

@@ -32,3 +32,7 @@ export const gamePlayerLoggedOut = createAction(
   props<{ data: any }>()
 )
 
+export const gameChatNewMsg = createAction(
+  '[Game] Chat: New message',
+  props<{ msg: string }>()
+)

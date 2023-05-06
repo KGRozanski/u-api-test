@@ -1,7 +1,7 @@
 <div class="msgs" [ngClass]="{ opaque: !isHidden }">
-	<span class="animated" #msgs *ngFor="let msg of chat$ | async" innerHTML="{{ msg }}"></span>
+	<span class="animated" #msgs *ngFor="let msg of receivedToRender" innerHTML="{{ msg }}"></span>
 </div>
 <div #permanent class="msgs msgs--permanent" [ngClass]="{ opaque: isHidden }">
-	<span *ngFor="let msg of chat$ | async" innerHTML="{{ msg }}"></span>
+	<span *ngFor="let msg of allMessages$ | async" innerHTML="{{ msg }}"></span>
 </div>
 <input #userInput type="text" [ngClass]="{ hidden: isHidden }" />
