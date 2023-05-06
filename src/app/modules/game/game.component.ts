@@ -5,12 +5,12 @@ import { MapService } from './core/services/map.service';
 
 import '@pixi/math-extras';
 import '@pixi/events';
-import { Application, Container, Point } from 'pixi.js';
+import { Application } from 'pixi.js';
 import { DataService } from './core/services/data.service';
 import { IOService } from './core/services/io.service';
-import { Soldier } from './core/classes/Soldier';
 import { WSService } from './core/services/ws.service';
 import { PIXI_APPLICATION } from './core/tokens/application.di-token';
+import { EntitiesService } from './core/services/entities.service';
 
 declare let globalThis: any;
 
@@ -23,9 +23,7 @@ declare let globalThis: any;
 export class GameComponent implements OnDestroy {
 	private Application: Application;
 	private _debugMode = false;
-	public entitiesContainer: Container = new Container();
 	public ticker;
-	public Soldier: Soldier;
 
 	@HostListener('document:keydown', ['$event'])
 	onDebugToggle(event: KeyboardEvent) {
@@ -43,9 +41,9 @@ export class GameComponent implements OnDestroy {
 		private IOService: IOService,
 		private readonly viewRef: ViewContainerRef,
 		private readonly WS: WSService,
+		private readonly entitiesService: EntitiesService
 	) {
 		this.Application = application[0];
-		this.Application.stage.addChild(this.entitiesContainer);
 		this.viewRef.element.nativeElement.appendChild(this.Application.view as any);
 
 		// assign info to global context vars for pixi chrome devtool extention
@@ -59,16 +57,7 @@ export class GameComponent implements OnDestroy {
 
 		this.Application.ticker.add(this.ticker);
 
-		// Initial event with player data fired once at logon used only for hydration
-		this.dataService.initPlayerState$.subscribe((playerData: any) => {
-			this.Soldier = new Soldier(
-				this.map,
-				this.IOService,
-				this.entitiesContainer,
-				this.WS,
-				new Point(playerData.position.x, playerData.position.y),
-			);
-		});
+
 
 		// const description = new Text(`${this.Application.ticker.FPS}`, {fill: '#ff0000'});
 		//   description.position = new Point(0,0)

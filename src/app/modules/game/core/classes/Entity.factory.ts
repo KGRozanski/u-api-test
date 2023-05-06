@@ -1,6 +1,6 @@
 import { EntityClassName } from '../types/Entity.type';
-import { AbstractEntity } from './AbstractEntity';
-import Entites from './entities/_index';
+import { AbstractEntity } from './entities/AbstractEntity';
+import Entites from './entities/buildings/_index';
 
 export class EntityFactory {
 	public static id = 0;

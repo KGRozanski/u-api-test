@@ -4,7 +4,8 @@ import { LogService } from 'src/app/modules/shared/services/log.service';
 import { DataService } from './data.service';
 import { IOService } from './io.service';
 import { ServerToClientEvents, ClientToServerEvents, PublicState } from '@fadein/commons';
-
+import { Store } from '@ngrx/store';
+import * as GameActions from '../actions/game.actions';
 @Injectable({ providedIn: 'root' })
 export class WSService {
 	private socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:3000', {
@@ -18,6 +19,7 @@ export class WSService {
 		private readonly logger: LogService,
 		private readonly dataService: DataService,
 		private IOService: IOService,
+		private store: Store
 	) {
 		this.socket.on('connect', () => {
 			this.logger.log('[WebSocket] Connected');
@@ -31,6 +33,7 @@ export class WSService {
 
 		this.socket.on('initState', (e: any) => {
 			this.dataService.initPlayerState$.next(e);
+			this.store.dispatch(GameActions.gameInit({data: e}));
 		});
 
 		this.socket.on('stateSnapshot', (e: PublicState) => {

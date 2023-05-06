@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 
 import { GameComponent } from './game.component';
 import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
@@ -6,19 +6,28 @@ import { DebugComponent } from './core/components/debug/debug.component';
 import { CommonModule } from '@angular/common';
 import { ChatComponent } from './core/components/chat/chat.component';
 import { EffectsModule } from '@ngrx/effects';
-import { GameEffects } from './game.effects';
+import { GameEffects } from './core/effects/game.effects';
 import pixiInitializer from './core/functions/pixiInitializer';
 import { PIXI_APPLICATION } from './core/tokens/application.di-token';
+import { StoreModule } from '@ngrx/store';
+import { gameFeature } from './core/reducers/game.reducer';
+import { assetsLoader } from './core/functions/assetsLoder.function';
 
 @NgModule({
 	declarations: [GameComponent, ToolbarComponent, DebugComponent, ChatComponent],
-	imports: [CommonModule, EffectsModule.forFeature([GameEffects])],
+	imports: [CommonModule, EffectsModule.forFeature([GameEffects]), StoreModule.forFeature(gameFeature)],
 	providers: [
 		{
 			provide: PIXI_APPLICATION,
 			useFactory: pixiInitializer,
 			multi: true,
 		},
+		{
+			provide: APP_INITIALIZER,
+			useFactory: assetsLoader,
+			multi: true,
+			deps: [Injector]
+		}
 	],
 })
 export class GameModule {}

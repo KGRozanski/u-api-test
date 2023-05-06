@@ -1,4 +1,4 @@
-import * as fromGame from './game.reducer';
+import * as fromGame from '../reducers/game.reducer';
 import { selectGameState } from './game.selectors';
 
 describe('Game Selectors', () => {
