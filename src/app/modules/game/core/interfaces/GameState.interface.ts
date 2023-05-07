@@ -1,8 +1,9 @@
-import { PlayerState } from "@fadein/commons";
+import { PlayerState, PublicState } from "@fadein/commons";
 
 export interface GameState {
-    initPlayerData: PlayerState | null;
+    playerData: PlayerState | null;
     chat: {
         messages: Array<string>
-    }
+    },
+    stateSnapshot: PublicState | null
 }

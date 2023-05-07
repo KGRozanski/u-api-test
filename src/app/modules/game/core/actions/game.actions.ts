@@ -1,4 +1,4 @@
-import { PlayerState } from '@fadein/commons';
+import { PlayerState, PublicState } from '@fadein/commons';
 import { createAction, props } from '@ngrx/store';
 
 export const gameGames = createAction(
@@ -16,6 +16,10 @@ export const gameGamesFailure = createAction(
 );
 
 
+export const gameStateSnapshot = createAction(
+  '[Game] Game state snapshot',
+  props<{ data: PublicState }>()
+)
 
 export const gameInit = createAction(
   '[Game] Game Init',

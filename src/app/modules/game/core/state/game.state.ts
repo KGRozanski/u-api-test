@@ -1,8 +1,9 @@
 import { GameState } from "../interfaces/GameState.interface";
 
 export const initialState: GameState = {
-    initPlayerData: null,
+    playerData: null,
     chat: {
         messages: []
-    }
+    },
+    stateSnapshot: null
 };

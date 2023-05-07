@@ -14,7 +14,8 @@ import { PIXI_APPLICATION } from '../tokens/application.di-token';
 @Injectable({ providedIn: 'root' })
 export class MapService {
 	private _application: Application;
-	private _container: Container = new Container();
+	private _chunksContainer = new Container();
+	public container: Container = new Container();
 	public origin: Point = getScreenCenter();
 	public map: MapType = world as MapType;
 
@@ -27,6 +28,7 @@ export class MapService {
 	constructor(@Inject(PIXI_APPLICATION) application: Application[], private dataService: DataService, private IOService: IOService) {
 		this._application = application[0];
 		this.container.position = this.origin;
+		this.container.addChild(this._chunksContainer);
 
 		this.map.forEach((chunkData: IChunk) => {
 			const CHUNK = new Chunk(this, chunkData, this.dataService);
@@ -35,7 +37,7 @@ export class MapService {
 
 		this._chunksBuffer.forEach((chunk: Chunk) => {
 			chunk.render();
-			this._container.addChild(chunk.container);
+			this._chunksContainer.addChild(chunk.container);
 		});
 
 		this.IOService.displacementVector$.subscribe((value: Point) => {
@@ -50,9 +52,9 @@ export class MapService {
 		this.container.position = this.container.position.add(playerVector);
 	}
 
-	public get container(): Container {
-		return this._container;
-	}
+	// public get container(): Container {
+	// 	return this._container;
+	// }
 
 	public getChunk(coords: Point): Chunk | undefined {
 		return this._chunksBuffer.find((chunk: any) => chunk.coords.equals(coords));
@@ -67,7 +69,7 @@ export class MapService {
 			EntityFactory.setStrategy(entityName);
 			const choosenEntity = EntityFactory.entity.getSprite();
 
-			this._container.onmousemove = (event) => {
+			this.container.onmousemove = (event) => {
 				if (this.targetedTile) {
 					choosenEntity.position.set(
 						this.targetedTile.position.x + (Constants.tileSize - choosenEntity.width) / 2,
@@ -86,8 +88,8 @@ export class MapService {
 						}
 					}
 
-					this._container.onclick = (event) => {
-						this._container.onmousemove = null;
+					this.container.onclick = (event) => {
+						this.container.onmousemove = null;
 					};
 				}
 			};

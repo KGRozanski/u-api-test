@@ -3,7 +3,7 @@ import { Socket, io } from 'socket.io-client';
 import { LogService } from 'src/app/modules/shared/services/log.service';
 import { DataService } from './data.service';
 import { IOService } from './io.service';
-import { ServerToClientEvents, ClientToServerEvents, PublicState } from '@fadein/commons';
+import { ServerToClientEvents, ClientToServerEvents, PublicState, PlayerState } from '@fadein/commons';
 import { Store } from '@ngrx/store';
 import * as GameActions from '../actions/game.actions';
 @Injectable({ providedIn: 'root' })
@@ -35,8 +35,12 @@ export class WSService {
 		});
 
 		this.socket.on('stateSnapshot', (e: PublicState) => {
-			// console.log(e.positions[0].position)
+			this.store.dispatch(GameActions.gameStateSnapshot({data: e}));
 		});
+
+		this.socket.on('playerJoined', (e: PlayerState) => {
+			this.store.dispatch(GameActions.gamePlayerJoined({data: e}));
+		})
 	}
 
 	public sendMsg(msg: string): void {
