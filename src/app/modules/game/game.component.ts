@@ -57,6 +57,8 @@ export class GameComponent implements OnDestroy {
 
 		this.Application.ticker.add(this.ticker);
 
+		this.WS.openConnection();
+
 	}
 
 	ngOnDestroy(): void {

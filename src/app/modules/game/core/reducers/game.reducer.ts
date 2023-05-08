@@ -12,7 +12,7 @@ export const gameReducer = createReducer(
   on(GameActions.gameGames, state => state),
   on(GameActions.gameGamesSuccess, (state, action) => state),
   on(GameActions.gameGamesFailure, (state, action) => state),
-  on(GameActions.gameInit, (state, { data }) => ({...state, playerData: data})),
+  on(GameActions.gameInit, (state, { data }) => ({...state, playerData: data.playerData, entities: data.entities})),
   on(GameActions.gameChatNewMsg, (state, { msg }) => {
     return {
       ...state, 

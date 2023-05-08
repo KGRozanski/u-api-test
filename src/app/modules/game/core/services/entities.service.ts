@@ -10,9 +10,10 @@ import * as GameActions from '../actions/game.actions';
 import { PlayerState, PositionMeta, PublicState } from "@fadein/commons";
 import { PlayerAbstract } from "../classes/entities/AbstractPlayer";
 import * as GameSelectors from '../selectors/game.selectors';
-import { filter, map, mergeMap } from "rxjs";
+import { Subject, filter, map, mergeMap } from "rxjs";
 import { Enemy } from "../classes/entities/Enemy";
 import { MapService } from "./map.service";
+import { ACCOUNT_ACTIONS } from "src/app/core/actions/account.actions";
 @Injectable({providedIn: 'root'})
 export class EntitiesService {
     private Application: Application;
@@ -20,6 +21,7 @@ export class EntitiesService {
 	public entitiesContainer: Container = new Container();
     public entities: Array<PlayerAbstract> = [];
     public player: Player;
+    public destory$ = new Subject();
 
     constructor(
         @Inject(PIXI_APPLICATION) application: Application[],
@@ -37,8 +39,9 @@ export class EntitiesService {
         this.actions$.pipe(
             ofType(GameActions.gameInit)
         ).subscribe(({data}) => {
-            this.player = new Player(data, this.IOService, this.WSService);
+            this.player = new Player(data.playerData, this.IOService, this.WSService);
             this.playerContainer.addChild(this.player.playerAnimation);
+            this.addAllEntities(data.entities);
         });
 
         this.actions$.pipe(
@@ -46,11 +49,14 @@ export class EntitiesService {
             mergeMap(({data}) => {
                 return this.store.select(GameSelectors.selectPlayerData).pipe(
                     map((playerData) => ({playerData, data})),
-                    filter(val => val.data.id !== val.playerData?.id)
+                    filter(val => {
+                        console.log(val.data.id, val.playerData?.id)
+                        return val.data.id !== val.playerData?.id && val.playerData?.id !== undefined;
+                    })
                 )
             })
         ).subscribe(({data}) => {
-            this.addEntity(new Enemy(data));
+            this.addAllEntities([data]);
         });
 
         this.actions$.pipe(
@@ -59,14 +65,37 @@ export class EntitiesService {
             if (this.entities.length) {
                 this.entities.forEach((entity) => {
                     const ENTITY_SNAP = data.positions.find((el: PositionMeta) => el.SID === entity.playerData.socket.id);
-                    entity.moveEnemy(new Point(
-                        ENTITY_SNAP?.position.x,
-                        ENTITY_SNAP?.position.y
-                    ));
+                    if (ENTITY_SNAP) {
+                        entity.moveEnemy(new Point(
+                            ENTITY_SNAP?.position.x,
+                            ENTITY_SNAP?.position.y
+                        ));
+                    }
                 });
             }
         });
 
+        this.actions$.pipe(
+            ofType(GameActions.gamePlayerLoggedOut)
+        ).subscribe(({data}) => {
+            const ENTITY = this.entities.find((entity) => entity.playerData.id == data.id);
+
+            if (ENTITY) {
+                this.entities.splice(this.entities.indexOf(ENTITY), 1);
+                this.entitiesContainer.removeChild(ENTITY.playerAnimation);
+            }
+        });
+
+        this.actions$.pipe(
+            ofType(ACCOUNT_ACTIONS.logout)
+        ).subscribe(() => {
+            this.player.destroy$.next('');
+            this.player.destroy$.complete();
+            this.entitiesContainer.removeChildren();
+            this.playerContainer.removeChild(this.player.playerAnimation);
+            this.entities = [];
+            this.player = undefined as any;
+        });
     }
 
 
@@ -75,5 +104,10 @@ export class EntitiesService {
         this.entitiesContainer.addChild(entity.playerAnimation);
     }
 
+    public addAllEntities(entities: PlayerState[], a?: any): void {
+        entities.forEach((entity) => {
+            this.addEntity(new Enemy(entity));
+        })
+    }
 
 }

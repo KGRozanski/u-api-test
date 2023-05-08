@@ -1,4 +1,4 @@
-import { PlayerState, PublicState } from '@fadein/commons';
+import { InitState, PlayerState, PublicState } from '@fadein/commons';
 import { createAction, props } from '@ngrx/store';
 
 export const gameGames = createAction(
@@ -23,17 +23,17 @@ export const gameStateSnapshot = createAction(
 
 export const gameInit = createAction(
   '[Game] Game Init',
-  props<{ data: PlayerState }>()
+  props<{ data: InitState }>()
 )
 
 export const gamePlayerJoined = createAction(
   '[Game] Player joined',
-  props<{ data: any }>()
+  props<{ data: PlayerState }>()
 )
 
 export const gamePlayerLoggedOut = createAction(
   '[Game] Player has logged out',
-  props<{ data: any }>()
+  props<{ data: PlayerState }>()
 )
 
 export const gameChatNewMsg = createAction(

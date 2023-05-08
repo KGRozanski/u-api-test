@@ -10,6 +10,8 @@ import { Inject, Injectable } from '@angular/core';
 import { IOService } from './io.service';
 import { Application, Container, Point, Sprite } from 'pixi.js';
 import { PIXI_APPLICATION } from '../tokens/application.di-token';
+import { Actions, ofType } from '@ngrx/effects';
+import { ACCOUNT_ACTIONS } from 'src/app/core/actions/account.actions';
 
 @Injectable({ providedIn: 'root' })
 export class MapService {
@@ -25,7 +27,7 @@ export class MapService {
 	public targetedTile: Sprite = null as unknown as Sprite;
 	public targetedChunk: Chunk = null as unknown as Chunk;
 
-	constructor(@Inject(PIXI_APPLICATION) application: Application[], private dataService: DataService, private IOService: IOService) {
+	constructor(@Inject(PIXI_APPLICATION) application: Application[], private dataService: DataService, private IOService: IOService, private actions$: Actions) {
 		this._application = application[0];
 		this.container.position = this.origin;
 		this.container.addChild(this._chunksContainer);
@@ -43,6 +45,13 @@ export class MapService {
 		this.IOService.displacementVector$.subscribe((value: Point) => {
 			this.updateMapPosition(value);
 		});
+
+		// this.actions$.pipe(
+		// 	ofType(ACCOUNT_ACTIONS.logout)
+		// ).subscribe(() => {
+		// 	this.container.position = new Point(0,0);
+		// SHOULD PROPERLY ADD VECTORS WITH RELATION TO MAP ORIGIN
+		// });
 
 		this.setupListener();
 		this._application.stage.addChild(this.container);

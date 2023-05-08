@@ -1,7 +1,7 @@
 import { AnimatedSprite, Point, SCALE_MODES, Spritesheet } from "pixi.js";
 import { getScreenCenter } from "../../utils/getScreenCenter.function";
 import { PlayerState } from "@fadein/commons";
-import { BehaviorSubject, distinctUntilChanged } from "rxjs";
+import { BehaviorSubject, Subject, distinctUntilChanged, takeUntil } from "rxjs";
 import { Direction } from "../../enums/directions.enum";
 
 export abstract class PlayerAbstract {
@@ -9,6 +9,7 @@ export abstract class PlayerAbstract {
 	public sprite: Spritesheet;
 	public playerAnimation: AnimatedSprite;
 	public displacementVector$: BehaviorSubject<Point>;
+	public destroy$ = new Subject();
 
     constructor(sprite: Spritesheet) {
 			this.sprite = sprite;
@@ -25,6 +26,7 @@ export abstract class PlayerAbstract {
 	public animateFacing(): void {
 		this.displacementVector$
 		.pipe(
+			takeUntil(this.destroy$),
 			distinctUntilChanged((prev, cur) => {
 				return JSON.stringify(prev) == JSON.stringify(cur);
 			}),

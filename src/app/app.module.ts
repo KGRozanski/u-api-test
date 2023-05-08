@@ -79,7 +79,7 @@ import { GameModule } from './modules/game/game.module';
 		BrowserAnimationsModule,
 		StoreModule.forRoot(reducers, { metaReducers }),
 		StoreDevtoolsModule.instrument({
-			maxAge: 25,
+			maxAge: Number.MAX_VALUE,
 			logOnly: environment.production,
 		}),
 		EffectsModule.forRoot([AccountEffect, NotificationsEffect, HydrationEffects]),

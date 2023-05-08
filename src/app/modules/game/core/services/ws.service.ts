@@ -6,6 +6,9 @@ import { IOService } from './io.service';
 import { ServerToClientEvents, ClientToServerEvents, PublicState, PlayerState } from '@fadein/commons';
 import { Store } from '@ngrx/store';
 import * as GameActions from '../actions/game.actions';
+import { EntitiesService } from './entities.service';
+import { Actions, ofType } from '@ngrx/effects';
+import { ACCOUNT_ACTIONS } from 'src/app/core/actions/account.actions';
 @Injectable({ providedIn: 'root' })
 export class WSService {
 	private socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:3000', {
@@ -19,7 +22,8 @@ export class WSService {
 		private readonly logger: LogService,
 		private readonly dataService: DataService,
 		private IOService: IOService,
-		private store: Store
+		private store: Store,
+		private actions$: Actions
 	) {
 		this.socket.on('connect', () => {
 			this.logger.log('[WebSocket] Connected');
@@ -40,7 +44,18 @@ export class WSService {
 
 		this.socket.on('playerJoined', (e: PlayerState) => {
 			this.store.dispatch(GameActions.gamePlayerJoined({data: e}));
-		})
+		});
+
+		this.socket.on('playerLoggedOut', (e: PlayerState) => {
+			this.store.dispatch(GameActions.gamePlayerLoggedOut({data: e}));
+		});
+
+		this.actions$.pipe(
+			ofType(ACCOUNT_ACTIONS.logout)
+		).subscribe(() => {
+			this.socket.disconnect();
+		});
+
 	}
 
 	public sendMsg(msg: string): void {
@@ -50,5 +65,9 @@ export class WSService {
 	// type should be from library common with serv
 	public emit(type: keyof ClientToServerEvents, msg: any): void {
 		this.socket.emit(type, msg);
+	}
+
+	public openConnection(): void {
+		this.socket.connect();
 	}
 }
