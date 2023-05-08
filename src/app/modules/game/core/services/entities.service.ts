@@ -21,7 +21,6 @@ export class EntitiesService {
 	public entitiesContainer: Container = new Container();
     public entities: Array<PlayerAbstract> = [];
     public player: Player;
-    public destory$ = new Subject();
 
     constructor(
         @Inject(PIXI_APPLICATION) application: Application[],
@@ -41,22 +40,7 @@ export class EntitiesService {
         ).subscribe(({data}) => {
             this.player = new Player(data.playerData, this.IOService, this.WSService);
             this.playerContainer.addChild(this.player.playerAnimation);
-            this.addAllEntities(data.entities);
-        });
-
-        this.actions$.pipe(
-            ofType(GameActions.gamePlayerJoined),
-            mergeMap(({data}) => {
-                return this.store.select(GameSelectors.selectPlayerData).pipe(
-                    map((playerData) => ({playerData, data})),
-                    filter(val => {
-                        console.log(val.data.id, val.playerData?.id)
-                        return val.data.id !== val.playerData?.id && val.playerData?.id !== undefined;
-                    })
-                )
-            })
-        ).subscribe(({data}) => {
-            this.addAllEntities([data]);
+            this.addEntities(data.entities);
         });
 
         this.actions$.pipe(
@@ -76,6 +60,20 @@ export class EntitiesService {
         });
 
         this.actions$.pipe(
+            ofType(GameActions.gamePlayerJoined),
+            mergeMap(({data}) => {
+                return this.store.select(GameSelectors.selectPlayerData).pipe(
+                    map((playerData) => ({playerData, data})),
+                    filter(val => {
+                        return val.data.id !== val.playerData?.id && val.playerData?.id !== undefined;
+                    })
+                )
+            })
+        ).subscribe(({data}) => {
+            this.addEntities([data]);
+        });
+
+        this.actions$.pipe(
             ofType(GameActions.gamePlayerLoggedOut)
         ).subscribe(({data}) => {
             const ENTITY = this.entities.find((entity) => entity.playerData.id == data.id);
@@ -89,25 +87,30 @@ export class EntitiesService {
         this.actions$.pipe(
             ofType(ACCOUNT_ACTIONS.logout)
         ).subscribe(() => {
-            this.player.destroy$.next('');
-            this.player.destroy$.complete();
-            this.entitiesContainer.removeChildren();
-            this.playerContainer.removeChild(this.player.playerAnimation);
-            this.entities = [];
-            this.player = undefined as any;
+            this.reset();
         });
     }
 
 
-    public addEntity(entity: PlayerAbstract): void {
-        this.entities.push(entity);
-        this.entitiesContainer.addChild(entity.playerAnimation);
+    /**
+     * Instantiates entity classes
+     * @param entities 
+     */
+    public addEntities(entities: PlayerState[]): void {
+        entities.forEach((entity) => {
+            const ENTITY = new Enemy(entity);
+            this.entities.push(ENTITY);
+            this.entitiesContainer.addChild(ENTITY.playerAnimation);
+        })
     }
 
-    public addAllEntities(entities: PlayerState[], a?: any): void {
-        entities.forEach((entity) => {
-            this.addEntity(new Enemy(entity));
-        })
+    public reset(): void {
+        this.player.destroy$.next('');
+        this.player.destroy$.complete();
+        this.entitiesContainer.removeChildren();
+        this.playerContainer.removeChild(this.player.playerAnimation);
+        this.entities = [];
+        this.player = null as any;
     }
 
 }
