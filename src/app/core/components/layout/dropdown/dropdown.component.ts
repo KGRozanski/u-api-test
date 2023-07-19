@@ -9,7 +9,6 @@ import { AuthService } from '../../../auth/auth.service';
 import { getAccountInitial } from '../../../state/initials/account.initial';
 import { AccountInfo } from '../../../interfaces/store/account-info.interface';
 import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
-import { WSService } from 'src/app/modules/game/core/services/ws.service';
 import { ACCOUNT_ACTIONS } from 'src/app/core/actions/account.actions';
 
 @Component({
@@ -23,7 +22,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
 	private readonly unsubscribe$: Subject<void> = new Subject();
 	public account: AccountInfo = getAccountInitial();
 
-	constructor(private store: Store, public authService: AuthService, private WSService: WSService) {}
+	constructor(private store: Store, public authService: AuthService) {}
 
 	public ngOnInit(): void {
 		this.settings$.pipe(takeUntil(this.unsubscribe$)).subscribe((data: Settings) => {
