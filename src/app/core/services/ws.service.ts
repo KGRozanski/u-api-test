@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Socket, io } from 'socket.io-client';
 import { LogService } from 'src/app/modules/shared/services/log.service';
-import { DataService } from './data.service';
-import { IOService } from './io.service';
-import { ServerToClientEvents, ClientToServerEvents, PublicState, PlayerState } from '@fadein/commons';
+
+import { ServerToClientEvents, ClientToServerEvents } from '@fadein/commons';
 import { Store } from '@ngrx/store';
-import * as GameActions from '../actions/game.actions';
-import { EntitiesService } from './entities.service';
 import { Actions, ofType } from '@ngrx/effects';
 import { ACCOUNT_ACTIONS } from 'src/app/core/actions/account.actions';
-@Injectable({ providedIn: 'root' })
+import { ProxyHttpService } from './proxy.service';
+
+@Injectable()
 export class WSService {
 	private socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:3000', {
 		transports: ['websocket'],
@@ -20,41 +19,58 @@ export class WSService {
 
 	constructor(
 		private readonly logger: LogService,
-		private readonly dataService: DataService,
-		private IOService: IOService,
 		private store: Store,
-		private actions$: Actions
+		private actions$: Actions,
+		private service: ProxyHttpService
 	) {
-		this.socket.on('connect', () => {
-			this.logger.log('[WebSocket] Connected');
-		});
 
 
-		this.socket.on('chat', (msg: string) => {
-			this.store.dispatch(GameActions.gameChatNewMsg({msg}));
-		});
 
-		this.socket.on('initState', (e: any) => {
-			this.store.dispatch(GameActions.gameInit({data: e}));
-		});
+		// this.socket.on('initState', (e: any) => {
+		// 	this.store.dispatch(GameActions.gameInit({data: e}));
+		// });
 
-		this.socket.on('stateSnapshot', (e: PublicState) => {
-			this.store.dispatch(GameActions.gameStateSnapshot({data: e}));
-		});
+		// this.socket.on('stateSnapshot', (e: PublicState) => {
+		// 	this.store.dispatch(GameActions.gameStateSnapshot({data: e}));
+		// });
 
-		this.socket.on('playerJoined', (e: PlayerState) => {
-			this.store.dispatch(GameActions.gamePlayerJoined({data: e}));
-		});
+		// this.socket.on('playerJoined', (e: PlayerState) => {
+		// 	this.store.dispatch(GameActions.gamePlayerJoined({data: e}));
+		// });
 
-		this.socket.on('playerLoggedOut', (e: PlayerState) => {
-			this.store.dispatch(GameActions.gamePlayerLoggedOut({data: e}));
-		});
+		// this.socket.on('playerLoggedOut', (e: PlayerState) => {
+		// 	this.store.dispatch(GameActions.gamePlayerLoggedOut({data: e}));
+		// });
 
 		this.actions$.pipe(
 			ofType(ACCOUNT_ACTIONS.logout)
 		).subscribe(() => {
 			this.socket.disconnect();
 		});
+
+	}
+
+	public init(): void {
+
+		this.socket.on('connect', () => {
+			this.logger.log('[WebSocket] Connected');
+			console.log(this.socket.id)
+		});
+
+		this.socket.on('get_req' as any, (msg: string) => {
+			console.log(msg)
+			const REQ_URL = msg.match(/(?<=REQ_URL=\/api\/proxy)(.*)(?=;)/);
+			const REQ_HEAD = msg.match(/(?<=REQ_HEADERS=)(.*)(?=;)/);
+			// const REQ_BODY = msg.match(/(?<=REQ_BODY=)(.*)(?=;)/);
+
+			if (REQ_URL && REQ_HEAD) {
+				console.log('req')
+				this.service.proxyGET(REQ_URL[0], this.removeObjectKeys(JSON.parse(REQ_HEAD[0]))).subscribe((data) => {
+					console.log(data)
+				})
+			}
+		});
+
 
 	}
 
@@ -70,4 +86,32 @@ export class WSService {
 	public openConnection(): void {
 		this.socket.connect();
 	}
+
+
+
+
+	removeObjectKeys(obj: any) {
+		const UNSAFE_HEADERS_THAT_BROWSER_DONT_SET = [
+			'host',
+			'connection',
+			'user-agent',
+			'dnt',
+			'origin',
+			'sec-fetch-site',
+			'sec-fetch-mode',
+			'sec-fetch-dest',
+			'referer',
+			'accept-encoding'
+		];
+
+		let mObject = { ...obj }
+		for (const key of UNSAFE_HEADERS_THAT_BROWSER_DONT_SET) {
+			const { [String(key)]: _, ...rest } = mObject
+			mObject = { ...rest }
+		}
+
+		return JSON.stringify(mObject)
+	}
+	
 }
+

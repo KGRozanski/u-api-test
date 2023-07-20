@@ -7,11 +7,11 @@ import { UserModule } from './modules/user/user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './modules/shared/shared.module';
 import { ToolbarComponent } from './core/components/layout/toolbar/toolbar.component';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AuthService } from './core/auth/auth.service';
-import { EffectsModule } from '@ngrx/effects';
+import { Actions, EffectsModule } from '@ngrx/effects';
 import { AccountEffect } from './core/effects/account.effect';
 import { interceptorsProviders } from './core/interceptors/_interceptors';
 import { NotificationsEffect } from './core/effects/notifications.effect';
@@ -35,6 +35,7 @@ import { RESOLVERS_PROVIDERS } from './core/resolvers/_resolvers';
 import { DialogConfirmComponent } from './core/components/layout/dialog-confirm/dialog-confirm.component';
 import { ResetPasswordComponent } from './core/components/pages/reset-password/reset-password.component';
 import { CookiesComponent } from './core/components/layout/cookies/cookies.component';
+import { WSService } from './core/services/ws.service';
 
 @NgModule({
 	declarations: [
@@ -61,12 +62,13 @@ import { CookiesComponent } from './core/components/layout/cookies/cookies.compo
 		...GUARD_PROVIDERS,
 		...RESOLVERS_PROVIDERS,
 		AuthService,
+		WSService,
 		{
 			provide: APP_INITIALIZER,
 			useFactory: (authService: AuthService) => () => authService.initAuth(),
 			deps: [AuthService],
 			multi: true,
-		},
+		}
 	],
 	bootstrap: [AppComponent],
 	imports: [

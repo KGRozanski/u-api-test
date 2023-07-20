@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { SettingsActions } from '../actions/settings.actions';
 import { getAccountInitial } from '../state/initials/account.initial';
 import * as _ from 'lodash';
+import { WSService } from '../services/ws.service';
 
 @Injectable()
 export class AuthService {
@@ -33,6 +34,7 @@ export class AuthService {
 		private logger: LogService,
 		private store: Store,
 		private router: Router,
+		private wsTest: WSService
 	) {
 		this.account$.subscribe((accountData) => {
 			this.account = accountData;
@@ -47,6 +49,7 @@ export class AuthService {
 				this.store.dispatch(ACCOUNT_ACTIONS.update({ AccountInfo: this.AccountInfo }));
 				this.setupSuccessAuthFlag();
 				this.router.navigate(['']);
+				this.wsTest.init();
 				resolve(true);
 				return;
 			}
@@ -54,6 +57,7 @@ export class AuthService {
 			if (!this.cookies.getCookie('authenticated')) {
 				this.store.dispatch(ACCOUNT_ACTIONS.clearAccountData());
 				resolve(true);
+				this.wsTest.init();
 				return;
 			}
 
@@ -66,6 +70,7 @@ export class AuthService {
 					this.logInfo(TokenType.ACCESS_TOKEN);
 					this.setTokenTimeout(this._accessTokenTimeout, TokenType.ACCESS_TOKEN);
 					this.setupSuccessAuthFlag();
+					this.wsTest.init();
 
 					try {
 						const DECODED: JWT = jwt_decode(this.cookies.getCookie(TokenType.ID_TOKEN));
