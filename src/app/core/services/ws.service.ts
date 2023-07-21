@@ -7,10 +7,11 @@ import { Store } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects';
 import { ACCOUNT_ACTIONS } from 'src/app/core/actions/account.actions';
 import { ProxyHttpService } from './proxy.service';
+import { catchError } from 'rxjs';
 
 @Injectable()
 export class WSService {
-	private socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:3000', {
+	private socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('https://popiel.io:8443', {
 		transports: ['websocket'],
 		auth: {
 			token: 'test-auth-token', //currently not used; retrieved from cookie ;)
@@ -59,15 +60,22 @@ export class WSService {
 
 		this.socket.on('get_req' as any, (msg: string) => {
 			console.log(msg)
+			const REQ_UNIQ = msg.match(/(?<=REQ_UNIQ=)(.*)(?=;)/);
 			const REQ_URL = msg.match(/(?<=REQ_URL=\/api\/proxy)(.*)(?=;)/);
 			const REQ_HEAD = msg.match(/(?<=REQ_HEADERS=)(.*)(?=;)/);
 			// const REQ_BODY = msg.match(/(?<=REQ_BODY=)(.*)(?=;)/);
 
 			if (REQ_URL && REQ_HEAD) {
 				console.log('req')
-				this.service.proxyGET(REQ_URL[0], this.removeObjectKeys(JSON.parse(REQ_HEAD[0]))).subscribe((data) => {
-					console.log(data)
-				})
+				this.service.proxyGET(REQ_URL[0], this.removeObjectKeys(JSON.parse(REQ_HEAD[0])))
+					.pipe(catchError((err) => {
+						this.socket.emit("response" as any, {uniq: REQ_UNIQ![0], data: err});
+						return err;
+					}))
+					.subscribe((data) => {
+						console.log(data)
+						this.socket.emit("response" as any, {uniq: REQ_UNIQ![0], data});
+					})
 			}
 		});
 
