@@ -57,7 +57,6 @@ export class AuthService {
 			if (!this.cookies.getCookie('authenticated')) {
 				this.store.dispatch(ACCOUNT_ACTIONS.clearAccountData());
 				resolve(true);
-				this.wsTest.init();
 				return;
 			}
 

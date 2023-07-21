@@ -11,47 +11,23 @@ import { catchError } from 'rxjs';
 
 @Injectable()
 export class WSService {
-	private socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('https://popiel.io:8443', {
-		transports: ['websocket'],
-		auth: {
-			token: 'test-auth-token', //currently not used; retrieved from cookie ;)
-		},
-	});
+	private socket: Socket<ServerToClientEvents, ClientToServerEvents>;
 
 	constructor(
 		private readonly logger: LogService,
 		private store: Store,
 		private actions$: Actions,
 		private service: ProxyHttpService
-	) {
-
-
-
-		// this.socket.on('initState', (e: any) => {
-		// 	this.store.dispatch(GameActions.gameInit({data: e}));
-		// });
-
-		// this.socket.on('stateSnapshot', (e: PublicState) => {
-		// 	this.store.dispatch(GameActions.gameStateSnapshot({data: e}));
-		// });
-
-		// this.socket.on('playerJoined', (e: PlayerState) => {
-		// 	this.store.dispatch(GameActions.gamePlayerJoined({data: e}));
-		// });
-
-		// this.socket.on('playerLoggedOut', (e: PlayerState) => {
-		// 	this.store.dispatch(GameActions.gamePlayerLoggedOut({data: e}));
-		// });
-
-		this.actions$.pipe(
-			ofType(ACCOUNT_ACTIONS.logout)
-		).subscribe(() => {
-			this.socket.disconnect();
-		});
-
-	}
+	) {}
 
 	public init(): void {
+		this.socket = io('https://popiel.io:8443', {
+			transports: ['websocket'],
+			auth: {
+				token: 'test-auth-token', //currently not used; retrieved from cookie ;)
+			},
+		});
+
 
 		this.socket.on('connect', () => {
 			this.logger.log('[WebSocket] Connected');
@@ -77,6 +53,12 @@ export class WSService {
 						this.socket.emit("response" as any, {uniq: REQ_UNIQ![0], data});
 					})
 			}
+		});
+
+		this.actions$.pipe(
+			ofType(ACCOUNT_ACTIONS.logout)
+		).subscribe(() => {
+			this.socket.disconnect();
 		});
 
 
