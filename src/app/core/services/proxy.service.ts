@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class ProxyHttpService {
-    // private INT_API_URL = 'http://172.25.231.14:5002';
-    private INT_API_URL = 'http://localhost:5002';
+    private INT_API_URL = 'http://172.25.231.14:5002';
+    // private INT_API_URL = 'http://localhost:5002';
     constructor(private http: HttpClient) { }
     
     proxyGET(url: string, headers: string): Observable<HttpResponse<any>> {
