@@ -6,7 +6,7 @@ export const environment = {
 	production: false,
 	api_protocol: 'http',
 	api_origin: 'localhost',
-	api_port: '3000',
+	api_port: '3000'
 };
 
 /*
