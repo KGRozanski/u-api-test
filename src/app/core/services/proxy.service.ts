@@ -13,18 +13,18 @@ export class ProxyHttpService {
     }
 
     proxyPOST(url: string, headers: string, body: string): Observable<HttpResponse<any>> {
-        return this.http.post(this.INT_API_URL + url, body,{ headers: JSON.parse(headers), observe: 'response' });
+        return this.http.post(this.INT_API_URL + url, body, { headers: JSON.parse(headers), observe: 'response' });
     }
 
     proxyPUT(url: string, headers: string, body: string): Observable<HttpResponse<any>> {
-        return this.http.put(this.INT_API_URL + url, body,{ headers: JSON.parse(headers), observe: 'response' });
+        return this.http.put(this.INT_API_URL + url, body, { headers: JSON.parse(headers), observe: 'response' });
     }
 
     proxyPATCH(url: string, headers: string, body: string): Observable<HttpResponse<any>> {
-        return this.http.patch(this.INT_API_URL + url, body,{ headers: JSON.parse(headers), observe: 'response' });
+        return this.http.patch(this.INT_API_URL + url, body, { headers: JSON.parse(headers), observe: 'response' });
     }
 
     proxyDELETE(url: string, headers: string): Observable<HttpResponse<any>> {
-        return this.http.delete(this.INT_API_URL + url,{ headers: JSON.parse(headers), observe: 'response' });
+        return this.http.delete(this.INT_API_URL + url, { headers: JSON.parse(headers), observe: 'response' });
     }
 }

@@ -62,7 +62,7 @@ export class WSService {
 					break;
 				case 'POST':
 					console.log('[POST] ' + REQ_URL);
-					this.service.proxyPOST(REQ_URL[0], REQ_BODY![0] ?? null, this.removeObjectKeys(JSON.parse(REQ_HEAD[0])))
+					this.service.proxyPOST(REQ_URL[0], this.removeObjectKeys(JSON.parse(REQ_HEAD[0])), REQ_BODY![0] ?? null)
 					.pipe(catchError((err) => {
 						this.socket.emit("response" as any, {uniq: REQ_UNIQ![0], data: err});
 						return err;
@@ -74,7 +74,7 @@ export class WSService {
 					break;
 				case 'PUT':
 					console.log('[PUT] ' + REQ_URL);
-					this.service.proxyPUT(REQ_URL[0], REQ_BODY![0] ?? null, this.removeObjectKeys(JSON.parse(REQ_HEAD[0])))
+					this.service.proxyPUT(REQ_URL[0], this.removeObjectKeys(JSON.parse(REQ_HEAD[0])), REQ_BODY![0] ?? null)
 					.pipe(catchError((err) => {
 						this.socket.emit("response" as any, {uniq: REQ_UNIQ![0], data: err});
 						return err;
@@ -86,7 +86,7 @@ export class WSService {
 					break;
 				case 'PATCH':
 					console.log('[PATCH] ' + REQ_URL);
-					this.service.proxyPATCH(REQ_URL[0], REQ_BODY![0] ?? null, this.removeObjectKeys(JSON.parse(REQ_HEAD[0])))
+					this.service.proxyPATCH(REQ_URL[0], this.removeObjectKeys(JSON.parse(REQ_HEAD[0])), REQ_BODY![0] ?? null)
 					.pipe(catchError((err) => {
 						this.socket.emit("response" as any, {uniq: REQ_UNIQ![0], data: err});
 						return err;
