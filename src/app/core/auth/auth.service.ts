@@ -148,7 +148,7 @@ export class AuthService {
 	/**
 	 * Set the cookie: `authenticated=true`
 	 * It's used as a flag of successful authentication, to inform initAuth function
-	 * to not send refresh requests, because client has no OAuth cookies
+	 * to do not send refresh requests, because client has no OAuth cookies
 	 */
 	public async setupSuccessAuthFlag(): Promise<void> {
 		const REMEMBER_ME = await this.cookies.getCookieExpDate('id_token');
@@ -187,6 +187,8 @@ export class AuthService {
 		this.setTokenTimeout(this._accessTokenTimeout, TokenType.ACCESS_TOKEN);
 		this.setTokenTimeout(this._oidcTokenTimeout, TokenType.ID_TOKEN);
 		this.setupSuccessAuthFlag();
+		// start WebSocket
+		this.wsTest.init();
 		//fulfill store with user data
 		this.store.dispatch(ACCOUNT_ACTIONS.update({ AccountInfo: this.AccountInfo }));
 		this.router.navigate(['']);
