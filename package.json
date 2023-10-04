@@ -1,6 +1,6 @@
 {
 	"name": "fadein-test",
-	"version": "3.29.0",
+	"version": "3.29.1",
 	"scripts": {
 		"ng": "ng",
 		"prestart": "node ./src/scripts/gc/register-cmp-themes.js",
