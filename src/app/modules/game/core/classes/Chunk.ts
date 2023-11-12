@@ -1,4 +1,4 @@
-import { Container, Graphics, Point, Sprite, Text } from 'pixi.js';
+import { Container, DisplayObject, Graphics, Point, Sprite, Text } from 'pixi.js';
 import { Constants } from '../constants/Constants.class';
 import { Tile } from './Tile';
 import { isoToCar } from '../utils/isoToCar.function';
@@ -28,7 +28,7 @@ export class Chunk {
 		this._container.name = 'chunk';
 		this.coords = new Point(chunkData.coords[0], chunkData.coords[1]);
 		this.origin = this.coords.multiplyScalar(Constants.tileSize * Constants.chunkSize);
-		this._tileOutlineContainer.addChild(this._tileOutlineGraphics);
+		this._tileOutlineContainer.addChild(this._tileOutlineGraphics as DisplayObject);
 		this._container.position = carToIso(this.origin);
 		this._registerEventListeners();
 	}
@@ -115,12 +115,12 @@ export class Chunk {
 			carToIso(new Point(0, Constants.chunkSize * Constants.tileSize)),
 		);
 		outline.endFill();
-		this._debugContainer.addChild(outline);
+		this._debugContainer.addChild(outline as DisplayObject);
 
 		const description = new Text(`${this.coords.x}, ${this.coords.y}`, { fill: '#ff0000' });
 		description.position = new Point(0, 0);
 
-		this._debugContainer.addChild(description);
+		this._debugContainer.addChild(description as DisplayObject);
 	}
 
 	render() {
@@ -138,14 +138,14 @@ export class Chunk {
 				);
 				const TILE = new Tile(TILE_POS);
 				this._tiles[i].push(TILE.getSprite('/assets/img/tiles/dirt_256px.png'));
-				this._tilesContainer.addChild(this._tiles[i][j]);
-				this._debugContainer.addChild(TILE.debugText(`${j},${i}`));
+				this._tilesContainer.addChild(this._tiles[i][j] as DisplayObject);
+				this._debugContainer.addChild(TILE.debugText(`${j},${i}`) as DisplayObject);
 			}
 		}
 
-		this._container.addChild(this._tilesContainer, this._tileOutlineContainer);
+		this._container.addChild(this._tilesContainer as DisplayObject, this._tileOutlineContainer as DisplayObject);
 		this.renderChunkDiagnostics();
-		this.container.addChild(this.entitiesContainer, this._debugContainer);
+		this.container.addChild(this.entitiesContainer as DisplayObject, this._debugContainer as DisplayObject);
 	}
 
 	public clearGraphics(): void {
@@ -155,7 +155,7 @@ export class Chunk {
 	private getDepthContainer(): Container {
 		let container = new Container();
 		for (let index = 0; index < Constants.chunkSize * 2; index++) {
-			container.addChild(new Container());
+			container.addChild(new Container() as DisplayObject);
 		}
 
 		return container;

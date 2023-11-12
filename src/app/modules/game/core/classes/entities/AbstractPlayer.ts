@@ -13,7 +13,7 @@ export abstract class PlayerAbstract {
 
     constructor(sprite: Spritesheet) {
 			this.sprite = sprite;
-			this.playerAnimation = new AnimatedSprite(sprite.animations['walk_up']);
+			this.playerAnimation = new AnimatedSprite(sprite.animations['walk_up' as keyof typeof sprite.animations]);
 			this.playerAnimation.position = getScreenCenter();
 			this.playerAnimation.texture.baseTexture.scaleMode = SCALE_MODES.NEAREST;
 			this.playerAnimation.scale.set(3);
@@ -38,7 +38,7 @@ export abstract class PlayerAbstract {
 				this.playerAnimation.currentFrame = 0;
 				this.playerAnimation.stop();
 			} else {
-				this.playerAnimation.textures = this.sprite.animations[Direction[dirKey]];
+				this.playerAnimation.textures = this.sprite.animations[Direction[dirKey] as keyof typeof this.sprite.animations];
 				this.playerAnimation.play();
 			}
 		});

@@ -10,7 +10,8 @@
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
 		"gc": "bash ./src/scripts/gc/generate-component.sh",
-		"lint": "ng lint"
+		"lint": "ng lint",
+		"link": "bash ./src/scripts/link.sh"
 	},
 	"private": true,
 	"dependencies": {
@@ -28,14 +29,14 @@
 		"@ngrx/effects": "^14.3.2",
 		"@ngrx/store": "^14.3.2",
 		"@ngrx/store-devtools": "^14.3.2",
-		"@pixi/events": "^7.2.0",
-		"@pixi/math-extras": "^7.2.0",
+		"@pixi/events": "^7.3.1",
+		"@pixi/math-extras": "^7.3.1",
 		"@types/lodash": "^4.14.186",
 		"@types/offscreencanvas": "^2019.7.0",
 		"jwt-decode": "^3.1.2",
 		"lodash": "^4.17.21",
 		"ngx-image-cropper": "^6.2.2",
-		"pixi.js": "^7.2.0",
+		"pixi.js": "^7.3.1",
 		"rxjs": "~7.5.0",
 		"socket.io-client": "^4.6.1",
 		"tslib": "^2.3.0",

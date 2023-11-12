@@ -8,7 +8,7 @@ import { EntityFactory } from '../classes/Entity.factory';
 import { Constants } from '../constants/Constants.class';
 import { Inject, Injectable } from '@angular/core';
 import { IOService } from './io.service';
-import { Application, Container, Point, Sprite } from 'pixi.js';
+import { Application, Container, DisplayObject, Point, Sprite } from 'pixi.js';
 import { PIXI_APPLICATION } from '../tokens/application.di-token';
 import { Actions, ofType } from '@ngrx/effects';
 import { ACCOUNT_ACTIONS } from 'src/app/core/actions/account.actions';
@@ -30,7 +30,7 @@ export class MapService {
 	constructor(@Inject(PIXI_APPLICATION) application: Application[], private dataService: DataService, private IOService: IOService, private actions$: Actions) {
 		this._application = application[0];
 		this.container.position = this.origin;
-		this.container.addChild(this._chunksContainer);
+		this.container.addChild(this._chunksContainer as DisplayObject);
 
 		this.map.forEach((chunkData: IChunk) => {
 			const CHUNK = new Chunk(this, chunkData, this.dataService);
@@ -39,7 +39,7 @@ export class MapService {
 
 		this._chunksBuffer.forEach((chunk: Chunk) => {
 			chunk.render();
-			this._chunksContainer.addChild(chunk.container);
+			this._chunksContainer.addChild(chunk.container as DisplayObject);
 		});
 
 		this.IOService.displacementVector$.subscribe((value: Point) => {
@@ -54,7 +54,7 @@ export class MapService {
 		// });
 
 		this.setupListener();
-		this._application.stage.addChild(this.container);
+		this._application.stage.addChild(this.container as DisplayObject);
 	}
 
 	public updateMapPosition(playerVector: Point): void {
@@ -85,7 +85,7 @@ export class MapService {
 						this.targetedTile.position.y - (choosenEntity.height - 100)
 					);
 
-					this.targetedChunk.entitiesContainer.addChild(choosenEntity);
+					this.targetedChunk.entitiesContainer.addChild(choosenEntity as DisplayObject);
 
 					if (this.targetedChunk.tracks) {
 						const tempContainer: Container = this.targetedChunk.entitiesContainer.children[
@@ -93,7 +93,7 @@ export class MapService {
 						] as Container;
 
 						if (tempContainer) {
-							tempContainer.addChild(choosenEntity);
+							tempContainer.addChild(choosenEntity as DisplayObject);
 						}
 					}
 

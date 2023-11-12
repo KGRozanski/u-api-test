@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
 import { PIXI_APPLICATION } from "../tokens/application.di-token";
-import { Application, Assets, Container, Point } from "pixi.js";
+import { Application, Assets, Container, DisplayObject, Point } from "pixi.js";
 import { Player } from "../classes/entities/Player";
 import { IOService } from "./io.service";
 import { WSService } from "./ws.service";
@@ -31,15 +31,15 @@ export class EntitiesService {
         private mapService: MapService
     ) {
         this.Application = application[0];
-		this.Application.stage.addChild(this.playerContainer);
-        this.mapService.container.addChild(this.entitiesContainer);
+		this.Application.stage.addChild(this.playerContainer as DisplayObject);
+        this.mapService.container.addChild(this.entitiesContainer as DisplayObject);
 
 
         this.actions$.pipe(
             ofType(GameActions.gameInit)
         ).subscribe(({data}) => {
             this.player = new Player(data.playerData, this.IOService, this.WSService);
-            this.playerContainer.addChild(this.player.playerAnimation);
+            this.playerContainer.addChild(this.player.playerAnimation as DisplayObject);
             this.addEntities(data.entities);
         });
 
@@ -80,7 +80,7 @@ export class EntitiesService {
 
             if (ENTITY) {
                 this.entities.splice(this.entities.indexOf(ENTITY), 1);
-                this.entitiesContainer.removeChild(ENTITY.playerAnimation);
+                this.entitiesContainer.removeChild(ENTITY.playerAnimation as DisplayObject);
             }
         });
 
@@ -100,7 +100,7 @@ export class EntitiesService {
         entities.forEach((entity) => {
             const ENTITY = new Enemy(entity);
             this.entities.push(ENTITY);
-            this.entitiesContainer.addChild(ENTITY.playerAnimation);
+            this.entitiesContainer.addChild(ENTITY.playerAnimation as DisplayObject);
         })
     }
 
@@ -108,7 +108,7 @@ export class EntitiesService {
         this.player.destroy$.next('');
         this.player.destroy$.complete();
         this.entitiesContainer.removeChildren();
-        this.playerContainer.removeChild(this.player.playerAnimation);
+        this.playerContainer.removeChild(this.player.playerAnimation as DisplayObject);
         this.entities = [];
         this.player = null as any;
     }
