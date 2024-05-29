@@ -3,6 +3,7 @@
 
 @use './account-info-theme';
 @use './avatar-theme';
+@use 'business-card-theme';
 @use './cookies-theme';
 @use './dropdown-theme';
 @use './enable-disable-mat-form-field-theme';
@@ -15,10 +16,12 @@
 @use './table-theme';
 @use './toolbar-theme';
 
+
 @mixin themeSwitch($default-theme, $dark-theme) {
 	@include mat.all-component-themes($default-theme);
 	@include account-info-theme.theme($default-theme);
 	@include avatar-theme.theme($default-theme);
+	@include business-card-theme.theme($default-theme);
 	@include cookies-theme.theme($default-theme);
 	@include dropdown-theme.theme($default-theme);
 	@include enable-disable-mat-form-field-theme.theme($default-theme);
@@ -35,6 +38,7 @@
 		@include mat.all-component-colors($dark-theme);
 		@include account-info-theme.theme($dark-theme);
 		@include avatar-theme.theme($dark-theme);
+		@include business-card-theme.theme($dark-theme);
 		@include cookies-theme.theme($dark-theme);
 		@include dropdown-theme.theme($dark-theme);
 		@include enable-disable-mat-form-field-theme.theme($dark-theme);

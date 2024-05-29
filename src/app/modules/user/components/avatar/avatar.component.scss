@@ -1,5 +1,9 @@
 @use '../../../../../assets/scss/mixins/avatar.mixin';
 
+:host{
+	display: block;
+}
+
 :host-context(.avatar-dropdown) {
 	@include avatar.avatar(55px, 55px);
 }

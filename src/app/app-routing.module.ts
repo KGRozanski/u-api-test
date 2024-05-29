@@ -12,6 +12,7 @@ import { AuthGuard } from './core/guards/authGuard.guard';
 import { NoAuthGuard } from './core/guards/noAuthGuard.guard';
 import { GetListOfUsersResolver } from './core/resolvers/getListOfUsers.resolver';
 import { ResetPasswordComponent } from './core/components/pages/reset-password/reset-password.component';
+import { BusinessCardComponent } from './core/components/pages/business-card/business-card.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,10 @@ const routes: Routes = [
 		resolve: {
 			appTableOfUsersData: GetListOfUsersResolver,
 		},
+	},
+	{
+		path: 'business-card',
+		component: BusinessCardComponent,
 	},
 	{ path: '**', pathMatch: 'full', component: NotfoundComponent },
 ];

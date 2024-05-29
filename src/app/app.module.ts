@@ -36,6 +36,7 @@ import { DialogConfirmComponent } from './core/components/layout/dialog-confirm/
 import { ResetPasswordComponent } from './core/components/pages/reset-password/reset-password.component';
 import { CookiesComponent } from './core/components/layout/cookies/cookies.component';
 import { WSService } from './core/services/ws.service';
+import { BusinessCardComponent } from './core/components/pages/business-card/business-card.component';
 
 @NgModule({
 	declarations: [
@@ -56,6 +57,7 @@ import { WSService } from './core/services/ws.service';
 		DialogConfirmComponent,
 		ResetPasswordComponent,
 		CookiesComponent,
+  BusinessCardComponent,
 	],
 	providers: [
 		interceptorsProviders,
