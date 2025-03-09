@@ -3,7 +3,6 @@
   "version": "3.30.0",
   "scripts": {
     "ng": "ng",
-    "prestart": "node ./src/scripts/gc/register-cmp-themes.js",
     "start": "ng serve",
     "start:test": "ng serve --configuration=test",
     "build": "ng build",
@@ -14,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@fadein/commons": "3.4.0",
     "@angular/animations": "^18.2.13",
     "@angular/cdk": "^18.2.14",
     "@angular/common": "^18.2.13",
@@ -24,9 +24,9 @@
     "@angular/platform-browser": "^18.2.13",
     "@angular/platform-browser-dynamic": "^18.2.13",
     "@angular/router": "^18.2.13",
-    "@ngrx/effects": "^17.2.0",
-    "@ngrx/store": "^17.2.0",
-    "@ngrx/store-devtools": "^17.2.0",
+    "@ngrx/effects": "^18.1.1",
+    "@ngrx/store": "^18.1.1",
+    "@ngrx/store-devtools": "^18.1.1",
     "@types/lodash": "^4.14.186",
     "@types/offscreencanvas": "^2019.7.0",
     "jwt-decode": "^3.1.2",
@@ -35,7 +35,8 @@
     "rxjs": "~7.5.0",
     "socket.io-client": "^4.6.1",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.10"
+    "zone.js": "~0.14.10",
+    "@ngrx/operators": "^18.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.14",
@@ -46,7 +47,7 @@
     "@angular-eslint/template-parser": "15.2.1",
     "@angular/cli": "^18.2.14",
     "@angular/compiler-cli": "^18.2.13",
-    "@ngrx/schematics": "^17.2.0",
+    "@ngrx/schematics": "^18.1.1",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.20.55",
     "@typescript-eslint/eslint-plugin": "5.48.2",

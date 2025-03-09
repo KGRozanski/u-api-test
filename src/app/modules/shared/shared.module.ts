@@ -8,9 +8,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CropImgComponent } from './components/dialogs/crop-img/crop-img.component';
 import { HamburgerBtnComponent } from './components/hamburger-btn/hamburger-btn.component';
 
+
+
 @NgModule({
-	declarations: [Pipes, directives, EnableDisableMatFormFieldComponent, CropImgComponent, HamburgerBtnComponent],
-	imports: [CommonModule, FormsModule, ReactiveFormsModule, materialImports],
-	exports: [Pipes, materialImports, directives, EnableDisableMatFormFieldComponent, HamburgerBtnComponent],
+	declarations: [ EnableDisableMatFormFieldComponent, HamburgerBtnComponent],
+	imports: [...materialImports, CommonModule, FormsModule, ReactiveFormsModule, CropImgComponent],
+	exports: [...materialImports, EnableDisableMatFormFieldComponent, HamburgerBtnComponent],
 })
 export class SharedModule {}

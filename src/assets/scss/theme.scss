@@ -4,37 +4,39 @@
 @use './typography' as typography; // Exports $default-typography (new config)
 @use './variables' as variables;   // Exports your color palette variables
 
+
 // ------------------------------------------------------------------
 // Define the default (light) theme using Angular Material v15 API
 // ------------------------------------------------------------------
-$default-theme: mat.define-light-theme((
+$default-theme: mat.define-theme((
   color: (
-    primary: variables.$my-primary-light,
-    accent: variables.$my-accent,
-    warn: variables.$my-warn,
+    theme-type: dark,
+    primary: mat.$violet-palette,
   ),
-  typography: typography.$typography
+  typography: (
+    brand-family: 'Comic Sans',
+    bold-weight: 900
+  ),
+  density: (
+    scale: -1
+  )
 ));
 
 // ------------------------------------------------------------------
 // Define the dark theme using Angular Material v15 API
 // ------------------------------------------------------------------
-$dark-theme: mat.define-dark-theme((
+
+$dark-theme: mat.define-theme((
   color: (
-    primary: variables.$my-primary-dark,
-    accent: variables.$my-accent,
-    warn: variables.$my-warn,
+    theme-type: dark,
+    primary: mat.$violet-palette,
   ),
-  typography: typography.$typography
+  typography: (
+    brand-family: 'Comic Sans',
+    bold-weight: 900
+  ),
+  density: (
+    scale: -1
+  )
 ));
 
-// ------------------------------------------------------------------
-// (Optional) Extract color configurations for additional styling.
-// These maps contain keys for primary, accent, warn, background, etc.
-// ------------------------------------------------------------------
-$light-config: mat.get-color-config($default-theme);
-$dark-config: mat.get-color-config($dark-theme);
-
-// Retrieve background colors for use elsewhere in your styles.
-$background-light: map.get($light-config, background);
-$background-dark: map.get($dark-config, background);
