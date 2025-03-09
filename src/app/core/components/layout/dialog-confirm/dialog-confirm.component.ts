@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
 	selector: 'app-dialog-confirm',
@@ -7,12 +7,11 @@ import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALO
 	styleUrls: ['./dialog-confirm.component.scss'],
 })
 export class DialogConfirmComponent {
-	constructor(
-		public dialogRef: MatDialogRef<DialogConfirmComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: { question: string },
+	constructor(public dialogRef: MatDialogRef<DialogConfirmComponent>,
+		@Inject(MAT_DIALOG_DATA) public data: { question: string }
 	) {}
 
 	public onNoClick(): void {
-		this.dialogRef.close();
+		this.dialogRef.close()
 	}
 }
