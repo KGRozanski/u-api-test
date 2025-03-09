@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { Store } from '@ngrx/store';
-import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
+import { ImageCroppedEvent, ImageCropperComponent, LoadedImage } from 'ngx-image-cropper';
 import { NotificationActions } from 'src/app/core/actions/notifications.actions';
 import { NotificationType } from 'src/app/core/enums/notification-type.enum';
 
@@ -9,6 +12,8 @@ import { NotificationType } from 'src/app/core/enums/notification-type.enum';
 	selector: 'app-crop-img',
 	templateUrl: './crop-img.component.html',
 	styleUrls: ['./crop-img.component.scss'],
+	standalone: true,
+	imports: [ImageCropperComponent, MatIconModule, MatFormFieldModule, ReactiveFormsModule]
 })
 export class CropImgComponent {
 	imageChangedEvent: any = '';

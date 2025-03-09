@@ -84,7 +84,7 @@ import { BusinessCardComponent } from './core/components/pages/business-card/bus
 		StoreDevtoolsModule.instrument({
 			maxAge: 100,
 			logOnly: environment.production,
-		}),
+		connectInZone: true}),
 		EffectsModule.forRoot([AccountEffect, NotificationsEffect, HydrationEffects]),
 	],
 })
