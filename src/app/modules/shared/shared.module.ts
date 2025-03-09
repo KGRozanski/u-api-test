@@ -11,8 +11,8 @@ import { HamburgerBtnComponent } from './components/hamburger-btn/hamburger-btn.
 
 
 @NgModule({
-	declarations: [ EnableDisableMatFormFieldComponent, HamburgerBtnComponent],
+	declarations: [Pipes, directives, EnableDisableMatFormFieldComponent, HamburgerBtnComponent],
 	imports: [...materialImports, CommonModule, FormsModule, ReactiveFormsModule, CropImgComponent],
-	exports: [...materialImports, EnableDisableMatFormFieldComponent, HamburgerBtnComponent],
+	exports: [Pipes, directives, ...materialImports, EnableDisableMatFormFieldComponent, HamburgerBtnComponent],
 })
 export class SharedModule {}
