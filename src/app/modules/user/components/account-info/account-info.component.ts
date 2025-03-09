@@ -14,9 +14,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { CropImgComponent } from 'src/app/modules/shared/components/dialogs/crop-img/crop-img.component';
 
 @Component({
-	selector: 'app-account-info',
-	templateUrl: './account-info.component.html',
-	styleUrls: ['./account-info.component.scss'],
+    selector: 'app-account-info',
+    templateUrl: './account-info.component.html',
+    styleUrls: ['./account-info.component.scss'],
+    standalone: false
 })
 export class AccountInfoComponent implements OnInit, OnDestroy {
 	public account: AccountInfo = getAccountInitial();

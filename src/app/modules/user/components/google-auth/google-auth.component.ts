@@ -4,9 +4,10 @@ import { AfterViewInit, Component, Inject } from '@angular/core';
 declare let google: any;
 
 @Component({
-	selector: 'app-google-auth',
-	templateUrl: './google-auth.component.html',
-	styleUrls: ['./google-auth.component.scss'],
+    selector: 'app-google-auth',
+    templateUrl: './google-auth.component.html',
+    styleUrls: ['./google-auth.component.scss'],
+    standalone: false
 })
 export class GoogleAuthComponent implements AfterViewInit {
 	private googleScript: HTMLScriptElement = this.document.createElement('script');

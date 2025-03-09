@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { CookieService } from 'src/app/modules/shared/services/cookie.service';
 
 @Component({
-	selector: 'app-cookies',
-	templateUrl: './cookies.component.html',
-	styleUrls: ['./cookies.component.scss'],
+    selector: 'app-cookies',
+    templateUrl: './cookies.component.html',
+    styleUrls: ['./cookies.component.scss'],
+    standalone: false
 })
 export class CookiesComponent {
 	public visibility = true;

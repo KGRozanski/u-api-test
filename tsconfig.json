@@ -6,13 +6,13 @@
 		"outDir": "./dist/out-tsc",
 		"forceConsistentCasingInFileNames": true,
 		"strict": true,
-		"noImplicitOverride": true,
+    "noImplicitOverride": true,
+    "esModuleInterop": true,
 		"noPropertyAccessFromIndexSignature": true,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
 		"sourceMap": true,
-		"declaration": false,
-		"downlevelIteration": true,
+    "declaration": false,
 		"experimentalDecorators": true,
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
@@ -26,8 +26,7 @@
 		"paths": {
 			"@fadein": ["node_modules/@fadein"]
 		},
-		"useDefineForClassFields": false,
-		"allowSyntheticDefaultImports": true
+    "useDefineForClassFields": false
 	},
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,

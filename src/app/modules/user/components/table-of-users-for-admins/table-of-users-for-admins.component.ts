@@ -12,9 +12,10 @@ import AccountExtended from '../../interfaces/account-extended.interface';
 import { UserService } from '../../services/user.service';
 
 @Component({
-	selector: 'app-table-of-users-for-admins',
-	templateUrl: './table-of-users-for-admins.component.html',
-	styleUrls: ['./table-of-users-for-admins.component.scss'],
+    selector: 'app-table-of-users-for-admins',
+    templateUrl: './table-of-users-for-admins.component.html',
+    styleUrls: ['./table-of-users-for-admins.component.scss'],
+    standalone: false
 })
 export class TableOfUsersForAdminsComponent {
 	@ViewChild(MatPaginator) paginator: MatPaginator;

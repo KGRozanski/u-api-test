@@ -6,9 +6,10 @@ import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
 import { getAccountInitial } from '../../../state/initials/account.initial';
 
 @Component({
-	selector: 'app-toolbar',
-	templateUrl: './toolbar.component.html',
-	styleUrls: ['./toolbar.component.scss'],
+    selector: 'app-toolbar',
+    templateUrl: './toolbar.component.html',
+    styleUrls: ['./toolbar.component.scss'],
+    standalone: false
 })
 export class ToolbarComponent implements OnInit {
 	public isDropdownVisible = false;

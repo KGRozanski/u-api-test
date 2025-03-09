@@ -5,9 +5,10 @@ import { FormControlStatus } from '@angular/forms';
 import { TogglableFormControl } from 'src/app/modules/user/components/account-info/interfaces/togglableFormControl.interface';
 
 @Component({
-	selector: 'app-enable-disable-mat-form-field',
-	templateUrl: './enable-disable-mat-form-field.component.html',
-	styleUrls: ['./enable-disable-mat-form-field.component.scss'],
+    selector: 'app-enable-disable-mat-form-field',
+    templateUrl: './enable-disable-mat-form-field.component.html',
+    styleUrls: ['./enable-disable-mat-form-field.component.scss'],
+    standalone: false
 })
 export class EnableDisableMatFormFieldComponent  {
 	// public formCtrl: UntypedFormControl & TogglableFormControl;

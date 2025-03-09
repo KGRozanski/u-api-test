@@ -12,9 +12,10 @@ import { ACCOUNT_SELECTORS } from '../../../selectors/account.selectors';
 import { ACCOUNT_ACTIONS } from 'src/app/core/actions/account.actions';
 
 @Component({
-	selector: 'app-dropdown',
-	templateUrl: './dropdown.component.html',
-	styleUrls: ['./dropdown.component.scss'],
+    selector: 'app-dropdown',
+    templateUrl: './dropdown.component.html',
+    styleUrls: ['./dropdown.component.scss'],
+    standalone: false
 })
 export class DropdownComponent implements OnInit, OnDestroy {
 	public darkMode = false;

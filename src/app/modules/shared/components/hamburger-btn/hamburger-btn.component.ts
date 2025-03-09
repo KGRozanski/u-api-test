@@ -3,9 +3,10 @@ import { Store } from '@ngrx/store';
 import { SETTINGS_SELECTORS } from 'src/app/core/selectors/settings.selectors';
 
 @Component({
-	selector: 'app-hamburger-btn',
-	templateUrl: './hamburger-btn.component.html',
-	styleUrls: ['./hamburger-btn.component.scss'],
+    selector: 'app-hamburger-btn',
+    templateUrl: './hamburger-btn.component.html',
+    styleUrls: ['./hamburger-btn.component.scss'],
+    standalone: false
 })
 export class HamburgerBtnComponent implements OnInit {
 	public hamburgerFlag = false;

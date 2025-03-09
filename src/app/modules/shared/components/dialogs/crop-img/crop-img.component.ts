@@ -9,11 +9,10 @@ import { NotificationActions } from 'src/app/core/actions/notifications.actions'
 import { NotificationType } from 'src/app/core/enums/notification-type.enum';
 
 @Component({
-	selector: 'app-crop-img',
-	templateUrl: './crop-img.component.html',
-	styleUrls: ['./crop-img.component.scss'],
-	standalone: true,
-	imports: [ImageCropperComponent, MatIconModule, MatFormFieldModule, ReactiveFormsModule]
+    selector: 'app-crop-img',
+    templateUrl: './crop-img.component.html',
+    styleUrls: ['./crop-img.component.scss'],
+    imports: [ImageCropperComponent, MatIconModule, MatFormFieldModule, ReactiveFormsModule]
 })
 export class CropImgComponent {
 	imageChangedEvent: any = '';

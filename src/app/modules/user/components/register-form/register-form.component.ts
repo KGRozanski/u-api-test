@@ -8,9 +8,10 @@ import { CustomValidators } from '../../../../core/validators/validators';
 import { UserService } from '../../services/user.service';
 
 @Component({
-	selector: 'app-register-form',
-	templateUrl: './register-form.component.html',
-	styleUrls: ['./register-form.component.scss'],
+    selector: 'app-register-form',
+    templateUrl: './register-form.component.html',
+    styleUrls: ['./register-form.component.scss'],
+    standalone: false
 })
 export class RegisterFormComponent {
 	constructor(private fb: UntypedFormBuilder, private US: UserService, private store: Store) {}

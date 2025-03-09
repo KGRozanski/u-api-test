@@ -1,6 +1,9 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Output } from '@angular/core';
 
-@Directive({ selector: '[appInteractedWithMenu]' })
+@Directive({
+    selector: '[appInteractedWithMenu]',
+    standalone: false
+})
 export class InteractedWithMenuDirective implements AfterViewInit {
 	@Output() interacted = new EventEmitter<void>();
 

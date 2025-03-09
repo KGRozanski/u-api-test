@@ -12,9 +12,10 @@ import { Role } from './modules/user/enums/roles.enum';
 import { getAccountInitial } from './core/state/initials/account.initial';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss'],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent implements OnInit, AfterViewInit {
 	public setting: Settings = getSettingsInitial();

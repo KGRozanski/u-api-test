@@ -6,9 +6,10 @@ import { ACCOUNT_SELECTORS } from 'src/app/core/selectors/account.selectors';
 import { getAccountInitial } from 'src/app/core/state/initials/account.initial';
 
 @Component({
-  selector: 'app-business-card',
-  templateUrl: './business-card.component.html',
-  styleUrls: ['./business-card.component.scss']
+    selector: 'app-business-card',
+    templateUrl: './business-card.component.html',
+    styleUrls: ['./business-card.component.scss'],
+    standalone: false
 })
 export class BusinessCardComponent {
 	public account: AccountInfo = getAccountInitial();

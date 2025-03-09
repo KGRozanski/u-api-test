@@ -2,7 +2,8 @@ import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 import { Role } from 'src/app/modules/user/enums/roles.enum';
 
 @Directive({
-	selector: '[appRoleHighlight]',
+    selector: '[appRoleHighlight]',
+    standalone: false
 })
 export class RoleHighlightDirective implements AfterViewInit {
 	constructor(private element: ElementRef) {}

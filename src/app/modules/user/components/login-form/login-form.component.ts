@@ -5,9 +5,10 @@ import { ACCOUNT_ACTIONS } from 'src/app/core/actions/account.actions';
 import { SettingsActions } from 'src/app/core/actions/settings.actions';
 
 @Component({
-	selector: 'app-login-form',
-	templateUrl: './login-form.component.html',
-	styleUrls: ['./login-form.component.scss'],
+    selector: 'app-login-form',
+    templateUrl: './login-form.component.html',
+    styleUrls: ['./login-form.component.scss'],
+    standalone: false
 })
 export class LoginFormComponent {
 	constructor(private fb: UntypedFormBuilder, private store: Store) {}

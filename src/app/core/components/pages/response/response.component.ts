@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-	selector: 'app-response',
-	templateUrl: './response.component.html',
-	styleUrls: ['./response.component.scss'],
+    selector: 'app-response',
+    templateUrl: './response.component.html',
+    styleUrls: ['./response.component.scss'],
+    standalone: false
 })
 export class ResponseComponent implements OnInit, OnDestroy {
 	public activationMsg: string;

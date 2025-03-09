@@ -3,9 +3,10 @@ import { Store } from '@ngrx/store';
 import { SETTINGS_SELECTORS } from '../../../selectors/settings.selectors';
 
 @Component({
-	selector: 'app-logotype',
-	templateUrl: './logotype.component.html',
-	styleUrls: ['./logotype.component.scss'],
+    selector: 'app-logotype',
+    templateUrl: './logotype.component.html',
+    styleUrls: ['./logotype.component.scss'],
+    standalone: false
 })
 export class LogotypeComponent implements OnInit {
 	public darkMode = true;

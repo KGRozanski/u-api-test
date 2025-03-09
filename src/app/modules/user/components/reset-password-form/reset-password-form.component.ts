@@ -10,9 +10,10 @@ import { CustomValidators } from 'src/app/core/validators/validators';
 import { UserService } from '../../services/user.service';
 
 @Component({
-	selector: 'app-reset-password-form',
-	templateUrl: './reset-password-form.component.html',
-	styleUrls: ['./reset-password-form.component.scss'],
+    selector: 'app-reset-password-form',
+    templateUrl: './reset-password-form.component.html',
+    styleUrls: ['./reset-password-form.component.scss'],
+    standalone: false
 })
 export class ResetPasswordFormComponent implements OnDestroy {
 	// flag that indicates that the form is in 'sendEmail' mode or already has 'token' query in url
