@@ -18,7 +18,7 @@
 
 @mixin themeSwitch($default-theme, $dark-theme) {
   // Apply the default theme to all Material components using the new API.
-  @include mat.all-component-themes($default-theme);
+  @include mat.all-component-bases($default-theme);
 	@include account-info-theme.theme($default-theme);
 	@include avatar-theme.theme($default-theme);
 	@include business-card-theme.theme($default-theme);
