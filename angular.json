@@ -94,13 +94,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "u-api-test:build:production"
+              "buildTarget": "u-api-test:build:production"
             },
             "development": {
-              "browserTarget": "u-api-test:build:development"
+              "buildTarget": "u-api-test:build:development"
             },
             "test": {
-              "browserTarget": "u-api-test:build:test"
+              "buildTarget": "u-api-test:build:test"
             }
           },
           "defaultConfiguration": "development"
@@ -108,7 +108,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "u-api-test:build"
+            "buildTarget": "u-api-test:build"
           }
         },
         "test": {
