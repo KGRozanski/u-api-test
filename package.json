@@ -13,7 +13,6 @@
   },
   "private": true,
   "dependencies": {
-    "@fadein/commons": "3.4.0",
     "@angular/animations": "^19.2.1",
     "@angular/cdk": "^19.2.2",
     "@angular/common": "^19.2.1",
