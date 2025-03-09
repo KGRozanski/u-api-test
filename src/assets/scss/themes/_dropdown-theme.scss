@@ -1,62 +1,60 @@
-@use 'sass:map';
-@use '@angular/material' as mat;
+@use "sass:map";
+@use "@angular/material" as mat;
 
 @mixin color($theme) {
-	// Get the color config from the theme.
+  // Get the color config from the theme.
+  $config: mat.get-color-config($theme);
 
-	$config: mat.get-color-config($theme);
+  // Extract the background and foreground palettes.
+  $background: map.get($config, background);
+  $foreground: map.get($config, foreground);
+  // Retrieve the divider color from the foreground palette.
+  $divider: map.get($foreground, divider);
 
-	// Get the primary color palette from the color-config.
-	$background: map.get($config, background);
-	$foreground: map.get($config, foreground);
-	$divider: map.get($foreground, divider);
+  app-dropdown {
+    // Set the background color using the theme's background palette.
+    background-color: mat.get-color-from-palette($background, background);
+    // Apply a border using the divider color.
+    border: 1px solid $divider;
 
-	app-dropdown {
-		// Read the 500 hue from the primary color palette.
-		background-color: mat.get-color-from-palette($background, background);
-		border: 1px solid $divider;
+    .header {
+      border-bottom: 1px solid $divider;
+    }
 
-		.header {
-			border-bottom: 1px solid $divider;
-		}
-
-		li {
-			&:hover,
-			&:active {
-				cursor: pointer;
-				background-color: mat.get-color-from-palette($background, hover);
-			}
-		}
-	}
+    li {
+      &:hover,
+      &:active {
+        cursor: pointer;
+        // Change background color on hover/active state using a "hover" key.
+        background-color: mat.get-color-from-palette($background, hover);
+      }
+    }
+  }
 }
 
 @mixin typography($theme) {
-	// Get the color config from the theme.
-	$color-config: mat.get-color-config($theme);
+  // Get the color config from the theme to extract the foreground palette.
+  $color-config: mat.get-color-config($theme);
+  $palette: map.get($color-config, foreground);
 
-	// Get the foreground color palette from the color-config.
-	$palette: map.get($color-config, foreground);
+  // Get the typography configuration from the theme.
+  $typography-config: mat.get-typography-config($theme);
 
-	// Get the typography config from the theme.
-	$typography-config: mat.get-typography-config($theme);
-
-	app-dropdown {
-		color: mat.get-color-from-palette($palette, text, 0.9);
-	}
+  app-dropdown {
+    // Set text color using the foreground palette with a 0.9 opacity factor.
+    color: mat.get-color-from-palette($palette, text, 0.9);
+  }
 }
 
-// For convenience, we can add a theme mixin that includes both color
-// and typography. This theme mixin should only emit the styles for
-// each color and typography, respectively, if they have a config specified.
+// A convenience mixin that applies both color and typography, but only if their respective configurations are defined.
 @mixin theme($theme) {
-	$color-config: mat.get-color-config($theme);
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme);
+  }
 
-	@if $color-config != null {
-		@include color($theme);
-	}
-
-	$typography-config: mat.get-typography-config($theme);
-	@if $typography-config != null {
-		@include typography($theme);
-	}
+  $typography-config: mat.get-typography-config($theme);
+  @if $typography-config != null {
+    @include typography($theme);
+  }
 }

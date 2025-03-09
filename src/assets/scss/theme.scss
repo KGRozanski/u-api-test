@@ -1,35 +1,40 @@
+// Import Sass map utilities and Angular Material theming API.
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use './typography';
-@use './variables';
+@use './typography' as typography; // Exports $default-typography (new config)
+@use './variables' as variables;   // Exports your color palette variables
 
-//default theme
-$default-theme: mat.define-light-theme(
-	(
-		color: (
-			primary: variables.$my-primary-light,
-			accent: variables.$my-accent,
-			warn: variables.$my-warn,
-		),
-		typography: typography.$default-typography,
-	)
-);
+// ------------------------------------------------------------------
+// Define the default (light) theme using Angular Material v15 API
+// ------------------------------------------------------------------
+$default-theme: mat.define-light-theme((
+  color: (
+    primary: variables.$my-primary-light,
+    accent: variables.$my-accent,
+    warn: variables.$my-warn,
+  ),
+  typography: typography.$typography
+));
 
-//dark theme
-$dark-theme: mat.define-dark-theme(
-	(
-		color: (
-			primary: variables.$my-primary-dark,
-			accent: variables.$my-accent,
-			warn: variables.$my-warn,
-		),
-		typography: typography.$default-typography,
-	)
-);
+// ------------------------------------------------------------------
+// Define the dark theme using Angular Material v15 API
+// ------------------------------------------------------------------
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: variables.$my-primary-dark,
+    accent: variables.$my-accent,
+    warn: variables.$my-warn,
+  ),
+  typography: typography.$typography
+));
 
-//https://www.youtube.com/watch?v=99T-zQLcluM
-
+// ------------------------------------------------------------------
+// (Optional) Extract color configurations for additional styling.
+// These maps contain keys for primary, accent, warn, background, etc.
+// ------------------------------------------------------------------
 $light-config: mat.get-color-config($default-theme);
 $dark-config: mat.get-color-config($dark-theme);
+
+// Retrieve background colors for use elsewhere in your styles.
 $background-light: map.get($light-config, background);
 $background-dark: map.get($dark-config, background);

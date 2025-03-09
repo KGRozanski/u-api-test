@@ -1,61 +1,46 @@
-
 @use "sass:map";
 @use "@angular/material" as mat;
 
 @mixin color($theme) {
-    // Get the color config from the theme.
-    $config: mat.get-color-config($theme);
-    // Get the primary color palette from the color-config.
-    $primary: map.get($config, primary);
+  // Get the color configuration from the theme.
+  $config: mat.get-color-config($theme);
 
+  // Retrieve individual palettes from the configuration.
+  $primary: map.get($config, primary);
+  $background: map.get($config, background);
+  $foreground: map.get($config, foreground);
 
-
-    $background: map.get($config, background);
-    $foreground: map.get($config, foreground);
-
-
-
-    app-business-card{
-
-
-
-
-
-
-
-    }
-    
+  // Customize the business card colors.
+  app-business-card {
+    // You can add custom styles here.
+    // For example, set a background color from the theme's background palette:
+    // background-color: map.get($background, default);
+  }
 }
 
 @mixin typography($theme) {
-    // Get the color config from the theme.
-    $color-config: mat.get-color-config($theme);
+  // Get the color configuration to extract the foreground palette.
+  $color-config: mat.get-color-config($theme);
+  $palette: map.get($color-config, foreground);
 
-    // Get the foreground color palette from the color-config.
-    $palette: map.get($color-config, foreground);
+  // Get the typography configuration from the theme.
+  $typography-config: mat.get-typography-config($theme);
 
-    // Get the typography config from the theme.
-    $typography-config: mat.get-typography-config($theme);
-
-    app-business-card {
-        color: mat.get-color-from-palette($palette, text, .9);
-    }
+  app-business-card {
+    // Apply a text color from the foreground palette with an opacity factor of 0.9.
+    color: mat.get-color-from-palette($palette, text, 0.9);
+  }
 }
 
-// For convenience, we can add a theme mixin that includes both color
-// and typography. This theme mixin should only emit the styles for
-// each color and typography, respectively, if they have a config specified.
+// Convenience mixin to apply both color and typography styles if available.
 @mixin theme($theme) {
-    $color-config: mat.get-color-config($theme);
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme);
+  }
 
-    @if $color-config != null {
-        @include color($theme);
-    }
-
-    $typography-config: mat.get-typography-config($theme);
-    @if $typography-config != null {
-        @include typography($theme);
-    }
+  $typography-config: mat.get-typography-config($theme);
+  @if $typography-config != null {
+    @include typography($theme);
+  }
 }
-
-    

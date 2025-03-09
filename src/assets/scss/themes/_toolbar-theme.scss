@@ -1,51 +1,49 @@
-@use 'sass:map';
-@use '@angular/material' as mat;
+@use "sass:map";
+@use "@angular/material" as mat;
 
 @mixin color($theme) {
-	// Get the color config from the theme.
+  // Retrieve the color configuration from the theme.
+  $config: mat.get-color-config($theme);
 
-	$config: mat.get-color-config($theme);
+  // Extract palettes from the configuration.
+  $primary: map.get($config, primary);
+  $background: map.get($config, background);
+  $foreground: map.get($config, foreground);
+  // Get the divider color from the foreground palette.
+  $divider: map.get($foreground, divider);
 
-	// Get the primary color palette from the color-config.
-	$primary: map.get($config, primary);
-	$background: map.get($config, background);
-	$foreground: map.get($config, foreground);
-	$divider: map.get($foreground, divider);
-
-	app-toolbar {
-		// Read the 500 hue from the primary color palette.
-		background-color: mat.get-color-from-palette($background, background);
-		border-bottom: 1px solid $divider;
-	}
+  app-toolbar {
+    // Set the background color using the 'background' key from the background palette.
+    background-color: mat.get-color-from-palette($background, background);
+    // Add a bottom border using the divider color.
+    border-bottom: 1px solid $divider;
+  }
 }
 
 @mixin typography($theme) {
-	// Get the color config from the theme.
-	$color-config: mat.get-color-config($theme);
+  // Retrieve the color configuration to get the foreground palette.
+  $color-config: mat.get-color-config($theme);
+  $palette: map.get($color-config, foreground);
 
-	// Get the foreground color palette from the color-config.
-	$palette: map.get($color-config, foreground);
+  // Retrieve the typography configuration from the theme.
+  $typography-config: mat.get-typography-config($theme);
 
-	// Get the typography config from the theme.
-	$typography-config: mat.get-typography-config($theme);
-
-	app-toolbar {
-		color: mat.get-color-from-palette($palette, text, 0.9);
-	}
+  app-toolbar {
+    // Apply a text color from the foreground palette with an opacity factor of 0.9.
+    color: mat.get-color-from-palette($palette, text, 0.9);
+  }
 }
 
-// For convenience, we can add a theme mixin that includes both color
-// and typography. This theme mixin should only emit the styles for
-// each color and typography, respectively, if they have a config specified.
+// Convenience mixin that includes both color and typography styles,
+// if the respective configurations are present in the provided theme.
 @mixin theme($theme) {
-	$color-config: mat.get-color-config($theme);
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme);
+  }
 
-	@if $color-config != null {
-		@include color($theme);
-	}
-
-	$typography-config: mat.get-typography-config($theme);
-	@if $typography-config != null {
-		@include typography($theme);
-	}
+  $typography-config: mat.get-typography-config($theme);
+  @if $typography-config != null {
+    @include typography($theme);
+  }
 }

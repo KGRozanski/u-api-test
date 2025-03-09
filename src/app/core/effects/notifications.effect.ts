@@ -4,7 +4,7 @@ import { tap } from 'rxjs';
 import { NotificationType } from '../enums/notification-type.enum';
 import { Notification } from '../interfaces/store/notification.interface';
 import { NotificationActions } from '../actions/notifications.actions';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 @Injectable()
 export class NotificationsEffect {

@@ -1,49 +1,50 @@
-@use 'sass:map';
-@use '@angular/material' as mat;
-@use '../mixins/page.mixin';
+@use "sass:map";
+@use "@angular/material" as mat;
+@use "../mixins/page.mixin";
 
 @mixin color($theme) {
-	// Get the color config from the theme.
-	$config: mat.get-color-config($theme);
+  // Retrieve the color configuration from the theme.
+  $config: mat.get-color-config($theme);
 
-	// Get the primary color palette from the color-config.
-	$background: map.get($config, background);
+  // Get the background palette from the configuration.
+  $background: map.get($config, background);
 
-	router-outlet + * {
-		// Read the 500 hue from the primary color palette.
-		// background-color: mat.get-color-from-palette($background, background);
-	}
+  // Apply color styles to elements immediately following <router-outlet>.
+  router-outlet + * {
+    // Uncomment the line below if you want to set a background color using
+    // the background palette's "background" key.
+    // background-color: mat.get-color-from-palette($background, background);
+  }
 }
 
 @mixin typography($theme) {
-	// Get the color config from the theme.
-	$color-config: mat.get-color-config($theme);
+  // Retrieve the color configuration to extract the foreground palette.
+  $color-config: mat.get-color-config($theme);
+  $palette: map.get($color-config, foreground);
 
-	// Get the foreground color palette from the color-config.
-	$palette: map.get($color-config, foreground);
+  // Retrieve the typography configuration from the theme.
+  $typography-config: mat.get-typography-config($theme);
 
-	// Get the typography config from the theme.
-	$typography-config: mat.get-typography-config($theme);
-
-	router-outlet + * {
-		color: mat.get-color-from-palette($palette, text, 0.9);
-	}
+  // Apply typography styles to elements following <router-outlet>.
+  router-outlet + * {
+    // Set the text color with an opacity of 0.9.
+    color: mat.get-color-from-palette($palette, text, 0.9);
+  }
 }
 
-// For convenience, we can add a theme mixin that includes both color
-// and typography. This theme mixin should only emit the styles for
-// each color and typography, respectively, if they have a config specified.
 @mixin theme($theme) {
-	@include page.page();
+  // Include additional page-level styles.
+  @include page.page();
 
-	$color-config: mat.get-color-config($theme);
+  // Apply color mixin if a color configuration is present.
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme);
+  }
 
-	@if $color-config != null {
-		@include color($theme);
-	}
-
-	$typography-config: mat.get-typography-config($theme);
-	@if $typography-config != null {
-		@include typography($theme);
-	}
+  // Apply typography mixin if a typography configuration is present.
+  $typography-config: mat.get-typography-config($theme);
+  @if $typography-config != null {
+    @include typography($theme);
+  }
 }

@@ -16,9 +16,9 @@
 @use './table-theme';
 @use './toolbar-theme';
 
-
 @mixin themeSwitch($default-theme, $dark-theme) {
-	@include mat.all-component-themes($default-theme);
+  // Apply the default theme to all Material components using the new API.
+  @include mat.all-component-themes($default-theme);
 	@include account-info-theme.theme($default-theme);
 	@include avatar-theme.theme($default-theme);
 	@include business-card-theme.theme($default-theme);
@@ -35,7 +35,8 @@
 	@include toolbar-theme.theme($default-theme);
 
 	.darkMode {
-		@include mat.all-component-colors($dark-theme);
+    // For dark mode, apply color overrides using the new API.
+    @include mat.all-component-colors($dark-theme);
 		@include account-info-theme.theme($dark-theme);
 		@include avatar-theme.theme($dark-theme);
 		@include business-card-theme.theme($dark-theme);
@@ -52,11 +53,12 @@
 		@include toolbar-theme.theme($dark-theme);
     }
 
-	body {
-		background-color: mat.get-color-from-palette(theme.$background-light, background);
-	}
+  // Set background colors using the color palettes from your theme.
+  body {
+    background-color: mat.get-color-from-palette(theme.$background-light, background);
+  }
 
-	body[class='darkMode'] {
-		background-color: mat.get-color-from-palette(theme.$background-dark, background);
-	}
+  body[class='darkMode'] {
+    background-color: mat.get-color-from-palette(theme.$background-dark, background);
+  }
 }

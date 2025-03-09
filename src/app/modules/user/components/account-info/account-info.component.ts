@@ -10,7 +10,7 @@ import { NotificationActions } from 'src/app/core/actions/notifications.actions'
 import { NotificationType } from 'src/app/core/enums/notification-type.enum';
 import { RegexSupplier } from '@fadein/commons';
 import { ACCOUNT_ACTIONS } from 'src/app/core/actions/account.actions';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { CropImgComponent } from 'src/app/modules/shared/components/dialogs/crop-img/crop-img.component';
 
 @Component({

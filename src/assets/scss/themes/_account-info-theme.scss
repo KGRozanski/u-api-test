@@ -2,45 +2,47 @@
 @use '@angular/material' as mat;
 
 @mixin color($theme) {
-	// Get the color config from the theme.
-	$config: mat.get-color-config($theme);
-	// Get the primary color palette from the color-config.
-	$primary: map.get($config, primary);
+  // Extract the color configuration from the theme.
+  $config: mat.get-color-config($theme);
+  // Extract specific color palettes.
+  $primary: map.get($config, primary);
+  $background: map.get($config, background);
+  $foreground: map.get($config, foreground);
 
-	$background: map.get($config, background);
-	$foreground: map.get($config, foreground);
-
-	app-account-info {
-	}
+  // Example: Apply color styles to your custom component.
+  app-account-info {
+    // Set a background color from the theme’s background palette.
+    background-color: map.get($background, default);
+    // Use a text color from the foreground palette.
+    color: mat.get-color-from-palette($foreground, text);
+  }
 }
 
 @mixin typography($theme) {
-	// Get the color config from the theme.
-	$color-config: mat.get-color-config($theme);
+  // Extract the typography configuration from the theme.
+  $typography-config: mat.get-typography-config($theme);
+  // (Optional) Also extract the foreground palette for text color.
+  $color-config: mat.get-color-config($theme);
+  $palette: map.get($color-config, foreground);
 
-	// Get the foreground color palette from the color-config.
-	$palette: map.get($color-config, foreground);
-
-	// Get the typography config from the theme.
-	$typography-config: mat.get-typography-config($theme);
-
-	app-account-info {
-		color: mat.get-color-from-palette($palette, text, 0.9);
-	}
+  // Example: Apply typography styles to your custom component.
+  app-account-info {
+    // Here you might set font properties based on your typography config.
+    // In this example we simply adjust the text color with an opacity.
+    color: mat.get-color-from-palette($palette, text, 0.9);
+  }
 }
 
-// For convenience, we can add a theme mixin that includes both color
-// and typography. This theme mixin should only emit the styles for
-// each color and typography, respectively, if they have a config specified.
 @mixin theme($theme) {
-	$color-config: mat.get-color-config($theme);
+  // If the theme has a color configuration, include the color mixin.
+  $color-config: mat.get-color-config($theme);
+  @if $color-config != null {
+    @include color($theme);
+  }
 
-	@if $color-config != null {
-		@include color($theme);
-	}
-
-	$typography-config: mat.get-typography-config($theme);
-	@if $typography-config != null {
-		@include typography($theme);
-	}
+  // If the theme has a typography configuration, include the typography mixin.
+  $typography-config: mat.get-typography-config($theme);
+  @if $typography-config != null {
+    @include typography($theme);
+  }
 }

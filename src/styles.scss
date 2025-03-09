@@ -3,9 +3,8 @@
 @use '@angular/material' as mat;
 @use './assets/scss/reset';
 @use './assets/scss/variables';
-@use './assets/scss/palette';
-@use './assets/scss/typography';
-@use './assets/scss/theme';
+@use './assets/scss/typography' as typography;
+@use './assets/scss/theme' as theme;
 @use './assets/scss/shadows';
 @use './assets/scss/modifiers';
 @use './assets/scss/themes/_theme-switch' as switch;
@@ -15,7 +14,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Hind:400,700&display=swap&subset=latin-ext');
 
-@include mat.core(typography.$default-typography);
 @include switch.themeSwitch(theme.$default-theme, theme.$dark-theme);
 
 * {
