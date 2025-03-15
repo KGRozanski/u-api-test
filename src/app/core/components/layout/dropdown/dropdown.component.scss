@@ -9,6 +9,8 @@
 	width: 300px;
 	border-radius: variables.$border-radius;
 	overflow: hidden;
+	background: var(--mat-sys-surface);
+	color: var(--mat-sys-on-background);
 }
 
 .header {

@@ -1,5 +1,11 @@
 @use '../../../../../assets/scss/variables.scss';
 
+
+:host {
+	color: var(--mat-sys-primary);
+}
+
+
 button {
 	position: relative;
 }
@@ -25,6 +31,7 @@ button {
 	left: 0;
 	transform: rotate(0deg);
 	transition: 0.25s ease-in-out;
+	background: #fff;
 }
 
 .nav-icon span:nth-child(1) {

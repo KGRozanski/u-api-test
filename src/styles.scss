@@ -6,14 +6,11 @@
 @use './assets/scss/typography' as typography;
 @use './assets/scss/shadows';
 @use './assets/scss/modifiers';
-@use './assets/scss/mixins/dark-mode-transition.mixin' as transition;
 @use './assets/scss/abstracts/index';
-@use './assets/scss/palette' as palette;
+@use './assets/scss/theme';
 
 @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Hind:400,700&display=swap&subset=latin-ext');
-
-
 
 
 
@@ -21,8 +18,8 @@
 	box-sizing: border-box;
 }
 
-body {
-	font-family: Roboto;
+body.darkMode{
+	color-scheme: dark;
 }
 
 app-root {
@@ -31,3 +28,5 @@ app-root {
 	height: 100vh;
 	overflow-x: hidden;
 }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

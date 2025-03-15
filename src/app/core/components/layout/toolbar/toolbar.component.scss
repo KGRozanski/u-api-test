@@ -13,8 +13,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-
-	@include transition.transition-dark-mode();
+	background: var(--mat-sys-primary-container);
 }
 
 h1 {

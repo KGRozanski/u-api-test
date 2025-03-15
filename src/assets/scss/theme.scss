@@ -5,38 +5,14 @@
 @use './variables' as variables;   // Exports your color palette variables
 
 
-// ------------------------------------------------------------------
-// Define the default (light) theme using Angular Material v15 API
-// ------------------------------------------------------------------
-$default-theme: mat.define-theme((
-  color: (
-    theme-type: dark,
-    primary: mat.$violet-palette,
-  ),
-  typography: (
-    brand-family: 'Comic Sans',
-    bold-weight: 900
-  ),
-  density: (
-    scale: -1
-  )
-));
 
-// ------------------------------------------------------------------
-// Define the dark theme using Angular Material v15 API
-// ------------------------------------------------------------------
 
-$dark-theme: mat.define-theme((
-  color: (
-    theme-type: dark,
-    primary: mat.$violet-palette,
-  ),
-  typography: (
-    brand-family: 'Comic Sans',
-    bold-weight: 900
-  ),
-  density: (
-    scale: -1
-  )
-));
 
+html {
+  color-scheme: light;
+  @include mat.theme((
+    color: mat.$azure-palette,
+    typography: Roboto,
+    density: 0
+  ));
+}
