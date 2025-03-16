@@ -10,6 +10,7 @@
 	padding: 20px;
 	border-radius: variables.$border-radius;
 	box-shadow: 3px 3px 13px rgb(0, 0, 0, 0.2);
+	background: var(--mat-sys-surface);
 
 	@include transition.transition-dark-mode();
 }

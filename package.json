@@ -1,6 +1,6 @@
 {
   "name": "fadein-test",
-  "version": "4.00.0",
+  "version": "4.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

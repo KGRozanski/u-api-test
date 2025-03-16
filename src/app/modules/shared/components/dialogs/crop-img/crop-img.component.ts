@@ -40,6 +40,10 @@ export class CropImgComponent {
 		// cropper ready
 	}
 
+	save(): void {
+		this.dialogRef.close(this.croppedImage);
+	  }
+
 	loadImageFailed() {
 		// show message
 		this.store.dispatch(
